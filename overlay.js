@@ -2,11 +2,16 @@ let files = [];
 let wallpapers = [];
 let currentFileIndex = 0;
 let currentWallpaperIndex = 0;
+let stylesheetSets = [];
+let currentStylesheetSet = 0;
+let isOnlineMode = false;
+let serverUrl = '';
 
-// Local file loading requires a web server to avoid CORS issues
+// Modified loadJSON to handle both modes
 async function loadJSON(path) {
     try {
-        const response = await fetch(path);
+        const fullPath = isOnlineMode ? `${serverUrl}/${path}` : path;
+        const response = await fetch(fullPath);
         const data = await response.text();
         return JSON.parse(data);
     } catch (error) {
@@ -37,64 +42,59 @@ async function loadJSON(path) {
     }
 }
 
-async function scanDirectory(path, extension) {
-    try {
-        const basePath = path.split('*')[0];
-        const response = await fetch(basePath);
-        const text = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, 'text/html');
-        const files = Array.from(doc.querySelectorAll('a'))
-            .map(a => a.getAttribute('href'))
-            .filter(href => href && href.toLowerCase().endsWith(extension.toLowerCase()))
-            .map(href => basePath + href);
-        return files;
-    } catch (error) {
-        console.warn(`Failed to scan directory: ${path}`, error);
-        return [];
-    }
+function getAvailableFiles() {
+    return [
+        'content/java_reference.json',
+        'content/css_guide.json',
+        'content/bootstrap_reference.json'
+    ];
 }
 
-async function getAvailableFiles() {
-    const files = new Set();
-    try {
-        const jsonFiles = await scanDirectory('content/*.json', '.json');
-        return jsonFiles.length > 0 ? jsonFiles : [
-            'content/java_reference.json',
-            'content/css_guide.json',
-            'content/bootstrap_reference.json'
-        ];
-    } catch (error) {
-        console.warn('Falling back to static file list:', error);
-        return [
-            'content/java_reference.json',
-            'content/css_guide.json',
-            'content/bootstrap_reference.json'
-        ];
+function getAvailableWallpapers(pattern) {
+    // Handle array of patterns
+    if (Array.isArray(pattern)) {
+        return pattern;
     }
-}
-
-async function getAvailableWallpapers(patterns) {
-    const wallpapers = new Set();
-    const patternList = Array.isArray(patterns) ? patterns : [patterns];
-
-    for (const pattern of patternList) {
+    
+    // Handle single pattern
+    if (typeof pattern === 'string') {
         if (pattern.includes('*')) {
             const extension = pattern.split('*.')[1];
-            const files = await scanDirectory(pattern, `.${extension}`);
-            files.forEach(file => wallpapers.add(file));
-        } else {
-            wallpapers.add(pattern);
+            // Return hardcoded list for now - in production this would be generated
+            const wallpapers = [
+                `images/wallpaper/wallpaper1.${extension}`,
+                `images/wallpaper/wallpaper2.${extension}`,
+                `images/wallpaper/wallpaper3.${extension}`
+            ];
+            return wallpapers.filter(w => {
+                try {
+                    // Test if file exists by creating an image object
+                    const img = new Image();
+                    img.src = w;
+                    return true;
+                } catch {
+                    return false;
+                }
+            });
         }
+        return [pattern];
     }
-    return Array.from(wallpapers).sort();
+    
+    return [];
 }
 
 async function loadAllJSON(pattern) {
-    if (pattern.includes('*')) {
-        files = await getAvailableFiles();
+    if (Array.isArray(pattern)) {
+        // If pattern is array, use it directly as files list
+        files = pattern;
         return files.length > 0 ? await loadJSON(files[0]) : null;
     }
+    if (typeof pattern === 'string' && pattern.includes('*')) {
+        // Handle wildcard pattern
+        files = getAvailableFiles();
+        return files.length > 0 ? await loadJSON(files[0]) : null;
+    }
+    // Single file case
     files = [pattern];
     return await loadJSON(pattern);
 }
@@ -112,6 +112,16 @@ async function navigateWallpaper(direction) {
         } catch (error) {
             console.error('Failed to navigate wallpaper:', error);
         }
+    }
+}
+
+function navigateStylesheet(direction) {
+    if (stylesheetSets.length > 0) {
+        currentStylesheetSet = (currentStylesheetSet + direction + stylesheetSets.length) % stylesheetSets.length;
+        // Remove existing stylesheets
+        document.querySelectorAll('link[rel="stylesheet"]').forEach(link => link.remove());
+        // Load new stylesheet set
+        loadStylesheets(stylesheetSets[currentStylesheetSet]);
     }
 }
 
@@ -167,19 +177,19 @@ function formatContent(item) {
     return '';
 }
 
-// Supports dynamic wallpaper changes without page reload
+// Modified setWallpaper to handle online mode
 function setWallpaper(wallpaperPath) {
     return new Promise((resolve, reject) => {
         const img = new Image();
         img.onload = () => {
-            document.body.style.backgroundImage = `url('${wallpaperPath}')`;
+            document.body.style.backgroundImage = `url('${isOnlineMode ? `${serverUrl}/${wallpaperPath}` : wallpaperPath}')`;
             resolve();
         };
         img.onerror = () => {
             console.error(`Failed to load wallpaper: ${wallpaperPath}`);
             reject();
         };
-        img.src = wallpaperPath;
+        img.src = isOnlineMode ? `${serverUrl}/${wallpaperPath}` : wallpaperPath;
     });
 }
 
@@ -193,31 +203,77 @@ function loadStylesheets(stylesheets) {
     });
 }
 
-// Orchestrates the initial setup and content rendering
+// Modified initializeContent to handle mode setting
 async function initializeContent() {
     try {
         const config = await loadJSON('config.json');
-        files = getAvailableFiles();
+        isOnlineMode = config.mode === 'online';
+        serverUrl = config.serverUrl || '';
         
+        // Get stylesheet sets
+        stylesheetSets = Object.values(config.stylesheets);
+        if (stylesheetSets.length > 0) {
+            loadStylesheets(stylesheetSets[0]);
+        }
+
         // Scan for wallpapers using patterns
-        wallpapers = await getAvailableWallpapers(config.wallpaper);
+        wallpapers = await scanWallpapers(config.wallpaper);
         console.log('Found wallpapers:', wallpapers);
         
         if (wallpapers.length > 0) {
             await setWallpaper(wallpapers[0]);
         }
 
+        // Load content from first file in config.content
         const content = await loadAllJSON(config.content);
-        const formattedContent = content.map(formatContent).join('');
-        document.getElementById("content").innerHTML = formattedContent;
-        
-        if (config.stylesheets) {
-            loadStylesheets(config.stylesheets);
+        if (content) {
+            const formattedContent = content.map(formatContent).join('');
+            document.getElementById("content").innerHTML = formattedContent;
+        } else {
+            document.getElementById("content").innerHTML = '<p>No content files found</p>';
         }
     } catch (error) {
         console.error('Failed to initialize:', error);
-        document.getElementById("content").innerHTML = '<p>Error loading content</p>';
+        document.getElementById("content").innerHTML = `<p>Error loading content: ${error.message}</p>`;
     }
+}
+
+async function scanWallpapers(patterns) {
+    const foundWallpapers = new Set();
+    const patternList = Array.isArray(patterns) ? patterns : [patterns];
+
+    // Helper function to test image loading
+    const testImage = (path) => new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = isOnlineMode ? `${serverUrl}/${path}` : path;
+    });
+
+    for (const pattern of patternList) {
+        if (pattern.includes('*')) {
+            const [basePath, filePattern] = pattern.split('*');
+            try {
+                const indexes = Array.from({length: 10}, (_, i) => i + 1);
+                for (const idx of indexes) {
+                    const path = `${basePath}${idx}${filePattern}`;
+                    if (await testImage(path)) {
+                        foundWallpapers.add(path);
+                    }
+                }
+            } catch (error) {
+                console.warn(`Failed to scan ${basePath}`, error);
+            }
+        } else {
+            // For direct paths, just add them without testing in online mode
+            if (isOnlineMode) {
+                foundWallpapers.add(pattern);
+            } else if (await testImage(pattern)) {
+                foundWallpapers.add(pattern);
+            }
+        }
+    }
+    return Array.from(foundWallpapers).sort();
 }
 
 function loadContent() {
@@ -237,4 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("nextBtn").addEventListener("click", () => navigateContent(1));
     document.getElementById("prevWallBtn").addEventListener("click", () => navigateWallpaper(-1));
     document.getElementById("nextWallBtn").addEventListener("click", () => navigateWallpaper(1));
+    document.getElementById("prevStyleBtn").addEventListener("click", () => navigateStylesheet(-1));
+    document.getElementById("nextStyleBtn").addEventListener("click", () => navigateStylesheet(1));
 });

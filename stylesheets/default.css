@@ -102,3 +102,46 @@ button {
     cursor: pointer;
     border-radius: 5px;
 }
+
+/* Navigation buttons */
+.nav-btn, .wall-btn, .style-btn {
+    position: fixed;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-btn {
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px;
+    font-size: 24px;
+}
+
+.wall-btn {
+    bottom: 20px;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.style-btn {
+    bottom: 60px;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.nav-left, .wall-left, .style-left {
+    left: 20px;
+}
+
+.nav-right, .wall-right, .style-right {
+    right: 20px;
+}
+
+.nav-btn:hover, .wall-btn:hover, .style-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}

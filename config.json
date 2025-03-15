@@ -1,12 +1,23 @@
 {    
-    "content": "content/*.json",
+    "mode": "online",
+    "serverUrl": "https://localhost:8443",
+    "title": "Reference Sheets",
+    "content": [
+        "content/java_reference.json", 
+        "content/json_reference.json"
+    ],
     "wallpaper": [
-        "images/wallpaper/*.jpg",
-        "images/wallpaper/*.png",
+        "images/wallpaper/VALLEY_BAY_DOUBLE.jpg",
         "images/wallpaper/wallpaper.png"
     ],
-    "stylesheets": [
-        "small.css"
-    ]
+    "stylesheets": {        
+        "set1": [
+            "stylesheets/tiny.css"
+        ],
+        "set2": [
+            "stylesheets/default.css",
+            "stylesheets/small.css"
+        ] 
+    }
 }
 
