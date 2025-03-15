@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "Cohesity Management Guide"
+    },
+    {
+        "title": "Protection Jobs",
+        "table": {
+            "headers": ["Operation", "Description"],
+            "rows": [
+                ["Create Job", "Define backup schedule and retention"],
+                ["Global Exclude", "Set cluster-wide exclusions"],
+                ["Job Chain", "Link dependent backup jobs"],
+                ["SLA Domain", "Define RPO and backup windows"],
+                ["Throttling", "Control backup performance impact"]
+            ]
+        }
+    },
+    {
+        "title": "Recovery Operations",
+        "table": {
+            "headers": ["Type", "Capability"],
+            "rows": [
+                ["Instant Recovery", "VM/Application immediate mount"],
+                ["File Level", "Individual file restoration"],
+                ["Mass Restore", "Bulk recovery operations"],
+                ["Clone", "Test/Dev environment creation"],
+                ["Download", "Local file copy retrieval"]
+            ]
+        }
+    },
+    {
+        "title": "Storage Management",
+        "table": {
+            "headers": ["Feature", "Purpose"],
+            "rows": [
+                ["Storage Domain", "Data organization units"],
+                ["External Target", "Archive/DR location"],
+                ["Deduplication", "Storage efficiency settings"],
+                ["Compression", "Data reduction options"],
+                ["Encryption", "Data security controls"]
+            ]
+        }
+    },
+    {
+        "title": "Monitoring Tasks",
+        "table": {
+            "headers": ["Task", "Frequency"],
+            "rows": [
+                ["Job Status", "Daily review"],
+                ["Capacity Usage", "Weekly assessment"],
+                ["Cluster Health", "Daily check"],
+                ["Alert Review", "Morning/Evening"],
+                ["Audit Logs", "Weekly review"]
+            ]
+        }
+    },
+    {
+        "title": "Best Practices",
+        "table": {
+            "headers": ["Area", "Recommendation"],
+            "rows": [
+                ["Job Scheduling", "Stagger large backups"],
+                ["Retention", "Match compliance requirements"],
+                ["Performance", "Monitor backup windows"],
+                ["Testing", "Regular recovery validation"],
+                ["Updates", "Monthly maintenance window"]
+            ]
+        }
+    }
+]

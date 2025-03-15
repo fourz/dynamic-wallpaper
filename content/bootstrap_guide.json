@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "Bootstrap 5 Quick Reference"
+    },
+    {
+        "title": "Grid System",
+        "table": {
+            "headers": ["Class", "Purpose"],
+            "rows": [
+                ["container", "Responsive fixed-width container"],
+                ["row", "Wrapper for columns"],
+                ["col-{size}-{1-12}", "Responsive column sizing"],
+                ["col-auto", "Auto-width column"],
+                ["g-{0-5}", "Grid gap spacing"]
+            ]
+        }
+    },
+    {
+        "title": "Responsive Breakpoints",
+        "table": {
+            "headers": ["Class", "Width"],
+            "rows": [
+                ["sm", "≥576px"],
+                ["md", "≥768px"],
+                ["lg", "≥992px"],
+                ["xl", "≥1200px"],
+                ["xxl", "≥1400px"]
+            ]
+        }
+    },
+    {
+        "title": "Utility Classes",
+        "table": {
+            "headers": ["Category", "Examples"],
+            "rows": [
+                ["Spacing", "m-{0-5}, p-{0-5}, mx-auto"],
+                ["Display", "d-none, d-flex, d-md-block"],
+                ["Flex", "flex-row, justify-content-between"],
+                ["Colors", "bg-primary, text-danger"],
+                ["Borders", "border, rounded, shadow"]
+            ]
+        }
+    },
+    {
+        "title": "Components",
+        "table": {
+            "headers": ["Component", "Classes"],
+            "rows": [
+                ["Buttons", "btn btn-primary btn-lg"],
+                ["Cards", "card, card-body, card-title"],
+                ["Navbar", "navbar navbar-expand-lg"],
+                ["Forms", "form-control, form-label"],
+                ["Alerts", "alert alert-success"]
+            ]
+        }
+    },
+    {
+        "title": "Interactive Elements",
+        "table": {
+            "headers": ["Component", "Data Attributes"],
+            "rows": [
+                ["Modal", "data-bs-toggle='modal'"],
+                ["Tooltip", "data-bs-toggle='tooltip'"],
+                ["Collapse", "data-bs-toggle='collapse'"],
+                ["Dropdown", "data-bs-toggle='dropdown'"],
+                ["Tab", "data-bs-toggle='tab'"]
+            ]
+        }
+    }
+]

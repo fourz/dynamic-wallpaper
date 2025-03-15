@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "How This System Was Made"
+    },
+    {
+        "title": "Core Technologies",
+        "table": {
+            "headers": ["Technology", "Purpose"],
+            "rows": [
+                ["HTML5", "Basic structure and content display"],
+                ["JavaScript", "Dynamic content loading and rendering"],
+                ["CSS", "Responsive styling and visual themes"],
+                ["JSON", "Structured data storage format"],
+                ["Fetch API", "Asynchronous content loading"]
+            ]
+        }
+    },
+    {
+        "title": "Development Approach",
+        "table": {
+            "headers": ["Component", "Implementation"],
+            "rows": [
+                ["Content Structure", "JSON-based modular design"],
+                ["Display Engine", "Pure JavaScript, no frameworks"],
+                ["Styling System", "CSS Variables for theming"],
+                ["File Organization", "Separate content from logic"],
+                ["Error Handling", "Detailed user feedback"]
+            ]
+        }
+    },
+    {
+        "title": "Design Decisions",
+        "table": {
+            "headers": ["Decision", "Rationale"],
+            "rows": [
+                ["No Dependencies", "Lightweight and portable"],
+                ["JSON Content", "Easy to edit and maintain"],
+                ["Local Files", "Works offline, no server needed"],
+                ["Responsive Layout", "Adapts to any screen size"],
+                ["Modular Design", "Easy to extend and modify"]
+            ]
+        }
+    },
+    {
+        "title": "Key Features",
+        "table": {
+            "headers": ["Feature", "Benefit"],
+            "rows": [
+                ["Dynamic Loading", "Change content without reload"],
+                ["Flexible Styling", "Multiple theme support"],
+                ["Error Recovery", "Helpful troubleshooting"],
+                ["Content Format", "Structured yet simple"],
+                ["Local First", "Works without internet"]
+            ]
+        }
+    },
+    {
+        "title": "Future Improvements",
+        "table": {
+            "headers": ["Area", "Potential Enhancement"],
+            "rows": [
+                ["Search", "Content search functionality"],
+                ["Navigation", "Keyboard shortcuts"],
+                ["Export", "PDF export capability"],
+                ["Categories", "Content categorization"],
+                ["Animations", "Smooth transitions"]
+            ]
+        }
+    }
+]

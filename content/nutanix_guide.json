@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "Nutanix Management Guide"
+    },
+    {
+        "title": "Common ACLI Commands",
+        "table": {
+            "headers": ["Command", "Purpose"],
+            "rows": [
+                ["cluster status", "Check cluster health"],
+                ["vm.list", "Show all VMs"],
+                ["storage.container.list", "List storage containers"],
+                ["host.list", "Show cluster nodes"],
+                ["ncli cluster info", "Display cluster information"]
+            ]
+        }
+    },
+    {
+        "title": "Storage Features",
+        "table": {
+            "headers": ["Feature", "Description"],
+            "rows": [
+                ["Deduplication", "Inline/post-process data reduction"],
+                ["Compression", "Data compression settings"],
+                ["Erasure Coding", "Storage efficiency feature"],
+                ["Snapshots", "Point-in-time VM copies"],
+                ["Replication", "Cross-cluster data protection"]
+            ]
+        }
+    },
+    {
+        "title": "Network Configuration",
+        "table": {
+            "headers": ["Component", "Purpose"],
+            "rows": [
+                ["Virtual Networks", "VM connectivity"],
+                ["Bond Modes", "NIC teaming options"],
+                ["VLAN Trunking", "Network segregation"],
+                ["IP Address Pool", "DHCP alternatives"],
+                ["Network Security", "Microsegmentation"]
+            ]
+        }
+    },
+    {
+        "title": "High Availability",
+        "table": {
+            "headers": ["Feature", "Function"],
+            "rows": [
+                ["Redundancy Factor", "Data replica settings"],
+                ["Auto Pathing", "Storage path failover"],
+                ["HA Restart", "Automatic VM recovery"],
+                ["Dynamic Scheduling", "Resource balancing"],
+                ["Affinity Rules", "VM placement control"]
+            ]
+        }
+    },
+    {
+        "title": "Maintenance Tasks",
+        "table": {
+            "headers": ["Task", "Timing"],
+            "rows": [
+                ["Cluster Upgrade", "Rolling node updates"],
+                ["Health Checks", "Daily automated scan"],
+                ["Capacity Planning", "Weekly review"],
+                ["Backup Verification", "Monthly testing"],
+                ["Performance Review", "Quarterly analysis"]
+            ]
+        }
+    }
+]

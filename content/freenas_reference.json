@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "FreeNAS/TrueNAS Reference"
+    },
+    {
+        "title": "Common CLI Commands",
+        "table": {
+            "headers": ["Command", "Purpose"],
+            "rows": [
+                ["zpool status", "Check pool health status"],
+                ["zpool scrub tankname", "Start pool data verification"],
+                ["zfs list", "Show datasets and properties"],
+                ["freenas-debug", "Generate diagnostic file"],
+                ["iocage list", "List jail instances"]
+            ]
+        }
+    },
+    {
+        "title": "Storage Management",
+        "table": {
+            "headers": ["Operation", "Command/Action"],
+            "rows": [
+                ["Create Dataset", "zfs create pool/dataset"],
+                ["Set Compression", "zfs set compression=lz4 pool/dataset"],
+                ["Enable Snapshots", "Enable snapshot tasks in UI"],
+                ["Check Usage", "zfs get used,available pool/dataset"],
+                ["Set Quota", "zfs set quota=100G pool/dataset"]
+            ]
+        }
+    },
+    {
+        "title": "Network Configuration",
+        "table": {
+            "headers": ["Setting", "Description"],
+            "rows": [
+                ["LAGG", "Link Aggregation for NIC teaming"],
+                ["VLAN", "Network segmentation"],
+                ["Static IP", "Fixed IP configuration"],
+                ["Default Gateway", "Main network gateway"],
+                ["DNS Settings", "Name resolution config"]
+            ]
+        }
+    },
+    {
+        "title": "Sharing Protocols",
+        "table": {
+            "headers": ["Protocol", "Usage"],
+            "rows": [
+                ["SMB/CIFS", "Windows file sharing"],
+                ["NFS", "Unix/Linux file sharing"],
+                ["iSCSI", "Block storage access"],
+                ["AFP", "Legacy Mac file sharing"],
+                ["WebDAV", "HTTP-based file access"]
+            ]
+        }
+    },
+    {
+        "title": "Maintenance Tasks",
+        "table": {
+            "headers": ["Task", "Frequency"],
+            "rows": [
+                ["SMART Tests", "Weekly short, monthly long"],
+                ["Pool Scrub", "Monthly verification"],
+                ["Snapshots", "Daily/weekly rotation"],
+                ["Updates", "Check monthly, after testing"],
+                ["Backup Config", "After system changes"]
+            ]
+        }
+    }
+]

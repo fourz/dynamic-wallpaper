@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "How To Use This Reference System"
+    },
+    {
+        "title": "Navigation Controls",
+        "table": {
+            "headers": ["Action", "How To"],
+            "rows": [
+                ["Change Guide", "Edit config.json content path"],
+                ["Refresh View", "Reload browser window"],
+                ["Adjust Size", "Modify CSS in stylesheet"],
+                ["Custom Theme", "Edit default.css file"],
+                ["New Content", "Create JSON in content folder"]
+            ]
+        }
+    },
+    {
+        "title": "File Structure",
+        "table": {
+            "headers": ["Component", "Purpose"],
+            "rows": [
+                ["config.json", "Main configuration file"],
+                ["content/*.json", "Reference guide content"],
+                ["*.css", "Visual styling files"],
+                ["index.html", "Display page"],
+                ["overlay.js", "Content rendering engine"]
+            ]
+        }
+    },
+    {
+        "title": "Content Format",
+        "table": {
+            "headers": ["Element", "Usage"],
+            "rows": [
+                ["Heading", "Main title with style:heading"],
+                ["Tables", "Structured data presentation"],
+                ["Lists", "Bulleted information"],
+                ["Numbered Lists", "Sequential steps"],
+                ["Sections", "Group related information"]
+            ]
+        }
+    },
+    {
+        "title": "Customization",
+        "table": {
+            "headers": ["Setting", "Location"],
+            "rows": [
+                ["Background", "wallpaper.png file"],
+                ["Styles", "CSS files in root"],
+                ["Content", "JSON files in content/"],
+                ["Layout", "Edit CSS grid settings"],
+                ["Colors", "Modify CSS variables"]
+            ]
+        }
+    },
+    {
+        "title": "Troubleshooting",
+        "table": {
+            "headers": ["Issue", "Solution"],
+            "rows": [
+                ["Blank Screen", "Check file paths in config"],
+                ["No Styles", "Verify CSS file existence"],
+                ["Load Error", "Use local web server"],
+                ["JSON Error", "Validate JSON syntax"],
+                ["Display Issues", "Clear browser cache"]
+            ]
+        }
+    }
+]

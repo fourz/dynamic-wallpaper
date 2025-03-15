@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "Raspbian/Raspberry Pi OS Reference"
+    },
+    {
+        "title": "System Commands",
+        "table": {
+            "headers": ["Command", "Purpose"],
+            "rows": [
+                ["raspi-config", "Configure system settings"],
+                ["vcgencmd measure_temp", "Check CPU temperature"],
+                ["vcgencmd get_mem arm/gpu", "Show memory split"],
+                ["rpi-update", "Update firmware"],
+                ["pinout", "Show GPIO pin layout"]
+            ]
+        }
+    },
+    {
+        "title": "Network Configuration",
+        "table": {
+            "headers": ["File/Command", "Function"],
+            "rows": [
+                ["/etc/wpa_supplicant/...", "WiFi configuration"],
+                ["raspi-config", "Enable/disable interfaces"],
+                ["ifconfig", "Show network interfaces"],
+                ["iwlist wlan0 scan", "Scan WiFi networks"],
+                ["hostname -I", "Show IP address"]
+            ]
+        }
+    },
+    {
+        "title": "GPIO Controls",
+        "table": {
+            "headers": ["Command", "Description"],
+            "rows": [
+                ["gpio readall", "Show all GPIO states"],
+                ["gpio -g mode 18 out", "Set GPIO18 as output"],
+                ["gpio -g write 18 1", "Set GPIO18 high"],
+                ["gpio -g read 18", "Read GPIO18 state"],
+                ["i2cdetect -y 1", "Scan I2C devices"]
+            ]
+        }
+    },
+    {
+        "title": "System Maintenance",
+        "table": {
+            "headers": ["Task", "Command"],
+            "rows": [
+                ["Update System", "sudo apt update && upgrade"],
+                ["Clean Packages", "sudo apt autoremove"],
+                ["Check Storage", "df -h"],
+                ["Monitor Resources", "top"],
+                ["View Logs", "journalctl -xe"]
+            ]
+        }
+    },
+    {
+        "title": "Boot Options",
+        "table": {
+            "headers": ["Setting", "Configuration"],
+            "rows": [
+                ["Boot to CLI", "systemd.unit=multi-user.target"],
+                ["Boot to Desktop", "systemd.unit=graphical.target"],
+                ["Disable Splash", "disable_splash=1"],
+                ["Silent Boot", "quiet"],
+                ["Force HDMI", "hdmi_force_hotplug=1"]
+            ]
+        }
+    }
+]

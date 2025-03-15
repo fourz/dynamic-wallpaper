@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "Zombie Apocalypse Survival Guide"
+    },
+    {
+        "title": "Essential Supplies",
+        "table": {
+            "headers": ["Category", "Items"],
+            "rows": [
+                ["Water", "3 gallons per person, filters, purification tabs"],
+                ["Food", "Non-perishables, canned goods, dried foods"],
+                ["Medical", "First aid kit, prescriptions, antiseptics"],
+                ["Tools", "Multi-tool, flashlights, batteries, radio"],
+                ["Defense", "Melee weapons, reinforcement materials"]
+            ]
+        }
+    },
+    {
+        "title": "Safe Locations",
+        "table": {
+            "headers": ["Location", "Advantages"],
+            "rows": [
+                ["High Ground", "Better visibility, defensible position"],
+                ["Rural Areas", "Less population, food sources"],
+                ["Islands", "Natural barriers, limited access"],
+                ["Warehouses", "Resources, sturdy construction"],
+                ["Military Bases", "Supplies, fortified structures"]
+            ]
+        }
+    },
+    {
+        "title": "Movement Tactics",
+        "table": {
+            "headers": ["Tactic", "Application"],
+            "rows": [
+                ["Stealth", "Move quietly, avoid main roads"],
+                ["Scouting", "Check areas before commitment"],
+                ["Formation", "Keep group tight, watch all angles"],
+                ["Signals", "Use silent communication methods"],
+                ["Extraction", "Always have escape routes planned"]
+            ]
+        }
+    },
+    {
+        "title": "Group Roles",
+        "table": {
+            "headers": ["Role", "Responsibilities"],
+            "rows": [
+                ["Scout", "Area reconnaissance, route finding"],
+                ["Medic", "Health monitoring, first aid"],
+                ["Guard", "Security, perimeter watch"],
+                ["Scavenger", "Resource gathering, inventory"],
+                ["Engineer", "Repairs, fortification"]
+            ]
+        }
+    },
+    {
+        "title": "Daily Priorities",
+        "table": {
+            "headers": ["Priority", "Actions"],
+            "rows": [
+                ["Security", "Check defenses, maintain watches"],
+                ["Water", "Collect, purify, ration supplies"],
+                ["Food", "Inventory, prepare, preserve"],
+                ["Maintenance", "Repair gear, clean weapons"],
+                ["Planning", "Update maps, discuss movements"]
+            ]
+        }
+    }
+]

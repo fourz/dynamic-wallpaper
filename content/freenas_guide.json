@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "FreeNAS/TrueNAS Practical Guide"
+    },
+    {
+        "title": "Initial Setup Steps",
+        "table": {
+            "headers": ["Step", "Configuration"],
+            "rows": [
+                ["Network", "Configure static IP, DNS, gateway"],
+                ["Storage", "Create ZFS pool, set compression"],
+                ["Users", "Create admin and user accounts"],
+                ["Shares", "Configure SMB/NFS shares"],
+                ["Updates", "Check system updates, plugins"]
+            ]
+        }
+    },
+    {
+        "title": "ZFS Pool Types",
+        "table": {
+            "headers": ["Type", "Usage"],
+            "rows": [
+                ["Mirror", "2+ drives, max redundancy"],
+                ["RAIDZ1", "3+ drives, 1 drive redundant"],
+                ["RAIDZ2", "4+ drives, 2 drives redundant"],
+                ["RAIDZ3", "5+ drives, 3 drives redundant"],
+                ["Stripe", "2+ drives, no redundancy"]
+            ]
+        }
+    },
+    {
+        "title": "Share Permissions",
+        "table": {
+            "headers": ["Permission", "Description"],
+            "rows": [
+                ["Unix (755)", "rwxr-xr-x standard folders"],
+                ["Unix (644)", "rw-r--r-- standard files"],
+                ["ACL", "Windows-style permissions"],
+                ["Dataset ACL", "Inheritable permissions"],
+                ["Guest Access", "Public share settings"]
+            ]
+        }
+    },
+    {
+        "title": "Backup Strategies",
+        "table": {
+            "headers": ["Type", "Method"],
+            "rows": [
+                ["Local", "ZFS snapshots with retention"],
+                ["Remote", "Replication to backup server"],
+                ["Cloud", "Cloud sync to providers"],
+                ["External", "Periodic disk backup"],
+                ["Config", "System settings backup"]
+            ]
+        }
+    },
+    {
+        "title": "Performance Tips",
+        "table": {
+            "headers": ["Area", "Optimization"],
+            "rows": [
+                ["Memory", "1GB RAM per TB storage"],
+                ["Network", "Enable jumbo frames"],
+                ["Cache", "Use SSDs for L2ARC"],
+                ["ZIL", "SSD for sync writes"],
+                ["Scrub", "Schedule monthly scrubs"]
+            ]
+        }
+    }
+]

@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "Hyper-V Management Guide"
+    },
+    {
+        "title": "PowerShell Commands",
+        "table": {
+            "headers": ["Command", "Purpose"],
+            "rows": [
+                ["Get-VM", "List all virtual machines"],
+                ["Start/Stop-VM", "Control VM power state"],
+                ["New-VM", "Create new virtual machine"],
+                ["Set-VMMemory", "Configure VM memory"],
+                ["Get-VMNetworkAdapter", "View network settings"]
+            ]
+        }
+    },
+    {
+        "title": "Network Types",
+        "table": {
+            "headers": ["Type", "Usage"],
+            "rows": [
+                ["Private", "Isolated VM network"],
+                ["Internal", "Host + VM communication"],
+                ["External", "Physical network access"],
+                ["NAT", "Share host's IP address"],
+                ["Default Switch", "Auto NAT networking"]
+            ]
+        }
+    },
+    {
+        "title": "Storage Options",
+        "table": {
+            "headers": ["Type", "Best For"],
+            "rows": [
+                ["VHDX", "Modern virtual disks"],
+                ["VHD", "Legacy compatibility"],
+                ["Fixed Size", "Best performance"],
+                ["Dynamic", "Space efficiency"],
+                ["Pass-through", "Direct disk access"]
+            ]
+        }
+    },
+    {
+        "title": "Performance Tips",
+        "table": {
+            "headers": ["Setting", "Recommendation"],
+            "rows": [
+                ["Dynamic Memory", "Enable for most VMs"],
+                ["Integration Services", "Keep updated"],
+                ["VHDX Location", "Separate physical disk"],
+                ["Checkpoints", "Production type default"],
+                ["vCPU Count", "Match workload needs"]
+            ]
+        }
+    },
+    {
+        "title": "Backup Strategy",
+        "table": {
+            "headers": ["Component", "Method"],
+            "rows": [
+                ["VM Export", "Portable backup copy"],
+                ["Checkpoints", "Point-in-time recovery"],
+                ["Replication", "Disaster recovery"],
+                ["Host Backup", "Windows Server Backup"],
+                ["Config Backup", "Export VM settings"]
+            ]
+        }
+    }
+]

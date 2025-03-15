@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "CSS Quick Reference"
+    },
+    {
+        "title": "Box Model",
+        "table": {
+            "headers": ["Property", "Description", "Example"],
+            "rows": [
+                ["margin", "Outside spacing", "margin: 10px 20px;"],
+                ["padding", "Inside spacing", "padding: 1em 2em;"],
+                ["border", "Edge styling", "border: 1px solid #000;"],
+                ["width/height", "Element size", "width: 100%; height: 50px;"],
+                ["box-sizing", "Size calculation", "box-sizing: border-box;"]
+            ]
+        }
+    },
+    {
+        "title": "Positioning",
+        "table": {
+            "headers": ["Value", "Description", "Example"],
+            "rows": [
+                ["static", "Default flow", "position: static;"],
+                ["relative", "Relative to normal", "position: relative; top: 10px;"],
+                ["absolute", "Relative to parent", "position: absolute; left: 0;"],
+                ["fixed", "Relative to viewport", "position: fixed; bottom: 0;"],
+                ["sticky", "Scrolling behavior", "position: sticky; top: 0;"]
+            ]
+        }
+    },
+    {
+        "title": "Flexbox",
+        "table": {
+            "headers": ["Property", "Common Values", "Example"],
+            "rows": [
+                ["display", "flex, inline-flex", "display: flex;"],
+                ["flex-direction", "row, column", "flex-direction: column;"],
+                ["justify-content", "center, space-between", "justify-content: center;"],
+                ["align-items", "center, stretch", "align-items: center;"],
+                ["flex", "grow shrink basis", "flex: 1 0 auto;"]
+            ]
+        }
+    },
+    {
+        "title": "Grid",
+        "table": {
+            "headers": ["Property", "Description", "Example"],
+            "rows": [
+                ["display", "Grid container", "display: grid;"],
+                ["grid-template", "Define layout", "grid-template-columns: 1fr 2fr;"],
+                ["gap", "Grid spacing", "gap: 10px;"],
+                ["grid-area", "Item placement", "grid-area: header;"],
+                ["grid-auto-flow", "Auto placement", "grid-auto-flow: dense;"]
+            ]
+        }
+    },
+    {
+        "title": "Typography",
+        "table": {
+            "headers": ["Property", "Description", "Example"],
+            "rows": [
+                ["font-family", "Font type", "font-family: Arial, sans-serif;"],
+                ["font-size", "Text size", "font-size: 16px;"],
+                ["line-height", "Line spacing", "line-height: 1.5;"],
+                ["text-align", "Alignment", "text-align: center;"],
+                ["font-weight", "Text thickness", "font-weight: bold;"]
+            ]
+        }
+    }
+]

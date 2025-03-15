@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "Bootstrap Class Reference"
+    },
+    {
+        "title": "Layout Patterns",
+        "table": {
+            "headers": ["Pattern", "Classes"],
+            "rows": [
+                ["Responsive Container", "container-{sm|md|lg|xl|xxl}"],
+                ["Fluid Layout", "container-fluid w-100"],
+                ["Auto Columns", "row-cols-{1-6} g-{1-5}"],
+                ["Equal Width", "col col col"],
+                ["Nested Grid", "row > col > row > col"]
+            ]
+        }
+    },
+    {
+        "title": "Flexbox Utilities",
+        "table": {
+            "headers": ["Property", "Classes"],
+            "rows": [
+                ["Direction", "flex-{row|column}(-reverse)"],
+                ["Justify", "justify-content-{start|end|center|between}"],
+                ["Align Items", "align-items-{start|end|center|baseline}"],
+                ["Align Self", "align-self-{start|end|center|stretch}"],
+                ["Order", "order-{0-5}"]
+            ]
+        }
+    },
+    {
+        "title": "Spacing System",
+        "table": {
+            "headers": ["Type", "Pattern"],
+            "rows": [
+                ["Margin", "m{t|r|b|l|x|y}-{0-5|auto}"],
+                ["Padding", "p{t|r|b|l|x|y}-{0-5}"],
+                ["Gap", "gap-{0-5}"],
+                ["Margin Negative", "m{t|r|b|l|x|y}-n{1-5}"],
+                ["Responsive", "{m|p}{sides}-{breakpoint}-{size}"]
+            ]
+        }
+    },
+    {
+        "title": "Color Utilities",
+        "table": {
+            "headers": ["Context", "Classes"],
+            "rows": [
+                ["Text", "text-{primary|secondary|success|danger}"],
+                ["Background", "bg-{color} bg-opacity-{25|50|75}"],
+                ["Border", "border border-{color}"],
+                ["Link", "link-{color}"],
+                ["Gradients", "bg-gradient bg-{color}"]
+            ]
+        }
+    },
+    {
+        "title": "Display Properties",
+        "table": {
+            "headers": ["Purpose", "Classes"],
+            "rows": [
+                ["Hide/Show", "d-{none|block|inline|inline-block}"],
+                ["Responsive", "d-{sm|md|lg|xl}-{value}"],
+                ["Print", "d-print-{none|block|inline|flex}"],
+                ["Overflow", "overflow-{auto|hidden|visible|scroll}"],
+                ["Position", "position-{static|relative|absolute|fixed}"]
+            ]
+        }
+    }
+]

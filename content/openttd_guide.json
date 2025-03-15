@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "OpenTTD Quick Reference Guide"
+    },
+    {
+        "title": "Basic Controls",
+        "table": {
+            "headers": ["Key", "Function"],
+            "rows": [
+                ["A", "Automate rail construction"],
+                ["Ctrl+D", "Demolish tool"],
+                ["M", "Toggle minimap"],
+                ["Z", "Zoom in / out"],
+                ["F", "Toggle forestation"]
+            ]
+        }
+    },
+    {
+        "title": "Train Signals",
+        "table": {
+            "headers": ["Signal Type", "Usage"],
+            "rows": [
+                ["Block Signal", "Basic track section control"],
+                ["Pre-Signal", "Station approach management"],
+                ["Exit Signal", "Station departure control"],
+                ["Combo Signal", "Priority junction control"],
+                ["Path Signal", "Smart junction management"]
+            ]
+        }
+    },
+    {
+        "title": "Station Efficiency",
+        "table": {
+            "headers": ["Design", "Benefits"],
+            "rows": [
+                ["Ro-Ro", "Continuous flow, no reversing"],
+                ["Terminus", "Space efficient, good for ends"],
+                ["Drive-through", "High throughput, flexible"],
+                ["Waypoint", "Traffic management, routing"],
+                ["Transfer", "Multi-modal connectivity"]
+            ]
+        }
+    },
+    {
+        "title": "Network Design",
+        "table": {
+            "headers": ["Pattern", "Application"],
+            "rows": [
+                ["Mainline", "High-speed backbone routes"],
+                ["Feeder Lines", "Local service connections"],
+                ["Loop System", "Circular urban transport"],
+                ["Grid Pattern", "City bus/tram networks"],
+                ["Hub and Spoke", "Airport/station networks"]
+            ]
+        }
+    },
+    {
+        "title": "Industry Chains",
+        "table": {
+            "headers": ["Industry", "Products"],
+            "rows": [
+                ["Coal Mine", "Coal → Power Plant"],
+                ["Forest", "Wood → Sawmill → Factory"],
+                ["Farm", "Grain → Factory"],
+                ["Oil Wells", "Oil → Refinery → Factory"],
+                ["Iron Ore", "Iron Ore → Steel Mill"]
+            ]
+        }
+    }
+]
