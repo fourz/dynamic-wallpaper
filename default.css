@@ -28,11 +28,11 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem;
-    /* Enable scrolling for overflow content while maintaining layout */
-    max-height: 90vh;
-    overflow-y: auto;
     justify-content: space-between;
     align-items: flex-start;
+    /* Remove scrollbar properties */
+    max-height: none;
+    overflow-y: visible;
 }
 
 /* Flexible container for content sections that maintains minimum width */
