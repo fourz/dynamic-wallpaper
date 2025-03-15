@@ -1,4 +1,5 @@
 body {
+    /* Reset defaults and ensure wallpaper covers viewport */
     margin: 0;
     padding: 0;
     background: url('wallpaper.png') no-repeat center center fixed;
@@ -11,16 +12,17 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    font-size: 11pt;
-    line-height: 1.3;
 }
 
 .overlay {
+    /* Semi-transparent container for better text readability */
     background: rgba(0, 0, 0, 0.6);
-    padding: 15px;
-    border-radius: 8px;
+    padding: 20px;
+    border-radius: 10px;
+    /* Responsive sizing with max-width to prevent oversized content */
     width: 92%;
-    max-width: 1400px;
+    max-width: 1600px;
+    line-height: 1.5;
     text-align: left;
     display: flex;
     flex-direction: row;
@@ -28,10 +30,12 @@ body {
     gap: 1.5rem;
     justify-content: space-between;
     align-items: flex-start;
+    /* Remove scrollbar properties */
     max-height: none;
     overflow-y: visible;
 }
 
+/* Flexible container for content sections that maintains minimum width */
 .flex-wrap {
     display: flex;
     flex-wrap: wrap;
@@ -40,6 +44,7 @@ body {
     margin: 0;
 }
 
+/* Prevent content from overflowing flex container */
 .flex-wrap > * {
     width: 100%;
     min-width: 0;
@@ -49,28 +54,30 @@ h1 {
     margin: 0;
     width: 100%;
     text-align: center;
-    font-size: 16pt;
 }
 
 h2 { 
-    margin: 0 0 0.4rem 0;
+    margin: 0 0 0.5rem 0;
     width: 100%;
-    font-size: 11pt;
+    font-size: 1.5em;
+    color: #fff;
 }
 
+/* Tables with consistent styling and responsive behavior */
 table {
     width: auto;
     border-collapse: collapse;
     margin: 0;
-    font-size: 11pt;
+    flex: 1;
 }
 
 th, td {
     border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 6px 8px;
+    padding: 8px 12px;
     text-align: left;
     white-space: normal;
-    min-width: 75px;
+    min-width: 100px;
+    max-width: none;
 }
 
 /* Add minimum width for all cells except first column */
@@ -94,18 +101,67 @@ li {
     padding: 0.2em 0;
 }
 
+.nav-buttons, .file-buttons, .tab-info {
+    display: none;
+}
+
 button {
     background: rgba(255, 255, 255, 0.3);
     border: none;
-    padding: 8px 15px;
+    padding: 10px 20px;
     color: white;
     cursor: pointer;
-    border-radius: 4px;
-    font-size: 11pt;
+    border-radius: 5px;
 }
 
-/* Navigation Controls - Match Default Theme
-   DO NOT MODIFY button sizes or positions to maintain consistency
+/* Navigation buttons */
+.nav-btn, .wall-btn, .style-btn {
+    position: fixed;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-btn {
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px;
+    font-size: 24px;
+}
+
+.wall-btn {
+    bottom: 20px;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.style-btn {
+    bottom: 60px;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.nav-left, .wall-left, .style-left {
+    left: 20px;
+}
+
+.nav-right, .wall-right, .style-right {
+    right: 20px;
+}
+
+.nav-btn:hover, .wall-btn:hover, .style-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Navigation Controls - MAINTAIN CONSISTENCY ACROSS ALL THEMES
+   - Fixed sizes: buttons should remain consistent across themes
+   - Z-index: always keep controls above content
+   - Positioning: maintain standard spacing from edges
+   - Hover effects: keep consistent interaction feedback
 */
 .nav-btn {
     position: fixed;

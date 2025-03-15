@@ -210,6 +210,12 @@ async function initializeContent() {
         isOnlineMode = config.mode === 'online';
         serverUrl = config.serverUrl || '';
         
+        // Set page title if provided
+        if (config.title) {
+            document.title = config.title;
+            document.getElementById("title").textContent = config.title;
+        }
+        
         // Get stylesheet sets
         stylesheetSets = Object.values(config.stylesheets);
         if (stylesheetSets.length > 0) {

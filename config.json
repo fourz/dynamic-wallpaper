@@ -15,9 +15,18 @@
             "stylesheets/tiny.css"
         ],
         "set2": [
+            "stylesheets/small.css"
+        ],        
+        "set3": [
+            "stylesheets/default.css"
+        ],        
+        "set4": [
+            "stylesheets/large.css"
+        ],                
+        "set5": [
             "stylesheets/default.css",
             "stylesheets/small.css"
-        ] 
+        ]
     }
 }
 

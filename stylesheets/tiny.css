@@ -122,45 +122,42 @@ h3, h4, h5, h6 {
     word-wrap: break-word;
 }
 
-/* Navigation buttons */
-.nav-btn, .wall-btn, .style-btn {
+/* Navigation Controls - Match Default Theme
+   IMPORTANT: These controls must maintain consistent sizing across themes
+*/
+.nav-btn {
     position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
     z-index: 1000;
     background: rgba(0, 0, 0, 0.5);
-    border: none;
     color: white;
+    border: none;
     cursor: pointer;
 }
 
-.nav-btn {
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 15px;
-    font-size: 18px;
-}
-
-.wall-btn {
-    bottom: 15px;
-    padding: 10px;
-    font-size: 14px;
+.wall-btn, .style-btn {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
     border-radius: 4px;
 }
 
-.style-btn {
-    bottom: 45px;
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 4px;
-}
+.wall-btn { bottom: 20px; }
+.style-btn { bottom: 70px; }
+.nav-left, .wall-left, .style-left { left: 20px; }
+.nav-right, .wall-right, .style-right { right: 20px; }
 
-.nav-left, .wall-left, .style-left {
-    left: 15px;
-}
-
-.nav-right, .wall-right, .style-right {
-    right: 15px;
-}
-
+/* Consistent hover effect */
 .nav-btn:hover, .wall-btn:hover, .style-btn:hover {
     background: rgba(0, 0, 0, 0.8);
 }
