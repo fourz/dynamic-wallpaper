@@ -1,8 +1,12 @@
-{
-    "content": "content/css_reference.json",
-    "wallpaper": "wallpaper.png",
+{    
+    "content": "content/*.json",
+    "wallpaper": [
+        "images/wallpaper/*.jpg",
+        "images/wallpaper/*.png",
+        "images/wallpaper/wallpaper.png"
+    ],
     "stylesheets": [
-        "default.css"
+        "small.css"
     ]
 }
 

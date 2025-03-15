@@ -103,3 +103,53 @@ button {
     border-radius: 4px;
     font-size: 11pt;
 }
+
+.nav-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 20px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.nav-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.nav-left {
+    left: 20px;
+}
+
+.nav-right {
+    right: 20px;
+}
+
+.wall-btn {
+    position: fixed;
+    bottom: 20px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.wall-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.wall-left {
+    left: 20px;
+}
+
+.wall-right {
+    right: 20px;
+}
