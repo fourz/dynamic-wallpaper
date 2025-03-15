@@ -1,0 +1,75 @@
+[
+  {
+    "title": "Regex Quick Reference",
+    "style": "heading"
+  },
+  {
+    "title": "Character Patterns:",
+    "table": {
+      "headers": ["Pattern", "Description"],
+      "rows": [
+        ["\\d", "Any digit (0-9)"],
+        ["\\D", "Any non-digit character"],
+        ["\\w", "Word character [a-zA-Z0-9_]"],
+        ["\\W", "Non-word character"],
+        ["\\s", "Whitespace (space, tab, newline)"],
+        ["\\S", "Non-whitespace character"],
+        [".", "Any character except newline"]
+      ]
+    }
+  },
+  {
+    "title": "Quantifiers:",
+    "table": {
+      "headers": ["Symbol", "Meaning", "Example"],
+      "rows": [
+        ["*", "0 or more", "a* matches '', 'a', 'aa'..."],
+        ["+", "1 or more", "a+ matches 'a', 'aa'..."],
+        ["?", "0 or 1", "a? matches '' or 'a'"],
+        ["{n}", "Exactly n times", "a{3} matches 'aaa'"],
+        ["{n,}", "n or more times", "a{2,} matches 'aa', 'aaa'..."],
+        ["{n,m}", "Between n and m", "a{2,4} matches 'aa', 'aaa', 'aaaa'"]
+      ]
+    }
+  },
+  {
+    "title": "Character Classes & Anchors:",
+    "table": {
+      "headers": ["Symbol", "Description"],
+      "rows": [
+        ["[abc]", "Any character a, b, or c"],
+        ["[^abc]", "Any character except a, b, or c"],
+        ["[a-z]", "Any character a through z"],
+        ["^", "Start of line/string"],
+        ["$", "End of line/string"],
+        ["\\b", "Word boundary"],
+        ["\\B", "Non-word boundary"]
+      ]
+    }
+  },
+  {
+    "title": "Groups & Alternation:",
+    "table": {
+      "headers": ["Symbol", "Description"],
+      "rows": [
+        ["(abc)", "Capture group"],
+        ["(?:abc)", "Non-capturing group"],
+        ["a|b", "Match a or b"],
+        ["\\1, \\2", "Backreference to group 1, 2, etc."]
+      ]
+    }
+  },
+  {
+    "title": "Common Examples:",
+    "table": {
+      "headers": ["Pattern", "Matches"],
+      "rows": [
+        ["Email", "[\\w.-]+@[\\w.-]+\\.\\w+"],
+        ["Phone (US)", "\\(\\d{3}\\) \\d{3}-\\d{4}"],
+        ["Date (YYYY-MM-DD)", "\\d{4}-\\d{2}-\\d{2}"],
+        ["URL", "https?://[\\w.-]+\\.\\w+(/[\\w./]*)?"],
+        ["IP Address", "\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b"]
+      ]
+    }
+  }
+]

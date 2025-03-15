@@ -1,0 +1,104 @@
+body {
+    /* Reset defaults and ensure wallpaper covers viewport */
+    margin: 0;
+    padding: 0;
+    background: url('wallpaper.png') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.overlay {
+    /* Semi-transparent container for better text readability */
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    /* Responsive sizing with max-width to prevent oversized content */
+    width: 90%;
+    max-width: 1600px;
+    line-height: 1.5;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    /* Enable scrolling for overflow content while maintaining layout */
+    max-height: 90vh;
+    overflow-y: auto;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Flexible container for content sections that maintains minimum width */
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 300px;
+    min-width: 300px;
+    margin: 0.5rem;
+}
+
+/* Prevent content from overflowing flex container */
+.flex-wrap > * {
+    width: 100%;
+    min-width: 0;
+}
+
+h1 { 
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+h2 { 
+    margin: 0 0 0.5rem 0;
+    width: 100%;
+    font-size: 1.5em;
+    color: #fff;
+}
+
+/* Tables with consistent styling and responsive behavior */
+table {
+    width: auto;
+    border-collapse: collapse;
+    margin: 0;
+    flex: 1;
+}
+
+th, td {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 12px;
+    text-align: left;
+    white-space: normal;
+    min-width: 100px;
+    max-width: none;
+}
+
+th {
+    background: rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+}
+
+ul, ol {
+    margin: 0;
+    width: 100%;
+}
+
+.nav-buttons, .file-buttons, .tab-info {
+    display: none;
+}
+
+button {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
