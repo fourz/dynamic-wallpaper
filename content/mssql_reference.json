@@ -1,0 +1,109 @@
+[
+  {
+    "title": "SQL Basics:",
+    "table": {
+      "headers": ["Statement", "Purpose", "Example"],
+      "rows": [
+        ["SELECT", "Query data", "SELECT column1, column2 FROM table_name;"],
+        ["INSERT", "Add new records", "INSERT INTO table_name (column1) VALUES ('value1');"],
+        ["UPDATE", "Modify existing data", "UPDATE table_name SET column1 = 'value' WHERE condition;"],
+        ["DELETE", "Remove records", "DELETE FROM table_name WHERE condition;"],
+        ["CREATE TABLE", "Create a new table", "CREATE TABLE table_name (column1 datatype);"],
+        ["ALTER TABLE", "Modify table structure", "ALTER TABLE table_name ADD column_name datatype;"],
+        ["DROP TABLE", "Remove a table", "DROP TABLE table_name;"],
+        ["TRUNCATE TABLE", "Remove all records from table", "TRUNCATE TABLE table_name;"]
+      ]
+    }
+  },
+  {
+    "title": "Data Types:",
+    "table": {
+      "headers": ["Data Type", "Description", "Example"],
+      "rows": [
+        ["INT", "Integer values", "column_name INT"],
+        ["DECIMAL(p,s)", "Exact numeric with precision and scale", "price DECIMAL(10,2)"],
+        ["VARCHAR(n)", "Variable-length string", "name VARCHAR(50)"],
+        ["NVARCHAR(n)", "Unicode variable-length string", "description NVARCHAR(MAX)"],
+        ["CHAR(n)", "Fixed-length string", "state CHAR(2)"],
+        ["DATE", "Date only", "birth_date DATE"],
+        ["DATETIME2", "Date and time with fractional seconds", "created_at DATETIME2"],
+        ["BIT", "Boolean (0 or 1)", "is_active BIT"]
+      ]
+    }
+  },
+  {
+    "title": "Constraints:",
+    "table": {
+      "headers": ["Constraint", "Purpose", "Example"],
+      "rows": [
+        ["PRIMARY KEY", "Uniquely identifies each record", "column_id INT PRIMARY KEY"],
+        ["FOREIGN KEY", "Links tables together", "FOREIGN KEY (column) REFERENCES other_table(column)"],
+        ["UNIQUE", "Ensures all values are different", "email VARCHAR(100) UNIQUE"],
+        ["NOT NULL", "Column cannot have NULL value", "username VARCHAR(50) NOT NULL"],
+        ["CHECK", "Enforces a condition", "CHECK (salary > 0)"],
+        ["DEFAULT", "Provides default value", "status VARCHAR(10) DEFAULT 'Active'"],
+        ["IDENTITY", "Auto-incrementing values", "id INT IDENTITY(1,1) PRIMARY KEY"],
+        ["INDEX", "Improves query performance", "CREATE INDEX idx_name ON table(column);"]
+      ]
+    }
+  },
+  {
+    "title": "JOIN Types:",
+    "table": {
+      "headers": ["Join Type", "Purpose", "Example"],
+      "rows": [
+        ["INNER JOIN", "Returns matching records from both tables", "SELECT * FROM Orders INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;"],
+        ["LEFT JOIN", "Returns all records from left table", "SELECT * FROM Customers LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;"],
+        ["RIGHT JOIN", "Returns all records from right table", "SELECT * FROM Orders RIGHT JOIN Customers ON Orders.CustomerID = Customers.CustomerID;"],
+        ["FULL JOIN", "Returns all records from both tables", "SELECT * FROM Orders FULL JOIN Customers ON Orders.CustomerID = Customers.CustomerID;"],
+        ["CROSS JOIN", "Returns Cartesian product", "SELECT * FROM Customers CROSS JOIN Products;"],
+        ["SELF JOIN", "Join a table to itself", "SELECT a.name, b.name FROM employees a, employees b WHERE a.manager_id = b.id;"]
+      ]
+    }
+  },
+  {
+    "title": "Functions:",
+    "table": {
+      "headers": ["Function Type", "Examples", "Purpose"],
+      "rows": [
+        ["Aggregate", "COUNT(), SUM(), AVG(), MIN(), MAX()", "Perform calculations on data sets"],
+        ["String", "CONCAT(), SUBSTRING(), LEN(), UPPER(), LOWER()", "Manipulate string values"],
+        ["Date", "GETDATE(), DATEADD(), DATEDIFF(), CONVERT()", "Work with date/time values"],
+        ["Mathematical", "ABS(), ROUND(), CEILING(), FLOOR(), POWER()", "Perform mathematical operations"],
+        ["Conversion", "CAST(), CONVERT(), TRY_CONVERT()", "Convert between data types"],
+        ["System", "@@IDENTITY, @@ROWCOUNT, @@ERROR", "Return system information"],
+        ["Logical", "CASE, IIF(), COALESCE(), NULLIF()", "Perform logical operations"]
+      ]
+    }
+  },
+  {
+    "title": "Stored Procedures:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Create", "Define a stored procedure", "CREATE PROCEDURE GetCustomers AS SELECT * FROM Customers;"],
+        ["Execute", "Run a stored procedure", "EXEC GetCustomers;"],
+        ["Parameters", "Pass values to procedure", "CREATE PROCEDURE GetCustomerById @Id INT AS SELECT * FROM Customers WHERE Id = @Id;"],
+        ["Output Parameters", "Return values from procedure", "CREATE PROCEDURE GetCount @Count INT OUTPUT AS SELECT @Count = COUNT(*) FROM Customers;"],
+        ["Return Value", "Return status code", "CREATE PROCEDURE Process AS BEGIN RETURN 0 END;"],
+        ["WITH RECOMPILE", "Recompile execution plan", "EXEC sp_name WITH RECOMPILE;"],
+        ["TRY-CATCH", "Error handling", "BEGIN TRY [statements] END TRY BEGIN CATCH [error handling] END CATCH;"]
+      ]
+    }
+  },
+  {
+    "title": "Transactions:",
+    "table": {
+      "headers": ["Statement", "Purpose", "Example"],
+      "rows": [
+        ["BEGIN TRANSACTION", "Start a transaction", "BEGIN TRANSACTION;"],
+        ["COMMIT", "Save changes", "COMMIT TRANSACTION;"],
+        ["ROLLBACK", "Undo changes", "ROLLBACK TRANSACTION;"],
+        ["SAVE TRANSACTION", "Create savepoint", "SAVE TRANSACTION SavepointName;"],
+        ["@@TRANCOUNT", "Transaction nesting level", "SELECT @@TRANCOUNT;"],
+        ["Isolation Levels", "Transaction isolation", "SET TRANSACTION ISOLATION LEVEL READ COMMITTED;"],
+        ["Deadlock Priority", "Set deadlock priority", "SET DEADLOCK_PRIORITY HIGH;"]
+      ]
+    }
+  }
+]

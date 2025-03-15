@@ -1,0 +1,91 @@
+[
+  {
+    "title": "Selectors:",
+    "table": {
+      "headers": ["Selector", "Description", "Example"],
+      "rows": [
+        ["*", "Universal selector", "* { margin: 0; }"],
+        ["element", "Type selector", "p { font-size: 16px; }"],
+        [".class", "Class selector", ".highlight { color: yellow; }"],
+        ["#id", "ID selector", "#main-title { font-weight: bold; }"],
+        ["attribute", "Attribute selector", "input[type='text'] { border: 1px solid; }"],
+        [":hover", "Pseudo-class", "button:hover { background-color: lightblue; }"],
+        [":nth-child(n)", "Pseudo-class", "li:nth-child(odd) { background: #eee; }"],
+        ["::before", "Pseudo-element", "p::before { content: '>'; }"]
+      ]
+    }
+  },
+  {
+    "title": "Box Model:",
+    "table": {
+      "headers": ["Property", "Description", "Example"],
+      "rows": [
+        ["width", "Element width", "width: 200px;"],
+        ["height", "Element height", "height: 100px;"],
+        ["padding", "Space inside border", "padding: 10px;"],
+        ["border", "Element border", "border: 1px solid black;"],
+        ["margin", "Space outside border", "margin: 20px;"],
+        ["box-sizing", "Box model type", "box-sizing: border-box;"],
+        ["overflow", "Content overflow", "overflow: auto;"]
+      ]
+    }
+  },
+  {
+    "title": "Text Properties:",
+    "table": {
+      "headers": ["Property", "Description", "Example"],
+      "rows": [
+        ["font-family", "Font selection", "font-family: Arial, sans-serif;"],
+        ["font-size", "Text size", "font-size: 16px;"],
+        ["font-weight", "Text weight", "font-weight: bold;"],
+        ["color", "Text color", "color: #333;"],
+        ["text-align", "Text alignment", "text-align: center;"],
+        ["line-height", "Line spacing", "line-height: 1.5;"],
+        ["text-decoration", "Text decoration", "text-decoration: underline;"],
+        ["word-wrap", "Text wrapping", "word-wrap: break-word;"]
+      ]
+    }
+  },
+  {
+    "title": "Layout:",
+    "table": {
+      "headers": ["Property", "Description", "Example"],
+      "rows": [
+        ["display", "Display type", "display: flex;"],
+        ["position", "Positioning method", "position: absolute;"],
+        ["float", "Float element", "float: left;"],
+        ["flex-direction", "Flex direction", "flex-direction: column;"],
+        ["justify-content", "Horizontal alignment", "justify-content: center;"],
+        ["align-items", "Vertical alignment", "align-items: center;"],
+        ["grid-template-columns", "Grid columns", "grid-template-columns: 1fr 1fr;"],
+        ["order", "Element order", "order: 1;"]
+      ]
+    }
+  },
+  {
+    "title": "Background:",
+    "table": {
+      "headers": ["Property", "Description", "Example"],
+      "rows": [
+        ["background-color", "Background color", "background-color: #f0f0f0;"],
+        ["background-image", "Background image", "background-image: url('image.png');"],
+        ["background-repeat", "Image repeat", "background-repeat: no-repeat;"],
+        ["background-position", "Image position", "background-position: center;"],
+        ["background-size", "Image size", "background-size: cover;"],
+        ["opacity", "Element transparency", "opacity: 0.8;"]
+      ]
+    }
+  },
+  {
+    "title": "Transitions & Animations:",
+    "table": {
+      "headers": ["Property", "Description", "Example"],
+      "rows": [
+        ["transition", "CSS transition", "transition: all 0.3s ease;"],
+        ["animation", "CSS animation", "animation: fadeIn 2s;"],
+        ["transform", "Element transformation", "transform: rotate(45deg);"],
+        ["@keyframes", "Animation keyframes", "@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }"]
+      ]
+    }
+  }
+]

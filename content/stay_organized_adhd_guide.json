@@ -1,0 +1,67 @@
+[
+    {
+        "title": "Daily Routine Essentials",
+        "table": {
+            "headers": ["Routine Item", "Description"],
+            "rows": [
+                ["Morning Routine", "Maintain consistency in daily start"],
+                ["Time Blocking", "Schedule focused work periods"],
+                ["Break Schedule", "Take breaks every 25-30 minutes"],
+                ["Workspace Management", "Keep workspace clean and minimal"],
+                ["Planning", "Set next day's priorities every evening"]
+            ]
+        }
+    },
+    {
+        "title": "Task Management Strategies",
+        "table": {
+            "headers": ["Strategy", "How to Implement"],
+            "rows": [
+                ["2-Minute Rule", "If it takes less than 2 minutes, do it now"],
+                ["Task Chunking", "Break large tasks into smaller, manageable parts"],
+                ["Time Boxing", "Assign specific time blocks to tasks"],
+                ["Priority Matrix", "Sort tasks by urgency and importance"],
+                ["Visual Reminders", "Use sticky notes or digital boards"]
+            ]
+        }
+    },
+    {
+        "title": "Focus Enhancement Tools",
+        "table": {
+            "headers": ["Tool", "Purpose"],
+            "rows": [
+                ["Noise-canceling headphones", "Block distracting sounds"],
+                ["Time tracking apps", "Monitor task duration"],
+                ["Digital task managers", "Organize and track tasks"],
+                ["Pomodoro timer", "Structure work intervals"],
+                ["Distraction blockers", "Limit access to distracting sites/apps"]
+            ]
+        }
+    },
+    {
+        "title": "Work Environment Setup",
+        "table": {
+            "headers": ["Setup Element", "Implementation"],
+            "rows": [
+                ["Desk Position", "Away from high-traffic areas"],
+                ["Lighting", "Prioritize natural light sources"],
+                ["Desk Organization", "Keep only essential items present"],
+                ["Work Space", "Maintain a dedicated area"],
+                ["Organization System", "Implement color coding"]
+            ]
+        }
+    },
+    {
+        "title": "Quick Reset Steps",
+        "table": {
+            "headers": ["Step", "Action"],
+            "rows": [
+                ["Clear Space", "Remove non-essential desk items"],
+                ["Task Review", "Update to-do list"],
+                ["Calendar Check", "Review upcoming commitments"],
+                ["Movement Break", "Take 5 minutes to move"],
+                ["Focus Reset", "Practice deep breathing"]
+            ]
+        }
+    }
+]

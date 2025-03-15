@@ -1,0 +1,127 @@
+[
+  {
+    "title": "MySQL Basics:",
+    "table": {
+      "headers": ["Statement", "Purpose", "Example"],
+      "rows": [
+        ["SELECT", "Query data", "SELECT column1, column2 FROM table_name;"],
+        ["INSERT", "Add new records", "INSERT INTO table_name (column1) VALUES ('value1');"],
+        ["UPDATE", "Modify existing data", "UPDATE table_name SET column1 = 'value' WHERE condition;"],
+        ["DELETE", "Remove records", "DELETE FROM table_name WHERE condition;"],
+        ["CREATE TABLE", "Create a new table", "CREATE TABLE table_name (column1 datatype);"],
+        ["ALTER TABLE", "Modify table structure", "ALTER TABLE table_name ADD column_name datatype;"],
+        ["DROP TABLE", "Remove a table", "DROP TABLE table_name;"],
+        ["TRUNCATE TABLE", "Remove all records from table", "TRUNCATE TABLE table_name;"],
+        ["SHOW", "Display database objects", "SHOW TABLES; SHOW DATABASES;"]
+      ]
+    }
+  },
+  {
+    "title": "MySQL Data Types:",
+    "table": {
+      "headers": ["Data Type", "Description", "Example"],
+      "rows": [
+        ["INT", "Integer values", "column_name INT"],
+        ["DECIMAL(p,s)", "Exact numeric with precision and scale", "price DECIMAL(10,2)"],
+        ["VARCHAR(n)", "Variable-length string", "name VARCHAR(50)"],
+        ["TEXT", "Long text string", "description TEXT"],
+        ["CHAR(n)", "Fixed-length string", "state CHAR(2)"],
+        ["DATE", "Date only (YYYY-MM-DD)", "birth_date DATE"],
+        ["DATETIME", "Date and time", "created_at DATETIME"],
+        ["TIMESTAMP", "Timestamp with timezone handling", "modified_at TIMESTAMP"],
+        ["BOOLEAN/TINYINT(1)", "Boolean (TRUE/FALSE or 1/0)", "is_active BOOLEAN"],
+        ["ENUM", "String from predefined list", "status ENUM('active','inactive')"]
+      ]
+    }
+  },
+  {
+    "title": "MySQL Constraints:",
+    "table": {
+      "headers": ["Constraint", "Purpose", "Example"],
+      "rows": [
+        ["PRIMARY KEY", "Uniquely identifies each record", "id INT PRIMARY KEY"],
+        ["FOREIGN KEY", "Links tables together", "FOREIGN KEY (dept_id) REFERENCES departments(id)"],
+        ["UNIQUE", "Ensures all values are different", "email VARCHAR(100) UNIQUE"],
+        ["NOT NULL", "Column cannot have NULL value", "username VARCHAR(50) NOT NULL"],
+        ["CHECK", "Enforces a condition", "CHECK (price > 0)"],
+        ["DEFAULT", "Provides default value", "status VARCHAR(10) DEFAULT 'Active'"],
+        ["AUTO_INCREMENT", "Auto-incrementing values", "id INT AUTO_INCREMENT PRIMARY KEY"],
+        ["INDEX", "Improves query performance", "CREATE INDEX idx_name ON table(column);"]
+      ]
+    }
+  },
+  {
+    "title": "JOIN Operations:",
+    "table": {
+      "headers": ["Join Type", "Purpose", "Example"],
+      "rows": [
+        ["INNER JOIN", "Returns matching records from both tables", "SELECT * FROM orders INNER JOIN customers ON orders.customer_id = customers.id;"],
+        ["LEFT JOIN", "Returns all records from left table", "SELECT * FROM customers LEFT JOIN orders ON customers.id = orders.customer_id;"],
+        ["RIGHT JOIN", "Returns all records from right table", "SELECT * FROM orders RIGHT JOIN customers ON orders.customer_id = customers.id;"],
+        ["CROSS JOIN", "Returns Cartesian product", "SELECT * FROM customers CROSS JOIN products;"],
+        ["SELF JOIN", "Join a table to itself", "SELECT a.name, b.name FROM employees a, employees b WHERE a.manager_id = b.id;"],
+        ["UNION", "Combines results of two SELECT statements", "SELECT name FROM customers UNION SELECT name FROM suppliers;"]
+      ]
+    }
+  },
+  {
+    "title": "MySQL Functions:",
+    "table": {
+      "headers": ["Function Type", "Examples", "Purpose"],
+      "rows": [
+        ["Aggregate", "COUNT(), SUM(), AVG(), MIN(), MAX()", "Perform calculations on data sets"],
+        ["String", "CONCAT(), SUBSTRING(), LENGTH(), UPPER(), LOWER()", "Manipulate string values"],
+        ["Date", "NOW(), CURDATE(), DATE_ADD(), DATE_SUB(), DATEDIFF()", "Work with date/time values"],
+        ["Mathematical", "ABS(), ROUND(), CEIL(), FLOOR(), RAND()", "Perform mathematical operations"],
+        ["Control Flow", "IF(), IFNULL(), CASE, COALESCE()", "Conditional logic"],
+        ["Encryption", "MD5(), SHA1(), SHA2(), ENCRYPT(), AES_ENCRYPT()", "Secure data"],
+        ["JSON", "JSON_EXTRACT(), JSON_OBJECT(), JSON_ARRAY()", "Work with JSON data"]
+      ]
+    }
+  },
+  {
+    "title": "Stored Procedures:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Create", "Define a stored procedure", "CREATE PROCEDURE get_customers() BEGIN SELECT * FROM customers; END;"],
+        ["Call", "Execute a stored procedure", "CALL get_customers();"],
+        ["Parameters", "Pass values to procedure", "CREATE PROCEDURE get_customer_by_id(IN customer_id INT) BEGIN SELECT * FROM customers WHERE id = customer_id; END;"],
+        ["Variables", "Store temporary values", "DECLARE total INT DEFAULT 0;"],
+        ["Conditionals", "Control flow", "IF condition THEN statement; ELSEIF condition THEN statement; ELSE statement; END IF;"],
+        ["Loops", "Repetitive execution", "WHILE condition DO statements; END WHILE;"],
+        ["Delimiter", "Change statement delimiter", "DELIMITER // CREATE PROCEDURE proc_name() BEGIN SELECT 1; END // DELIMITER ;"]
+      ]
+    }
+  },
+  {
+    "title": "Transactions:",
+    "table": {
+      "headers": ["Statement", "Purpose", "Example"],
+      "rows": [
+        ["START TRANSACTION", "Begin a transaction", "START TRANSACTION;"],
+        ["COMMIT", "Save changes", "COMMIT;"],
+        ["ROLLBACK", "Undo changes", "ROLLBACK;"],
+        ["SAVEPOINT", "Create savepoint", "SAVEPOINT sp1;"],
+        ["ROLLBACK TO", "Rollback to savepoint", "ROLLBACK TO sp1;"],
+        ["Transaction Isolation", "Set isolation level", "SET TRANSACTION ISOLATION LEVEL READ COMMITTED;"],
+        ["Locking", "Row-level locking", "SELECT * FROM table FOR UPDATE;"]
+      ]
+    }
+  },
+  {
+    "title": "Administration:",
+    "table": {
+      "headers": ["Command", "Purpose", "Example"],
+      "rows": [
+        ["CREATE USER", "Create new user", "CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';"],
+        ["GRANT", "Give privileges", "GRANT ALL PRIVILEGES ON database.* TO 'username'@'localhost';"],
+        ["REVOKE", "Remove privileges", "REVOKE SELECT ON database.* FROM 'username'@'localhost';"],
+        ["SHOW PROCESSLIST", "View connections", "SHOW PROCESSLIST;"],
+        ["EXPLAIN", "Analyze query performance", "EXPLAIN SELECT * FROM table WHERE id = 1;"],
+        ["BACKUP", "Database backup", "mysqldump -u username -p database > backup.sql"],
+        ["RESTORE", "Database restore", "mysql -u username -p database < backup.sql"]
+      ]
+    }
+  }
+]

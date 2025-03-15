@@ -1,0 +1,90 @@
+[
+  {
+    "title": "Basic Commands:",
+    "table": {
+      "headers": ["Command", "Description", "Example"],
+      "rows": [
+        ["Get-Command", "List available commands", "Get-Command -Name *process*"],
+        ["Get-Help", "Show command help", "Get-Help Get-Process -Detailed"],
+        ["Get-Process", "List running processes", "Get-Process | Sort-Object CPU -Descending"],
+        ["Get-Service", "List services", "Get-Service | Where-Object {$_.Status -eq 'Running'}"],
+        ["Get-Item", "Get file/directory info", "Get-Item C:\\Windows\\*.exe"],
+        ["Set-Location", "Change directory (cd)", "Set-Location C:\\Users"],
+        ["New-Item", "Create file/directory", "New-Item -Path ./test.txt -ItemType File"]
+      ]
+    }
+  },
+  {
+    "title": "Pipeline Operations:",
+    "table": {
+      "headers": ["Operator", "Description", "Example"],
+      "rows": [
+        ["|", "Pipe output to next command", "Get-Process | Sort-Object CPU"],
+        ["Where-Object", "Filter objects", "Get-Service | Where-Object {$_.Status -eq 'Running'}"],
+        ["Select-Object", "Select properties", "Get-Process | Select-Object Name, CPU, Memory"],
+        ["Sort-Object", "Sort objects", "Get-ChildItem | Sort-Object Length -Descending"],
+        ["Group-Object", "Group objects", "Get-Process | Group-Object Company"],
+        ["ForEach-Object", "Process each item", "1..5 | ForEach-Object {$_ * 2}"]
+      ]
+    }
+  },
+  {
+    "title": "File Operations:",
+    "table": {
+      "headers": ["Command", "Description", "Example"],
+      "rows": [
+        ["Get-Content", "Read file content", "Get-Content ./log.txt"],
+        ["Set-Content", "Write to file", "Set-Content ./file.txt 'Hello'"],
+        ["Copy-Item", "Copy files/folders", "Copy-Item ./source.txt ./dest.txt"],
+        ["Move-Item", "Move files/folders", "Move-Item ./old.txt ./new.txt"],
+        ["Remove-Item", "Delete files/folders", "Remove-Item ./temp -Recurse"],
+        ["Test-Path", "Check if path exists", "Test-Path ./config.json"]
+      ]
+    }
+  },
+  {
+    "title": "Variables & Types:",
+    "table": {
+      "headers": ["Syntax", "Description", "Example"],
+      "rows": [
+        ["$variable", "Variable declaration", "$name = 'John'"],
+        ["[type]", "Type declaration", "[int]$number = 42"],
+        ["@()", "Array creation", "$array = @(1, 2, 3)"],
+        ["@{}", "Hash table creation", "$hash = @{Name='John'; Age=30}"],
+        ["$null", "Null value", "if ($var -eq $null)"],
+        ["$_", "Current pipeline object", "1..5 | % { $_ * 2 }"],
+        ["$args", "Command-line arguments", "script.ps1 arg1 arg2"],
+        ["PSCustomObject", "Custom object", "$obj = [PSCustomObject]@{Name='John'; Age=30}"]
+      ]
+    }
+  },
+  {
+    "title": "Control Flow:",
+    "table": {
+      "headers": ["Structure", "Description"],
+      "rows": [
+        ["if/else", "if ($x -eq 1) { 'One' } else { 'Other' }"],
+        ["switch", "switch ($x) { 1 {'One'} 2 {'Two'} }"],
+        ["foreach", "foreach ($item in $items) { $item }"],
+        ["while", "while ($true) { 'Loop' }"],
+        ["do/while", "do { 'Loop' } while ($true)"],
+        ["try/catch", "try { 1/0 } catch { 'Error' }"]
+      ]
+    }
+  },
+  {
+    "title": "Comparison Operators:",
+    "table": {
+      "headers": ["Operator", "Description"],
+      "rows": [
+        ["-eq, -ne", "Equal, Not equal"],
+        ["-gt, -lt", "Greater than, Less than"],
+        ["-ge, -le", "Greater/equal, Less/equal"],
+        ["-like, -notlike", "Wildcard match"],
+        ["-match, -notmatch", "Regex match"],
+        ["-contains", "Collection contains value"],
+        ["-in, -notin", "Value in collection"]
+      ]
+    }
+  }
+]

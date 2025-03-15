@@ -1,0 +1,82 @@
+[
+  {
+    "title": "React Components:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Functional Component", "Simple component using a function", "const MyComponent = () => { return <h1>Hello</h1>; }"],
+        ["Class Component", "Component using ES6 class", "class MyComponent extends React.Component { render() { return <h1>Hello</h1>; } }"],
+        ["JSX", "JavaScript XML syntax", "<h1>{props.name}</h1>"],
+        ["Props", "Passing data to components", "<MyComponent name=\"World\" />"],
+        ["State", "Managing component data", "this.state = { count: 0 }; this.setState({ count: 1 });"],
+        ["Lifecycle Methods", "Methods called at different stages", "componentDidMount(), componentDidUpdate(), componentWillUnmount()"],
+        ["Hooks", "Using state and lifecycle in functional components", "useState(), useEffect()"],
+        ["Conditional Rendering", "Rendering based on conditions", "{condition ? <A /> : <B />}"]
+      ]
+    }
+  },
+  {
+    "title": "React Core Concepts:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Virtual DOM", "In-memory representation of the DOM", "React updates the virtual DOM and then efficiently updates the real DOM"],
+        ["Component Composition", "Building complex UIs from smaller components", "<App><Header /><Content /><Footer /></App>"],
+        ["Reconciliation", "Process of updating the DOM", "React compares the virtual DOM with the real DOM and applies minimal changes"],
+        ["Keys", "Unique identifiers for list items", "<li key={item.id}>{item.name}</li>"],
+        ["Refs", "Accessing DOM elements", "const myRef = React.createRef(); <input ref={myRef} /> myRef.current.focus()"],
+        ["Context", "Sharing data between components", "const MyContext = React.createContext(defaultValue);"],
+        ["Fragments", "Grouping children without adding extra nodes", "<><h1>Title</h1><p>Content</p></>"],
+        ["Higher-Order Components (HOC)", "Wrapping components for logic reuse", "const withAuth = (WrappedComponent) => { ... }"]
+      ]
+    }
+  },
+  {
+    "title": "Node.js Basics:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Modules", "Reusable blocks of code", "const fs = require('fs');"],
+        ["npm", "Package manager", "npm install express"],
+        ["package.json", "Project metadata and dependencies", "{ \"name\": \"my-app\", \"version\": \"1.0.0\" }"],
+        ["Event Loop", "Handles asynchronous operations", "Non-blocking I/O"],
+        ["Streams", "Handling streaming data", "fs.createReadStream('file.txt').pipe(process.stdout)"],
+        ["Global Objects", "Objects available in all modules", "console, process, Buffer"],
+        ["File System", "Working with files", "fs.readFile('file.txt', 'utf8', (err, data) => {})"],
+        ["HTTP Server", "Creating web servers", "const http = require('http'); http.createServer((req, res) => {}).listen(3000);"]
+      ]
+    }
+  },
+  {
+    "title": "Express.js:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Routing", "Handling HTTP requests", "app.get('/', (req, res) => { res.send('Hello World!'); });"],
+        ["Middleware", "Functions that intercept requests", "app.use(express.json());"],
+        ["Request Object", "Accessing request data", "req.params, req.query, req.body"],
+        ["Response Object", "Sending responses", "res.send(), res.json(), res.status()"],
+        ["Templating Engines", "Rendering dynamic HTML", "app.set('view engine', 'ejs'); res.render('index', { name: 'John' });"],
+        ["Static Files", "Serving static assets", "app.use(express.static('public'));"],
+        ["Error Handling", "Handling errors in routes", "app.use((err, req, res, next) => {})"],
+        ["REST APIs", "Building APIs", "GET /users, POST /users, PUT /users/:id, DELETE /users/:id"]
+      ]
+    }
+  },
+  {
+    "title": "Connecting React and Node.js:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["API Calls", "Fetching data from Node.js API", "fetch('/api/data').then(res => res.json()).then(data => {})"],
+        ["CORS", "Cross-Origin Resource Sharing", "Enable CORS in Node.js to allow requests from React app"],
+        ["Proxying", "Using a proxy to avoid CORS issues", "Configure proxy in React's package.json"],
+        ["Full-Stack Development", "Building both front-end and back-end", "Using React for UI and Node.js/Express for API"],
+        ["Deployment", "Deploying React and Node.js apps", "Using platforms like Heroku, Netlify, or AWS"],
+        ["Authentication", "Implementing user authentication", "Using libraries like Passport.js"],
+        ["Real-time Communication", "Using WebSockets for real-time updates", "Using libraries like Socket.IO"],
+        ["State Management", "Using Redux or Context API to manage state", "Centralized state management"]
+      ]
+    }
+  }
+]

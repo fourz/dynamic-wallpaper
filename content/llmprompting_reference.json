@@ -1,0 +1,152 @@
+[
+  {
+    "title": "Prompting Frameworks:",
+    "table": {
+      "headers": ["Framework", "Description", "Best For"],
+      "rows": [
+        ["CRISPE", "Context, Role, Instruction, Specification, Performance Evaluation", "Comprehensive, structured tasks with clear evaluation criteria"],
+        ["TAG", "Task, Action, Goal", "Simple, direct instructions with clear objectives"],
+        ["REACT", "Reasoning, Action, Observation", "Complex reasoning tasks requiring step-by-step thinking"],
+        ["APE", "Action, Purpose, Expectation", "Tasks where intent and expected outcome need specification"],
+        ["PSMAP", "Problem, Solution, Method, Action, Process", "Problem-solving scenarios requiring methodical approaches"],
+        ["ICE", "Instruction, Context, Examples", "Tasks benefiting from demonstration and contextualization"],
+        ["START", "Specificity, Task, Audience, Response, Tone", "Content creation with focus on audience and style"]
+      ]
+    }
+  },
+  {
+    "title": "Advanced Prompting Patterns:",
+    "table": {
+      "headers": ["Pattern", "Description", "Example"],
+      "rows": [
+        ["Zero-shot Chain-of-Thought", "Trigger reasoning without examples by using phrases like 'Think step by step'", "Let's solve this problem step by step."],
+        ["Tree of Thoughts", "Generate and explore multiple reasoning paths before reaching conclusion", "Let's consider several possible approaches and evaluate each one."],
+        ["Retrieval-Augmented Generation", "Incorporate external knowledge sources into prompt", "Based on the following reference material: [content]..."],
+        ["Constitutional AI", "Providing ethical guidelines or rules for the model to follow", "While answering, adhere to these principles: 1) Be truthful 2) Avoid harm..."],
+        ["Maieutic Prompting", "Asking the model to generate questions about its own reasoning", "What questions should I be asking to verify this conclusion?"],
+        ["Generated Knowledge Prompting", "Asking the model to generate relevant knowledge before answering", "Before answering, write down what you know about this topic."],
+        ["Least-to-Most Prompting", "Breaking down complex problems into simpler subproblems", "First, solve [simpler version]. Now use that to solve [full problem]."]
+      ]
+    }
+  },
+  {
+    "title": "Domain-Specific Prompting:",
+    "table": {
+      "headers": ["Domain", "Key Techniques", "Example Prompt"],
+      "rows": [
+        ["Coding", "Pseudocode first, Test cases, Specify edge cases", "Generate a Python function that sorts a list of numbers. First write pseudocode, then implement. Include handling for empty lists and duplicates."],
+        ["Medical", "Include patient demographics, medical history, and constraints", "You're a medical assistant. Given this patient profile [details], suggest potential diagnoses and next steps."],
+        ["Legal", "Specify jurisdiction, relevant laws, case precedents", "Analyze this contract clause under California law, citing relevant statutes and precedents."],
+        ["Financial", "Include time horizon, risk tolerance, constraints", "Create an investment strategy for a 35-year-old with moderate risk tolerance and 30-year time horizon."],
+        ["Scientific", "Specify methodology, prior research, evaluation criteria", "Propose an experimental design to test [hypothesis], based on previous studies [references]."],
+        ["Education", "Target knowledge level, learning objectives, assessment", "Create a lesson plan on photosynthesis for 5th graders that includes hands-on activities and assessment."],
+        ["Creative Writing", "Genre, tone, character limits, inspirations", "Write a 500-word Gothic short story inspired by Edgar Allan Poe featuring a mysterious artifact."]
+      ]
+    }
+  },
+  {
+    "title": "Prompt Components:",
+    "table": {
+      "headers": ["Component", "Purpose", "Example"],
+      "rows": [
+        ["Persona Assignment", "Gives the LLM a specific role or expertise", "As an experienced quantum physicist..."],
+        ["Task Definition", "Clearly states what needs to be accomplished", "Create a comprehensive marketing plan for a new smartphone."],
+        ["Context Setting", "Provides necessary background information", "The target audience is tech-savvy millennials in urban areas."],
+        ["Output Format", "Specifies how the response should be structured", "Format your response as a bulleted list with 5 key points."],
+        ["Input Parameters", "Provides specific inputs the model should use", "Use the following customer data: [data]"],
+        ["Constraints", "Sets boundaries on the response", "Keep your explanation under 200 words and avoid technical jargon."],
+        ["Examples", "Demonstrates expected input-output pairs", "If I say 'analyze Apple Inc.', respond with metrics like P/E ratio, market cap, etc."]
+      ]
+    }
+  },
+  {
+    "title": "Prompt Optimization:",
+    "table": {
+      "headers": ["Technique", "Description", "When to Use"],
+      "rows": [
+        ["Iterative Refinement", "Gradually improving prompts based on outputs", "When initial results are close but not perfect"],
+        ["A/B Testing", "Comparing multiple prompt versions to find optimal one", "When optimization for specific metrics is needed"],
+        ["Prompt Chaining", "Using output from one prompt as input to another", "For complex workflows requiring multiple steps"],
+        ["Automated Prompt Engineering", "Using algorithms to generate and optimize prompts", "When handling large-scale prompt development"],
+        ["Prompt Versioning", "Tracking changes to prompts over time", "For collaborative prompt development"],
+        ["Temperature Tuning", "Adjusting randomness in model responses", "Balance between creativity and determinism"],
+        ["Context Window Management", "Optimizing use of available token space", "When working with complex tasks requiring significant context"]
+      ]
+    }
+  },
+  {
+    "title": "Troubleshooting Common Issues:",
+    "table": {
+      "headers": ["Issue", "Potential Causes", "Solutions"],
+      "rows": [
+        ["Hallucinations", "Insufficient context, Ambiguous instructions", "Provide factual grounding, Explicitly request verification"],
+        ["Incoherent Responses", "Conflicting instructions, Context overload", "Simplify prompt, Break into smaller tasks"],
+        ["Model Misalignment", "Unclear goals, Lack of examples", "Clarify objectives, Provide examples of desired output"],
+        ["Prompt Rejection", "Requesting prohibited content, Unclear intentions", "Rephrase request, Clarify legitimate use case"],
+        ["Generic Responses", "Lack of specificity, Poor constraints", "Add specific requirements, Request unique perspectives"],
+        ["Inconsistent Results", "Randomness settings too high, Ambiguity", "Lower temperature, Add evaluation criteria"],
+        ["Context Window Overflow", "Too much input content", "Summarize input, Use chunking strategies"]
+      ]
+    }
+  },
+  {
+    "title": "Prompt Evaluation Methods:",
+    "table": {
+      "headers": ["Method", "Description", "Metrics"],
+      "rows": [
+        ["Human Evaluation", "Manual review by human evaluators", "Accuracy, Relevance, Helpfulness, Fluency"],
+        ["Reference-based", "Comparing to gold-standard answers", "BLEU, ROUGE, BERTScore, Exact Match"],
+        ["Model-based", "Using another model to evaluate outputs", "GPT Judge, LLM as a judge, Critiques"],
+        ["Task-based", "Evaluating based on downstream task performance", "Success rate, Completion time, Error rate"],
+        ["Self-consistency", "Checking coherence among multiple responses", "Agreement rate, Contradiction detection"],
+        ["Behavioral Testing", "Testing with specifically designed challenges", "Robustness, Safety, Fairness measures"],
+        ["A/B User Testing", "Direct comparison with user preferences", "Preference rate, Click-through rate, Time spent"]
+      ]
+    }
+  },
+  {
+    "title": "Cross-Model Prompting Strategies:",
+    "table": {
+      "headers": ["LLM Family", "Strengths", "Recommended Approaches"],
+      "rows": [
+        ["GPT Models", "General knowledge, Instruction following, Creative tasks", "Detailed instructions, Chain-of-thought, Role-playing"],
+        ["Claude Models", "Nuanced reasoning, Content summarization, Safety", "Explicit reasoning requests, Constitutional directions"],
+        ["Llama/Mistral Models", "Coding, Technical tasks, Open-ended generation", "Clear input-output examples, Technical specificity"],
+        ["PaLM/Gemini Models", "Multi-turn reasoning, Structured outputs", "Step-by-step instructions, Format specifications"],
+        ["Smaller Open Models", "Specific domains, Limited context windows", "Focused tasks, Simplified instructions, Context management"],
+        ["Multilingual Models", "Cross-language tasks, Cultural nuance", "Language specification, Cultural context inclusion"],
+        ["Multi-modal Models", "Text + vision/audio", "Clear descriptions of visual elements, Explicit connection instructions"]
+      ]
+    }
+  },
+  {
+    "title": "Ethical Considerations in Prompting:",
+    "table": {
+      "headers": ["Consideration", "Description", "Best Practices"],
+      "rows": [
+        ["Transparency", "Disclosing AI-generated content", "Include attribution, Disclose limitations"],
+        ["Bias Mitigation", "Reducing unfair outcomes", "Diverse perspectives, Regular auditing"],
+        ["Privacy Protection", "Safeguarding sensitive information", "Data minimization, Anonymization techniques"],
+        ["Informed Consent", "Ensuring users understand AI interaction", "Clear notices, Opt-in mechanisms"],
+        ["Accountability", "Responsibility for AI outputs", "Human oversight, Review processes"],
+        ["Accessibility", "Ensuring AI benefits are widely available", "Plain language, Multiple formats"],
+        ["Environmental Impact", "Resource usage of large prompts", "Prompt efficiency, Minimizing unnecessary requests"]
+      ]
+    }
+  },
+  {
+    "title": "Research and Resources:",
+    "table": {
+      "headers": ["Resource Type", "Examples", "Value"],
+      "rows": [
+        ["Academic Papers", "\"Chain-of-Thought Prompting\" (Wei et al.), \"Tree of Thoughts\" (Yao et al.)", "Foundational research and novel techniques"],
+        ["Open Playbooks", "dair.ai Prompt Engineering Guide, Anthropic's Constitutional AI", "Practical applications and guidelines"],
+        ["Online Courses", "Prompt Engineering for ChatGPT (Vanderbilt), DeepLearning.AI courses", "Structured learning paths"],
+        ["Communities", "r/PromptEngineering, OpenAI Community Forum", "Peer learning and shared examples"],
+        ["Tools", "PromptPerfect, LMQL, Dust.tt", "Testing, optimization, and implementation"],
+        ["Model Documentation", "OpenAI API docs, Anthropic Guidelines, Gemini Best Practices", "Model-specific insights"],
+        ["Benchmarks", "HumanEval, MMLU, PromptSource", "Standardized evaluation resources"]
+      ]
+    }
+  }
+]

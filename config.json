@@ -1,8 +1,8 @@
 {
-    "content": "regex_reference.json",
+    "content": "content/emailsecurity_reference.json",
     "wallpaper": "wallpaper.png",
     "stylesheets": [
-        "small.css"
+        "default.css"
     ]
 }
 

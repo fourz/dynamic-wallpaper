@@ -1,0 +1,81 @@
+[
+  {
+    "title": "Core Concepts:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Playbooks", "YAML files defining automation tasks", "--- \n- hosts: all\n  tasks:\n    - name: Install package\n      apt: name=tree state=present"],
+        ["Inventory", "List of managed hosts", "[webservers]\nserver1.example.com\nserver2.example.com"],
+        ["Modules", "Reusable units of code", "apt: name=nginx state=latest"],
+        ["Tasks", "Individual actions to be performed", "tasks:\n  - name: Ensure nginx is running\n    service: name=nginx state=started"],
+        ["Roles", "Organizing playbooks into reusable components", "roles:\n  - webserver"],
+        ["Variables", "Storing and reusing values", "vars:\n  http_port: 80"],
+        ["Handlers", "Tasks triggered by other tasks", "handlers:\n  - name: Restart nginx\n    service: name=nginx state=restarted"],
+        ["Facts", "Discovered information about managed hosts", "ansible_os_family, ansible_distribution"]
+      ]
+    }
+  },
+  {
+    "title": "Playbook Syntax:",
+    "table": {
+      "headers": ["Keyword", "Description", "Example"],
+      "rows": [
+        ["hosts", "Target hosts or groups", "hosts: webservers"],
+        ["tasks", "List of tasks to execute", "tasks:\n  - name: Copy file\n    copy: src=source dest=destination"],
+        ["vars", "Variables defined for the playbook", "vars:\n  my_variable: value"],
+        ["roles", "List of roles to include", "roles:\n  - common"],
+        ["handlers", "List of handlers", "handlers:\n  - name: Restart service\n    service: name=httpd state=restarted"],
+        ["become", "Privilege escalation", "become: true"],
+        ["gather_facts", "Gather facts about the host", "gather_facts: true"],
+        ["name", "Description of the task", "name: Ensure directory exists"]
+      ]
+    }
+  },
+  {
+    "title": "Common Modules:",
+    "table": {
+      "headers": ["Module", "Description", "Example"],
+      "rows": [
+        ["apt", "Manage apt packages", "apt: name=apache2 state=present"],
+        ["yum", "Manage yum packages", "yum: name=httpd state=installed"],
+        ["service", "Manage services", "service: name=nginx state=started"],
+        ["copy", "Copy files to remote hosts", "copy: src=source dest=destination"],
+        ["file", "Manage files and directories", "file: path=/tmp/mydir state=directory"],
+        ["template", "Create files from Jinja2 templates", "template: src=template.j2 dest=destination"],
+        ["user", "Manage user accounts", "user: name=john state=present"],
+        ["cron", "Manage cron jobs", "cron: name=mycron job='...' state=present"]
+      ]
+    }
+  },
+  {
+    "title": "Variables and Templating:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Precedence", "Order in which variables are loaded", "Role vars > Playbook vars > Inventory vars"],
+        ["Registering", "Capturing output of a task", "tasks:\n  - name: Run command\n    command: /usr/bin/uptime\n    register: uptime_output"],
+        ["Using", "Accessing registered output", "debug: msg={{ uptime_output.stdout }}"],
+        ["Inventory variables", "Variables defined in inventory", "[webservers:vars]\nhttp_port=80"],
+        ["Group variables", "Variables defined for a group", "[webservers:vars]\nhttp_port=80"],
+        ["Host variables", "Variables defined for a host", "[webservers]\nserver1.example.com http_port=80"],
+        ["Facts variables", "Accessing facts", "debug: msg={{ ansible_os_family }}"]
+      ]
+    }
+  },
+  {
+    "title": "Conditionals and Loops:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["When conditionals", "Executing tasks based on conditions", "tasks:\n  - name: Install package\n    apt: name=tree state=present\n    when: ansible_os_family == \"Debian\""],
+        ["Looping", "Iterating over a list", "tasks:\n  - name: Create users\n    user: name={{ item }} state=present\n    loop: \"{{ users }}\""],
+        ["Until loops", "Retrying a task until a condition is met", "tasks:\n  - name: Wait for port\n    wait_for: port=80 timeout=30\n    until: ..."],
+        ["With_items", "Looping over a simple list", "tasks:\n  - name: Install packages\n    apt: name={{ item }} state=present\n    with_items:\n      - vim\n      - git"],
+        ["With_nested", "Looping over nested lists", "tasks:\n  - name: Create firewall rules\n    firewalld: port={{ item[0] }} protocol={{ item[1] }} state=enabled\n    with_nested:\n      - [80, 443]\n      - [tcp, udp]"],
+        ["With_dict", "Looping over a dictionary", "tasks:\n  - name: Create directories\n    file: path={{ item.value }} state=directory\n    with_dict:\n      dir1: /tmp/dir1\n      dir2: /tmp/dir2"],
+        ["With_fileglob", "Looping over files matching a pattern", "tasks:\n  - name: Copy files\n    copy: src={{ item }} dest=/tmp/\n    with_fileglob: /path/to/files/*"],
+        ["With_sequence", "Looping over a sequence of numbers", "tasks:\n  - name: Create users\n    user: name=user{{ item }} state=present\n    with_sequence: start=1 end=5"]
+      ]
+    }
+  }
+]

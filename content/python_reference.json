@@ -1,0 +1,98 @@
+[
+  {
+    "title": "Data Types:",
+    "table": {
+      "headers": ["Type", "Description", "Example"],
+      "rows": [
+        ["int", "Integer numbers", "x = 42"],
+        ["float", "Decimal numbers", "y = 3.14"],
+        ["str", "Text strings", "name = 'Python'"],
+        ["bool", "Boolean values", "is_valid = True"],
+        ["list", "Mutable sequence", "nums = [1, 2, 3]"],
+        ["tuple", "Immutable sequence", "point = (x, y)"],
+        ["dict", "Key-value pairs", "person = {'name': 'John'}"],
+        ["set", "Unique elements", "unique = {1, 2, 3}"]
+      ]
+    }
+  },
+  {
+    "title": "Control Flow:",
+    "table": {
+      "headers": ["Statement", "Syntax", "Example"],
+      "rows": [
+        ["if-elif-else", "Conditional branching", "if x > 0: pass\nelif x < 0: pass\nelse: pass"],
+        ["for loop", "Iteration", "for item in sequence:\n    print(item)"],
+        ["while loop", "Conditional loop", "while condition:\n    do_something()"],
+        ["break", "Exit loop", "break"],
+        ["continue", "Skip iteration", "continue"],
+        ["match-case", "Pattern matching (3.10+)", "match value:\n    case pattern: ..."],
+        ["with", "Context manager", "with open('file.txt') as f:"],
+        ["try-except", "Exception handling", "try: code\nexcept Error: handle"]
+      ]
+    }
+  },
+  {
+    "title": "Functions & Lambda:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["def", "Function definition", "def greet(name): return f'Hello {name}'"],
+        ["lambda", "Anonymous function", "square = lambda x: x**2"],
+        ["args", "Variable positional args", "def func(*args): ..."],
+        ["kwargs", "Variable keyword args", "def func(**kwargs): ..."],
+        ["decorators", "Function wrapper", "@decorator\ndef func(): ..."],
+        ["generator", "Yield values", "def gen(): yield item"],
+        ["return", "Return value", "return result"],
+        ["annotations", "Type hints", "def add(x: int, y: int) -> int: ..."]
+      ]
+    }
+  },
+  {
+    "title": "Object-Oriented:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["class", "Class definition", "class Person:\n    def __init__(self): ..."],
+        ["inheritance", "Class extension", "class Student(Person): ..."],
+        ["super()", "Parent class access", "super().__init__()"],
+        ["@property", "Property decorator", "@property\ndef name(self): ..."],
+        ["@classmethod", "Class method", "@classmethod\ndef from_string(cls): ..."],
+        ["@staticmethod", "Static method", "@staticmethod\ndef helper(): ..."],
+        ["__str__", "String representation", "def __str__(self): return str"],
+        ["__repr__", "Debug representation", "def __repr__(self): return repr"]
+      ]
+    }
+  },
+  {
+    "title": "Common Operations:",
+    "table": {
+      "headers": ["Operation", "Description", "Example"],
+      "rows": [
+        ["List ops", "List manipulation", "lst.append(), lst.extend(), lst.pop()"],
+        ["Dict ops", "Dictionary operations", "d.keys(), d.values(), d.items()"],
+        ["String ops", "String manipulation", "s.strip(), s.split(), s.join()"],
+        ["Comprehension", "List/Dict building", "[x for x in range(10)]"],
+        ["Slicing", "Sequence slicing", "sequence[start:stop:step]"],
+        ["f-strings", "String formatting", "f'{name} is {age} years old'"],
+        ["map/filter", "Functional tools", "map(func, iterable), filter(pred, iterable)"],
+        ["zip", "Parallel iteration", "zip(list1, list2)"]
+      ]
+    }
+  },
+  {
+    "title": "Built-in Functions:",
+    "table": {
+      "headers": ["Function", "Purpose", "Example"],
+      "rows": [
+        ["len()", "Length of sequence", "len([1, 2, 3])"],
+        ["range()", "Number sequence", "range(start, stop, step)"],
+        ["type()", "Get object type", "type(variable)"],
+        ["print()", "Output to console", "print('Hello, World!')"],
+        ["input()", "User input", "name = input('Enter name: ')"],
+        ["sorted()", "Sort sequence", "sorted([3, 1, 2])"],
+        ["enumerate()", "Index-value pairs", "for i, v in enumerate(list)"],
+        ["isinstance()", "Type checking", "isinstance(obj, type)"]
+      ]
+    }
+  }
+]

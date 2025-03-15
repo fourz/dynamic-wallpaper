@@ -1,0 +1,122 @@
+[
+  {
+    "title": "JSON Basics:",
+    "table": {
+      "headers": ["Element", "Description", "Example"],
+      "rows": [
+        ["Object", "Collection of key-value pairs", "{ \"name\": \"John\", \"age\": 30 }"],
+        ["Array", "Ordered list of values", "[1, 2, 3, \"text\", true]"],
+        ["Value", "String, number, object, array, boolean or null", "\"Hello\", 42, { }, [ ], true, null"],
+        ["String", "Text enclosed in double quotes", "\"This is a string\""],
+        ["Number", "Integer or floating point", "42, 3.14159"],
+        ["Boolean", "true or false", "true, false"],
+        ["null", "Empty/unknown value", "null"]
+      ]
+    }
+  },
+  {
+    "title": "JSON Syntax Rules:",
+    "table": {
+      "headers": ["Rule", "Description", "Example/Note"],
+      "rows": [
+        ["Curly Braces", "Objects are enclosed in { }", "{ \"key\": \"value\" }"],
+        ["Square Brackets", "Arrays are enclosed in [ ]", "[1, 2, 3]"],
+        ["Key-Value Pairs", "Keys and values separated by colon", "\"name\": \"John\""],
+        ["Commas", "Elements separated by commas", "{\"first\": 1, \"second\": 2}"],
+        ["Double Quotes", "Strings require double quotes", "\"key\": \"value\" (not 'key': 'value')"],
+        ["No Comments", "JSON doesn't support comments", "// or /* */ not allowed in standard"],
+        ["No Trailing Commas", "Last element should not end with comma", "[1, 2, 3] not [1, 2, 3,]"],
+        ["No Undefined", "undefined is not valid JSON", "Use null instead"]
+      ]
+    }
+  },
+  {
+    "title": "JSON Structure Patterns:",
+    "table": {
+      "headers": ["Pattern", "Use Case", "Example"],
+      "rows": [
+        ["Flat Object", "Simple key-value settings", "{ \"theme\": \"dark\", \"fontSize\": 14 }"],
+        ["Nested Objects", "Hierarchical data", "{ \"user\": { \"name\": \"John\", \"email\": \"j@ex.com\" } }"],
+        ["Arrays of Objects", "Collections of similar items", "[ {\"id\": 1, \"name\": \"A\"}, {\"id\": 2, \"name\": \"B\"} ]"],
+        ["Mixed Arrays", "Lists of different values", "[\"apple\", 42, true, {\"color\": \"red\"}, [1, 2]]"],
+        ["Object with Array Properties", "Properties containing lists", "{ \"colors\": [\"red\", \"green\", \"blue\"] }"],
+        ["Array of Arrays", "Matrix or tabular data", "[ [1, 2, 3], [4, 5, 6], [7, 8, 9] ]"]
+      ]
+    }
+  },
+  {
+    "title": "Common JSON Use Cases:",
+    "table": {
+      "headers": ["Use Case", "Description", "Example"],
+      "rows": [
+        ["Configuration", "App settings and preferences", "{ \"debug\": true, \"apiEndpoint\": \"https://api.example.com\" }"],
+        ["API Responses", "Data returned from web services", "{ \"status\": \"success\", \"data\": [...], \"message\": \"OK\" }"],
+        ["Data Storage", "Structured data persistence", "{ \"users\": [...], \"products\": [...] }"],
+        ["State Management", "Application state serialization", "{ \"currentPage\": 2, \"filters\": { \"category\": \"books\" } }"],
+        ["Internationalization", "Language translations", "{ \"en\": { \"welcome\": \"Hello\" }, \"es\": { \"welcome\": \"Hola\" } }"],
+        ["Schema Validation", "Data structure definition", "{ \"type\": \"object\", \"properties\": { ... } }"]
+      ]
+    }
+  },
+  {
+    "title": "Escaping Characters:",
+    "table": {
+      "headers": ["Character", "Escape Sequence", "Example"],
+      "rows": [
+        ["Double Quote", "\\\"", "{ \"message\": \"He said \\\"Hello\\\"\" }"],
+        ["Backslash", "\\\\", "{ \"path\": \"C:\\\\Program Files\\\\App\" }"],
+        ["Forward Slash", "\\/", "{ \"url\": \"http:\\/\\/example.com\" }"],
+        ["Backspace", "\\b", "\"\\b\""],
+        ["Form Feed", "\\f", "\"\\f\""],
+        ["New Line", "\\n", "{ \"text\": \"Line 1\\nLine 2\" }"],
+        ["Carriage Return", "\\r", "\"\\r\""],
+        ["Tab", "\\t", "{ \"formatted\": \"Column1\\tColumn2\" }"],
+        ["Unicode", "\\uXXXX", "{ \"symbol\": \"\\u20AC\" } // Euro symbol"]
+      ]
+    }
+  },
+  {
+    "title": "JSON Processing in Languages:",
+    "table": {
+      "headers": ["Language", "Parse (String to Object)", "Stringify (Object to String)"],
+      "rows": [
+        ["JavaScript", "JSON.parse(jsonString)", "JSON.stringify(object)"],
+        ["Python", "json.loads(json_string)", "json.dumps(object)"],
+        ["Java", "new Gson().fromJson(jsonString, Type)", "new Gson().toJson(object)"],
+        ["C#", "JsonSerializer.Deserialize<T>(jsonString)", "JsonSerializer.Serialize(object)"],
+        ["PHP", "json_decode($jsonString)", "json_encode($object)"],
+        ["Ruby", "JSON.parse(json_string)", "object.to_json"],
+        ["Go", "json.Unmarshal([]byte(jsonString), &v)", "json.Marshal(v)"]
+      ]
+    }
+  },
+  {
+    "title": "JSON vs Other Formats:",
+    "table": {
+      "headers": ["Format", "Advantages", "Disadvantages"],
+      "rows": [
+        ["JSON", "Human-readable, Language-independent, Wide support", "No comments, Verbose for binary data"],
+        ["XML", "Namespaces, Schemas, Good for documents", "Verbose, Complex parsing"],
+        ["YAML", "Human-friendly, Comments, References", "Complex spec, Less language support"],
+        ["TOML", "Clear structure, Good for configs, Comments", "Limited nesting, Less common"],
+        ["CSV", "Simple tabular data, Excel compatible", "No nested structures, Schema-less"],
+        ["Protocol Buffers", "Compact, Fast, Schema validation", "Not human-readable, Requires schema"]
+      ]
+    }
+  },
+  {
+    "title": "Common JSON Tools:",
+    "table": {
+      "headers": ["Tool Type", "Examples", "Purpose"],
+      "rows": [
+        ["Validators", "JSONLint, jsonschema", "Check JSON syntax and structure validity"],
+        ["Formatters", "Prettier, JSON Formatter & Validator", "Format JSON with proper indentation"],
+        ["Editors", "JSON Editor Online, JSONEditor", "Visual editing of JSON data"],
+        ["Schema Tools", "JSON Schema Validator, Ajv", "Define and validate JSON structure"],
+        ["Path Query", "jq, JSONPath", "Query and transform JSON data"],
+        ["Diff Tools", "JSON Diff, jsondiffpatch", "Compare JSON documents"],
+        ["Converters", "YAML-to-JSON, CSV-to-JSON", "Convert between data formats"]
+      ]
+    }
+  }
+]

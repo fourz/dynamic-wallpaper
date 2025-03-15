@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "Active Directory Quick Reference"
+    },
+    {
+        "title": "PowerShell AD Commands",
+        "table": {
+            "headers": ["Command", "Purpose"],
+            "rows": [
+                ["Get-ADUser", "Query user accounts in AD"],
+                ["New-ADUser", "Create new AD user account"],
+                ["Set-ADUser", "Modify existing user properties"],
+                ["Remove-ADUser", "Delete AD user account"],
+                ["Get-ADGroup", "Query AD groups"]
+            ]
+        }
+    },
+    {
+        "title": "Common LDAP Attributes",
+        "table": {
+            "headers": ["Attribute", "Description"],
+            "rows": [
+                ["sAMAccountName", "Legacy logon name"],
+                ["userPrincipalName", "User's login name (email format)"],
+                ["distinguishedName", "Unique object identifier in AD"],
+                ["memberOf", "Groups user belongs to"],
+                ["objectGUID", "Unique identifier"]
+            ]
+        }
+    },
+    {
+        "title": "Group Management",
+        "table": {
+            "headers": ["Command", "Description"],
+            "rows": [
+                ["Add-ADGroupMember", "Add user to security group"],
+                ["Get-ADGroupMember", "List group members"],
+                ["New-ADGroup", "Create new security group"],
+                ["Remove-ADGroup", "Delete security group"],
+                ["Set-ADGroup", "Modify group properties"]
+            ]
+        }
+    },
+    {
+        "title": "User Account Status",
+        "table": {
+            "headers": ["Operation", "Command"],
+            "rows": [
+                ["Enable Account", "Enable-ADAccount"],
+                ["Disable Account", "Disable-ADAccount"],
+                ["Unlock Account", "Unlock-ADAccount"],
+                ["Reset Password", "Set-ADAccountPassword"],
+                ["Check Status", "Get-ADUser -Properties Enabled"]
+            ]
+        }
+    },
+    {
+        "title": "Common AD Locations",
+        "table": {
+            "headers": ["Container", "Purpose"],
+            "rows": [
+                ["Users", "Default user accounts container"],
+                ["Computers", "Computer accounts storage"],
+                ["Domain Controllers", "DC accounts location"],
+                ["Builtin", "Built-in security groups"],
+                ["ForeignSecurityPrincipals", "External trust accounts"]
+            ]
+        }
+    }
+]

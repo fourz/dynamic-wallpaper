@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "Email Security Reference"
+    },
+    {
+        "title": "Email Authentication Protocols",
+        "table": {
+            "headers": ["Protocol", "Purpose"],
+            "rows": [
+                ["SPF", "Validates sending mail servers"],
+                ["DKIM", "Ensures email authenticity and integrity"],
+                ["DMARC", "Enforces SPF and DKIM policies"],
+                ["BIMI", "Displays verified logos in inbox"],
+                ["MTA-STS", "Enforces SMTP encryption"]
+            ]
+        }
+    },
+    {
+        "title": "Common DNS Records",
+        "table": {
+            "headers": ["Record Type", "Example Value"],
+            "rows": [
+                ["SPF", "v=spf1 include:_spf.google.com ~all"],
+                ["DKIM", "v=DKIM1; k=rsa; p=MIGfMA0GCSq..."],
+                ["DMARC", "v=DMARC1; p=reject; rua=mailto:dmarc@domain.com"],
+                ["MX", "10 aspmx.l.google.com"],
+                ["TXT", "google-site-verification=..."]
+            ]
+        }
+    },
+    {
+        "title": "Security Headers",
+        "table": {
+            "headers": ["Header", "Function"],
+            "rows": [
+                ["Authentication-Results", "Shows authentication status"],
+                ["Received-SPF", "Displays SPF check results"],
+                ["DKIM-Signature", "Contains signature data"],
+                ["ARC-Seal", "Preserves authentication results"],
+                ["X-Forwarded-For", "Shows email routing path"]
+            ]
+        }
+    },
+    {
+        "title": "Best Practices",
+        "table": {
+            "headers": ["Practice", "Implementation"],
+            "rows": [
+                ["TLS Encryption", "Enable TLS 1.2 or higher"],
+                ["DMARC Policy", "Start with p=none, move to p=reject"],
+                ["SPF Policy", "Use -all for strict, ~all for soft fail"],
+                ["Key Rotation", "Rotate DKIM keys every 6 months"],
+                ["Monitoring", "Review DMARC reports weekly"]
+            ]
+        }
+    },
+    {
+        "title": "Common Attack Types",
+        "table": {
+            "headers": ["Attack", "Prevention"],
+            "rows": [
+                ["Spoofing", "Implement strict SPF/DKIM/DMARC"],
+                ["Phishing", "Enable anti-phishing filters"],
+                ["Man-in-Middle", "Enforce TLS encryption"],
+                ["Domain Hijack", "Use registry lock, 2FA"],
+                ["Email Bombing", "Rate limiting, CAPTCHA"]
+            ]
+        }
+    }
+]

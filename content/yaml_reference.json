@@ -1,0 +1,74 @@
+[
+  {
+    "title": "Basic Syntax:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Indentation", "Used to define structure", "key:\n  subkey: value"],
+        ["Key-Value Pairs", "Represent data", "key: value"],
+        ["Comments", "Start with #", "# This is a comment"],
+        ["Strings", "Textual data", "string: \"Hello, YAML\""],
+        ["Numbers", "Integers and floats", "integer: 123\nfloat: 3.14"],
+        ["Booleans", "True or false values", "boolean: true"],
+        ["Null", "Represents no value", "null_value: null"]
+      ]
+    }
+  },
+  {
+    "title": "Data Structures:",
+    "table": {
+      "headers": ["Structure", "Description", "Example"],
+      "rows": [
+        ["Lists", "Ordered collections", "list:\n  - item1\n  - item2"],
+        ["Maps", "Unordered key-value pairs", "map:\n  key1: value1\n  key2: value2"],
+        ["Nested Structures", "Combining lists and maps", "nested:\n  map:\n    list:\n      - item1\n      - item2"],
+        ["Scalars", "Single values", "scalar: value"],
+        ["Sequences", "Ordered collections", "sequence:\n  - one\n  - two"],
+        ["Sets", "Unique unordered values", "set:\n  - value1\n  - value2"],
+        ["Multi-line Strings", "Literal block style", "multiline: |\n  Line 1\n  Line 2"]
+      ]
+    }
+  },
+  {
+    "title": "Advanced Features:",
+    "table": {
+      "headers": ["Feature", "Description", "Example"],
+      "rows": [
+        ["Anchors and Aliases", "Referencing content", "anchor: &my_anchor value\naliases: *my_anchor"],
+        ["Document Separator", "Multiple documents in one file", "---\ndoc1: value1\n---\ndoc2: value2"],
+        ["Directives", "Instructions for the parser", "%YAML 1.2\n%TAG ! tag:example.com,2000:app/"],
+        ["Data Typing", "Explicitly defining data types", "number: !!int 123"],
+        ["Tags", "Identifying data types", "tagged: !local tag\nvalue"],
+        ["References", "Referencing other nodes", "ref: *my_anchor"],
+        ["Includes", "Merging external files", "<<: *my_anchor"]
+      ]
+    }
+  },
+  {
+    "title": "Common Uses:",
+    "table": {
+      "headers": ["Use Case", "Description", "Example"],
+      "rows": [
+        ["Configuration Files", "Storing application settings", "database:\n  host: localhost\n  port: 5432"],
+        ["Data Serialization", "Representing data for storage", "user:\n  name: John Doe\n  age: 30"],
+        ["Inter-process Communication", "Exchanging data between systems", "message:\n  type: request\n  data: ..."],
+        ["Document Storage", "Storing structured content", "document:\n  title: YAML Reference\n  content: ..."],
+        ["Automation Workflows", "Defining tasks and flows", "steps:\n  - name: task1\n    action: ..."],
+        ["Configuration Management", "Infrastructure as code", "servers:\n  - name: web\n    role: frontend"],
+        ["Data Exchange", "Sharing data between applications", "exchange:\n  format: YAML\n  data: ..."]
+      ]
+    }
+  },
+  {
+    "title": "Best Practices:",
+    "table": {
+      "headers": ["Practice", "Description"],
+      "rows": [
+        ["Use consistent indentation", "Consistent indentation improves readability"],
+        ["Keep lines short", "Shorter lines are easier to read"],
+        ["Use comments", "Comments explain the purpose of the YAML"],
+        ["Validate YAML", "Validate YAML files to catch errors"]
+      ]
+    }
+  }
+]

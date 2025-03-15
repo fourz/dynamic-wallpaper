@@ -1,0 +1,168 @@
+[
+  {
+    "title": "XML Basics:",
+    "table": {
+      "headers": ["Element", "Description", "Example"],
+      "rows": [
+        ["XML Declaration", "Document type and encoding", "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"],
+        ["Element", "Basic unit of XML content", "<book>Content</book>"],
+        ["Attribute", "Additional element information", "<book isbn=\"123456789\">Content</book>"],
+        ["Comment", "Non-parsed annotations", "<!-- This is a comment -->"],
+        ["CDATA", "Non-parsed character data", "<![CDATA[<p>HTML content</p>]]>"],
+        ["Entity", "Special character reference", "&lt; (< character), &amp; (& character)"],
+        ["Processing Instruction", "Application instructions", "<?xml-stylesheet type=\"text/xsl\" href=\"style.xsl\"?>"]
+      ]
+    }
+  },
+  {
+    "title": "XML Syntax Rules:",
+    "table": {
+      "headers": ["Rule", "Description", "Example/Note"],
+      "rows": [
+        ["Case Sensitivity", "XML tags are case-sensitive", "<Person> ≠ <person>"],
+        ["Proper Nesting", "Elements must be properly nested", "<outer><inner>Text</inner></outer>"],
+        ["Root Element", "Must have exactly one root element", "All elements must be inside a single root"],
+        ["Attribute Quotes", "Attribute values must be quoted", "<element attr=\"value\">"],
+        ["Entity Escaping", "Special chars must be escaped", "&lt; for <, &gt; for >, &amp; for &"],
+        ["Empty Elements", "Self-closing or paired tags", "<br/> or <element></element>"],
+        ["White Space", "White space is preserved", "Spaces, tabs, newlines are significant"],
+        ["Valid Names", "Elements/attributes naming rules", "Start with letter/underscore, no spaces"]
+      ]
+    }
+  },
+  {
+    "title": "XML Document Structure:",
+    "table": {
+      "headers": ["Component", "Purpose", "Example"],
+      "rows": [
+        ["Prolog", "XML declaration and metadata", "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"],
+        ["DTD/Schema Declaration", "Document type definition", "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\">"],
+        ["Elements", "Hierarchical structure", "<root><child>...</child></root>"],
+        ["Processing Instructions", "Application instructions", "<?xml-stylesheet type=\"text/xsl\" href=\"style.xsl\"?>"],
+        ["Comments", "Documentation notes", "<!-- This is a comment -->"],
+        ["Entities", "Reusable content references", "<!ENTITY copyright \"© 2023\">"],
+        ["Namespaces", "Distinguish elements from different vocabularies", "<h:html xmlns:h=\"http://www.w3.org/1999/xhtml\">"]
+      ]
+    }
+  },
+  {
+    "title": "Namespaces:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Declaration", "Define a namespace", "<root xmlns:prefix=\"URI\">"],
+        ["Default Namespace", "Elements with no prefix", "<html xmlns=\"http://www.w3.org/1999/xhtml\">"],
+        ["Namespace Prefix", "Qualify element/attribute names", "<prefix:element>"],
+        ["URI", "Namespace identifier (not location)", "xmlns:svg=\"http://www.w3.org/2000/svg\""],
+        ["Scope", "Namespaces apply to element and descendants", "Inherited by child elements unless redefined"],
+        ["Multiple Namespaces", "Different vocabularies in same doc", "<html xmlns=\"http://www.w3.org/1999/xhtml\"><svg:svg xmlns:svg=\"http://www.w3.org/2000/svg\">"]
+      ]
+    }
+  },
+  {
+    "title": "Schema Languages:",
+    "table": {
+      "headers": ["Type", "Description", "Example"],
+      "rows": [
+        ["DTD", "Document Type Definition", "<!DOCTYPE root [<!ELEMENT element (child)>]>"],
+        ["XML Schema (XSD)", "W3C XML Schema Definition", "<xs:element name=\"person\" type=\"xs:string\"/>"],
+        ["RELAX NG", "Regular Language for XML Next Generation", "<element name=\"person\"><text/></element>"],
+        ["Schematron", "Rule-based validation", "<assert test=\"count(item)>0\">Must have items</assert>"],
+        ["JSON Schema", "For validating XML converted to JSON", "{\"type\": \"object\", \"properties\": {...}}"]
+      ]
+    }
+  },
+  {
+    "title": "XPath:",
+    "table": {
+      "headers": ["Expression", "Description", "Example"],
+      "rows": [
+        ["/", "Root element or absolute path", "/bookstore/book"],
+        ["//", "Any descendant elements", "//title"],
+        [".", "Current context node", "./author"],
+        ["..", "Parent of current node", "../title"],
+        ["@", "Attribute selector", "@lang"],
+        ["*", "Wildcard for elements", "/bookstore/*"],
+        ["@*", "Wildcard for attributes", "@*"],
+        ["[]", "Predicate for filtering", "/book[price>30]"],
+        ["|", "Union operator", "//book | //cd"]
+      ]
+    }
+  },
+  {
+    "title": "XSLT Basics:",
+    "table": {
+      "headers": ["Element", "Purpose", "Example"],
+      "rows": [
+        ["<xsl:stylesheet>", "Root element for stylesheet", "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"],
+        ["<xsl:template>", "Define transformation rules", "<xsl:template match=\"/book\">"],
+        ["<xsl:value-of>", "Extract node value", "<xsl:value-of select=\"title\"/>"],
+        ["<xsl:for-each>", "Loop through nodes", "<xsl:for-each select=\"book/chapter\">"],
+        ["<xsl:if>", "Conditional processing", "<xsl:if test=\"price>30\">Expensive</xsl:if>"],
+        ["<xsl:choose>", "Multiple conditions", "<xsl:choose><xsl:when test=\"expr\">...</xsl:when>...</xsl:choose>"],
+        ["<xsl:apply-templates>", "Process matching templates", "<xsl:apply-templates select=\"chapter\"/>"],
+        ["<xsl:sort>", "Sort nodes", "<xsl:sort select=\"author\"/>"]
+      ]
+    }
+  },
+  {
+    "title": "Common XML Applications:",
+    "table": {
+      "headers": ["Application", "Description", "Example"],
+      "rows": [
+        ["HTML5/XHTML", "Web document markup", "<html xmlns=\"http://www.w3.org/1999/xhtml\">"],
+        ["SVG", "Scalable Vector Graphics", "<svg xmlns=\"http://www.w3.org/2000/svg\">"],
+        ["RSS/Atom", "Web feeds/syndication", "<rss version=\"2.0\"><channel>...</channel></rss>"],
+        ["SOAP", "Simple Object Access Protocol", "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"],
+        ["WSDL", "Web Services Description Language", "<wsdl:definitions xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\">"],
+        ["DocBook", "Technical documentation", "<book xmlns=\"http://docbook.org/ns/docbook\">"],
+        ["XBRL", "eXtensible Business Reporting Language", "<xbrl xmlns=\"http://www.xbrl.org/2003/instance\">"],
+        ["MathML", "Mathematical Markup", "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">"]
+      ]
+    }
+  },
+  {
+    "title": "XML Processing in Languages:",
+    "table": {
+      "headers": ["Language", "DOM API", "SAX/Streaming API"],
+      "rows": [
+        ["JavaScript", "DOMParser, XMLSerializer", "Sax.js (3rd party)"],
+        ["Java", "javax.xml.parsers.DocumentBuilder", "javax.xml.parsers.SAXParser"],
+        ["Python", "xml.dom.minidom", "xml.sax"],
+        ["C#", "System.Xml.XmlDocument", "System.Xml.XmlReader"],
+        ["PHP", "DOMDocument", "XMLReader"],
+        ["Node.js", "xmldom", "sax"],
+        ["Go", "encoding/xml", "encoding/xml with Decoder"]
+      ]
+    }
+  },
+  {
+    "title": "XML vs Other Formats:",
+    "table": {
+      "headers": ["Format", "Advantages", "Disadvantages"],
+      "rows": [
+        ["XML", "Self-describing, Namespaces, Rich ecosystem", "Verbose, Complex parsing"],
+        ["JSON", "Lightweight, Easy parsing, JavaScript native", "No comments, Less strict schema options"],
+        ["YAML", "Human-friendly, Less verbose", "Whitespace significance, Complex spec"],
+        ["HTML", "Web-focused, Browser support", "Limited semantic options, Less strict"],
+        ["CSV", "Simple tabular data", "No nested structures, No metadata"],
+        ["Protocol Buffers", "Compact, Fast", "Not human-readable, Requires schema"]
+      ]
+    }
+  },
+  {
+    "title": "XML Tools:",
+    "table": {
+      "headers": ["Tool Type", "Examples", "Purpose"],
+      "rows": [
+        ["Editors", "XML Notepad, Oxygen XML Editor", "Creation and editing of XML documents"],
+        ["Validators", "xmllint, XML Validator", "Validate XML against schemas"],
+        ["Transformers", "Saxon, Xalan", "XSLT transformation engines"],
+        ["Query Tools", "BaseX, eXist-db", "XQuery and XML database tools"],
+        ["Converters", "JAXB, xml2json", "Convert XML to/from other formats"],
+        ["Schema Tools", "Trang, XML Schema Generator", "Create and convert schema definitions"],
+        ["Parsers", "Xerces, libxml2", "Parse XML into object models"]
+      ]
+    }
+  }
+]

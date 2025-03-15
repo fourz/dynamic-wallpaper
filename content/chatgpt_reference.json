@@ -1,0 +1,97 @@
+[
+  {
+    "title": "Prompt Engineering Basics:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Clarity", "Be specific and clear in your requests", "Instead of 'Write a story,' try 'Write a short story about a cat detective in a cyberpunk city.'"],
+        ["Context", "Provide necessary background information", "Instead of 'Translate this,' provide the text and its original language."],
+        ["Format", "Specify the desired output format", "Ask for a list, a table, a JSON object, etc."],
+        ["Tone", "Indicate the desired tone or style", "Request a 'professional,' 'friendly,' or 'humorous' response."],
+        ["Role Play", "Assign a role to ChatGPT", "Ask it to act as a 'technical writer,' 'marketing expert,' or 'historian.'"],
+        ["Constraints", "Set limitations to guide the response", "Specify length, complexity, or target audience."]
+      ]
+    }
+  },
+  {
+    "title": "Prompting Techniques:",
+    "table": {
+      "headers": ["Technique", "Description", "Example"],
+      "rows": [
+        ["Few-Shot Learning", "Provide a few examples to guide the model", "Show a few input-output pairs before asking for a new output."],
+        ["Chain-of-Thought", "Encourage the model to explain its reasoning", "Ask 'Let's think step by step' before solving a problem."],
+        ["Self-Consistency", "Generate multiple responses and choose the most consistent one", "Useful for complex tasks with subjective answers."],
+        ["Decomposition", "Break down complex tasks into smaller subtasks", "Ask for an outline before writing an essay."],
+        ["Reflexion", "Allow the model to reflect on its previous attempts", "Provide feedback on errors and ask it to try again."],
+        ["Active Learning", "Involve the model in the data selection process", "Ask it to identify the most informative examples for training."]
+      ]
+    }
+  },
+  {
+    "title": "Best Practices:",
+    "table": {
+      "headers": ["Practice", "Description", "Benefit"],
+      "rows": [
+        ["Iterative Refinement", "Start with a basic prompt and refine it based on the results", "Improves output quality and relevance."],
+        ["Prompt Templates", "Create reusable prompt structures for common tasks", "Saves time and ensures consistency."],
+        ["Testing and Evaluation", "Evaluate the model's performance on different prompts", "Identifies strengths and weaknesses."],
+        ["Monitoring and Feedback", "Continuously monitor the model's output and provide feedback", "Helps maintain quality and address issues."],
+        ["Combining Techniques", "Use multiple prompting techniques together", "Achieves better results for complex tasks."],
+        ["Understanding Limitations", "Be aware of the model's limitations and biases", "Avoids unrealistic expectations and potential harm."]
+      ]
+    }
+  },
+  {
+    "title": "Limitations:",
+    "table": {
+      "headers": ["Limitation", "Description", "Mitigation"],
+      "rows": [
+        ["Hallucinations", "Generating false or nonsensical information", "Verify information from reliable sources."],
+        ["Bias", "Reflecting societal biases in its output", "Use diverse training data and be aware of potential biases."],
+        ["Lack of Common Sense", "Struggling with basic reasoning and understanding", "Provide clear context and step-by-step instructions."],
+        ["Sensitivity to Phrasing", "Producing different outputs based on slight changes in the prompt", "Experiment with different phrasings and use prompt templates."],
+        ["Limited Knowledge", "Having limited knowledge of events after its training cutoff", "Supplement with external information."],
+        ["Overconfidence", "Presenting incorrect information with high confidence", "Double-check critical information and be skeptical."],
+        ["Security Vulnerabilities", "Being susceptible to prompt injection attacks", "Sanitize user inputs and implement security measures."]
+      ]
+    }
+  },
+  {
+    "title": "Prompt Examples:",
+    "table": {
+      "headers": ["Task", "Prompt", "Notes"],
+      "rows": [
+        ["Summarization", "Summarize the following article in three sentences: [article text]", "Specify length and focus."],
+        ["Translation", "Translate the following text from English to Spanish: [text]", "Specify languages and context."],
+        ["Code Generation", "Write a Python function to calculate the factorial of a number.", "Specify language and requirements."],
+        ["Creative Writing", "Write a poem about the beauty of nature in the style of Robert Frost.", "Specify style and theme."],
+        ["Question Answering", "Answer the following question based on the provided context: [question] [context]", "Provide context and ask specific questions."],
+        ["Classification", "Classify the following text as positive, negative, or neutral: [text]", "Define categories and provide examples."],
+        ["Brainstorming", "Brainstorm ten ideas for a new mobile app.", "Specify goals and constraints."]
+      ]
+    }
+  },
+  {
+    "title": "Advanced Prompting Techniques:",
+    "table": {
+      "headers": ["Technique", "Description", "Example"],
+      "rows": [
+        ["Meta-Prompting", "Prompting the model to generate prompts", "Ask it to create prompts for a specific task."],
+        ["Constrained Generation", "Using regular expressions or grammars to constrain the output", "Ensures output conforms to a specific format."],
+        ["Adversarial Prompting", "Testing the model's robustness with challenging prompts", "Identifies vulnerabilities and biases."],
+        ["Multi-Agent Collaboration", "Using multiple models to solve a task collaboratively", "Leverages different strengths and perspectives."],
+        ["Knowledge Integration", "Incorporating external knowledge sources into the prompting process", "Improves accuracy and relevance."],
+        ["Human-in-the-Loop", "Involving human feedback in the prompting and generation process", "Enhances quality and addresses ethical concerns."]
+      ]
+    }
+  },
+  {
+    "title": "Tools and Resources:",
+    "table": {
+      "headers": ["Resource", "Description", "Link"],
+      "rows": [
+        ["Responsible AI Practices", "Guidelines for responsible AI development and deployment", "https://www.microsoft.com/en-us/ai/responsible-ai"]
+      ]
+    }
+  }
+]

@@ -1,0 +1,71 @@
+[
+    {
+        "style": "heading",
+        "title": "Microsoft Azure Quick Reference"
+    },
+    {
+        "title": "Common Azure CLI Commands",
+        "table": {
+            "headers": ["Command", "Purpose"],
+            "rows": [
+                ["az login", "Sign in to Azure"],
+                ["az group list", "List resource groups"],
+                ["az vm list", "List virtual machines"],
+                ["az account set", "Switch subscriptions"],
+                ["az webapp list", "List web applications"]
+            ]
+        }
+    },
+    {
+        "title": "Resource Management",
+        "table": {
+            "headers": ["Operation", "Command"],
+            "rows": [
+                ["Create Resource Group", "az group create --name --location"],
+                ["Deploy Template", "az deployment group create"],
+                ["Delete Resource", "az resource delete --ids"],
+                ["List Locations", "az account list-locations"],
+                ["Show Resource", "az resource show --ids"]
+            ]
+        }
+    },
+    {
+        "title": "Storage Services",
+        "table": {
+            "headers": ["Service", "Use Case"],
+            "rows": [
+                ["Blob Storage", "Unstructured object storage"],
+                ["File Storage", "Managed file shares"],
+                ["Queue Storage", "Message queuing"],
+                ["Table Storage", "NoSQL data store"],
+                ["Disk Storage", "VM disk storage"]
+            ]
+        }
+    },
+    {
+        "title": "Networking Components",
+        "table": {
+            "headers": ["Component", "Purpose"],
+            "rows": [
+                ["Virtual Network", "Isolated network environment"],
+                ["Network Security Group", "Network traffic filtering"],
+                ["Load Balancer", "Traffic distribution"],
+                ["Application Gateway", "Web traffic load balancer"],
+                ["VPN Gateway", "Cross-network connectivity"]
+            ]
+        }
+    },
+    {
+        "title": "Common Azure PowerShell",
+        "table": {
+            "headers": ["Cmdlet", "Description"],
+            "rows": [
+                ["Connect-AzAccount", "Sign in to Azure"],
+                ["Get-AzResourceGroup", "List resource groups"],
+                ["New-AzVM", "Create virtual machine"],
+                ["Get-AzSubscription", "List subscriptions"],
+                ["Set-AzContext", "Switch subscription context"]
+            ]
+        }
+    }
+]
