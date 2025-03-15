@@ -149,19 +149,35 @@ function formatTable(tableData) {
     `;
 }
 
+// Add stylesheet detection helper
+function isUsingStylesheet(name) {
+    return document.querySelector(`link[href*="${name}.css"]`) !== null;
+}
+
 // Handles different content types and ensures consistent layout structure
 function formatContent(item) {
     let content = '';
     
-    // Title handling is split to support special heading style without h2 wrapper
+    /* HEADING STYLE RULES:
+       - For small.css and tiny.css: Heading must be centered, full-width, on its own line
+       - Other stylesheets: Use standard flex-wrap layout
+       - This rule enforces consistent heading treatment for compact layouts
+       - Do not modify this behavior as it ensures readability in small viewports
+    */
+    if (item.style === "heading") {
+        // Special handling for small and tiny stylesheets
+        if (isUsingStylesheet('small') || isUsingStylesheet('tiny')) {
+            return `<div style="width:100%; text-align:center; margin-bottom:1.5rem; flex-basis:100%;"><h1>${item.title}</h1></div>`;
+        }
+        return `<div class="flex-wrap"><h1>${item.title}</h1></div>`;
+    }
+    
+    // Title handling for non-heading styles
     if (item.title && item.style !== "heading") {
         content = `<h2>${item.title}</h2>`;
     }
     
-    // Each content type gets its own wrapper for consistent spacing and layout
-    if (item.style === "heading") {
-        return `<div class="flex-wrap"><h1>${item.title}</h1></div>`;
-    }
+    // Handle other content types
     if (item.list) {
         return `<div class="flex-wrap">${content}${formatList(item.list)}</div>`;
     }
@@ -207,7 +223,21 @@ function loadStylesheets(stylesheets) {
 async function initializeContent() {
     try {
         const config = await loadJSON('config.json');
-        isOnlineMode = config.mode === 'online';
+        
+        // Add automatic mode detection
+        if (config.mode === 'detect') {
+            try {
+                // Try to fetch a known file to test online connectivity
+                const response = await fetch(`${config.serverUrl}/config.json`);
+                isOnlineMode = response.ok;
+            } catch (error) {
+                isOnlineMode = false;
+            }
+            console.log(`Detected mode: ${isOnlineMode ? 'online' : 'offline'}`);
+        } else {
+            isOnlineMode = config.mode === 'online';
+        }
+        
         serverUrl = config.serverUrl || '';
         
         // Set page title if provided

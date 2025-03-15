@@ -1,10 +1,12 @@
 {    
-    "mode": "online",
+    "mode": "detect",
     "serverUrl": "https://localhost:8443",
     "title": "Reference Sheets",
     "content": [
         "content/java_reference.json", 
-        "content/json_reference.json"
+        "content/json_reference.json",
+        "content/regex_reference.json",
+        "content/raspbian_reference.json"
     ],
     "wallpaper": [
         "images/wallpaper/VALLEY_BAY_DOUBLE.jpg",

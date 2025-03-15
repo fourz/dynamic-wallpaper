@@ -1,5 +1,9 @@
 [
   {
+    "style": "heading",
+    "title": "Java Reference Sheet"
+  },
+  {
     "title": "Primitive Data Types:",
     "table": {
       "headers": ["Type", "Size", "Range", "Example"],

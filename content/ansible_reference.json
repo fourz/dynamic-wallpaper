@@ -1,5 +1,9 @@
 [
   {
+    "style": "heading",
+    "title": "Ansible Reference Sheet"
+  },
+  {
     "title": "Core Concepts:",
     "table": {
       "headers": ["Concept", "Description", "Example"],
