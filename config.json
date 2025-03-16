@@ -21,15 +21,21 @@
         "content/how_to_use_this_guide.json",
         "content/yaml_reference.json",
         "content/ansible_reference.json",
+        "content/networking_basics.json",
+        "content/networking_routing.json",
+        "content/networking_wan.json",
+        "content/networking_overview.json",
         "content/how_to_make_guides.json",
         "content/how_this_was_made_summary.json"
-                
     ],
     "wallpaper": [
         "images/wallpaper/VALLEY_BAY_DOUBLE.jpg",
         "images/wallpaper/wallpaper.png"
     ],
     "stylesheets": {        
+        "set0": [
+            "stylesheets/small.css"
+        ],        
         "set1": [
             "stylesheets/tiny.css"
         ],

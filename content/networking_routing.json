@@ -1,0 +1,94 @@
+[
+    {
+        "style": "heading",
+        "title": "Network Routing"
+    },
+    {
+        "title": "Routing Fundamentals",
+        "table": {
+            "headers": ["Concept", "Description", "Real-world Example"],
+            "rows": [
+                ["Path Selection", "Choosing best route", "Taking highway vs. local roads"],
+                ["Next Hop", "Next router in path", "Next intersection in journey"],
+                ["Route Distribution", "Sharing route info", "Sharing traffic updates"],
+                ["Convergence", "Network stability", "All GPS maps updated"],
+                ["Load Balancing", "Traffic distribution", "Multiple parallel highways"]
+            ]
+        }
+    },
+    {
+        "title": "Routing Concepts",
+        "table": {
+            "headers": ["Concept", "Description"],
+            "rows": [
+                ["Routing Table", "Table that stores routes to different networks"],
+                ["Static Routing", "Manually configured routes"],
+                ["Dynamic Routing", "Routes learned automatically via routing protocols"],
+                ["Default Route", "Route used when no other route matches"],
+                ["Route Metric", "Value that indicates the cost of using a route"]
+            ]
+        }
+    },
+    {
+        "title": "Routing Protocols",
+        "table": {
+            "headers": ["Protocol", "Description"],
+            "rows": [
+                ["RIP", "Distance-vector routing protocol (obsolete)"],
+                ["OSPF", "Link-state routing protocol"],
+                ["BGP", "Path-vector routing protocol used on the Internet"],
+                ["EIGRP", "Cisco proprietary routing protocol"]
+            ]
+        }
+    },
+    {
+        "title": "Routing Metrics",
+        "table": {
+            "headers": ["Metric", "Description"],
+            "rows": [
+                ["Hop Count", "Number of routers a packet must pass through"],
+                ["Bandwidth", "Data rate of the link"],
+                ["Delay", "Time it takes for a packet to travel across the link"],
+                ["Load", "Amount of traffic on the link"],
+                ["Reliability", "Probability of a packet successfully reaching its destination"]
+            ]
+        }
+    },
+    {
+        "title": "Routing Algorithms",
+        "table": {
+            "headers": ["Algorithm", "Description"],
+            "rows": [
+                ["Distance-Vector", "Each router sends its routing table to neighbors"],
+                ["Link-State", "Each router sends link-state advertisements to all routers"],
+                ["Path-Vector", "Each router sends its path to a destination"]
+            ]
+        }
+    },
+    {
+        "title": "Routing Tables",
+        "table": {
+            "headers": ["Column", "Description"],
+            "rows": [
+                ["Network", "Destination network address"],
+                ["Next Hop", "IP address of the next router"],
+                ["Interface", "Outgoing interface for the route"],
+                ["Metric", "Cost of using the route"],
+                ["Flags", "Indicators for route status"]
+            ]
+        }
+    },
+    {
+        "title": "Routing Configuration",
+        "table": {
+            "headers": ["Setting", "Description"],
+            "rows": [
+                ["Static Route", "Manually configured route"],
+                ["Default Route", "Route used when no other route matches"],
+                ["Routing Protocol", "Protocol used to exchange routing information"],
+                ["Route Redistribution", "Sharing routes between different routing protocols"],
+                ["Route Summarization", "Aggregating multiple routes into a single route"]
+            ]
+        }
+    }
+]

@@ -1,0 +1,110 @@
+[
+    {
+        "style": "heading",
+        "title": "Networking Fundamentals"
+    },
+    {
+        "title": "Addressing Fundamentals",
+        "table": {
+            "headers": ["Concept", "Format", "Example", "Usage"],
+            "rows": [
+                ["IPv4 Address", "xxx.xxx.xxx.xxx", "192.168.1.1", "Network addressing"],
+                ["IPv6 Address", "xxxx:xxxx:xxxx:xxxx", "2001:0db8::1", "Next-gen addressing"],
+                ["Subnet Mask", "xxx.xxx.xxx.xxx", "255.255.255.0", "Network segmentation"],
+                ["MAC Address", "XX:XX:XX:XX:XX:XX", "00:1A:2B:3C:4D:5E", "Hardware identification"],
+                ["Port Number", "0-65535", "80 (HTTP), 443 (HTTPS)", "Service identification"]
+            ]
+        }
+    },
+    {
+        "title": "Common Protocols",
+        "table": {
+            "headers": ["Protocol", "Description", "Port"],
+            "rows": [
+                ["TCP", "Reliable, connection-oriented protocol", "80, 443"],
+                ["UDP", "Unreliable, connectionless protocol", "53, 123"],
+                ["HTTP", "Protocol for web browsing", "80"],
+                ["HTTPS", "Secure web browsing", "443"],
+                ["DNS", "Domain name resolution", "53"]
+            ]
+        }
+    },
+    {
+        "title": "Network Devices",
+        "table": {
+            "headers": ["Device", "Description"],
+            "rows": [
+                ["Router", "Forwards network traffic between networks"],
+                ["Switch", "Connects devices within a network"],
+                ["Hub", "Simple device that broadcasts traffic to all connected devices (obsolete)"],
+                ["Firewall", "Security system that controls network traffic"],
+                ["Modem", "Connects to the Internet Service Provider (ISP)"]
+            ]
+        }
+    },
+    {
+        "title": "Network Security",
+        "table": {
+            "headers": ["Concept", "Description"],
+            "rows": [
+                ["Firewall", "Filters network traffic based on security rules"],
+                ["VPN", "Securely connects remote networks or users"],
+                ["SSL/TLS", "Encrypts data for secure communication"],
+                ["IDS/IPS", "Intrusion Detection System/Intrusion Prevention System"],
+                ["WPA2", "Wi-Fi security protocol"]
+            ]
+        }
+    },
+    {
+        "title": "Wireless Networking",
+        "table": {
+            "headers": ["Standard", "Description"],
+            "rows": [
+                ["802.11a", "54 Mbps, 5 GHz frequency"],
+                ["802.11b", "11 Mbps, 2.4 GHz frequency"],
+                ["802.11g", "54 Mbps, 2.4 GHz frequency"],
+                ["802.11n", "300 Mbps, 2.4/5 GHz frequency"],
+                ["802.11ac", "1 Gbps, 5 GHz frequency"]
+            ]
+        }
+    },
+    {
+        "title": "Network Addressing",
+        "table": {
+            "headers": ["Type", "Description"],
+            "rows": [
+                ["IPv4", "32-bit address used in most networks"],
+                ["IPv6", "128-bit address to replace IPv4"],
+                ["Private IP", "Reserved IP addresses for private networks"],
+                ["Public IP", "Unique IP addresses on the Internet"],
+                ["DHCP", "Automatically assigns IP addresses to devices"]
+            ]
+        }
+    },
+    {
+        "title": "Network Troubleshooting",
+        "table": {
+            "headers": ["Issue", "Solution"],
+            "rows": [
+                ["No Internet", "Check modem, router, and ISP"],
+                ["Slow Connection", "Check for interference or bandwidth issues"],
+                ["Intermittent Connection", "Check cables and connections"],
+                ["No Network Access", "Check IP configuration and network settings"],
+                ["DNS Resolution Error", "Check DNS server settings"]
+            ]
+        }
+    },
+    {
+        "title": "Network Services",
+        "table": {
+            "headers": ["Service", "Description"],
+            "rows": [
+                ["DNS", "Domain Name System for name resolution"],
+                ["DHCP", "Dynamic Host Configuration Protocol for IP assignment"],
+                ["NTP", "Network Time Protocol for time synchronization"],
+                ["FTP", "File Transfer Protocol for file sharing"],
+                ["SSH", "Secure Shell for remote access"]
+            ]
+        }
+    }
+]
