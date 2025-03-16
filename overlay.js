@@ -149,6 +149,11 @@ function formatTable(tableData) {
     `;
 }
 
+// Format text blocks into paragraphs
+function formatBlock(blocks) {
+    return blocks.map(text => `<p class="block-text">${text}</p>`).join('');
+}
+
 // Add stylesheet detection helper
 function isUsingStylesheet(name) {
     return document.querySelector(`link[href*="${name}.css"]`) !== null;
@@ -175,6 +180,11 @@ function formatContent(item) {
     // Title handling for non-heading styles
     if (item.title && item.style !== "heading") {
         content = `<h2>${item.title}</h2>`;
+    }
+    
+    // Handle block content type
+    if (item.block) {
+        return `<div class="flex-wrap">${content}${formatBlock(item.block)}</div>`;
     }
     
     // Handle other content types

@@ -60,5 +60,70 @@
         }
       ]
     }
+  ],
+  "reference": [
+    {
+      "style": "heading",
+      "title": "Git Reference"
+    },
+    {
+      "title": "Essential Commands",
+      "table": {
+        "headers": ["Command", "Usage", "Example"],
+        "rows": [
+          ["git init", "Create new repository", "git init myproject"],
+          ["git clone", "Copy repository", "git clone https://github.com/user/repo.git"],
+          ["git add", "Stage changes", "git add file.txt"],
+          ["git commit", "Record changes", "git commit -m \"Add feature\""],
+          ["git push", "Upload changes", "git push origin main"]
+        ]
+      }
+    },
+    {
+      "title": "Branch Operations",
+      "table": {
+        "headers": ["Command", "Purpose", "Example"],
+        "rows": [
+          ["git branch", "List/create branches", "git branch feature"],
+          ["git checkout", "Switch branches", "git checkout main"],
+          ["git merge", "Combine branches", "git merge feature"],
+          ["git rebase", "Reapply commits", "git rebase main"],
+          ["git stash", "Save changes", "git stash save \"WIP\""]
+        ]
+      }
+    },
+    {
+      "title": "Remote Operations",
+      "list": [
+        "git remote add origin URL - Add remote repository",
+        "git fetch origin - Download changes",
+        "git pull origin main - Fetch and merge",
+        "git push -u origin main - Upload and track",
+        "git remote -v - List remotes"
+      ]
+    },
+    {
+      "title": "Common Workflows",
+      "numberedList": [
+        "Create feature branch: git checkout -b feature",
+        "Make changes and stage: git add .",
+        "Commit changes: git commit -m \"message\"",
+        "Update from main: git pull origin main",
+        "Push changes: git push origin feature"
+      ]
+    },
+    {
+      "title": "Configuration",
+      "table": {
+        "headers": ["Command", "Purpose", "Example"],
+        "rows": [
+          ["git config", "Set options", "git config --global user.name \"Name\""],
+          ["git ignore", "Exclude files", "Add *.log to .gitignore"],
+          ["git alias", "Create shortcuts", "git config --global alias.co checkout"],
+          ["git hooks", "Automate actions", "Create pre-commit hook"],
+          ["git attributes", "File handling", "Set line endings"]
+        ]
+      }
+    }
   ]
 }

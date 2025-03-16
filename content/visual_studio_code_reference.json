@@ -41,5 +41,90 @@
         ["Symbol Search", "Ctrl+Shift+O", "Navigate to symbol"]
       ]
     }
+  },
+  {
+    "title": "Essential Extensions",
+    "table": {
+      "headers": ["Extension", "Purpose", "Key Features"],
+      "rows": [
+        ["GitHub Copilot", "AI code completion", "Inline suggestions, contextual code generation"],
+        ["GitLens", "Git repository insights", "Blame annotations, file history, comparisons"],
+        ["Git Graph", "Repository visualization", "Branch history, commit tree view"],
+        ["Git History", "Commit exploration", "File and line history browsing"],
+        ["Peacock", "Workspace color coding", "Distinguish multiple VS Code windows"]
+      ]
+    }
+  },
+  {
+    "title": "GitHub Copilot Features",
+    "table": {
+      "headers": ["Feature", "Usage", "Shortcut"],
+      "rows": [
+        ["Inline Suggestions", "Auto-complete as you type", "Tab to accept"],
+        ["Generate Function", "Comment describing functionality", "Ctrl+Enter"],
+        ["Chat", "Ask coding questions", "Ctrl+Shift+I"],
+        ["Explain Code", "Select code + right-click", "Explain with Copilot"],
+        ["Test Generation", "Generate unit tests", "Comment test requirements"]
+      ]
+    }
+  },
+  {
+    "title": "GitLens Features",
+    "table": {
+      "headers": ["Feature", "Purpose", "Access"],
+      "rows": [
+        ["Current Line Blame", "Show commit info inline", "Hover over line"],
+        ["File History", "View file changes", "GitLens sidebar"],
+        ["Repository Compare", "Compare branches/tags", "GitLens > Compare"],
+        ["Commit Search", "Find specific changes", "Ctrl+Shift+P > GitLens: Search Commits"],
+        ["Code Lens", "Authorship info", "Above functions/classes"]
+      ]
+    }
+  },
+  {
+    "title": "Git Integration",
+    "table": {
+      "headers": ["Task", "Method", "Location"],
+      "rows": [
+        ["Stage Changes", "Click + in Source Control", "Source Control tab"],
+        ["Commit", "Message + Ctrl+Enter", "Source Control tab"],
+        ["Branch Management", "Branch icon", "Status bar"],
+        ["Resolve Conflicts", "Click file", "Merge Editor"],
+        ["Push/Pull", "Sync button", "Status bar"]
+      ]
+    }
+  },
+  {
+    "title": "Customization Options",
+    "table": {
+      "headers": ["Option", "Access Method", "Description"],
+      "rows": [
+        ["Theme Selection", "Ctrl+K Ctrl+T", "Change color themes and icon sets"],
+        ["Font Settings", "Ctrl+Scroll", "Adjust font size, family, and rendering"],
+        ["Keybindings", "Ctrl+K Ctrl+S", "Customize keyboard shortcuts"],
+        ["Layout Options", "View menu", "Configure editor layout and visibility"],
+        ["User Snippets", "File > Preferences", "Create custom code templates"]
+      ]
+    }
+  },
+  {
+    "title": "Workspace Setup",
+    "list": [
+      "1. Clone repository: Ctrl+Shift+P > Git: Clone",
+      "2. Open folder: File > Open Folder",
+      "3. Select Git branch: Status bar branch picker",
+      "4. Configure workspace settings: settings.json",
+      "5. Install project-specific extensions"
+    ]
+  },
+  {
+    "title": "Initial Setup",
+    "numberedList": [
+      "Install VS Code from code.visualstudio.com",
+      "Install Git from git-scm.com",
+      "Configure user settings (settings.json)",
+      "Install essential extensions",
+      "Sign in to GitHub account"
+    ]
   }
 ]

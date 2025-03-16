@@ -1,0 +1,105 @@
+[
+    {
+        "style": "heading",
+        "title": "Cisco JTAPI Guide"
+    },
+    {
+        "title": "Overview",
+        "paragraphs": [
+            "Cisco Java Telephony API (JTAPI) is an application programming interface that enables Java applications to control telephony resources in Cisco Unified Communications Manager (CUCM). It provides a standardized interface for computer telephony integration (CTI) applications.",
+            "JTAPI allows developers to create applications that can monitor and control telephony devices, handle calls, and receive real-time events from the phone system."
+        ]
+    },
+    {
+        "title": "Core Components",
+        "table": {
+            "headers": ["Component", "Description", "Purpose"],
+            "rows": [
+                ["JtapiPeer", "Entry point to JTAPI implementation", "Creates providers and manages JTAPI configuration"],
+                ["Provider", "Connection to CUCM", "Manages connection and authentication to call control system"],
+                ["Address", "Directory number or extension", "Represents phone numbers in the system"],
+                ["Terminal", "Physical or virtual device", "Represents endpoints like phones or softphones"],
+                ["Call", "Voice or video connection", "Represents active communications between parties"]
+            ]
+        }
+    },
+    {
+        "title": "Essential Setup",
+        "list": [
+            "1. Add Cisco JTAPI JAR files to project classpath",
+            "2. Configure JTAPI client in CUCM Administration",
+            "3. Download JTAPI client plugin from CUCM",
+            "4. Set up application user with appropriate roles",
+            "5. Configure device and line associations"
+        ]
+    },
+    {
+        "title": "Basic Implementation",
+        "numberedList": [
+            "Initialize JTAPI provider:",
+            "    JtapiPeer peer = JtapiPeerFactory.getJtapiPeer(null);",
+            "    Provider provider = peer.getProvider(\"username;password@cucm-server\");",
+            "Add observer for events:",
+            "    provider.addObserver(new ProviderObserver());",
+            "Get address and terminal:",
+            "    Address address = provider.getAddress(\"1234\");",
+            "    Terminal terminal = provider.getTerminal(\"SEP001122334455\");"
+        ]
+    },
+    {
+        "title": "Common Events",
+        "table": {
+            "headers": ["Event", "Description", "Usage"],
+            "rows": [
+                ["CallEvent", "Call state changes", "Monitor call progress"],
+                ["TerminalEvent", "Device state changes", "Track device status"],
+                ["AddressEvent", "Line state changes", "Monitor line availability"],
+                ["ProviderEvent", "Connection status", "Handle CUCM connectivity"],
+                ["MediaEvent", "Media stream changes", "Handle audio/video streams"]
+            ]
+        }
+    },
+    {
+        "title": "Error Handling",
+        "list": [
+            "PlatformException: CUCM connection issues",
+            "ResourceUnavailableException: Device/line unavailable",
+            "InvalidStateException: Invalid operation for current state",
+            "MethodNotSupportedException: Unsupported feature",
+            "InvalidArgumentException: Invalid parameter values"
+        ]
+    },
+    {
+        "title": "Best Practices",
+        "list": [
+            "Always implement proper exception handling",
+            "Use connection retry mechanism with exponential backoff",
+            "Implement event queuing for high-volume scenarios",
+            "Release resources properly when shutting down",
+            "Monitor and log JTAPI events for troubleshooting"
+        ]
+    },
+    {
+        "title": "Performance Considerations",
+        "table": {
+            "headers": ["Aspect", "Recommendation", "Impact"],
+            "rows": [
+                ["Connection Pool", "Maintain provider pool", "Improved scalability"],
+                ["Event Handling", "Use event queues", "Prevent thread bottlenecks"],
+                ["Resource Management", "Close unused connections", "Reduce memory usage"],
+                ["Error Recovery", "Implement reconnection logic", "Improved reliability"],
+                ["Monitoring", "Track performance metrics", "Better troubleshooting"]
+            ]
+        }
+    },
+    {
+        "title": "Security Considerations",
+        "list": [
+            "Use application user accounts instead of end-user accounts",
+            "Implement secure password storage",
+            "Enable SRTP for media encryption when possible",
+            "Regular audit of device/line permissions",
+            "Monitor and log security-related events"
+        ]
+    }
+]
