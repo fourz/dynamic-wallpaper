@@ -1,5 +1,9 @@
 [
   {
+    "style": "heading",
+    "title": "JSON Reference Sheet"
+  },
+  {
     "title": "JSON Basics:",
     "table": {
       "headers": ["Element", "Description", "Example"],

@@ -1,6 +1,8 @@
 body {
     margin: 0;
-    padding: 0;
+    padding: 10px 10px;
+    min-height: 100vh;
+    height: auto;
     background: url('wallpaper.png') no-repeat center center fixed;
     background-size: cover;
     color: white;
@@ -15,6 +17,7 @@ body {
     line-height: 1.2;
     max-width: 100%;
     overflow-x: hidden;
+    overflow: hidden;
 }
 
 .overlay {
@@ -30,8 +33,26 @@ body {
     gap: 1.2rem;
     justify-content: space-between;
     align-items: flex-start;
-    max-height: 92vh;
+    max-height: calc(100vh - 20px);
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.3);
+    margin: 0 auto;
+    min-height: 150px;
+}
+
+.overlay::-webkit-scrollbar {
+    width: 8px;
+}
+
+.overlay::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.overlay::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
 }
 
 .flex-wrap {

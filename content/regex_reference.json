@@ -1,5 +1,9 @@
 [
   {
+    "style": "heading",
+    "title": "Regex Reference Sheet"
+  },
+  {
     "title": "Character Patterns:",
     "table": {
       "headers": ["Pattern", "Description"],

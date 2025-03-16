@@ -1,0 +1,45 @@
+[
+  {
+    "style": "heading",
+    "title": "Ubuntu Linux Reference"
+  },
+  {
+    "title": "Package Management",
+    "table": {
+      "headers": ["Command", "Purpose", "Example"],
+      "rows": [
+        ["apt update", "Update package list", "sudo apt update"],
+        ["apt upgrade", "Upgrade packages", "sudo apt upgrade"],
+        ["apt install", "Install package", "sudo apt install package-name"],
+        ["apt remove", "Remove package", "sudo apt remove package-name"],
+        ["apt search", "Find packages", "apt search keyword"]
+      ]
+    }
+  },
+  {
+    "title": "System Administration",
+    "table": {
+      "headers": ["Command", "Purpose", "Example"],
+      "rows": [
+        ["systemctl", "Service management", "systemctl start service"],
+        ["journalctl", "View logs", "journalctl -u service"],
+        ["useradd", "Create user", "useradd username"],
+        ["passwd", "Change password", "passwd username"],
+        ["chmod/chown", "Permissions", "chmod 755 file"]
+      ]
+    }
+  },
+  {
+    "title": "Network Commands",
+    "table": {
+      "headers": ["Command", "Purpose", "Usage"],
+      "rows": [
+        ["netstat", "Network status", "netstat -tuln"],
+        ["ip addr", "IP configuration", "ip addr show"],
+        ["ufw", "Firewall", "ufw enable/disable"],
+        ["ping", "Test connectivity", "ping hostname"],
+        ["nslookup", "DNS query", "nslookup domain"]
+      ]
+    }
+  }
+]

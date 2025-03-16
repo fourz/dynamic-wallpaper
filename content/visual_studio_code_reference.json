@@ -1,0 +1,45 @@
+[
+  {
+    "style": "heading",
+    "title": "Visual Studio Code Reference"
+  },
+  {
+    "title": "Essential Shortcuts",
+    "table": {
+      "headers": ["Action", "Windows", "Mac"],
+      "rows": [
+        ["Command Palette", "Ctrl+Shift+P", "Cmd+Shift+P"],
+        ["Quick Open", "Ctrl+P", "Cmd+P"],
+        ["Toggle Sidebar", "Ctrl+B", "Cmd+B"],
+        ["Multi-Select", "Ctrl+D", "Cmd+D"],
+        ["IntelliSense", "Ctrl+Space", "Cmd+Space"]
+      ]
+    }
+  },
+  {
+    "title": "Editor Features",
+    "table": {
+      "headers": ["Feature", "Purpose", "Activation"],
+      "rows": [
+        ["Integrated Terminal", "Command line", "Ctrl+` (Windows/Mac)"],
+        ["Source Control", "Git integration", "Ctrl+Shift+G"],
+        ["Extensions", "Add functionality", "Ctrl+Shift+X"],
+        ["Search", "Find in files", "Ctrl+Shift+F"],
+        ["Debug", "Run/debug code", "F5"]
+      ]
+    }
+  },
+  {
+    "title": "Code Navigation",
+    "table": {
+      "headers": ["Action", "Shortcut", "Description"],
+      "rows": [
+        ["Go to Definition", "F12", "Jump to symbol definition"],
+        ["Peak Definition", "Alt+F12", "Inline definition view"],
+        ["Find References", "Shift+F12", "List all references"],
+        ["File Navigation", "Ctrl+Tab", "Switch between files"],
+        ["Symbol Search", "Ctrl+Shift+O", "Navigate to symbol"]
+      ]
+    }
+  }
+]
