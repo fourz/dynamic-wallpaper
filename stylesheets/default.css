@@ -1,7 +1,8 @@
+/* Core layout styles */
 body {
     /* Reset defaults and ensure wallpaper covers viewport */
     margin: 0;
-    padding: 50px 0;
+    padding: 60px 50px;
     background: url('wallpaper.png') no-repeat center center fixed;
     background-size: cover;
     color: white;
@@ -11,14 +12,17 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
+    overflow: hidden;  /* Prevent page scrolling */
 }
 
+/* Content container with scrolling */
 .overlay {
     /* Semi-transparent container for better text readability */
     background: rgba(0, 0, 0, 0.6);
     padding: 25px;
-    margin-top: 20px;
+    margin: 20px auto;
     border-radius: 8.5px;
     /* Responsive sizing with max-width to prevent oversized content */
     width: 92%;
@@ -32,11 +36,28 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     /* Remove scrollbar properties */
-    max-height: none;
-    overflow-y: visible;
+    max-height: calc(100vh - 140px); /* Account for body padding */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.3);
+    min-height: 200px;
 }
 
-/* Flexible container for content sections that maintains minimum width */
+.overlay::-webkit-scrollbar {
+    width: 8px;
+}
+
+.overlay::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.overlay::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+/* Content layout components */
 .flex-wrap {
     display: flex;
     flex-wrap: wrap;
@@ -117,7 +138,7 @@ button {
     border-radius: 5px;
 }
 
-/* Navigation buttons */
+/* Navigation controls - consistent across themes */
 .nav-btn, .wall-btn, .style-btn {
     position: fixed;
     z-index: 1000;

@@ -1,7 +1,8 @@
 body {
-    /* Reset defaults and ensure wallpaper covers viewport */
     margin: 0;
-    padding: 0;
+    padding: 20px 50px;
+    min-height: 100vh;
+    height: auto;
     background: url('wallpaper.png') no-repeat center center fixed;
     background-size: cover;
     color: white;
@@ -11,15 +12,13 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    overflow: hidden;  /* Prevent page scrolling */
 }
 
 .overlay {
-    /* Semi-transparent container for better text readability */
     background: rgba(0, 0, 0, 0.6);
     padding: 20px;
     border-radius: 10px;
-    /* Responsive sizing with max-width to prevent oversized content */
     width: 92%;
     max-width: 1600px;
     line-height: 1.5;
@@ -30,9 +29,27 @@ body {
     gap: 1.5rem;
     justify-content: space-between;
     align-items: flex-start;
-    /* Remove scrollbar properties */
-    max-height: none;
-    overflow-y: visible;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    margin: 0 auto;
+    min-height: 250px;
+    /* Add subtle scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.3);
+}
+
+.overlay::-webkit-scrollbar {
+    width: 8px;
+}
+
+.overlay::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.overlay::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
 }
 
 /* Flexible container for content sections that maintains minimum width */
