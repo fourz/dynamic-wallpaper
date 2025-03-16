@@ -1,0 +1,64 @@
+{
+  "title": "Git Quick Reference",
+  "sections": [
+    {
+      "name": "Basic Commands",
+      "commands": [
+        {
+          "command": "git init",
+          "description": "Initialize a new Git repository"
+        },
+        {
+          "command": "git clone <url>",
+          "description": "Clone a repository from remote"
+        },
+        {
+          "command": "git status",
+          "description": "Show working tree status"
+        },
+        {
+          "command": "git add <file>",
+          "description": "Add file to staging area"
+        },
+        {
+          "command": "git commit -m \"message\"",
+          "description": "Commit staged changes"
+        }
+      ]
+    },
+    {
+      "name": "Branch Operations",
+      "commands": [
+        {
+          "command": "git branch",
+          "description": "List branches"
+        },
+        {
+          "command": "git checkout <branch>",
+          "description": "Switch to branch"
+        },
+        {
+          "command": "git merge <branch>",
+          "description": "Merge branch into current branch"
+        }
+      ]
+    },
+    {
+      "name": "Remote Operations",
+      "commands": [
+        {
+          "command": "git fetch",
+          "description": "Download objects from remote"
+        },
+        {
+          "command": "git pull",
+          "description": "Fetch and merge remote changes"
+        },
+        {
+          "command": "git push",
+          "description": "Upload local changes to remote"
+        }
+      ]
+    }
+  ]
+}

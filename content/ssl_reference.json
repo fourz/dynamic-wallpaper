@@ -1,0 +1,45 @@
+[
+  {
+    "style": "heading",
+    "title": "SSL/TLS Reference Guide"
+  },
+  {
+    "title": "OpenSSL Commands",
+    "table": {
+      "headers": ["Command", "Purpose", "Example"],
+      "rows": [
+        ["Generate Key", "Create private key", "openssl genrsa -out private.key 2048"],
+        ["Create CSR", "Certificate request", "openssl req -new -key private.key -out cert.csr"],
+        ["Self-Sign", "Create self-signed cert", "openssl x509 -req -days 365 -in cert.csr -signkey private.key"],
+        ["Verify Cert", "Check certificate", "openssl x509 -in cert.pem -text"],
+        ["Check Server", "Test SSL connection", "openssl s_client -connect host:443"]
+      ]
+    }
+  },
+  {
+    "title": "Certificate Types",
+    "table": {
+      "headers": ["Type", "Use Case", "Description"],
+      "rows": [
+        ["DV", "Domain Validation", "Basic website security"],
+        ["OV", "Organization Validation", "Business verification"],
+        ["EV", "Extended Validation", "Highest trust level"],
+        ["Wildcard", "Multiple subdomains", "*.domain.com"],
+        ["SAN", "Multiple domains", "Subject Alternative Names"]
+      ]
+    }
+  },
+  {
+    "title": "Common SSL Issues",
+    "table": {
+      "headers": ["Problem", "Cause", "Solution"],
+      "rows": [
+        ["Expired Certificate", "Past validity date", "Renew certificate"],
+        ["Chain Issues", "Missing intermediates", "Install full chain"],
+        ["Name Mismatch", "Wrong domain name", "Get correct certificate"],
+        ["Protocol Error", "Version mismatch", "Configure supported versions"],
+        ["Trust Issues", "Unknown CA", "Install root certificates"]
+      ]
+    }
+  }
+]

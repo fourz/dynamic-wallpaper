@@ -1,0 +1,45 @@
+[
+  {
+    "style": "heading",
+    "title": "SSH Reference Guide"
+  },
+  {
+    "title": "Basic SSH Commands",
+    "table": {
+      "headers": ["Command", "Description", "Example"],
+      "rows": [
+        ["ssh", "Connect to remote host", "ssh user@hostname"],
+        ["ssh-keygen", "Generate SSH key pair", "ssh-keygen -t rsa -b 4096"],
+        ["ssh-copy-id", "Copy public key to server", "ssh-copy-id user@hostname"],
+        ["scp", "Secure copy files", "scp file.txt user@host:/path"],
+        ["sftp", "Secure FTP session", "sftp user@hostname"]
+      ]
+    }
+  },
+  {
+    "title": "SSH Configuration",
+    "table": {
+      "headers": ["File/Setting", "Purpose", "Example"],
+      "rows": [
+        ["~/.ssh/config", "SSH client config", "Host myserver\n  HostName example.com\n  User admin"],
+        ["/etc/ssh/sshd_config", "SSH server config", "PermitRootLogin no"],
+        ["known_hosts", "Trusted servers", "~/.ssh/known_hosts"],
+        ["authorized_keys", "Allowed public keys", "~/.ssh/authorized_keys"],
+        ["ssh_config", "Global client config", "/etc/ssh/ssh_config"]
+      ]
+    }
+  },
+  {
+    "title": "SSH Security",
+    "table": {
+      "headers": ["Feature", "Description", "Configuration"],
+      "rows": [
+        ["Key Types", "RSA, ED25519, ECDSA", "-t rsa|ed25519|ecdsa"],
+        ["Port Forwarding", "Tunnel connections", "-L local:remote"],
+        ["Agent Forwarding", "Key forwarding", "-A or ForwardAgent yes"],
+        ["Permissions", "File permissions", "chmod 600 private_key"],
+        ["Authentication", "Methods", "PublicKey, Password, KeyboardInteractive"]
+      ]
+    }
+  }
+]
