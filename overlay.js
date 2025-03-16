@@ -1,9 +1,5 @@
-let files = [];
-let wallpapers = [];
-let currentFileIndex = 0;
-let currentWallpaperIndex = 0;
-let stylesheetSets = [];
-let currentStylesheetSet = 0;
+import { NavigationManager } from './js/navigation.js';
+
 let isOnlineMode = false;
 let serverUrl = '';
 // Add variables for fade functionality
@@ -11,6 +7,9 @@ let fadeToggleEnabled = false;
 let fadeTimeout = null;
 let lastMouseMoveTime = 0;
 const FADE_DELAY = 40000; // 40 seconds
+
+// Create navigation manager instance
+const navigation = new NavigationManager();
 
 // Modified loadJSON to handle both modes
 async function loadJSON(path) {
@@ -90,17 +89,16 @@ function getAvailableWallpapers(pattern) {
 
 async function loadAllJSON(pattern) {
     if (Array.isArray(pattern)) {
-        // If pattern is array, use it directly as files list
-        files = pattern;
-        return files.length > 0 ? await loadJSON(files[0]) : null;
+        const files = pattern;
+        const firstFile = navigation.setFiles(files);
+        return files.length > 0 ? await loadJSON(firstFile) : null;
     }
     if (typeof pattern === 'string' && pattern.includes('*')) {
-        // Handle wildcard pattern
-        files = getAvailableFiles();
-        return files.length > 0 ? await loadJSON(files[0]) : null;
+        const files = getAvailableFiles();
+        const firstFile = navigation.setFiles(files);
+        return files.length > 0 ? await loadJSON(firstFile) : null;
     }
-    // Single file case
-    files = [pattern];
+    const firstFile = navigation.setFiles([pattern]);
     return await loadJSON(pattern);
 }
 
@@ -358,17 +356,16 @@ async function initializeContent() {
         }
         
         // Get stylesheet sets
-        stylesheetSets = Object.values(config.stylesheets);
-        if (stylesheetSets.length > 0) {
-            loadStylesheets(stylesheetSets[0]);
+        const stylesheetSet = navigation.setStylesheetSets(Object.values(config.stylesheets));
+        if (stylesheetSet) {
+            loadStylesheets(stylesheetSet);
         }
 
         // Scan for wallpapers using patterns
-        wallpapers = await scanWallpapers(config.wallpaper);
-        console.log('Found wallpapers:', wallpapers);
-        
-        if (wallpapers.length > 0) {
-            await setWallpaper(wallpapers[0]);
+        const scannedWallpapers = await scanWallpapers(config.wallpaper);
+        const currentWallpaper = navigation.setWallpapers(scannedWallpapers);
+        if (currentWallpaper) {
+            await setWallpaper(currentWallpaper);
         }
 
         // Load content from first file in config.content
@@ -423,9 +420,11 @@ async function scanWallpapers(patterns) {
     return Array.from(foundWallpapers).sort();
 }
 
+// Modified loadContent to use navigation manager
 function loadContent() {
-    if (files[currentFileIndex]) {
-        loadJSON(files[currentFileIndex])
+    const currentFile = navigation.getCurrentFile();
+    if (currentFile) {
+        loadJSON(currentFile)
             .then(content => {
                 const formattedContent = content.map(formatContent).join('');
                 document.getElementById("content").innerHTML = formattedContent;
@@ -436,12 +435,37 @@ function loadContent() {
 
 document.addEventListener("DOMContentLoaded", () => {
     initializeContent();
-    document.getElementById("prevBtn").addEventListener("click", () => navigateContent(-1));
-    document.getElementById("nextBtn").addEventListener("click", () => navigateContent(1));
-    document.getElementById("prevWallBtn").addEventListener("click", () => navigateWallpaper(-1));
-    document.getElementById("nextWallBtn").addEventListener("click", () => navigateWallpaper(1));
-    document.getElementById("prevStyleBtn").addEventListener("click", () => navigateStylesheet(-1));
-    document.getElementById("nextStyleBtn").addEventListener("click", () => navigateStylesheet(1));
+    
+    document.getElementById("prevBtn").addEventListener("click", () => {
+        navigation.navigateContent(-1);
+        loadContent();
+    });
+    
+    document.getElementById("nextBtn").addEventListener("click", () => {
+        navigation.navigateContent(1);
+        loadContent();
+    });
+    
+    document.getElementById("prevWallBtn").addEventListener("click", async () => {
+        const wallpaper = navigation.navigateWallpaper(-1);
+        if (wallpaper) await setWallpaper(wallpaper);
+    });
+    
+    document.getElementById("nextWallBtn").addEventListener("click", async () => {
+        const wallpaper = navigation.navigateWallpaper(1);
+        if (wallpaper) await setWallpaper(wallpaper);
+    });
+    
+    document.getElementById("prevStyleBtn").addEventListener("click", () => {
+        const stylesheet = navigation.navigateStylesheet(-1);
+        if (stylesheet) loadStylesheets(stylesheet);
+    });
+    
+    document.getElementById("nextStyleBtn").addEventListener("click", () => {
+        const stylesheet = navigation.navigateStylesheet(1);
+        if (stylesheet) loadStylesheets(stylesheet);
+    });
+    
     // Initialize fade toggle functionality
     initFadeToggle();
 });
