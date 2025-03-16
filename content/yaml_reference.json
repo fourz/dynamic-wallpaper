@@ -1,5 +1,9 @@
 [
   {
+    "style": "heading",
+    "title": "YAML Reference"
+  },
+  {
     "title": "Basic Syntax:",
     "table": {
       "headers": ["Concept", "Description", "Example"],

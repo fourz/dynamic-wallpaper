@@ -4,67 +4,132 @@
         "title": "How This System Was Made"
     },
     {
+        "title": "Architecture Overview",
+        "table": {
+            "headers": ["Component", "Description", "Implementation"],
+            "rows": [
+                ["State Management", "Centralized state container", "Pure JavaScript module with getters/setters"],
+                ["Content Engine", "Dynamic content loader", "Async/await with fetch API"],
+                ["Navigation System", "Content/theme cycling", "Event-driven with state persistence"],
+                ["Rendering Engine", "Content display system", "DOM manipulation with HTML templates"],
+                ["Theme Manager", "Dynamic styling system", "CSS variables with multiple stylesheets"]
+            ]
+        }
+    },
+    {
         "title": "Core Technologies",
         "table": {
-            "headers": ["Technology", "Purpose"],
+            "headers": ["Technology", "Purpose", "Implementation Details"],
             "rows": [
-                ["HTML5", "Basic structure and content display"],
-                ["JavaScript", "Dynamic content loading and rendering"],
-                ["CSS", "Responsive styling and visual themes"],
-                ["JSON", "Structured data storage format"],
-                ["Fetch API", "Asynchronous content loading"]
+                ["Vanilla JavaScript", "Core functionality", "ES6+ features, modules, async/await"],
+                ["HTML5", "Structure & content", "Semantic markup, custom data attributes"],
+                ["CSS3", "Styling & themes", "CSS variables, flex layout, media queries"],
+                ["JSON", "Data storage", "Modular content files, configuration"],
+                ["LocalStorage", "State persistence", "Cookie fallback for compatibility"]
             ]
         }
     },
     {
-        "title": "Development Approach",
+        "title": "Design Patterns",
         "table": {
-            "headers": ["Component", "Implementation"],
+            "headers": ["Pattern", "Usage", "Benefit"],
             "rows": [
-                ["Content Structure", "JSON-based modular design"],
-                ["Display Engine", "Pure JavaScript, no frameworks"],
-                ["Styling System", "CSS Variables for theming"],
-                ["File Organization", "Separate content from logic"],
-                ["Error Handling", "Detailed user feedback"]
-            ]
-        }
-    },
-    {
-        "title": "Design Decisions",
-        "table": {
-            "headers": ["Decision", "Rationale"],
-            "rows": [
-                ["No Dependencies", "Lightweight and portable"],
-                ["JSON Content", "Easy to edit and maintain"],
-                ["Local Files", "Works offline, no server needed"],
-                ["Responsive Layout", "Adapts to any screen size"],
-                ["Modular Design", "Easy to extend and modify"]
+                ["Module Pattern", "Code organization", "Encapsulation and dependency management"],
+                ["Observer Pattern", "Event handling", "Loose coupling between components"],
+                ["Factory Pattern", "Content creation", "Consistent object creation and validation"],
+                ["State Pattern", "App state management", "Centralized state control"],
+                ["Strategy Pattern", "Content rendering", "Flexible content display algorithms"]
             ]
         }
     },
     {
         "title": "Key Features",
         "table": {
-            "headers": ["Feature", "Benefit"],
+            "headers": ["Feature", "Implementation", "Benefit"],
             "rows": [
-                ["Dynamic Loading", "Change content without reload"],
-                ["Flexible Styling", "Multiple theme support"],
-                ["Error Recovery", "Helpful troubleshooting"],
-                ["Content Format", "Structured yet simple"],
-                ["Local First", "Works without internet"]
+                ["Offline Support", "Local file system + state storage", "Works without server/internet"],
+                ["Responsive Design", "CSS Grid + Flexbox", "Adapts to any screen size"],
+                ["Theme System", "Multiple stylesheet sets", "Customizable appearance"],
+                ["State Persistence", "LocalStorage + Cookies", "Remembers user preferences"],
+                ["Error Recovery", "Try/catch + user feedback", "Graceful error handling"]
             ]
         }
     },
     {
-        "title": "Future Improvements",
+        "title": "Development Process",
         "table": {
-            "headers": ["Area", "Potential Enhancement"],
+            "headers": ["Phase", "Activities", "Outcome"],
             "rows": [
-                ["Search", "Content search functionality"],
-                ["Navigation", "Keyboard shortcuts"],
-                ["Export", "PDF export capability"],
-                ["Categories", "Content categorization"],
-                ["Animations", "Smooth transitions"]
+                ["Planning", "Requirements analysis, Architecture design", "System blueprint"],
+                ["Implementation", "Core modules, Content system, UI", "Working prototype"],
+                ["Testing", "Cross-browser, Offline mode, Error cases", "Stable system"],
+                ["Optimization", "Code review, Performance tuning", "Enhanced performance"],
+                ["Documentation", "Code comments, Usage guides", "Maintainable codebase"]
+            ]
+        }
+    },
+    {
+        "title": "Future Roadmap",
+        "table": {
+            "headers": ["Feature", "Description", "Priority"],
+            "rows": [
+                ["Search System", "Full-text content search", "High"],
+                ["Keyboard Navigation", "Shortcut key support", "Medium"],
+                ["Content Categories", "Hierarchical organization", "Medium"],
+                ["Export Options", "PDF/HTML export", "Low"],
+                ["Custom Themes", "User-defined themes", "Low"]
+            ]
+        }
+    },
+    {
+        "title": "Content Generation Workflow",
+        "table": {
+            "headers": ["Stage", "Description", "Tools/Methods"],
+            "rows": [
+                ["Template Creation", "Design JSON structure templates", "Standard patterns for tables, lists, headings"],
+                ["Prompt Engineering", "Create reusable prompts", "Subject-specific prompt templates"],
+                ["LLM Generation", "Generate content via LLM", "GitHub Copilot, ChatGPT API"],
+                ["Post-Processing", "Format and validate JSON", "JSON validators, formatters"],
+                ["Integration", "Add to content collection", "Update config.json references"]
+            ]
+        }
+    },
+    {
+        "title": "LLM Prompt Templates",
+        "table": {
+            "headers": ["Template Type", "Purpose", "Example Pattern"],
+            "rows": [
+                ["Reference Guide", "Technical documentation", "\"Create a comprehensive reference for {technology} with sections for {aspects}\""],
+                ["Command Sheet", "CLI commands", "\"List essential {tool} commands with descriptions and examples\""],
+                ["Concept Guide", "Educational content", "\"Explain {topic} concepts with examples and use cases\""],
+                ["Quick Start", "Getting started guides", "\"Create a quick start guide for {technology} covering {requirements}\""],
+                ["Best Practices", "Guidelines and standards", "\"Compile best practices for {domain} with rationale\""]
+            ]
+        }
+    },
+    {
+        "title": "Content Structure Templates",
+        "table": {
+            "headers": ["Component", "JSON Structure", "Usage"],
+            "rows": [
+                ["Section Header", "{ \"style\": \"heading\", \"title\": \"...\" }", "Main topic headers"],
+                ["Command Table", "{ \"table\": { \"headers\": [\"Command\", \"Description\", \"Example\"] } }", "CLI references"],
+                ["Concept List", "{ \"list\": [\"item1\", \"item2\"] }", "Simple bullet points"],
+                ["Feature Matrix", "{ \"table\": { \"headers\": [\"Feature\", \"Details\", \"Support\"] } }", "Compatibility guides"],
+                ["Step Sequence", "{ \"numberedList\": [\"step1\", \"step2\"] }", "Procedural instructions"]
+            ]
+        }
+    },
+    {
+        "title": "Extension Strategy",
+        "table": {
+            "headers": ["Aspect", "Method", "Benefit"],
+            "rows": [
+                ["Content Addition", "Standardized JSON templates + LLM prompts", "Consistent format, rapid generation"],
+                ["Style Variants", "Modular stylesheet sets", "Flexible presentation options"],
+                ["Data Structure", "Composable JSON patterns", "Reusable content blocks"],
+                ["Theme Extension", "CSS variable system", "Easy visual customization"],
+                ["Format Evolution", "Version-tagged templates", "Backward compatibility"]
             ]
         }
     }

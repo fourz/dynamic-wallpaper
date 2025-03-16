@@ -243,7 +243,6 @@ async function initializeContent() {
         // Set page title if provided
         if (config.title) {
             document.title = config.title;
-            document.getElementById("title").textContent = config.title;
         }
         
         // Get stylesheet sets

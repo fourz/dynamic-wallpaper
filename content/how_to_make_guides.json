@@ -1,0 +1,69 @@
+[
+    {
+        "style": "heading",
+        "title": "How to Create Reference Guides"
+    },
+    {
+        "title": "Guide Structure",
+        "table": {
+            "headers": ["Component", "Description", "Required?"],
+            "rows": [
+                ["Heading", "Main title using style:heading", "Yes"],
+                ["Section Titles", "Descriptive section headers", "Yes"],
+                ["Tables", "Structured information in columns", "Primary format"],
+                ["Lists", "Unordered bullet points", "Optional"],
+                ["Numbered Lists", "Ordered step sequences", "Optional"]
+            ]
+        }
+    },
+    {
+        "title": "Standard Table Types",
+        "table": {
+            "headers": ["Type", "Headers Pattern", "Best For"],
+            "rows": [
+                ["Command Reference", "[Command, Description, Example]", "CLI tools, APIs"],
+                ["Concept Guide", "[Concept, Description, Example]", "Language features"],
+                ["Best Practices", "[Practice, Description, Rationale]", "Guidelines"],
+                ["Quick Reference", "[Syntax, Usage, Notes]", "Code snippets"],
+                ["Comparison", "[Feature, Details, Support]", "Tool comparisons"]
+            ]
+        }
+    },
+    {
+        "title": "Content Guidelines",
+        "list": [
+            "Keep examples concise and practical",
+            "Use consistent formatting across sections",
+            "Include essential information only",
+            "Order content from basic to advanced",
+            "Use clear, technical language",
+            "Follow established patterns in similar guides",
+            "Test content rendering in all style modes"
+        ]
+    },
+    {
+        "title": "Creation Workflow",
+        "numberedList": [
+            "Create new JSON file in content directory",
+            "Add heading with style:heading",
+            "Structure content in logical sections",
+            "Use appropriate table patterns",
+            "Add file to config.json content array",
+            "Test with all stylesheet variations",
+            "Verify navigation works correctly"
+        ]
+    },
+    {
+        "title": "LLM Prompt Strategy",
+        "table": {
+            "headers": ["Step", "Prompt Pattern", "Example"],
+            "rows": [
+                ["Define Scope", "\"Create a reference guide for {topic} covering {aspects}\"", "\"Create a reference guide for Git covering basic commands, branching, and remote operations\""],
+                ["Add Section", "\"Add a section about {feature} with {details}\"", "\"Add a section about array methods with common operations and examples\""],
+                ["Enhance Content", "\"Expand the {section} with more {aspect}\"", "\"Expand the Examples section with more practical use cases\""],
+                ["Format Check", "\"Verify JSON structure follows {template}\"", "\"Verify JSON structure follows standard guide format\""],
+                ["Final Review", "\"Review content for completeness and accuracy\"", "\"Review content for technical accuracy and formatting\""]
+            ]
+        }
+    }
+]
