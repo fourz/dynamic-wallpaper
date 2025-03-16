@@ -1,0 +1,78 @@
+[
+    {
+        "style": "heading",
+        "title": "Writing Software: Core Principles"
+    },
+    {
+        "title": "Software Development Foundations",
+        "table": {
+            "headers": ["Principle", "Core Concept", "Primary Goal"],
+            "rows": [
+                ["Code Organization", "Structure", "Maintainability"],
+                ["Testing Strategy", "Validation", "Reliability"],
+                ["Documentation", "Knowledge Sharing", "Accessibility"],
+                ["Version Control", "Code Management", "Collaboration"],
+                ["Code Review", "Quality Assurance", "Knowledge Transfer"]
+            ]
+        }
+    },
+    {
+        "title": "Code Organization Patterns",
+        "table": {
+            "headers": ["Pattern", "Purpose", "Benefits"],
+            "rows": [
+                ["SOLID Principles", "Design methodology", "Maintainable architecture"],
+                ["Design Patterns", "Common solutions", "Proven approaches"],
+                ["Clean Architecture", "Layer separation", "System flexibility"],
+                ["Module Structure", "Code grouping", "Logical organization"],
+                ["Naming Conventions", "Code clarity", "Self-documenting code"]
+            ]
+        }
+    },
+    {
+        "title": "Testing Strategy Implementation",
+        "table": {
+            "headers": ["Test Type", "Coverage Goal", "Tools/Methods"],
+            "rows": [
+                ["Unit Tests", "Core functionality", "xUnit frameworks"],
+                ["Integration Tests", "Component interaction", "API testing tools"],
+                ["E2E Tests", "User workflows", "Browser automation"],
+                ["Load Tests", "Performance limits", "Stress testing tools"],
+                ["Security Tests", "Vulnerability checks", "Static analysis"]
+            ]
+        }
+    },
+    {
+        "title": "Documentation Best Practices",
+        "table": {
+            "headers": ["Doc Type", "Content Focus", "Target Audience"],
+            "rows": [
+                ["API Docs", "Interface usage", "External developers"],
+                ["Code Comments", "Implementation details", "Maintenance team"],
+                ["README Files", "Project overview", "New contributors"],
+                ["Architecture Docs", "System design", "Technical leads"],
+                ["User Guides", "Feature usage", "End users"]
+            ]
+        }
+    },
+    {
+        "title": "Implementation Steps",
+        "list": [
+            "1. Start with a project README that outlines the basic setup and requirements",
+            "2. Implement SOLID principles in your initial architecture",
+            "3. Write tests before implementing new features (TDD approach)",
+            "4. Review and document code as you write it",
+            "5. Set up automated CI/CD pipelines early"
+        ]
+    },
+    {
+        "title": "Common Pitfalls to Avoid",
+        "list": [
+            "• Skipping documentation during rapid development",
+            "• Writing tests after implementation",
+            "• Ignoring code review feedback",
+            "• Postponing refactoring tasks",
+            "• Neglecting security considerations"
+        ]
+    }
+]

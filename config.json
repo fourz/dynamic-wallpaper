@@ -3,6 +3,8 @@
     "serverUrl": "https://localhost:8443",
     "title": "Reference Sheets",
     "content": [
+        "content/dynamic-wallpaper_config_guide.json",        
+        "content/dynamic-wallpaper_css_guide.json",        
         "content/ansible_reference.json",       
         "content/azure_reference.json",        
         "content/github_guide.json",
@@ -10,10 +12,13 @@
         "content/java_reference.json", 
         "content/json_reference.json",
         "content/raspbian_reference.json",
+        "content/devops_practices.json",
+        "content/learning_languages_guide.json",
+        "content/writing_software_guide.json",        
         "content/ssh_reference.json",
         "content/ssl_reference.json",
-        "content/ubuntu_reference.json",
         "content/bootstrap_reference.json",
+        "content/stay_organized_adhd_guide.json",
         "content/css_guide.json",        
         "content/javascript_reference.json",        
         "content/mssql_reference.json",
@@ -22,13 +27,13 @@
         "content/git_reference.json",
         "content/networking_basics.json",
         "content/networking_overview.json",
+        "content/powershell_reference.json",
         "content/regex_reference.json", 
         "content/visual_studio_code_reference.json",               
         "content/yaml_reference.json",        
         "content/how_to_use_this_guide.json",        
         "content/how_to_make_guides.json",
         "content/how_this_was_made_summary.json"
-
     ],
     "wallpaper": [
         "images/wallpaper/VALLEY_BAY_DOUBLE.jpg",

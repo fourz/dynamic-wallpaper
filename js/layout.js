@@ -125,11 +125,16 @@ export class LayoutManager {
 
     checkFadeContent() {
         const contentDiv = document.getElementById('content');
+        const buttons = document.querySelectorAll('.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn');
         const now = Date.now();
         
         if (now - this.lastMouseMoveTime >= this.FADE_DELAY) {
             contentDiv.classList.add('fading');
             contentDiv.style.opacity = '0.3';
+            buttons.forEach(btn => {
+                btn.classList.add('fading');
+                btn.style.opacity = '0.3';
+            });
         }
         
         this.scheduleFadeCheck();
@@ -144,7 +149,12 @@ export class LayoutManager {
 
     restoreContentOpacity() {
         const contentDiv = document.getElementById('content');
+        const buttons = document.querySelectorAll('.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn');
         contentDiv.classList.add('fading');
         contentDiv.style.opacity = '1';
+        buttons.forEach(btn => {
+            btn.classList.add('fading');
+            btn.style.opacity = '1';
+        });
     }
 }

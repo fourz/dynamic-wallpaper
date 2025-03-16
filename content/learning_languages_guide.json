@@ -1,0 +1,117 @@
+[
+    {
+        "style": "heading",
+        "title": "Learning Programming Languages: Strategic Guide"
+    },
+    {
+        "title": "Language Learning Framework",
+        "table": {
+            "headers": ["Component", "Learning Focus", "Core Concept"],
+            "rows": [
+                ["Syntax Fundamentals", "Basic Structure", "Language Building Blocks"],
+                ["Paradigm Understanding", "Programming Model", "Thought Process"],
+                ["Tooling Ecosystem", "Development Environment", "Supporting Tools"],
+                ["Practice Projects", "Applied Learning", "Hands-on Experience"],
+                ["Community Resources", "Knowledge Sources", "Learning Support"]
+            ]
+        }
+    },
+    {
+        "title": "Syntax Fundamentals Deep Dive",
+        "table": {
+            "headers": ["Topic", "Description", "Priority"],
+            "rows": [
+                ["Variables & Types", "Data storage and type systems", "High"],
+                ["Control Structures", "Loops, conditionals, and flow control", "High"],
+                ["Functions", "Declaration, parameters, return values", "High"],
+                ["Error Handling", "Try-catch blocks and error patterns", "Medium"],
+                ["Operators", "Arithmetic, logical, and comparison", "Medium"]
+            ]
+        }
+    },
+    {
+        "title": "Paradigm Understanding Details",
+        "table": {
+            "headers": ["Concept", "Application", "Example"],
+            "rows": [
+                ["OOP", "Object-oriented design patterns", "Classes & inheritance"],
+                ["Functional", "Pure functions and immutability", "Map & reduce operations"],
+                ["Procedural", "Sequential execution flow", "Top-down programming"],
+                ["Event-Driven", "Response to triggers", "UI event handling"],
+                ["Concurrent", "Parallel execution patterns", "Async/await usage"]
+            ]
+        }
+    },
+    {
+        "title": "Essential Tooling",
+        "table": {
+            "headers": ["Tool Type", "Purpose", "Common Examples"],
+            "rows": [
+                ["IDE/Editor", "Code writing environment", "VS Code, IntelliJ"],
+                ["Package Manager", "Dependency handling", "npm, pip, cargo"],
+                ["Debugger", "Error investigation", "Chrome DevTools, gdb"],
+                ["Linter", "Code quality checks", "ESLint, pylint"],
+                ["Build Tools", "Project compilation", "webpack, make"]
+            ]
+        }
+    },
+    {
+        "title": "Project Portfolio",
+        "table": {
+            "headers": ["Project Type", "Skills Demonstrated", "Complexity"],
+            "rows": [
+                ["CLI Tool", "I/O and argument parsing", "Beginner"],
+                ["API Service", "Network and data handling", "Intermediate"],
+                ["Data Analysis", "Processing and algorithms", "Intermediate"],
+                ["UI Application", "User interface design", "Advanced"],
+                ["System Tool", "OS integration", "Advanced"]
+            ]
+        }
+    },
+    {
+        "title": "Development Best Practices",
+        "table": {
+            "headers": ["Practice", "Implementation", "Impact"],
+            "rows": [
+                ["Version Control", "Git workflow usage", "Code management"],
+                ["Code Reviews", "Peer review process", "Quality assurance"],
+                ["CI/CD", "Automated pipelines", "Reliable delivery"],
+                ["Documentation", "Inline and external docs", "Knowledge sharing"],
+                ["Testing", "TDD/BDD approach", "Code reliability"]
+            ]
+        }
+    },
+    {
+        "title": "Problem Solving Patterns",
+        "table": {
+            "headers": ["Pattern", "Use Case", "Example"],
+            "rows": [
+                ["Divide & Conquer", "Complex problems", "Binary search"],
+                ["Iterative", "Sequential processing", "Loop operations"],
+                ["Recursive", "Tree structures", "Directory scanning"],
+                ["State Machine", "Workflow management", "Game logic"],
+                ["Observer", "Event handling", "UI updates"]
+            ]
+        }
+    },
+    {
+        "title": "Learning Path Steps",
+        "list": [
+            "1. Master language syntax through interactive tutorials",
+            "2. Build 3 small projects to apply basic concepts",
+            "3. Study and implement common design patterns",
+            "4. Contribute to open source projects",
+            "5. Create a complex project using advanced features"
+        ]
+    },
+    {
+        "title": "Daily Practice Routine",
+        "list": [
+            "1. Read documentation for 30 minutes",
+            "2. Solve one coding challenge",
+            "3. Review others' code on GitHub",
+            "4. Write or improve tests",
+            "5. Refactor previous day's code"
+        ]
+    }
+]

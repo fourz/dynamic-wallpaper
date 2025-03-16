@@ -1,0 +1,123 @@
+[
+    {
+        "style": "heading",
+        "title": "DevOps Practices: Essential Guide"
+    },
+    {
+        "title": "Core DevOps Pillars",
+        "table": {
+            "headers": ["Practice", "Focus Area", "Key Principle"],
+            "rows": [
+                ["Continuous Integration", "Code Integration", "Early Detection"],
+                ["Continuous Delivery", "Release Process", "Automation First"],
+                ["Infrastructure as Code", "Environment Management", "Version Control"],
+                ["Monitoring", "System Health", "Proactive Response"],
+                ["Collaboration", "Team Integration", "Shared Responsibility"]
+            ]
+        }
+    },
+    {
+        "title": "CD Pipeline Stages",
+        "table": {
+            "headers": ["Stage", "Activities", "Success Criteria"],
+            "rows": [
+                ["Build", "Compilation, packaging", "Zero build errors"],
+                ["Test", "Automated testing", "100% pass rate"],
+                ["Stage", "Environment deployment", "No deployment fails"],
+                ["Validate", "Integration checks", "System stability"],
+                ["Release", "Production deployment", "Zero downtime"]
+            ]
+        }
+    },    
+    {
+        "title": "CI Implementation Details",
+        "table": {
+            "headers": ["Component", "Purpose", "Tools"],
+            "rows": [
+                ["Build Automation", "Continuous Integration", "GitHub Actions, Azure Pipelines"],
+                ["Code Quality", "Standard enforcement", "Azure DevOps, SonarCloud"],
+                ["Issue Tracking", "Work management", "Jira Software Cloud"],
+                ["Security Scanning", "Vulnerability detection", "GitHub Advanced Security, Azure Defender"],
+                ["Artifact Storage", "Package management", "Azure Artifacts, GitHub Packages"]
+            ]
+        }
+    },
+    {
+        "title": "Infrastructure Management",
+        "table": {
+            "headers": ["Aspect", "Implementation", "Tools"],
+            "rows": [
+                ["VM Management", "Hyperconverged infrastructure", "Nutanix AHV, Azure VM"],
+                ["Container Platform", "Container orchestration", "Azure Kubernetes Service (AKS)"],
+                ["Network Management", "SD-WAN deployment", "Cisco SD-WAN, Meraki"],
+                ["Backup Solution", "Data protection", "Cohesity DataProtect"],
+                ["Config Management", "Infrastructure automation", "Ansible Tower, Azure Automation"]
+            ]
+        }
+    },
+    {
+        "title": "Monitoring Framework",
+        "table": {
+            "headers": ["Category", "Metrics", "Tools"],
+            "rows": [
+                ["Performance", "Response times, throughput", "Prometheus"],
+                ["Availability", "Uptime, error rates", "Grafana"],
+                ["Security", "Access patterns, threats", "ELK Stack"],
+                ["Cost", "Resource usage, billing", "CloudWatch"],
+                ["User Experience", "Session data, errors", "New Relic"]
+            ]
+        }
+    },
+    {
+        "title": "Common DevOps Tools",
+        "table": {
+            "headers": ["Tool", "Category", "Use Case"],
+            "rows": [
+                ["Jenkins", "CI/CD", "Automated build and deploy"],
+                ["Terraform", "Infrastructure", "Multi-cloud provisioning"],
+                ["Prometheus", "Monitoring", "Metric collection and alerting"],
+                ["Docker", "Containers", "App packaging and deployment"],
+                ["Ansible", "Automation", "Configuration management"]
+            ]
+        }
+    },
+    {
+        "title": "DevOps Implementation Steps",
+        "list": [
+            "1. Set up Azure DevOps or GitHub organization structure",
+            "2. Configure Jira-GitHub integration for issue tracking",
+            "3. Implement AKS clusters with Ansible automation",
+            "4. Deploy Cohesity backup policies for data protection"
+        ]
+    },
+    {
+        "title": "Best Practices Checklist",
+        "list": [
+            "• Automate repetitive tasks",
+            "• Use infrastructure as code for all environments",
+            "• Implement comprehensive monitoring",
+            "• Practice continuous security scanning",
+            "• Maintain detailed documentation"
+        ]
+    },
+    {
+        "title": "GitHub Workflow Steps",
+        "list": [
+            "1. Configure branch protection rules (require reviews, status checks)",
+            "2. Set up GitHub Actions workflow (.github/workflows/ci.yml)",
+            "3. Enable Dependabot security updates",
+            "4. Configure environment secrets and variables",
+            "5. Set up deployment environments (staging/production)"
+        ]
+    },
+    {
+        "title": "Jira Integration Guide",
+        "list": [
+            "• Link GitHub commits using [Dev-123] format",
+            "• Configure GitHub-Jira app for automatic issue transitions",
+            "• Use smart commits for workflow automation",
+            "• Set up Jira deployment notifications",
+            "• Track development progress in Jira dashboards"
+        ]
+    }
+]

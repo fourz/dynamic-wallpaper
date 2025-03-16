@@ -31,7 +31,6 @@ Originally designed as a simple wallpaper app, Dynamic Wallpaper has evolved int
 - **Customizable Settings:** Flexible configuration options
 - **Enhanced Logging:** Detailed error tracking
 - **LLM Documentation:** Self-documenting workflows
-- **Reference Library:** Extensible knowledge storage
 
 ## Installation
 
