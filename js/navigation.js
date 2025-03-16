@@ -78,4 +78,17 @@ export class NavigationManager {
         if (state.currentWallpaperIndex !== undefined) this.currentWallpaperIndex = state.currentWallpaperIndex;
         if (state.currentStylesheetSet !== undefined) this.currentStylesheetSet = state.currentStylesheetSet;
     }
+
+    handleKeyPress(event) {
+        switch (event.key) {
+            case 'ArrowLeft': return this.navigateContent(-1);
+            case 'ArrowRight': return this.navigateContent(1);
+            case 'ArrowUp': return this.navigateStylesheet(1);
+            case 'ArrowDown': return this.navigateStylesheet(-1);
+            case '+': return this.navigateWallpaper(1);
+            case '-': return this.navigateWallpaper(-1);
+            case ' ': return this.navigateContent(1);
+        }
+        return null;
+    }
 }

@@ -16,6 +16,22 @@ const config = new ConfigManager();
 const layout = new LayoutManager();
 const content = new ContentManager(storage, navigation, config, layout);
 
+// Fix: Update keyboard event listeners using correct navigation instance
+document.addEventListener('keydown', (event) => {
+    const result = navigation.handleKeyPress(event);
+    if (result !== null) {
+        event.preventDefault();
+        content.updateContent();
+    }
+});
+
+// Fix: Move space prevention to document level
+document.addEventListener('keypress', (event) => {
+    if (event.key === ' ') {
+        event.preventDefault();
+    }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     content.initialize();
     
