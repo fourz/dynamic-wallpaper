@@ -80,14 +80,38 @@ export class NavigationManager {
     }
 
     handleKeyPress(event) {
+        // Don't process modified key presses (like Ctrl+Arrow)
+        if (event.ctrlKey || event.altKey || event.metaKey) {
+            return null;
+        }
+        
         switch (event.key) {
-            case 'ArrowLeft': return this.navigateContent(-1);
-            case 'ArrowRight': return this.navigateContent(1);
-            case 'ArrowUp': return this.navigateStylesheet(1);
-            case 'ArrowDown': return this.navigateStylesheet(-1);
-            case '+': return this.navigateWallpaper(1);
-            case '-': return this.navigateWallpaper(-1);
-            case ' ': return this.navigateContent(1);
+            case 'ArrowLeft': 
+                return this.navigateContent(-1);
+            case 'ArrowRight': 
+                return this.navigateContent(1);
+            case 'ArrowUp': 
+                return this.navigateStylesheet(1);
+            case 'ArrowDown': 
+                return this.navigateStylesheet(-1);
+            case '+': 
+            case '=': // Many keyboards require Shift for +, so = works too
+                return this.navigateWallpaper(1);
+            case '-': 
+            case '_': // Similarly for minus
+                return this.navigateWallpaper(-1);
+            case ' ': 
+                return this.navigateContent(1);
+            case 'PageUp':
+                return this.navigateContent(-1);
+            case 'PageDown':
+                return this.navigateContent(1);
+            case 'Home':
+                this.currentFileIndex = 0;
+                return this.getCurrentFile();
+            case 'End':
+                this.currentFileIndex = this.files.length - 1;
+                return this.getCurrentFile();
         }
         return null;
     }

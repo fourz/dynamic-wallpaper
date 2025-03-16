@@ -106,12 +106,15 @@ export class LayoutManager {
 
     startFadeMonitoring() {
         this.lastMouseMoveTime = Date.now();
-        document.addEventListener('mousemove', () => this.handleMouseMove());
+        // Bind the handler properly and store the reference
+        this.boundHandleMouseMove = this.handleMouseMove.bind(this);
+        document.addEventListener('mousemove', this.boundHandleMouseMove);
         this.scheduleFadeCheck();
     }
 
     stopFadeMonitoring() {
-        document.removeEventListener('mousemove', () => this.handleMouseMove());
+        // Remove the event listener using the stored reference
+        document.removeEventListener('mousemove', this.boundHandleMouseMove);
         if (this.fadeTimeout) {
             clearTimeout(this.fadeTimeout);
             this.fadeTimeout = null;
@@ -150,10 +153,11 @@ export class LayoutManager {
     restoreContentOpacity() {
         const contentDiv = document.getElementById('content');
         const buttons = document.querySelectorAll('.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn');
-        contentDiv.classList.add('fading');
+        // Remove the fading class instead of adding it
+        contentDiv.classList.remove('fading');
         contentDiv.style.opacity = '1';
         buttons.forEach(btn => {
-            btn.classList.add('fading');
+            btn.classList.remove('fading');
             btn.style.opacity = '1';
         });
     }
