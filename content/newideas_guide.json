@@ -1,0 +1,68 @@
+[
+    {
+        "style": "heading",
+        "title": "Content Card Ideas Guide"
+    },
+    {
+        "title": "Technical Reference Cards",
+        "table": {
+            "headers": ["Topic", "Content Type", "Example"],
+            "rows": [
+                ["Language Syntax", "Quick Reference", "JavaScript array methods"],
+                ["Design Patterns", "Code Examples", "Factory pattern implementation"],
+                ["CLI Commands", "Command List", "Docker container management"],
+                ["Algorithm Basics", "Pseudocode", "Sorting algorithms overview"],
+                ["API References", "Endpoint List", "REST API conventions"]
+            ]
+        }
+    },
+    {
+        "title": "Learning Resources",
+        "table": {
+            "headers": ["Type", "Format", "Topics"],
+            "rows": [
+                ["Study Guides", "Structured Lists", "CS fundamentals"],
+                ["Cheat Sheets", "Quick Reference", "RegEx patterns"],
+                ["Best Practices", "Guidelines", "Code review checklist"],
+                ["Learning Paths", "Step-by-Step", "Web development roadmap"],
+                ["Tool Guides", "Setup Steps", "Development environment"]
+            ]
+        }
+    },
+    {
+        "title": "Project Ideas",
+        "numberedList": [
+            "Personal Portfolio Template",
+            "System Architecture Diagrams",
+            "Code Quality Metrics Guide",
+            "Performance Optimization Tips",
+            "Security Best Practices"
+        ]
+    },
+    {
+        "title": "Workflow Guides",
+        "table": {
+            "headers": ["Category", "Focus", "Example"],
+            "rows": [
+                ["DevOps", "Pipeline Setup", "CI/CD workflow steps"],
+                ["Testing", "Test Strategies", "Unit testing patterns"],
+                ["Documentation", "Doc Standards", "API documentation"],
+                ["Deployment", "Release Process", "Production checklist"],
+                ["Monitoring", "System Health", "Logging practices"]
+            ]
+        }
+    },
+    {
+        "title": "Soft Skills",
+        "table": {
+            "headers": ["Skill", "Application", "Benefits"],
+            "rows": [
+                ["Code Review", "Review Process", "Better code quality"],
+                ["Team Communication", "Meeting Tips", "Clear collaboration"],
+                ["Time Management", "Planning Tools", "Project efficiency"],
+                ["Problem Solving", "Debug Strategy", "Quick resolution"],
+                ["Knowledge Sharing", "Documentation", "Team growth"]
+            ]
+        }
+    }
+]

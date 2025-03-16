@@ -34,7 +34,8 @@
         "content/yaml_reference.json",        
         "content/how_to_use_this_guide.json",        
         "content/how_to_make_guides.json",
-        "content/how_this_was_made_summary.json"
+        "content/how_this_was_made_summary.json",
+        "content/newideas_guide.json"
     ],
     "wallpaper": [
         "images/wallpaper/VALLEY_BAY_DOUBLE.jpg",

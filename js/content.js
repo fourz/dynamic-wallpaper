@@ -75,10 +75,53 @@ export class ContentManager {
         }
     }
 
+    formatLinks(text) {
+        // URL regex pattern that matches http, https, and www URLs
+        const urlPattern = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
+        return text.replace(urlPattern, url => {
+            const fullUrl = url.startsWith('www.') ? 'http://' + url : url;
+            return `<a href="${fullUrl}" target="_blank" class="content-link" rel="noopener noreferrer">${url}</a>`;
+        });
+    }
+
     async initializeContent(configData) {
         const content = await this.storage.loadAllJSON(configData.content, this.navigation);
         if (content) {
-            const formattedContent = content.map((item) => this.layout.formatContent(item)).join('');
+            const formattedContent = content.map(item => {
+                // Process the item's text content to detect and format links
+                if (item.block) {
+                    item.block = item.block.map(text => this.formatLinks(text));
+                }
+                if (item.list) {
+                    item.list = item.list.map(text => this.formatLinks(text));
+                }
+                if (item.numberedList) {
+                    item.numberedList = item.numberedList.map(text => this.formatLinks(text));
+                }
+                if (item.table) {
+                    item.table.rows = item.table.rows.map(row => 
+                        row.map(cell => this.formatLinks(cell))
+                    );
+                }
+                return this.layout.formatContent(item);
+            }).join('');
+            
+            const styleElement = document.createElement('style');
+            styleElement.textContent = `
+                .content-link {
+                    color: #ffffff;
+                    text-decoration: underline;
+                    text-decoration-thickness: 1px;
+                }
+                .content-link:visited {
+                    color: #ffffff;
+                }
+                .content-link:hover {
+                    text-decoration-thickness: 2px;
+                }
+            `;
+            document.head.appendChild(styleElement);
+            
             document.getElementById("content").innerHTML = formattedContent;
         } else {
             document.getElementById("content").innerHTML = '<p>No content files found</p>';
