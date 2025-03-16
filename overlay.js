@@ -15,96 +15,11 @@ let fadeTimeout = null;
 let lastMouseMoveTime = 0;
 const FADE_DELAY = 40000;
 
-// Modified loadJSON to handle both modes
-async function loadJSON(path) {
-    try {
-        const fullPath = isOnlineMode ? `${serverUrl}/${path}` : path;
-        const response = await fetch(fullPath);
-        const data = await response.text();
-        return JSON.parse(data);
-    } catch (error) {
-        console.error(`Failed to load ${path}`, error);
-        document.getElementById("content").innerText = 
-            `Error loading ${path}. Choose a solution below based on your browser:\n\n` +
-            `1. Run a local server (Recommended):\n` +
-            `   - Open terminal in this folder\n` +
-            `   - Run: python -m http.server 8000\n` +
-            `   - Open: http://localhost:8000\n\n` +
-            `2. Chrome/Edge:\n` +
-            `   - Create shortcut to Chrome/Edge\n` +
-            `   - Add flag: --allow-file-access-from-files\n` +
-            `   - Right-click → Properties → Target:\n` +
-            `   "C:\\Path\\chrome.exe" --allow-file-access-from-files\n\n` +
-            `3. Firefox:\n` +
-            `   - Type about:config in address bar\n` +
-            `   - Search: privacy.file_unique_origin\n` +
-            `   - Set to false\n\n` +
-            `4. VS Code:\n` +
-            `   - Install "Live Server" extension\n` +
-            `   - Right-click HTML file → Open with Live Server\n\n` +
-            `5. Node.js:\n` +
-            `   - Install: npm install -g http-server\n` +
-            `   - Run: http-server\n` +
-            `   - Open: http://localhost:8080`;
-        throw error;
-    }
-}
-
-function getAvailableFiles() {
-    return [
-        'content/java_reference.json',
-        'content/css_guide.json',
-        'content/bootstrap_reference.json'
-    ];
-}
-
-function getAvailableWallpapers(pattern) {
-    // Handle array of patterns
-    if (Array.isArray(pattern)) {
-        return pattern;
-    }
-    
-    // Handle single pattern
-    if (typeof pattern === 'string') {
-        if (pattern.includes('*')) {
-            const extension = pattern.split('*.')[1];
-            // Return hardcoded list for now - in production this would be generated
-            const wallpapers = [
-                `images/wallpaper/wallpaper1.${extension}`,
-                `images/wallpaper/wallpaper2.${extension}`,
-                `images/wallpaper/wallpaper3.${extension}`
-            ];
-            return wallpapers.filter(w => {
-                try {
-                    // Test if file exists by creating an image object
-                    const img = new Image();
-                    img.src = w;
-                    return true;
-                } catch {
-                    return false;
-                }
-            });
-        }
-        return [pattern];
-    }
-    
-    return [];
-}
-
-async function loadAllJSON(pattern) {
-    if (Array.isArray(pattern)) {
-        const files = pattern;
-        const firstFile = navigation.setFiles(files);
-        return files.length > 0 ? await loadJSON(firstFile) : null;
-    }
-    if (typeof pattern === 'string' && pattern.includes('*')) {
-        const files = getAvailableFiles();
-        const firstFile = navigation.setFiles(files);
-        return files.length > 0 ? await loadJSON(firstFile) : null;
-    }
-    const firstFile = navigation.setFiles([pattern]);
-    return await loadJSON(pattern);
-}
+// Remove these functions as they are now in StorageManager:
+// - loadJSON
+// - getAvailableFiles
+// - getAvailableWallpapers
+// - loadAllJSON
 
 function navigateContent(direction) {
     currentFileIndex = (currentFileIndex + direction + files.length) % files.length;
@@ -304,19 +219,23 @@ function restoreContentOpacity() {
 // Update initializeContent to use ConfigManager
 async function initializeContent() {
     try {
-        const configData = await loadJSON('config.json');
+        const configData = await storage.loadJSON('config.json');
         
         if (configData.mode === 'detect') {
             try {
                 const response = await fetch(`${configData.serverUrl}/config.json`);
-                config.setOnlineMode(response.ok);
+                isOnlineMode = response.ok;
             } catch (error) {
-                config.setOnlineMode(false);
+                isOnlineMode = false;
             }
         } else {
-            config.setOnlineMode(configData.mode === 'online');
+            isOnlineMode = configData.mode === 'online';
         }
         
+        // Update both storage and config managers
+        storage.setOnlineMode(isOnlineMode);
+        storage.setServerUrl(configData.serverUrl || '');
+        config.setOnlineMode(isOnlineMode);
         config.setServerUrl(configData.serverUrl || '');
         config.setFormatContentFunction(formatContent);
         
@@ -338,7 +257,7 @@ async function initializeContent() {
             await config.setWallpaper(currentWallpaper);
         }
 
-        const content = await loadAllJSON(configData.content);
+        const content = await storage.loadAllJSON(configData.content, navigation);
         if (content) {
             const formattedContent = content.map(formatContent).join('');
             document.getElementById("content").innerHTML = formattedContent;
@@ -359,15 +278,15 @@ document.addEventListener("DOMContentLoaded", () => {
         storage.setNavigationState(navigation.getState());
     };
     
-    document.getElementById("prevBtn").addEventListener("click", () => {
-        navigation.navigateContent(-1);
-        config.loadContent(navigation.getCurrentFile(), loadJSON);
+    document.getElementById("prevBtn").addEventListener("click", async () => {
+        const currentFile = navigation.navigateContent(-1);
+        config.loadContent(currentFile, (path) => storage.loadJSON(path));
         storage.setNavigationState(navigation.getState());
     });
     
-    document.getElementById("nextBtn").addEventListener("click", () => {
-        navigation.navigateContent(1);
-        config.loadContent(navigation.getCurrentFile(), loadJSON);
+    document.getElementById("nextBtn").addEventListener("click", async () => {
+        const currentFile = navigation.navigateContent(1);
+        config.loadContent(currentFile, (path) => storage.loadJSON(path));
         storage.setNavigationState(navigation.getState());
     });
     

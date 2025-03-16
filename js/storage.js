@@ -1,6 +1,8 @@
 export class StorageManager {
     constructor() {
         this.storage = window.localStorage;
+        this.isOnlineMode = false;
+        this.serverUrl = '';
     }
 
     // Fade state management
@@ -37,5 +39,102 @@ export class StorageManager {
     // Clear all stored data
     clearAll() {
         this.storage.clear();
+    }
+
+    setOnlineMode(mode) {
+        this.isOnlineMode = mode;
+    }
+
+    setServerUrl(url) {
+        this.serverUrl = url;
+    }
+
+    getAvailableFiles() {
+        return [
+            'content/java_reference.json',
+            'content/css_guide.json',
+            'content/bootstrap_reference.json'
+        ];
+    }
+
+    getAvailableWallpapers(pattern) {
+        if (Array.isArray(pattern)) {
+            return pattern;
+        }
+        
+        if (typeof pattern === 'string') {
+            if (pattern.includes('*')) {
+                const extension = pattern.split('*.')[1];
+                const wallpapers = [
+                    `images/wallpaper/wallpaper1.${extension}`,
+                    `images/wallpaper/wallpaper2.${extension}`,
+                    `images/wallpaper/wallpaper3.${extension}`
+                ];
+                return wallpapers.filter(w => {
+                    try {
+                        const img = new Image();
+                        img.src = w;
+                        return true;
+                    } catch {
+                        return false;
+                    }
+                });
+            }
+            return [pattern];
+        }
+        return [];
+    }
+
+    async loadJSON(path) {
+        try {
+            const fullPath = this.isOnlineMode ? `${this.serverUrl}/${path}` : path;
+            const response = await fetch(fullPath);
+            const data = await response.text();
+            return JSON.parse(data);
+        } catch (error) {
+            console.error(`Failed to load ${path}`, error);
+            const errorMessage = this.getErrorMessage(path);
+            document.getElementById("content").innerText = errorMessage;
+            throw error;
+        }
+    }
+
+    async loadAllJSON(pattern, navigation) {
+        if (Array.isArray(pattern)) {
+            const files = pattern;
+            const firstFile = navigation.setFiles(files);
+            return files.length > 0 ? await this.loadJSON(firstFile) : null;
+        }
+        if (typeof pattern === 'string' && pattern.includes('*')) {
+            const files = this.getAvailableFiles();
+            const firstFile = navigation.setFiles(files);
+            return files.length > 0 ? await this.loadJSON(firstFile) : null;
+        }
+        const firstFile = navigation.setFiles([pattern]);
+        return await this.loadJSON(pattern);
+    }
+
+    getErrorMessage(path) {
+        return `Error loading ${path}. Choose a solution below based on your browser:\n\n` +
+            `1. Run a local server (Recommended):\n` +
+            `   - Open terminal in this folder\n` +
+            `   - Run: python -m http.server 8000\n` +
+            `   - Open: http://localhost:8000\n\n` +
+            `2. Chrome/Edge:\n` +
+            `   - Create shortcut to Chrome/Edge\n` +
+            `   - Add flag: --allow-file-access-from-files\n` +
+            `   - Right-click → Properties → Target:\n` +
+            `   "C:\\Path\\chrome.exe" --allow-file-access-from-files\n\n` +
+            `3. Firefox:\n` +
+            `   - Type about:config in address bar\n` +
+            `   - Search: privacy.file_unique_origin\n` +
+            `   - Set to false\n\n` +
+            `4. VS Code:\n` +
+            `   - Install "Live Server" extension\n` +
+            `   - Right-click HTML file → Open with Live Server\n\n` +
+            `5. Node.js:\n` +
+            `   - Install: npm install -g http-server\n` +
+            `   - Run: http-server\n` +
+            `   - Open: http://localhost:8080`;
     }
 }
