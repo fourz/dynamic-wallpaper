@@ -121,7 +121,6 @@ button {
     color: white;
     cursor: pointer;
     border-radius: 4px;
-    font-size: 11pt;
 }
 
 /* Navigation Controls - Match Default Theme
@@ -139,6 +138,39 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+}
+
+/* Add fade toggle button styles */
+.fade-toggle-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.fade-toggle-btn.active {
+    background: rgba(0, 180, 0, 0.6);
+}
+
+.fade-toggle-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.fade-toggle-btn.active:hover {
+    background: rgba(0, 150, 0, 0.8);
+}
+
+/* Content fading classes */
+.overlay.fading {
+    transition: opacity 2s ease-in-out;
 }
 
 .wall-btn, .style-btn {

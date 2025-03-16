@@ -6,6 +6,11 @@ let stylesheetSets = [];
 let currentStylesheetSet = 0;
 let isOnlineMode = false;
 let serverUrl = '';
+// Add variables for fade functionality
+let fadeToggleEnabled = false;
+let fadeTimeout = null;
+let lastMouseMoveTime = 0;
+const FADE_DELAY = 40000; // 40 seconds
 
 // Modified loadJSON to handle both modes
 async function loadJSON(path) {
@@ -229,6 +234,103 @@ function loadStylesheets(stylesheets) {
     });
 }
 
+// Initialize fade toggle state from localStorage
+function initFadeToggle() {
+    // Load fade toggle state from localStorage
+    fadeToggleEnabled = localStorage.getItem('fadeToggleEnabled') === 'true';
+    const fadeToggleBtn = document.getElementById('fadeToggleBtn');
+    
+    // Set initial button state
+    if (fadeToggleEnabled) {
+        fadeToggleBtn.classList.add('active');
+        startFadeMonitoring();
+    }
+    
+    // Add event listener for toggle button
+    fadeToggleBtn.addEventListener('click', toggleFade);
+}
+
+// Toggle fade functionality on/off
+function toggleFade() {
+    fadeToggleEnabled = !fadeToggleEnabled;
+    
+    // Save state to localStorage
+    localStorage.setItem('fadeToggleEnabled', fadeToggleEnabled);
+    
+    // Update button appearance
+    const fadeToggleBtn = document.getElementById('fadeToggleBtn');
+    if (fadeToggleEnabled) {
+        fadeToggleBtn.classList.add('active');
+        startFadeMonitoring();
+    } else {
+        fadeToggleBtn.classList.remove('active');
+        stopFadeMonitoring();
+        restoreContentOpacity();
+    }
+}
+
+// Start monitoring for inactivity
+function startFadeMonitoring() {
+    // Reset last mouse move time
+    lastMouseMoveTime = Date.now();
+    
+    // Set up mouse move listener
+    document.addEventListener('mousemove', handleMouseMove);
+    
+    // Set initial fade timeout
+    scheduleFadeCheck();
+}
+
+// Stop monitoring for inactivity
+function stopFadeMonitoring() {
+    // Remove mouse move listener
+    document.removeEventListener('mousemove', handleMouseMove);
+    
+    // Clear any pending timeout
+    if (fadeTimeout) {
+        clearTimeout(fadeTimeout);
+        fadeTimeout = null;
+    }
+}
+
+// Handle mouse movement
+function handleMouseMove() {
+    lastMouseMoveTime = Date.now();
+    restoreContentOpacity();
+}
+
+// Check if content should be faded
+function checkFadeContent() {
+    const contentDiv = document.getElementById('content');
+    const now = Date.now();
+    
+    if (now - lastMouseMoveTime >= FADE_DELAY) {
+        // Add transition class for smooth fading
+        contentDiv.classList.add('fading');
+        // Set opacity to 30%
+        contentDiv.style.opacity = '0.3';
+    }
+    
+    // Schedule next check
+    scheduleFadeCheck();
+}
+
+// Schedule the next fade check
+function scheduleFadeCheck() {
+    if (fadeTimeout) {
+        clearTimeout(fadeTimeout);
+    }
+    
+    fadeTimeout = setTimeout(checkFadeContent, 1000);
+}
+
+// Restore content opacity
+function restoreContentOpacity() {
+    const contentDiv = document.getElementById('content');
+    contentDiv.classList.add('fading');
+    contentDiv.style.opacity = '1';
+}
+
 // Modified initializeContent to handle mode setting
 async function initializeContent() {
     try {
@@ -340,4 +442,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("nextWallBtn").addEventListener("click", () => navigateWallpaper(1));
     document.getElementById("prevStyleBtn").addEventListener("click", () => navigateStylesheet(-1));
     document.getElementById("nextStyleBtn").addEventListener("click", () => navigateStylesheet(1));
+    // Initialize fade toggle functionality
+    initFadeToggle();
 });
