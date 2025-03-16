@@ -1,3 +1,9 @@
+/**
+ * Handles persistent storage and file loading operations
+ * Manages localStorage for preferences and navigation state
+ * Provides file access and error handling for JSON content
+ * Controls online/offline mode configuration
+ */
 export class StorageManager {
     constructor() {
         this.storage = window.localStorage;

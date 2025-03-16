@@ -1,3 +1,8 @@
+/**
+ * Manages navigation state and cycling through content, wallpapers, and stylesheets
+ * Handles circular navigation through arrays of items with indices
+ * Maintains current position in each collection and provides state persistence
+ */
 export class NavigationManager {
     constructor() {
         this.files = [];

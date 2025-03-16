@@ -1,3 +1,9 @@
+/**
+ * Manages application configuration and dynamic resource loading
+ * Handles wallpaper scanning and loading
+ * Controls stylesheet application and content formatting
+ * Manages online/offline mode settings
+ */
 export class ConfigManager {
     constructor() {
         this.isOnlineMode = false;
