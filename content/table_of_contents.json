@@ -1,0 +1,93 @@
+[
+    {
+        "style": "heading",
+        "title": "Technical Documentation Library"
+    },
+    {
+        "title": "Overview:",
+        "block": [
+            "A comprehensive collection of technical documentation organized by domain and expertise level.",
+            "This documentation covers development, infrastructure, security, and general technical guides.",
+            "Each section is categorized for easy navigation and quick reference."
+        ]
+    },
+    {
+        "title": "Development & Programming",
+        "table": {
+            "headers": ["Category", "Guide", "Path"],
+            "rows": [
+                ["Languages", "Java Reference", "content/java_reference.json"],
+                ["Languages", "JavaScript Reference", "content/javascript_reference.json"],
+                ["Languages", "CSS Guide", "content/css_guide.json"],
+                ["Languages", "Bootstrap Reference", "content/bootstrap_reference.json"],
+                ["Best Practices", "Writing Software Guide", "content/writing_software_guide.json"],
+                ["Best Practices", "Learning Languages Guide", "content/learning_languages_guide.json"],
+                ["Best Practices", "DevOps Practices", "content/devops_practices.json"]
+            ]
+        }
+    },
+    {
+        "title": "Infrastructure & Operations",
+        "table": {
+            "headers": ["Category", "Guide", "Path"],
+            "rows": [
+                ["Cloud", "Azure Reference", "content/azure_reference.json"],
+                ["Cloud", "Ansible Reference", "content/ansible_reference.json"],
+                ["Cloud", "FreeNAS Reference", "content/freenas_reference.json"],
+                ["Databases", "MSSQL Reference", "content/mssql_reference.json"],
+                ["Databases", "MySQL Reference", "content/mysql_reference.json"]
+            ]
+        }
+    },
+    {
+        "title": "Security & Networking",
+        "table": {
+            "headers": ["Category", "Guide", "Path"],
+            "rows": [
+                ["Security", "SSL/TLS Reference", "content/ssl_reference.json"],
+                ["Security", "SSH Reference", "content/ssh_reference.json"],
+                ["Networking", "Networking Basics", "content/networking_basics.json"],
+                ["Networking", "Networking Overview", "content/networking_overview.json"]
+            ]
+        }
+    },
+    {
+        "title": "Tools & Utilities",
+        "table": {
+            "headers": ["Category", "Guide", "Path"],
+            "rows": [
+                ["Version Control", "Git Reference", "content/git_reference.json"],
+                ["Version Control", "GitHub Guide", "content/github_guide.json"],
+                ["Development", "Visual Studio Code Reference", "content/visual_studio_code_reference.json"],
+                ["Development", "PowerShell Reference", "content/powershell_reference.json"],
+                ["Development", "Regex Reference", "content/regex_reference.json"]
+            ]
+        }
+    },
+    {
+        "title": "Documentation & Guides",
+        "table": {
+            "headers": ["Category", "Guide", "Path"],
+            "rows": [
+                ["System", "Dynamic Wallpaper Config Guide", "content/dynamic-wallpaper_config_guide.json"],
+                ["System", "Dynamic Wallpaper CSS Guide", "content/dynamic-wallpaper_css_guide.json"],
+                ["Usage", "How to Use This Guide", "content/how_to_use_this_guide.json"],
+                ["Usage", "How to Make Guides", "content/how_to_make_guides.json"],
+                ["Usage", "How This Was Made Summary", "content/how_this_was_made_summary.json"],
+                ["Usage", "Stay Organized ADHD Guide", "content/stay_organized_adhd_guide.json"]
+            ]
+        }
+    },
+    {
+        "title": "Metadata",
+        "table": {
+            "headers": ["Property", "Value"],
+            "rows": [
+                ["Last Updated", "2024-01-01"],
+                ["Version", "1.0"],
+                ["Total Guides", "31"],
+                ["Format", "JSON"]
+            ]
+        }
+    }
+]

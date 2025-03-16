@@ -4,7 +4,8 @@
     "title": "Reference Sheets",
     "content": [
         "content/dynamic-wallpaper_config_guide.json",        
-        "content/dynamic-wallpaper_css_guide.json",        
+        "content/dynamic-wallpaper_css_guide.json",   
+        "content/table_of_contents.json",     
         "content/ansible_reference.json",       
         "content/azure_reference.json",        
         "content/github_guide.json",
