@@ -97,5 +97,39 @@
         ["System", "out.println(), currentTimeMillis()", "Output and system functions"]
       ]
     }
+  },
+  {
+    "title": "Bukkit API:",
+    "table": {
+      "headers": ["Component", "Description", "Example"],
+      "rows": [
+        ["Plugin", "Minecraft mod", "public class MyPlugin extends JavaPlugin {}"],
+        ["Event", "Triggered action", "public class MyListener implements Listener {}"],
+        ["Command", "Player input", "public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {}"],
+        ["Player", "Game user", "Player player = (Player) sender;"],
+        ["Inventory", "Item storage", "Inventory inv = player.getInventory();"],
+        ["ItemStack", "Item representation", "ItemStack item = new ItemStack(Material.DIAMOND);"],
+        ["Location", "World coordinates", "Location loc = player.getLocation();"],
+        ["Block", "World element", "Block block = loc.getBlock();"],
+        ["World", "Game environment", "World world = player.getWorld();"],
+        ["Scheduler", "Task scheduling", "getServer().getScheduler().runTaskLater(this, () -> { code }, 20L);"]
+      ]
+    }
+  },
+  {
+    "title": "Java Best Practices:",
+    "table": {
+      "headers": ["Practice", "Description"],
+      "rows": [
+        ["Naming Conventions", "CamelCase for classes, lowerCamelCase for variables"],
+        ["Code Formatting", "Consistent indentation, spacing and line breaks"],
+        ["Comments", "Use Javadoc for documentation, inline comments for clarity"],
+        ["Error Handling", "Catch exceptions, log errors, provide feedback"],
+        ["Testing", "Write unit tests, validate inputs, handle edge cases"],
+        ["Performance", "Optimize algorithms, minimize memory usage, avoid unnecessary operations"],
+        ["Security", "Sanitize inputs, validate user data, prevent SQL injection"],
+        ["Version Control", "Use Git for source code management, commit frequently, branch for features"]
+      ]
+    }
   }
 ]

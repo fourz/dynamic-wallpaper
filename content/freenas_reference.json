@@ -67,5 +67,31 @@
                 ["Backup Config", "After system changes"]
             ]
         }
+    },
+    {
+        "title": "Security Features",
+        "table": {
+            "headers": ["Feature", "Description"],
+            "rows": [
+                ["Firewall", "Network traffic filtering"],
+                ["Two-Factor Auth", "Enhanced login security"],
+                ["Dataset Encryption", "Data protection at rest"],
+                ["Jail Isolation", "Container security"],
+                ["Alert Services", "Notification setup"]
+            ]
+        }
+    },
+    {
+        "title": "Performance Tuning",
+        "table": {
+            "headers": ["Area", "Optimization"],
+            "rows": [
+                ["Memory", "8GB RAM minimum"],
+                ["Network", "Jumbo frames for NAS"],
+                ["SSD Cache", "L2ARC for read acceleration"],
+                ["ZIL Device", "SSD for write acceleration"],
+                ["Tuning", "Adjust sysctl parameters"]
+            ]
+        }
     }
 ]

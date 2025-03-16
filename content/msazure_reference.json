@@ -67,5 +67,44 @@
                 ["Set-AzContext", "Switch subscription context"]
             ]
         }
+    },
+    {
+        "title": "Azure Services",
+        "table": {
+            "headers": ["Service", "Description"],
+            "rows": [
+                ["Azure App Service", "Web and mobile applications"],
+                ["Azure Functions", "Serverless event-driven apps"],
+                ["Azure SQL Database", "Managed relational database"],
+                ["Azure Cosmos DB", "NoSQL database service"],
+                ["Azure Kubernetes Service", "Managed Kubernetes clusters"]
+            ]
+        }
+    },
+    {
+        "title": "Azure Security",
+        "table": {
+            "headers": ["Component", "Description"],
+            "rows": [
+                ["Azure AD", "Identity and access management"],
+                ["Key Vault", "Secure key and secret storage"],
+                ["Security Center", "Threat protection and monitoring"],
+                ["Azure Sentinel", "Cloud-native SIEM"],
+                ["Azure DDoS Protection", "Network attack defense"]
+            ]
+        }
+    },
+    {
+        "title": "Azure Monitoring",
+        "table": {
+            "headers": ["Tool", "Purpose"],
+            "rows": [
+                ["Azure Monitor", "Unified monitoring platform"],
+                ["Application Insights", "Application performance monitoring"],
+                ["Log Analytics", "Log and data analysis"],
+                ["Azure Metrics", "Performance metrics tracking"],
+                ["Azure Service Health", "Service status and incidents"]
+            ]
+        }
     }
 ]

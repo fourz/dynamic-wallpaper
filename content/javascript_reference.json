@@ -1,0 +1,125 @@
+[
+  {
+    "style": "heading",
+    "title": "JavaScript Reference"
+  },
+  {
+    "title": "Core Syntax:",
+    "table": {
+      "headers": ["Concept", "Syntax", "Example"],
+      "rows": [
+        ["Variables", "let, const, var", "let x = 5; const PI = 3.14;"],
+        ["Functions", "function name() {}", "function add(a, b) { return a + b; }"],
+        ["Arrow Functions", "() => {}", "const add = (a, b) => a + b;"],
+        ["Object Literals", "{key: value}", "const obj = {name: 'John', age: 30};"],
+        ["Arrays", "[]", "const arr = [1, 2, 3, 4];"],
+        ["Destructuring", "{} or []", "const {name, age} = person;"],
+        ["Template Literals", "`${expression}`", "`Hello ${name}!`"]
+      ]
+    }
+  },
+  {
+    "title": "Data Types:",
+    "table": {
+      "headers": ["Type", "Description", "Example"],
+      "rows": [
+        ["Number", "Integer or floating-point", "42, 3.14, NaN, Infinity"],
+        ["String", "Text characters", "'Hello', \"World\", `Template`"],
+        ["Boolean", "True/false values", "true, false"],
+        ["Null", "Intentional absence", "null"],
+        ["Undefined", "Not assigned value", "undefined"],
+        ["Symbol", "Unique identifier", "Symbol('description')"],
+        ["Object", "Collection of properties", "{}, [], new Date()"]
+      ]
+    }
+  },
+  {
+    "title": "Control Flow:",
+    "table": {
+      "headers": ["Statement", "Syntax", "Example"],
+      "rows": [
+        ["If Statement", "if (condition) {}", "if (x > 0) { return true; }"],
+        ["Switch", "switch (value) {}", "switch (day) { case 'Monday': break; }"],
+        ["For Loop", "for (init; cond; incr)", "for (let i = 0; i < 10; i++)"],
+        ["While Loop", "while (condition)", "while (count > 0) { count--; }"],
+        ["Try/Catch", "try {} catch (e) {}", "try { JSON.parse(str) } catch (e) {}"],
+        ["Async/Await", "async function()", "async function getData() { await fetch() }"]
+      ]
+    }
+  },
+  {
+    "title": "Array Methods:",
+    "table": {
+      "headers": ["Method", "Purpose", "Example"],
+      "rows": [
+        ["map()", "Transform elements", "array.map(x => x * 2)"],
+        ["filter()", "Select elements", "array.filter(x => x > 0)"],
+        ["reduce()", "Accumulate values", "array.reduce((sum, x) => sum + x, 0)"],
+        ["forEach()", "Iterate elements", "array.forEach(x => console.log(x))"],
+        ["find()", "Find first match", "array.find(x => x.id === 1)"],
+        ["some()", "Test any match", "array.some(x => x > 10)"],
+        ["every()", "Test all match", "array.every(x => x >= 0)"]
+      ]
+    }
+  },
+  {
+    "title": "Object Methods:",
+    "table": {
+      "headers": ["Method", "Purpose", "Example"],
+      "rows": [
+        ["Object.keys()", "Get property names", "Object.keys(obj)"],
+        ["Object.values()", "Get property values", "Object.values(obj)"],
+        ["Object.entries()", "Get key-value pairs", "Object.entries(obj)"],
+        ["Object.assign()", "Copy properties", "Object.assign({}, source)"],
+        ["Object.freeze()", "Make immutable", "Object.freeze(obj)"],
+        ["Object.create()", "Create from prototype", "Object.create(proto)"],
+        ["hasOwnProperty()", "Check own property", "obj.hasOwnProperty('key')"]
+      ]
+    }
+  },
+  {
+    "title": "Promises:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Creation", "Create new promise", "new Promise((resolve, reject) => {})"],
+        ["Then", "Handle success", "promise.then(result => {})"],
+        ["Catch", "Handle errors", "promise.catch(error => {})"],
+        ["Finally", "Always executes", "promise.finally(() => {})"],
+        ["All", "Wait for all", "Promise.all([p1, p2, p3])"],
+        ["Race", "First to complete", "Promise.race([p1, p2])"],
+        ["Async/Await", "Sync-style async", "const data = await fetch(url)"]
+      ]
+    }
+  },
+  {
+    "title": "DOM Operations:",
+    "table": {
+      "headers": ["Operation", "Method", "Example"],
+      "rows": [
+        ["Select Element", "querySelector()", "document.querySelector('.class')"],
+        ["Select All", "querySelectorAll()", "document.querySelectorAll('div')"],
+        ["Create Element", "createElement()", "document.createElement('div')"],
+        ["Modify Content", "innerHTML, textContent", "element.textContent = 'text'"],
+        ["Add Class", "classList.add()", "element.classList.add('active')"],
+        ["Remove Class", "classList.remove()", "element.classList.remove('active')"],
+        ["Add Event", "addEventListener()", "el.addEventListener('click', fn)"]
+      ]
+    }
+  },
+  {
+    "title": "ES6+ Features:",
+    "table": {
+      "headers": ["Feature", "Description", "Example"],
+      "rows": [
+        ["Spread", "Expand arrays/objects", "[...array], {...object}"],
+        ["Rest", "Collect parameters", "function(...args) {}"],
+        ["Classes", "OOP syntax", "class Name { constructor() {} }"],
+        ["Modules", "Import/Export", "import { name } from './module'"],
+        ["Optional Chain", "Safe property access", "obj?.prop?.method?.()"],
+        ["Nullish Coalesce", "Default for null/undef", "value ?? defaultValue"],
+        ["BigInt", "Large integers", "BigInt(Number.MAX_SAFE_INTEGER)"]
+      ]
+    }
+  }
+]
