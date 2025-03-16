@@ -1,15 +1,19 @@
 import { NavigationManager } from './js/navigation.js';
+import { StorageManager } from './js/storage.js';
+import { ConfigManager } from './js/config.js';
 
+// Create managers
+const navigation = new NavigationManager();
+const storage = new StorageManager();
+const config = new ConfigManager();
+
+// Remove old storage variables
 let isOnlineMode = false;
 let serverUrl = '';
-// Add variables for fade functionality
 let fadeToggleEnabled = false;
 let fadeTimeout = null;
 let lastMouseMoveTime = 0;
-const FADE_DELAY = 40000; // 40 seconds
-
-// Create navigation manager instance
-const navigation = new NavigationManager();
+const FADE_DELAY = 40000;
 
 // Modified loadJSON to handle both modes
 async function loadJSON(path) {
@@ -206,56 +210,24 @@ function formatContent(item) {
     return '';
 }
 
-// Modified setWallpaper to handle online mode
-function setWallpaper(wallpaperPath) {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => {
-            document.body.style.backgroundImage = `url('${isOnlineMode ? `${serverUrl}/${wallpaperPath}` : wallpaperPath}')`;
-            resolve();
-        };
-        img.onerror = () => {
-            console.error(`Failed to load wallpaper: ${wallpaperPath}`);
-            reject();
-        };
-        img.src = isOnlineMode ? `${serverUrl}/${wallpaperPath}` : wallpaperPath;
-    });
-}
-
-// Allows theme customization through additional CSS files
-function loadStylesheets(stylesheets) {
-    stylesheets.forEach(stylesheet => {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = stylesheet;
-        document.head.appendChild(link);
-    });
-}
-
-// Initialize fade toggle state from localStorage
+// Update initFadeToggle to use StorageManager
 function initFadeToggle() {
-    // Load fade toggle state from localStorage
-    fadeToggleEnabled = localStorage.getItem('fadeToggleEnabled') === 'true';
+    fadeToggleEnabled = storage.getFadeState();
     const fadeToggleBtn = document.getElementById('fadeToggleBtn');
     
-    // Set initial button state
     if (fadeToggleEnabled) {
         fadeToggleBtn.classList.add('active');
         startFadeMonitoring();
     }
     
-    // Add event listener for toggle button
     fadeToggleBtn.addEventListener('click', toggleFade);
 }
 
 // Toggle fade functionality on/off
 function toggleFade() {
     fadeToggleEnabled = !fadeToggleEnabled;
+    storage.setFadeState(fadeToggleEnabled);
     
-    // Save state to localStorage
-    localStorage.setItem('fadeToggleEnabled', fadeToggleEnabled);
-    
-    // Update button appearance
     const fadeToggleBtn = document.getElementById('fadeToggleBtn');
     if (fadeToggleEnabled) {
         fadeToggleBtn.classList.add('active');
@@ -329,47 +301,44 @@ function restoreContentOpacity() {
     contentDiv.style.opacity = '1';
 }
 
-// Modified initializeContent to handle mode setting
+// Update initializeContent to use ConfigManager
 async function initializeContent() {
     try {
-        const config = await loadJSON('config.json');
+        const configData = await loadJSON('config.json');
         
-        // Add automatic mode detection
-        if (config.mode === 'detect') {
+        if (configData.mode === 'detect') {
             try {
-                // Try to fetch a known file to test online connectivity
-                const response = await fetch(`${config.serverUrl}/config.json`);
-                isOnlineMode = response.ok;
+                const response = await fetch(`${configData.serverUrl}/config.json`);
+                config.setOnlineMode(response.ok);
             } catch (error) {
-                isOnlineMode = false;
+                config.setOnlineMode(false);
             }
-            console.log(`Detected mode: ${isOnlineMode ? 'online' : 'offline'}`);
         } else {
-            isOnlineMode = config.mode === 'online';
+            config.setOnlineMode(configData.mode === 'online');
         }
         
-        serverUrl = config.serverUrl || '';
+        config.setServerUrl(configData.serverUrl || '');
+        config.setFormatContentFunction(formatContent);
         
-        // Set page title if provided
-        if (config.title) {
-            document.title = config.title;
+        if (configData.title) {
+            document.title = configData.title;
         }
         
-        // Get stylesheet sets
-        const stylesheetSet = navigation.setStylesheetSets(Object.values(config.stylesheets));
+        const savedState = storage.getNavigationState();
+        navigation.setState(savedState);
+        
+        const stylesheetSet = navigation.setStylesheetSets(Object.values(configData.stylesheets));
         if (stylesheetSet) {
-            loadStylesheets(stylesheetSet);
+            config.loadStylesheets(stylesheetSet);
         }
 
-        // Scan for wallpapers using patterns
-        const scannedWallpapers = await scanWallpapers(config.wallpaper);
+        const scannedWallpapers = await config.scanWallpapers(configData.wallpaper);
         const currentWallpaper = navigation.setWallpapers(scannedWallpapers);
         if (currentWallpaper) {
-            await setWallpaper(currentWallpaper);
+            await config.setWallpaper(currentWallpaper);
         }
 
-        // Load content from first file in config.content
-        const content = await loadAllJSON(config.content);
+        const content = await loadAllJSON(configData.content);
         if (content) {
             const formattedContent = content.map(formatContent).join('');
             document.getElementById("content").innerHTML = formattedContent;
@@ -382,88 +351,56 @@ async function initializeContent() {
     }
 }
 
-async function scanWallpapers(patterns) {
-    const foundWallpapers = new Set();
-    const patternList = Array.isArray(patterns) ? patterns : [patterns];
-
-    // Helper function to test image loading
-    const testImage = (path) => new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = isOnlineMode ? `${serverUrl}/${path}` : path;
-    });
-
-    for (const pattern of patternList) {
-        if (pattern.includes('*')) {
-            const [basePath, filePattern] = pattern.split('*');
-            try {
-                const indexes = Array.from({length: 10}, (_, i) => i + 1);
-                for (const idx of indexes) {
-                    const path = `${basePath}${idx}${filePattern}`;
-                    if (await testImage(path)) {
-                        foundWallpapers.add(path);
-                    }
-                }
-            } catch (error) {
-                console.warn(`Failed to scan ${basePath}`, error);
-            }
-        } else {
-            // For direct paths, just add them without testing in online mode
-            if (isOnlineMode) {
-                foundWallpapers.add(pattern);
-            } else if (await testImage(pattern)) {
-                foundWallpapers.add(pattern);
-            }
-        }
-    }
-    return Array.from(foundWallpapers).sort();
-}
-
-// Modified loadContent to use navigation manager
-function loadContent() {
-    const currentFile = navigation.getCurrentFile();
-    if (currentFile) {
-        loadJSON(currentFile)
-            .then(content => {
-                const formattedContent = content.map(formatContent).join('');
-                document.getElementById("content").innerHTML = formattedContent;
-            })
-            .catch(error => console.error('Failed to load content:', error));
-    }
-}
-
+// Update event listeners to use ConfigManager
 document.addEventListener("DOMContentLoaded", () => {
     initializeContent();
     
+    const saveNavigationState = () => {
+        storage.setNavigationState(navigation.getState());
+    };
+    
     document.getElementById("prevBtn").addEventListener("click", () => {
         navigation.navigateContent(-1);
-        loadContent();
+        config.loadContent(navigation.getCurrentFile(), loadJSON);
+        storage.setNavigationState(navigation.getState());
     });
     
     document.getElementById("nextBtn").addEventListener("click", () => {
         navigation.navigateContent(1);
-        loadContent();
+        config.loadContent(navigation.getCurrentFile(), loadJSON);
+        storage.setNavigationState(navigation.getState());
     });
     
     document.getElementById("prevWallBtn").addEventListener("click", async () => {
         const wallpaper = navigation.navigateWallpaper(-1);
-        if (wallpaper) await setWallpaper(wallpaper);
+        if (wallpaper) {
+            await config.setWallpaper(wallpaper);
+            storage.setNavigationState(navigation.getState());
+        }
     });
     
     document.getElementById("nextWallBtn").addEventListener("click", async () => {
         const wallpaper = navigation.navigateWallpaper(1);
-        if (wallpaper) await setWallpaper(wallpaper);
+        if (wallpaper) {
+            await config.setWallpaper(wallpaper);
+            storage.setNavigationState(navigation.getState());
+        }
     });
     
     document.getElementById("prevStyleBtn").addEventListener("click", () => {
         const stylesheet = navigation.navigateStylesheet(-1);
-        if (stylesheet) loadStylesheets(stylesheet);
+        if (stylesheet) {
+            config.loadStylesheets(stylesheet);
+            storage.setNavigationState(navigation.getState());
+        }
     });
     
     document.getElementById("nextStyleBtn").addEventListener("click", () => {
         const stylesheet = navigation.navigateStylesheet(1);
-        if (stylesheet) loadStylesheets(stylesheet);
+        if (stylesheet) {
+            config.loadStylesheets(stylesheet);
+            storage.setNavigationState(navigation.getState());
+        }
     });
     
     // Initialize fade toggle functionality
