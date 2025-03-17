@@ -13,11 +13,11 @@ export class StorageManager {
 
     // Fade state management
     getFadeState() {
-        return this.storage.getItem('fadeToggleEnabled') === 'true';
+        return localStorage.getItem('fadeState') || 'default';
     }
 
-    setFadeState(enabled) {
-        this.storage.setItem('fadeToggleEnabled', enabled);
+    setFadeState(state) {
+        localStorage.setItem('fadeState', state);
     }
 
     // Navigation state management

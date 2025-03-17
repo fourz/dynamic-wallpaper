@@ -69,28 +69,28 @@
         }
     },
     {
-        "title": "Apple Focus Settings",
+        "title": "Apple Focus Features Made Simple",
         "table": {
-            "headers": ["Feature", "Configuration", "Helpful Tip"],
+            "headers": ["What to Do", "How to Do It", "Pro Tip"],
             "rows": [
-                ["Focus Modes", "Set up Work, Personal, and Sleep modes", "Customize notifications for each mode"],
-                ["App Notifications", "Allow only essential apps during focus time", "Review allowed apps periodically"],
-                ["Time Triggers", "Schedule automatic focus activation", "Adjust triggers based on routine changes"],
-                ["Focus Filters", "Customize app appearances per focus mode", "Use dark mode to reduce eye strain"],
-                ["Share Focus Status", "Let others know you're concentrating", "Enable for key contacts only"]
+                ["Set Up Basic Modes", "Create Work and Personal modes first", "Start with just 2 modes - don't overwhelm yourself"],
+                ["Pick Important Apps", "Choose 3-5 must-have apps per mode", "Less is more - fewer apps = better focus"],
+                ["Set Up Auto-Schedule", "Pick your most productive hours", "Match to your natural energy peaks"],
+                ["Choose Screen Look", "Pick calm colors and dark mode", "Your eyes will thank you later"],
+                ["Tell Others You're Busy", "Turn on auto-reply messages", "Keep it simple: 'Working now, back at [time]'"]
             ]
         }
     },
     {
-        "title": "Android Focus Settings",
+        "title": "Android Focus Made Easy",
         "table": {
-            "headers": ["Feature", "Configuration", "Helpful Tip"],
+            "headers": ["What to Do", "How to Do It", "Pro Tip"],
             "rows": [
-                ["Focus Mode", "Create custom focus modes", "Include specific apps and contacts for each mode"],
-                ["Notification Management", "Block distracting notifications", "Use priority mode for urgent alerts only"],
-                ["Scheduled Focus", "Automate focus mode activation", "Set recurring focus periods for consistency"],
-                ["Focus Timer", "Track focus time and breaks", "Use built-in timers to manage work intervals"],
-                ["Focus Status Sharing", "Share focus status with contacts", "Customize shared messages for clarity"]
+                ["Quick Focus Setup", "Use pre-made focus templates", "Start with 'Work' template and adjust later"],
+                ["Quiet Your Phone", "Block all but VIP contacts", "Make a short list of emergency contacts"],
+                ["Auto-Focus Times", "Match to your daily schedule", "Set it once, forget it forever"],
+                ["Track Your Time", "Use the built-in focus timer", "Start with 15-minute chunks"],
+                ["Let People Know", "Set up auto-text responses", "Keep messages short and clear"]
             ]
         }
     },
@@ -105,6 +105,16 @@
         ]
     },
     {
+        "title": "Your Daily Game Plan",
+        "list": [
+            "1. Morning Check (just 3 minutes): What's today's #1 task?",
+            "2. Clear your desk - keep only today's stuff",
+            "3. Phone on focus mode - notifications off",
+            "4. Pick your top 3 tasks (not 4, not 5)",
+            "5. Work 25 minutes, break 5 minutes - repeat"
+        ]
+    },
+    {
         "title": "Focus Reset Protocol",
         "list": [
             "1. Close all unnecessary browser tabs and applications",
@@ -112,6 +122,16 @@
             "3. Put on noise-canceling headphones",
             "4. Take 3 deep breaths",
             "5. Set a timer for your next work block"
+        ]
+    },
+    {
+        "title": "Lost Focus? Quick Reset",
+        "list": [
+            "1. Close everything except what you need RIGHT NOW",
+            "2. Clear desk - keep only current task items",
+            "3. Headphones on - music optional",
+            "4. Big breath in (4 counts), out (4 counts)",
+            "5. Set timer - start with just 15 minutes"
         ]
     }
 ]

@@ -1,87 +1,40 @@
+/* Import master styles */
+@import url('master.css');
+
+/* Theme-specific overrides for tiny theme */
 body {
-    margin: 0;
     padding: 10px 10px;
-    min-height: 100vh;
-    height: auto;
-    background: url('wallpaper.png') no-repeat center center fixed;
-    background-size: cover;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     font-size: 10pt;
     line-height: 1.2;
     max-width: 100%;
     overflow-x: hidden;
-    overflow: hidden;
 }
 
 .overlay {
-    background: rgba(0, 0, 0, 0.6);
     padding: 12px;
     border-radius: 6px;
-    width: 92%;
     max-width: 100%;
-    text-align: left;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     gap: 1.2rem;
-    justify-content: space-between;
-    align-items: flex-start;
     max-height: calc(100vh - 20px);
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.3);
-    margin: 0 auto;
     min-height: 150px;
 }
 
-.overlay::-webkit-scrollbar {
-    width: 8px;
-}
-
-.overlay::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-}
-
-.overlay::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-}
-
 .flex-wrap {
-    display: flex;
-    flex-wrap: wrap;
     flex: 1 1 280px;
     min-width: 280px;
-    margin: 0;
     padding: 5px;
     box-sizing: border-box;
 }
 
-.flex-wrap > * {
-    width: 100%;
-    min-width: 0;
-}
-
-h1 { 
+h1 {
     margin: 8px 0;
-    width: 100%;
-    text-align: center;
     font-size: 14pt;
     padding: 4px;
     word-wrap: break-word;
 }
 
-h2 { 
+h2 {
     margin: 8px 0;
-    width: 100%;
     font-size: 10pt;
     padding: 4px;
     word-wrap: break-word;
@@ -90,18 +43,13 @@ h2 {
 table {
     width: 100%;
     max-width: 100%;
-    border-collapse: collapse;
-    margin: 0;
     font-size: 10pt;
     table-layout: fixed;
     word-wrap: break-word;
 }
 
 th, td {
-    border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 4px;
-    text-align: left;
-    white-space: normal;
     min-width: 60px;
     word-break: break-word;
 }
@@ -112,7 +60,6 @@ th:not(:first-child) {
 }
 
 th {
-    background: rgba(255, 255, 255, 0.1);
     white-space: normal;
 }
 
@@ -128,11 +75,7 @@ li {
 }
 
 button {
-    background: rgba(255, 255, 255, 0.3);
-    border: none;
     padding: 6px 12px;
-    color: white;
-    cursor: pointer;
     border-radius: 4px;
     font-size: 10pt;
 }
@@ -141,77 +84,4 @@ h3, h4, h5, h6 {
     margin: 8px 0;
     padding: 4px;
     word-wrap: break-word;
-}
-
-/* Navigation Controls - Match Default Theme
-   IMPORTANT: These controls must maintain consistent sizing across themes
-*/
-.nav-btn {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-/* Add fade toggle button styles */
-.fade-toggle-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.fade-toggle-btn.active {
-    background: rgba(0, 180, 0, 0.6);
-}
-
-.fade-toggle-btn:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.fade-toggle-btn.active:hover {
-    background: rgba(0, 150, 0, 0.8);
-}
-
-/* Content fading classes */
-.overlay.fading {
-    transition: opacity 2s ease-in-out;
-}
-
-.wall-btn, .style-btn {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.wall-btn { bottom: 20px; }
-.style-btn { bottom: 70px; }
-.nav-left, .wall-left, .style-left { left: 20px; }
-.nav-right, .wall-right, .style-right { right: 20px; }
-
-/* Consistent hover effect */
-.nav-btn:hover, .wall-btn:hover, .style-btn:hover {
-    background: rgba(0, 0, 0, 0.8);
 }
