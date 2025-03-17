@@ -1,7 +1,8 @@
 /**
- * Manages navigation state and cycling through content, wallpapers, and stylesheets
- * Handles circular navigation through arrays of items with indices
- * Maintains current position in each collection and provides state persistence
+ * Manages navigation state and URL parameters for content, wallpapers, and stylesheets.
+ * Provides two modes of operation:
+ * 1. Local state: Saves navigation in localStorage for offline/normal use
+ * 2. URL state: Uses URL parameters for sharable links in online mode
  */
 export class NavigationManager {
     constructor() {
@@ -18,7 +19,7 @@ export class NavigationManager {
         this.useUrlParameters = enabled;
         // If enabling URL mode, immediately update URL to match current state
         if (enabled) {
-            this.updateUrlParams();
+            this.updatePermalinkAndUrl();
         }
     }
 
@@ -34,9 +35,6 @@ export class NavigationManager {
 
     navigateContent(direction) {
         this.currentFileIndex = (this.currentFileIndex + direction + this.files.length) % this.files.length;
-        if (this.useUrlParameters) {
-            this.updateUrlParams();
-        }
         return this.getCurrentFile();
     }
 
@@ -71,9 +69,6 @@ export class NavigationManager {
     navigateStylesheet(direction) {
         if (this.stylesheetSets.length > 0) {
             this.currentStylesheetSet = (this.currentStylesheetSet + direction + this.stylesheetSets.length) % this.stylesheetSets.length;
-            if (this.useUrlParameters) {
-                this.updateUrlParams();
-            }
             return this.getCurrentStylesheetSet();
         }
         return null;
@@ -103,70 +98,44 @@ export class NavigationManager {
 
     // URL parameter handling
     findContentByName(name) {
-        // Simple name match assuming /content directory
-        return this.files.findIndex(file => `content/${name}.json` === file);
+        const normalizedName = name.trim().toLowerCase();
+        return this.files.findIndex(file => {
+            const fileName = file.split('/').pop().replace('.json', '');
+            return fileName.toLowerCase() === normalizedName;
+        });
     }
 
+    // URL parameter parsing and application
     setIndexFromParams(params) {
+        if (params.has('random') && params.get('random') === 'true') {
+            this.currentFileIndex = Math.floor(Math.random() * this.files.length);
+            return;
+        }
+        
         if (params.has('content')) {
-            const contentParam = params.get('content');
-            const index = parseInt(contentParam);
-            if (!isNaN(index) && index >= 0 && index < this.files.length) {
-                this.currentFileIndex = index;
-            } else {
-                const nameIndex = this.findContentByName(contentParam);
-                if (nameIndex !== -1) {
-                    this.currentFileIndex = nameIndex;
-                }
-            }
+            const index = parseInt(params.get('content'));
+            this.currentFileIndex = !isNaN(index) && index >= 0 && index < this.files.length ?
+                index : this.findContentByName(params.get('content'));
         }
         
         if (params.has('style')) {
-            const styleParam = params.get('style');
             const styleIndex = this.stylesheetSets.findIndex(set => 
-                set === `stylesheets/${styleParam}.css`
+                set === `stylesheets/${params.get('style')}.css`
             );
-            if (styleIndex !== -1) {
-                this.currentStylesheetSet = styleIndex;
-            }
+            if (styleIndex !== -1) this.currentStylesheetSet = styleIndex;
         }
 
         if (params.has('wallpaper')) {
-            const wallpaperParam = parseInt(params.get('wallpaper'));
-            if (!isNaN(wallpaperParam) && wallpaperParam >= 0 && wallpaperParam < this.wallpapers.length) {
-                this.currentWallpaperIndex = wallpaperParam;
+            const wallIndex = parseInt(params.get('wallpaper'));
+            if (!isNaN(wallIndex) && wallIndex >= 0 && wallIndex < this.wallpapers.length) {
+                this.currentWallpaperIndex = wallIndex;
             }
         }
     }
 
-    updateUrlParams() {
-        if (this.files.length === 0) return;
-        
-        const params = new URLSearchParams();
-        
-        // Add content parameter
-        const fileName = this.getCurrentFile().split('/')[1].replace('.json', '');
-        params.set('content', fileName);
-        
-        // Add style parameter
-        if (this.stylesheetSets.length > 0) {
-            const style = this.getCurrentStylesheetSet().split('/')[1].replace('.css', '');
-            params.set('style', style);
-        }
-
-        // Add wallpaper parameter
-        if (this.wallpapers.length > 0) {
-            params.set('wallpaper', this.currentWallpaperIndex.toString());
-        }
-        
-        // Update URL and permalink
-        const urlWithParams = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
-        window.history.replaceState({}, '', urlWithParams);
-
-        const permalinkBtn = document.getElementById('permalinkBtn');
-        if (permalinkBtn) {
-            permalinkBtn.href = urlWithParams;
-            permalinkBtn.title = `Permalink to: ${fileName}`;
-        }
+    // This method is being removed since we're moving the functionality to LayoutManager
+    // The empty method stays as a compatibility placeholder
+    async updatePermalinkAndUrl() {
+        // Functionality moved to LayoutManager.updatePermalink
     }
 }

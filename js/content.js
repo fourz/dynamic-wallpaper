@@ -18,7 +18,7 @@ export class ContentManager {
             await this.initializeMode(configData);
             
             const params = new URLSearchParams(window.location.search);
-            const hasUrlParams = params.has('content') || params.has('style');
+            const hasUrlParams = params.has('random') || params.has('content') || params.has('style');
             
             this.navigation.setUseUrlParameters(this.storage.isOnlineMode() && hasUrlParams);
             
@@ -61,8 +61,10 @@ export class ContentManager {
     async initializeMode(configData) {
         let isOnlineMode = false;
         
+        // Determine online/offline mode through explicit config or detection
         if (configData.mode === 'detect') {
             try {
+                // Test server connectivity by requesting config
                 const response = await fetch(`${configData.serverUrl}/config.json`);
                 isOnlineMode = response.ok;
             } catch (error) {
@@ -72,15 +74,16 @@ export class ContentManager {
             isOnlineMode = configData.mode === 'online';
         }
 
-        // Handle permalink visibility and initial URL
+        // Configure permalink visibility and initial state
+        // Only show permalink in online mode, with default parameters
         const permalinkBtn = document.getElementById('permalinkBtn');
         if (permalinkBtn) {
             permalinkBtn.style.display = isOnlineMode ? 'flex' : 'none';
             if (isOnlineMode) {
                 const params = new URLSearchParams();
-                params.set('content', 'how_to_use_this_guide'); // Default content
-                params.set('style', 'default'); // Default style
-                params.set('wallpaper', '0'); // Default wallpaper
+                params.set('content', 'how_to_use_this_guide');
+                params.set('style', 'default');
+                params.set('wallpaper', '0');
                 permalinkBtn.href = `${configData.serverUrl}?${params.toString()}`;
             }
         }
@@ -171,35 +174,58 @@ export class ContentManager {
         }
     }
 
+    // Single method to handle all navigation updates
+    async handleNavigation(type, direction) {
+        let result;
+        try {
+            switch(type) {
+                case 'content':
+                    result = this.navigation.navigateContent(direction);
+                    if (result) {
+                        await this.config.loadContent(result, path => this.storage.loadJSON(path));
+                    }
+                    break;
+                case 'wallpaper':
+                    result = this.navigation.navigateWallpaper(direction);
+                    if (result) {
+                        await this.config.setWallpaper(result);
+                    }
+                    break;
+                case 'stylesheet':
+                    result = this.navigation.navigateStylesheet(direction);
+                    if (result) {
+                        this.config.loadStylesheets(result);
+                    }
+                    break;
+            }
+
+            if (result) {
+                // Update storage state first if not using URL parameters
+                if (!this.navigation.useUrlParameters) {
+                    this.storage.setNavigationState(this.navigation.getState());
+                }
+                
+                // Update permalink after all operations complete
+                // Replace the navigation call with layout call
+                setTimeout(() => {
+                    this.layout.updatePermalink(this.navigation);
+                }, 100); // Small delay to ensure content is updated first
+            }
+        } catch (error) {
+            console.error(`Navigation failed for ${type}:`, error);
+        }
+    }
+
+    // Update navigation methods to use handleNavigation
     async navigateContent(direction) {
-        const currentFile = this.navigation.navigateContent(direction);
-        await this.config.loadContent(currentFile, (path) => this.storage.loadJSON(path));
-        if (!this.navigation.useUrlParameters) {
-            this.storage.setNavigationState(this.navigation.getState());
-        }
-        if (this.storage.isOnlineMode()) {
-            this.navigation.updateUrlParams();
-        }
+        await this.handleNavigation('content', direction);
     }
 
     async navigateWallpaper(direction) {
-        const wallpaper = this.navigation.navigateWallpaper(direction);
-        if (wallpaper) {
-            await this.config.setWallpaper(wallpaper);
-            this.storage.setNavigationState(this.navigation.getState());
-        }
+        await this.handleNavigation('wallpaper', direction);
     }
 
-    navigateStylesheet(direction) {
-        const stylesheet = this.navigation.navigateStylesheet(direction);
-        if (stylesheet) {
-            this.config.loadStylesheets(stylesheet);
-            if (!this.navigation.useUrlParameters) {
-                this.storage.setNavigationState(this.navigation.getState());
-            }
-            if (this.storage.isOnlineMode()) {
-                this.navigation.updateUrlParams();
-            }
-        }
+    async navigateStylesheet(direction) {
+        await this.handleNavigation('stylesheet', direction);
     }
 }

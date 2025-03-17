@@ -19,28 +19,28 @@ const content = new ContentManager(storage, navigation, config, layout);
 document.addEventListener("DOMContentLoaded", () => {
     content.initialize();
     
-    document.getElementById("prevBtn").addEventListener("click", () => {
-        content.navigateContent(-1);
+    document.getElementById("prevBtn").addEventListener("click", async () => {
+        await content.navigateContent(-1);
     });
     
-    document.getElementById("nextBtn").addEventListener("click", () => {
-        content.navigateContent(1);
+    document.getElementById("nextBtn").addEventListener("click", async () => {
+        await content.navigateContent(1);
     });
     
-    document.getElementById("prevWallBtn").addEventListener("click", () => {
-        content.navigateWallpaper(-1);
+    document.getElementById("prevWallBtn").addEventListener("click", async () => {
+        await content.navigateWallpaper(-1);
     });
     
-    document.getElementById("nextWallBtn").addEventListener("click", () => {
-        content.navigateWallpaper(1);
+    document.getElementById("nextWallBtn").addEventListener("click", async () => {
+        await content.navigateWallpaper(1);
     });
     
-    document.getElementById("prevStyleBtn").addEventListener("click", () => {
-        content.navigateStylesheet(-1);
+    document.getElementById("prevStyleBtn").addEventListener("click", async () => {
+        await content.navigateStylesheet(-1);
     });
     
-    document.getElementById("nextStyleBtn").addEventListener("click", () => {
-        content.navigateStylesheet(1);
+    document.getElementById("nextStyleBtn").addEventListener("click", async () => {
+        await content.navigateStylesheet(1);
     });
     
     layout.initFadeToggle(storage);

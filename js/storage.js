@@ -112,7 +112,22 @@ export class StorageManager {
     async loadAllJSON(pattern, navigation) {
         if (Array.isArray(pattern)) {
             const files = pattern;
+            console.log('Available content files:', files);
+            
+            // Set files in navigation system before loading default
             const firstFile = navigation.setFiles(files);
+            
+            // Check URL parameters after setting files array
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('content') && this.onlineMode) {
+                console.log('URL has content parameter:', params.get('content'));
+                navigation.setIndexFromParams(params);
+                // Use the file selected by parameter instead of default first
+                const selectedFile = navigation.getCurrentFile();
+                console.log('Selected content file:', selectedFile);
+                return files.length > 0 ? await this.loadJSON(selectedFile) : null;
+            }
+            
             return files.length > 0 ? await this.loadJSON(firstFile) : null;
         }
         if (typeof pattern === 'string' && pattern.includes('*')) {

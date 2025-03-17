@@ -290,4 +290,39 @@ export class LayoutManager {
             btn.style.opacity = '1';
         });
     }
+
+    // New method to handle permalink updates separately from content changes
+    updatePermalink(navigation) {
+        if (!navigation || navigation.files.length === 0) return;
+        
+        try {
+            const params = new URLSearchParams();
+            const currentFile = navigation.getCurrentFile();
+            const fileName = currentFile ? currentFile.split('/').pop().replace('.json', '') : '';
+            const styleSet = navigation.getCurrentStylesheetSet();
+            const style = styleSet ? styleSet.split('/').pop().replace('.css', '') : '';
+            
+            // Build URL parameters
+            params.set('content', fileName);
+            params.set('style', style);
+            params.set('wallpaper', navigation.currentWallpaperIndex.toString());
+            
+            // Create full URL
+            const urlWithParams = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+            
+            // Update permalink button
+            const permalinkBtn = document.getElementById('permalinkBtn');
+            if (permalinkBtn) {
+                permalinkBtn.href = urlWithParams;
+                permalinkBtn.title = `Permalink to: ${fileName}`;
+            }
+            
+            // Update browser URL if in parameter mode
+            if (navigation.useUrlParameters) {
+                window.history.replaceState({}, '', urlWithParams);
+            }
+        } catch (error) {
+            console.error("Failed to update permalink:", error);
+        }
+    }
 }
