@@ -200,16 +200,16 @@ export class ContentManager {
             }
 
             if (result) {
-                // Update storage state first if not using URL parameters
+                // Update storage state if not using URL parameters
                 if (!this.navigation.useUrlParameters) {
                     this.storage.setNavigationState(this.navigation.getState());
                 }
                 
-                // Update permalink after all operations complete
-                // Replace the navigation call with layout call
-                setTimeout(() => {
-                    this.layout.updatePermalink(this.navigation);
-                }, 100); // Small delay to ensure content is updated first
+                // Update permalink with proper separation of concerns:
+                // 1. NavigationManager generates the URL
+                // 2. LayoutManager updates the UI element
+                const permalinkData = this.navigation.updatePermalinkAndUrl();
+                this.layout.updatePermalinkButton(permalinkData);
             }
         } catch (error) {
             console.error(`Navigation failed for ${type}:`, error);

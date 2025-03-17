@@ -133,9 +133,39 @@ export class NavigationManager {
         }
     }
 
-    // This method is being removed since we're moving the functionality to LayoutManager
-    // The empty method stays as a compatibility placeholder
-    async updatePermalinkAndUrl() {
-        // Functionality moved to LayoutManager.updatePermalink
+    // Restore and improve permalink URL generation
+    updatePermalinkAndUrl() {
+        // Only proceed if we have files to work with
+        if (!this.files || this.files.length === 0) return null;
+        
+        try {
+            const params = new URLSearchParams();
+            const currentFile = this.getCurrentFile();
+            const fileName = currentFile ? currentFile.split('/').pop().replace('.json', '') : '';
+            const styleSet = this.getCurrentStylesheetSet();
+            const style = styleSet ? styleSet.split('/').pop().replace('.css', '') : '';
+            
+            // Build URL parameters
+            params.set('content', fileName);
+            params.set('style', style);
+            params.set('wallpaper', this.currentWallpaperIndex.toString());
+            
+            // Create full URL
+            const urlWithParams = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+            
+            // Update browser URL if in parameter mode
+            if (this.useUrlParameters) {
+                window.history.replaceState({}, '', urlWithParams);
+            }
+            
+            // Return the generated URL for use by other components
+            return {
+                url: urlWithParams,
+                fileName: fileName
+            };
+        } catch (error) {
+            console.error("Failed to update permalink URL:", error);
+            return null;
+        }
     }
 }
