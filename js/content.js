@@ -16,16 +16,46 @@ export class ContentManager {
         try {
             const configData = await this.storage.loadJSON('config.json');
             await this.initializeMode(configData);
+            
+            const params = new URLSearchParams(window.location.search);
+            const hasUrlParams = params.has('content') || params.has('style');
+            
+            this.navigation.setUseUrlParameters(this.storage.isOnlineMode() && hasUrlParams);
+            
+            // Hide navigation elements if using URL parameters
+            if (this.navigation.useUrlParameters) {
+                this.hideNavigationElements();
+            }
+            
             this.initializeManagers(configData);
             this.setDocumentTitle(configData);
             
             await this.initializeStylesheets(configData);
             await this.initializeWallpapers(configData);
+            
+            // Handle URL parameters if in URL mode
+            if (this.navigation.useUrlParameters) {
+                this.navigation.setIndexFromParams(params);
+            }
+            
             await this.initializeContent(configData);
         } catch (error) {
             console.error('Failed to initialize:', error);
             document.getElementById("content").innerHTML = `<p>Error loading content: ${error.message}</p>`;
         }
+    }
+
+    hideNavigationElements() {
+        ['nav-btn', 'wall-btn', 'style-btn', 'fade-toggle-btn'].forEach(className => {
+            const elements = document.getElementsByClassName(className);
+            if (elements) {
+                Array.from(elements).forEach(element => {
+                    if (element) {
+                        element.style.visibility = 'hidden';
+                    }
+                });
+            }
+        });
     }
 
     async initializeMode(configData) {
@@ -131,7 +161,12 @@ export class ContentManager {
     async navigateContent(direction) {
         const currentFile = this.navigation.navigateContent(direction);
         await this.config.loadContent(currentFile, (path) => this.storage.loadJSON(path));
-        this.storage.setNavigationState(this.navigation.getState());
+        if (!this.navigation.useUrlParameters) {
+            this.storage.setNavigationState(this.navigation.getState());
+        }
+        if (this.storage.isOnlineMode()) {
+            this.navigation.updateUrlParams();
+        }
     }
 
     async navigateWallpaper(direction) {
@@ -146,7 +181,12 @@ export class ContentManager {
         const stylesheet = this.navigation.navigateStylesheet(direction);
         if (stylesheet) {
             this.config.loadStylesheets(stylesheet);
-            this.storage.setNavigationState(this.navigation.getState());
+            if (!this.navigation.useUrlParameters) {
+                this.storage.setNavigationState(this.navigation.getState());
+            }
+            if (this.storage.isOnlineMode()) {
+                this.navigation.updateUrlParams();
+            }
         }
     }
 }

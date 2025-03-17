@@ -7,7 +7,7 @@
 export class StorageManager {
     constructor() {
         this.storage = window.localStorage;
-        this.isOnlineMode = false;
+        this.onlineMode = false;
         this.serverUrl = '';
     }
 
@@ -48,7 +48,7 @@ export class StorageManager {
     }
 
     setOnlineMode(mode) {
-        this.isOnlineMode = mode;
+        this.onlineMode = mode;
     }
 
     setServerUrl(url) {
@@ -93,7 +93,11 @@ export class StorageManager {
 
     async loadJSON(path) {
         try {
-            const fullPath = this.isOnlineMode ? `${this.serverUrl}/${path}` : path;
+            // Clean up path for offline mode to prevent double slashes
+            const fullPath = this.onlineMode ? 
+                `${this.serverUrl}/${path}` : 
+                path.startsWith('/') ? path.substring(1) : path;
+                
             const response = await fetch(fullPath);
             const data = await response.text();
             return JSON.parse(data);
@@ -142,5 +146,10 @@ export class StorageManager {
             `   - Install: npm install -g http-server\n` +
             `   - Run: http-server\n` +
             `   - Open: http://localhost:8080`;
+    }
+
+    // Keep this method for external use
+    isOnlineMode() {
+        return this.onlineMode;
     }
 }
