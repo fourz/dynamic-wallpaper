@@ -277,7 +277,7 @@ body:hover .fade-toggle-btn.default {
 }
 
 /* Base UI element states - hidden by default */
-.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn {
+.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn, .permalink-btn {
     opacity: 0;
     transition: opacity var(--ui-fade-in-time, 0.3s) ease-in-out;
 }
@@ -290,4 +290,34 @@ body:hover .fade-toggle-btn.default {
 .nav-btn.fade-out, .wall-btn.fade-out, .style-btn.fade-out, .fade-toggle-btn.fade-out,
 .nav-btn.wallpaper, .wall-btn.wallpaper, .style-btn.wallpaper, .fade-toggle-btn.wallpaper {
     transition: opacity var(--ui-fade-out-time, 2s) ease-in-out;
+}
+
+/* Permalink button styling */
+.permalink-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.permalink-btn:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Update fade system to include permalink button */
+.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn, .permalink-btn {
+    opacity: 0;
+    transition: opacity var(--ui-fade-in-time, 0.3s) ease-in-out;
 }

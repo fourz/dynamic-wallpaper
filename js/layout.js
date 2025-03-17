@@ -162,7 +162,7 @@ export class LayoutManager {
 
     // Add new method for default fade behavior
     setupDefaultFade() {
-        const buttons = document.querySelectorAll('.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn');
+        const buttons = document.querySelectorAll('.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn, .permalink-btn');
         
         // Ensure UI starts hidden
         buttons.forEach(btn => btn.style.opacity = '0');

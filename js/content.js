@@ -46,7 +46,7 @@ export class ContentManager {
     }
 
     hideNavigationElements() {
-        ['nav-btn', 'wall-btn', 'style-btn', 'fade-toggle-btn'].forEach(className => {
+        ['nav-btn', 'wall-btn', 'style-btn', 'fade-toggle-btn', 'permalink-btn'].forEach(className => {
             const elements = document.getElementsByClassName(className);
             if (elements) {
                 Array.from(elements).forEach(element => {
@@ -70,6 +70,19 @@ export class ContentManager {
             }
         } else {
             isOnlineMode = configData.mode === 'online';
+        }
+
+        // Handle permalink visibility and initial URL
+        const permalinkBtn = document.getElementById('permalinkBtn');
+        if (permalinkBtn) {
+            permalinkBtn.style.display = isOnlineMode ? 'flex' : 'none';
+            if (isOnlineMode) {
+                const params = new URLSearchParams();
+                params.set('content', 'how_to_use_this_guide'); // Default content
+                params.set('style', 'default'); // Default style
+                params.set('wallpaper', '0'); // Default wallpaper
+                permalinkBtn.href = `${configData.serverUrl}?${params.toString()}`;
+            }
         }
 
         this.storage.setOnlineMode(isOnlineMode);

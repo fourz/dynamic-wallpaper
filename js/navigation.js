@@ -114,7 +114,6 @@ export class NavigationManager {
             if (!isNaN(index) && index >= 0 && index < this.files.length) {
                 this.currentFileIndex = index;
             } else {
-                // Simple exact match with content folder
                 const nameIndex = this.findContentByName(contentParam);
                 if (nameIndex !== -1) {
                     this.currentFileIndex = nameIndex;
@@ -123,7 +122,6 @@ export class NavigationManager {
         }
         
         if (params.has('style')) {
-            // Simple stylesheet match without paths
             const styleParam = params.get('style');
             const styleIndex = this.stylesheetSets.findIndex(set => 
                 set === `stylesheets/${styleParam}.css`
@@ -132,23 +130,43 @@ export class NavigationManager {
                 this.currentStylesheetSet = styleIndex;
             }
         }
+
+        if (params.has('wallpaper')) {
+            const wallpaperParam = parseInt(params.get('wallpaper'));
+            if (!isNaN(wallpaperParam) && wallpaperParam >= 0 && wallpaperParam < this.wallpapers.length) {
+                this.currentWallpaperIndex = wallpaperParam;
+            }
+        }
     }
 
     updateUrlParams() {
         if (this.files.length === 0) return;
         
-        const params = new URLSearchParams(window.location.search);
-        // Use just the filename without extension
-        const fileName = this.getCurrentFile().split('/')[1];
+        const params = new URLSearchParams();
+        
+        // Add content parameter
+        const fileName = this.getCurrentFile().split('/')[1].replace('.json', '');
         params.set('content', fileName);
         
+        // Add style parameter
         if (this.stylesheetSets.length > 0) {
-            // Use just the filename without extension
-            const style = this.getCurrentStylesheetSet().split('/')[1];
+            const style = this.getCurrentStylesheetSet().split('/')[1].replace('.css', '');
             params.set('style', style);
         }
+
+        // Add wallpaper parameter
+        if (this.wallpapers.length > 0) {
+            params.set('wallpaper', this.currentWallpaperIndex.toString());
+        }
         
-        const newUrl = `${window.location.pathname}?${params.toString()}`;
-        window.history.replaceState({}, '', newUrl);
+        // Update URL and permalink
+        const urlWithParams = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+        window.history.replaceState({}, '', urlWithParams);
+
+        const permalinkBtn = document.getElementById('permalinkBtn');
+        if (permalinkBtn) {
+            permalinkBtn.href = urlWithParams;
+            permalinkBtn.title = `Permalink to: ${fileName}`;
+        }
     }
 }
