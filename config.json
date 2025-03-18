@@ -1,7 +1,7 @@
 {    
     "mode": "detect",
     "serverUrl": "https://localhost:8443",
-    "title": "Reference Sheets",
+    "title": "Reference Guide",
     "content": [
         "content/dynamic-wallpaper_config_guide.json",        
         "content/dynamic-wallpaper_css_guide.json",   

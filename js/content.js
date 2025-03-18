@@ -137,6 +137,14 @@ export class ContentManager {
     async initializeContent(configData) {
         const content = await this.storage.loadAllJSON(configData.content, this.navigation);
         if (content) {
+            // Look for heading in content when using URL parameters
+            if (this.navigation.useUrlParameters) {
+                const headingItem = content.find(item => item.style === "heading");
+                if (headingItem && headingItem.title) {
+                    document.title = headingItem.title;
+                }
+            }
+
             const formattedContent = content.map(item => {
                 // Process the item's text content to detect and format links
                 if (item.block) {
