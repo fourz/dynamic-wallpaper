@@ -119,46 +119,69 @@ export class NavigationManager {
         }
         
         if (params.has('style')) {
-            const styleIndex = this.stylesheetSets.findIndex(set => 
-                set === `stylesheets/${params.get('style')}.css`
-            );
-            if (styleIndex !== -1) this.currentStylesheetSet = styleIndex;
+            const styleParam = params.get('style');
+            const styleIndex = this.stylesheetSets.findIndex(set => {
+                // Handle array of stylesheets or single stylesheet
+                const stylesheets = Array.isArray(set) ? set : [set];
+                return stylesheets.some(sheet => 
+                    sheet.toLowerCase().includes(`/${styleParam.toLowerCase()}.css`)
+                );
+            });
+            if (styleIndex !== -1) {
+                this.currentStylesheetSet = styleIndex;
+            }
         }
 
         if (params.has('wallpaper')) {
-            const wallIndex = parseInt(params.get('wallpaper'));
+            const wallpaperParam = params.get('wallpaper');
+            // Try to parse as index first
+            const wallIndex = parseInt(wallpaperParam);
             if (!isNaN(wallIndex) && wallIndex >= 0 && wallIndex < this.wallpapers.length) {
                 this.currentWallpaperIndex = wallIndex;
+            } else {
+                // Try to find by filename if not a valid index
+                const wallpaperIndex = this.wallpapers.findIndex(wall => 
+                    wall.toLowerCase().includes(wallpaperParam.toLowerCase())
+                );
+                if (wallpaperIndex !== -1) {
+                    this.currentWallpaperIndex = wallpaperIndex;
+                }
             }
         }
     }
 
-    // Restore and improve permalink URL generation
+    // Improved permalink URL generation
     updatePermalinkAndUrl() {
-        // Only proceed if we have files to work with
         if (!this.files || this.files.length === 0) return null;
         
         try {
             const params = new URLSearchParams();
             const currentFile = this.getCurrentFile();
             const fileName = currentFile ? currentFile.split('/').pop().replace('.json', '') : '';
-            const styleSet = this.getCurrentStylesheetSet();
-            const style = styleSet ? styleSet.split('/').pop().replace('.css', '') : '';
+            const stylesetName = Object.keys(window.configData.stylesheets)[this.currentStylesheetSet];
             
-            // Build URL parameters
             params.set('content', fileName);
-            params.set('style', style);
+            params.set('styleset', stylesetName);
             params.set('wallpaper', this.currentWallpaperIndex.toString());
             
-            // Create full URL
-            const urlWithParams = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+            // Fix URL generation for offline mode
+            let baseUrl;
+            if (window.location.protocol === 'file:') {
+                // Get the current file path and ensure proper formatting
+                const currentPath = window.location.pathname;
+                // Remove any leading slashes and convert to proper file:// URL
+                baseUrl = `file:///${currentPath.replace(/^\/+/, '')}`;
+            } else {
+                baseUrl = window.location.origin + window.location.pathname;
+            }
+            
+            const urlWithParams = `${baseUrl}?${params.toString()}`;
             
             // Update browser URL if in parameter mode
             if (this.useUrlParameters) {
                 window.history.replaceState({}, '', urlWithParams);
             }
             
-            // Return the generated URL for use by other components
             return {
                 url: urlWithParams,
                 fileName: fileName

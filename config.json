@@ -41,10 +41,7 @@
         "images/wallpaper/VALLEY_BAY_DOUBLE.jpg",
         "images/wallpaper/wallpaper.png"
     ],
-    "stylesheets": {        
-        "set0": [
-            "stylesheets/small.css"
-        ],        
+    "stylesheets": {          
         "set1": [
             "stylesheets/tiny.css"
         ],

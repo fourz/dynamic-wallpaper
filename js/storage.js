@@ -93,42 +93,57 @@ export class StorageManager {
 
     async loadJSON(path) {
         try {
+            // If path is undefined, throw error early
+            if (!path) {
+                throw new Error('No content path specified');
+            }
+
             // Clean up path for offline mode to prevent double slashes
             const fullPath = this.onlineMode ? 
                 `${this.serverUrl}/${path}` : 
-                path.startsWith('/') ? path.substring(1) : path;
+                // For offline mode, ensure path starts without leading slash
+                path.replace(/^\/+/, '');
                 
             const response = await fetch(fullPath);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.text();
             return JSON.parse(data);
         } catch (error) {
-            console.error(`Failed to load ${path}`, error);
-            const errorMessage = this.getErrorMessage(path);
-            document.getElementById("content").innerText = errorMessage;
+            console.error(`Failed to load ${path}:`, error);
             throw error;
         }
     }
 
     async loadAllJSON(pattern, navigation) {
+        if (!pattern) {
+            throw new Error('No content pattern specified');
+        }
+
         if (Array.isArray(pattern)) {
             const files = pattern;
             console.log('Available content files:', files);
             
             // Set files in navigation system before loading default
-            const firstFile = navigation.setFiles(files);
+            navigation.setFiles(files);
             
             // Check URL parameters after setting files array
             const params = new URLSearchParams(window.location.search);
-            if (params.has('content') && this.onlineMode) {
+            if (params.has('content')) {
                 console.log('URL has content parameter:', params.get('content'));
                 navigation.setIndexFromParams(params);
-                // Use the file selected by parameter instead of default first
-                const selectedFile = navigation.getCurrentFile();
-                console.log('Selected content file:', selectedFile);
-                return files.length > 0 ? await this.loadJSON(selectedFile) : null;
             }
             
-            return files.length > 0 ? await this.loadJSON(firstFile) : null;
+            // Get current file after potential parameter handling
+            const selectedFile = navigation.getCurrentFile();
+            console.log('Selected content file:', selectedFile);
+            
+            if (!selectedFile) {
+                throw new Error('No content file selected');
+            }
+            
+            return await this.loadJSON(selectedFile);
         }
         if (typeof pattern === 'string' && pattern.includes('*')) {
             const files = this.getAvailableFiles();

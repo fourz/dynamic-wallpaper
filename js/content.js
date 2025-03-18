@@ -15,15 +15,20 @@ export class ContentManager {
     async initialize() {
         try {
             const configData = await this.storage.loadJSON('config.json');
+            window.configData = configData;
+            
             await this.initializeMode(configData);
             
             const params = new URLSearchParams(window.location.search);
-            const hasUrlParams = params.has('random') || params.has('content') || params.has('style');
+            // Check for URL parameters regardless of online/offline mode
+            const hasUrlParams = params.has('random') || params.has('content') || 
+                               params.has('styleset') || params.has('wallpaper');
             
-            this.navigation.setUseUrlParameters(this.storage.isOnlineMode() && hasUrlParams);
+            // Set URL parameter mode without online mode check
+            this.navigation.setUseUrlParameters(hasUrlParams);
             
-            // Hide navigation elements if using URL parameters
-            if (this.navigation.useUrlParameters) {
+            // Hide navigation elements if using URL parameters regardless of mode
+            if (hasUrlParams) {
                 this.hideNavigationElements();
             }
             
@@ -74,18 +79,17 @@ export class ContentManager {
             isOnlineMode = configData.mode === 'online';
         }
 
-        // Configure permalink visibility and initial state
-        // Only show permalink in online mode, with default parameters
+        // Configure permalink initial state regardless of mode
         const permalinkBtn = document.getElementById('permalinkBtn');
         if (permalinkBtn) {
-            permalinkBtn.style.display = isOnlineMode ? 'flex' : 'none';
-            if (isOnlineMode) {
-                const params = new URLSearchParams();
-                params.set('content', 'how_to_use_this_guide');
-                params.set('style', 'default');
-                params.set('wallpaper', '0');
-                permalinkBtn.href = `${configData.serverUrl}?${params.toString()}`;
-            }
+            const params = new URLSearchParams();
+            params.set('content', 'how_to_use_this_guide');
+            params.set('styleset', 'set1');
+            params.set('wallpaper', '0');
+            const baseUrl = window.location.protocol === 'file:' ? 
+                `file:///${window.location.pathname.replace(/^\//, '')}` : 
+                `${window.location.origin}${window.location.pathname}`;
+            permalinkBtn.href = `${baseUrl}?${params.toString()}`;
         }
 
         this.storage.setOnlineMode(isOnlineMode);
@@ -205,11 +209,11 @@ export class ContentManager {
                     this.storage.setNavigationState(this.navigation.getState());
                 }
                 
-                // Update permalink with proper separation of concerns:
-                // 1. NavigationManager generates the URL
-                // 2. LayoutManager updates the UI element
+                // Always update permalink regardless of URL parameter mode
                 const permalinkData = this.navigation.updatePermalinkAndUrl();
-                this.layout.updatePermalinkButton(permalinkData);
+                if (permalinkData) {
+                    this.layout.updatePermalinkButton(permalinkData);
+                }
             }
         } catch (error) {
             console.error(`Navigation failed for ${type}:`, error);
