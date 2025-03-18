@@ -1,8 +1,8 @@
 /**
  * Orchestrates content initialization and management
- * Coordinates between other managers for content operations
- * Handles application startup sequence and mode detection
- * Provides navigation and content state management
+ * Controls page title behavior:
+ * - Bookmarkable URLs: Use heading title from content
+ * - Regular browsing: Use catalog title from config.json
  */
 export class ContentManager {
     constructor(storage, navigation, config, layout) {
@@ -105,7 +105,8 @@ export class ContentManager {
     }
 
     setDocumentTitle(configData) {
-        if (configData.title) {
+        // Only set catalog title when not using bookmarkable URLs
+        if (!this.navigation.useUrlParameters && configData.title) {
             document.title = configData.title;
         }
     }
@@ -134,97 +135,106 @@ export class ContentManager {
         });
     }
 
+    // Simplified content processing method
+    processContentItem(item) {
+        const processFields = ['block', 'list', 'numberedList'];
+        processFields.forEach(field => {
+            if (item[field]) {
+                item[field] = Array.isArray(item[field]) ? 
+                    item[field].map(text => this.formatLinks(text)) : 
+                    this.formatLinks(item[field]);
+            }
+        });
+        
+        if (item.table?.rows) {
+            item.table.rows = item.table.rows.map(row => 
+                row.map(cell => this.formatLinks(cell))
+            );
+        }
+        return item;
+    }
+
     async initializeContent(configData) {
         const content = await this.storage.loadAllJSON(configData.content, this.navigation);
-        if (content) {
-            // Look for heading in content when using URL parameters
-            if (this.navigation.useUrlParameters) {
-                const headingItem = content.find(item => item.style === "heading");
-                if (headingItem && headingItem.title) {
-                    document.title = headingItem.title;
-                }
-            }
-
-            const formattedContent = content.map(item => {
-                // Process the item's text content to detect and format links
-                if (item.block) {
-                    item.block = item.block.map(text => this.formatLinks(text));
-                }
-                if (item.list) {
-                    item.list = item.list.map(text => this.formatLinks(text));
-                }
-                if (item.numberedList) {
-                    item.numberedList = item.numberedList.map(text => this.formatLinks(text));
-                }
-                if (item.table) {
-                    item.table.rows = item.table.rows.map(row => 
-                        row.map(cell => this.formatLinks(cell))
-                    );
-                }
-                return this.layout.formatContent(item);
-            }).join('');
-            
-            const styleElement = document.createElement('style');
-            styleElement.textContent = `
-                .content-link {
-                    color: #ffffff;
-                    text-decoration: underline;
-                    text-decoration-thickness: 1px;
-                }
-                .content-link:visited {
-                    color: #ffffff;
-                }
-                .content-link:hover {
-                    text-decoration-thickness: 2px;
-                }
-            `;
-            document.head.appendChild(styleElement);
-            
-            document.getElementById("content").innerHTML = formattedContent;
-        } else {
+        if (!content) {
             document.getElementById("content").innerHTML = '<p>No content files found</p>';
+            return;
         }
+
+        // Set page title based on mode
+        const headingItem = content.find(item => item.style === "heading");
+        if (headingItem?.title) {
+            if (this.navigation.useUrlParameters) {
+                // Bookmarkable URLs: use heading title
+                document.title = headingItem.title;
+            }
+        }
+
+        // Process content with simplified logic
+        const formattedContent = content
+            .map(item => this.processContentItem(item))
+            .map(item => this.layout.formatContent(item))
+            .join('');
+
+        this.appendContentStyles();
+        document.getElementById("content").innerHTML = formattedContent;
+    }
+
+    // Extracted content styles to separate method
+    appendContentStyles() {
+        const styleElement = document.createElement('style');
+        styleElement.textContent = `
+            .content-link {
+                color: #ffffff;
+                text-decoration: underline;
+                text-decoration-thickness: 1px;
+            }
+            .content-link:visited { color: #ffffff; }
+            .content-link:hover { text-decoration-thickness: 2px; }
+        `;
+        document.head.appendChild(styleElement);
     }
 
     // Single method to handle all navigation updates
     async handleNavigation(type, direction) {
-        let result;
-        try {
-            switch(type) {
-                case 'content':
-                    result = this.navigation.navigateContent(direction);
-                    if (result) {
-                        await this.config.loadContent(result, path => this.storage.loadJSON(path));
-                    }
-                    break;
-                case 'wallpaper':
-                    result = this.navigation.navigateWallpaper(direction);
-                    if (result) {
-                        await this.config.setWallpaper(result);
-                    }
-                    break;
-                case 'stylesheet':
-                    result = this.navigation.navigateStylesheet(direction);
-                    if (result) {
-                        this.config.loadStylesheets(result);
-                    }
-                    break;
+        const navigationActions = {
+            content: {
+                navigate: () => this.navigation.navigateContent(direction),
+                handle: (result) => this.config.loadContent(result, path => this.storage.loadJSON(path))
+            },
+            wallpaper: {
+                navigate: () => this.navigation.navigateWallpaper(direction),
+                handle: (result) => this.config.setWallpaper(result)
+            },
+            stylesheet: {
+                navigate: () => this.navigation.navigateStylesheet(direction),
+                handle: (result) => this.config.loadStylesheets(result)
             }
+        };
 
+        try {
+            const action = navigationActions[type];
+            if (!action) return;
+
+            const result = action.navigate();
             if (result) {
-                // Update storage state if not using URL parameters
-                if (!this.navigation.useUrlParameters) {
-                    this.storage.setNavigationState(this.navigation.getState());
-                }
-                
-                // Always update permalink regardless of URL parameter mode
-                const permalinkData = this.navigation.updatePermalinkAndUrl();
-                if (permalinkData) {
-                    this.layout.updatePermalinkButton(permalinkData);
-                }
+                await action.handle(result);
+                this.updateNavigationState(result);
             }
         } catch (error) {
             console.error(`Navigation failed for ${type}:`, error);
+        }
+    }
+
+    // Extracted navigation state update logic
+    updateNavigationState(result) {
+        if (!this.navigation.useUrlParameters) {
+            this.storage.setNavigationState(this.navigation.getState());
+        }
+        
+        const permalinkData = this.navigation.updatePermalinkAndUrl();
+        if (permalinkData) {
+            this.layout.updatePermalinkButton(permalinkData);
         }
     }
 
