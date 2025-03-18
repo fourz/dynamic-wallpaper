@@ -1,0 +1,83 @@
+[
+    {
+        "style": "heading",
+        "title": "Software Design Principles Guide"
+    },
+    {
+        "title": "SOLID Principles",
+        "table": {
+            "headers": ["Principle", "Description", "Key Point"],
+            "rows": [
+                ["Single Responsibility", "A class should have only one reason to change", "Split classes by responsibility"],
+                ["Open/Closed", "Open for extension, closed for modification", "Use interfaces and inheritance"],
+                ["Liskov Substitution", "Subtypes must be substitutable for base types", "Maintain base class contracts"],
+                ["Interface Segregation", "Clients shouldn't depend on unused methods", "Create focused interfaces"],
+                ["Dependency Inversion", "Depend on abstractions, not implementations", "Use dependency injection"]
+            ]
+        }
+    },
+    {
+        "title": "Core Principles",
+        "table": {
+            "headers": ["Principle", "Meaning", "Example"],
+            "rows": [
+                ["DRY", "Don't Repeat Yourself", "Extract common code into shared methods"],
+                ["KISS", "Keep It Simple, Stupid", "Choose simple solutions over complex ones"],
+                ["YAGNI", "You Ain't Gonna Need It", "Only build what's currently needed"],
+                ["Separation of Concerns", "Different aspects should be separated", "Split UI, business logic, and data"],
+                ["Composition over Inheritance", "Prefer flexible composition", "Use interfaces instead of deep inheritance"]
+            ]
+        }
+    },
+    {
+        "title": "Architecture Patterns",
+        "table": {
+            "headers": ["Pattern", "Use Case", "Key Benefit"],
+            "rows": [
+                ["MVC", "UI applications", "Separates data, logic, and presentation"],
+                ["Repository", "Data access", "Abstracts data storage details"],
+                ["Factory", "Object creation", "Centralizes object instantiation"],
+                ["Observer", "Event handling", "Loose coupling between components"],
+                ["Strategy", "Algorithm variation", "Runtime behavior switching"]
+            ]
+        }
+    },
+    {
+        "title": "Anti-Patterns",
+        "table": {
+            "headers": ["Pattern", "Problem", "Solution"],
+            "rows": [
+                ["God Class", "Class does too much", "Split into smaller, focused classes"],
+                ["Tight Coupling", "Hard dependencies", "Use dependency injection"],
+                ["Magic Numbers", "Unexplained constants", "Use named constants or enums"],
+                ["Copy-Paste Code", "Duplicate logic", "Extract to shared methods"],
+                ["Premature Optimization", "Over-engineering", "Profile first, optimize later"]
+            ]
+        }
+    },
+    {
+        "title": "Code Quality Metrics",
+        "table": {
+            "headers": ["Metric", "Good Range", "Warning Signs"],
+            "rows": [
+                ["Cyclomatic Complexity", "1-10", "Methods with many branches"],
+                ["Method Length", "5-15 lines", "Long methods need splitting"],
+                ["Class Length", "50-200 lines", "Large classes need decomposing"],
+                ["Dependencies", "1-5 per class", "Too many dependencies"],
+                ["Test Coverage", "70-100%", "Untested critical paths"]
+            ]
+        }
+    },
+    {
+        "title": "Best Practices",
+        "list": [
+            "Write self-documenting code",
+            "Use meaningful variable names",
+            "Keep methods small and focused",
+            "Write tests before fixing bugs",
+            "Review code regularly",
+            "Document architectural decisions",
+            "Maintain consistent coding style"
+        ]
+    }
+]

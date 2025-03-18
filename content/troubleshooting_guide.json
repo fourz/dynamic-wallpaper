@@ -1,0 +1,82 @@
+[
+    {
+        "style": "heading",
+        "title": "Troubleshooting Guide"
+    },
+    {
+        "title": "Six-Step Methodology",
+        "table": {
+            "headers": ["Step", "Action", "Key Questions"],
+            "rows": [
+                ["1. Identify", "Define the problem", "What changed? When did it start? Who's affected?"],
+                ["2. Theory", "Establish possible causes", "What are the most likely causes? Hardware or software?"],
+                ["3. Test", "Verify the theory", "Can the issue be reproduced? Does testing confirm theory?"],
+                ["4. Plan", "Establish action plan", "What's the fix? What's the backup plan?"],
+                ["5. Implement", "Execute solution", "Did you document changes? Tested the fix?"],
+                ["6. Verify", "Confirm resolution", "Is it fully fixed? Any side effects?"]
+            ]
+        }
+    },
+    {
+        "title": "Initial Response",
+        "table": {
+            "headers": ["Task", "Action Points"],
+            "rows": [
+                ["Gather Info", "Error messages, recent changes, affected systems"],
+                ["Document", "Time, symptoms, user reports, environment"],
+                ["Quick Fixes", "Check power, connections, basic settings"],
+                ["Scope", "Single user or system-wide? Intermittent or constant?"],
+                ["Impact", "Business critical? Security risk? Performance issue?"]
+            ]
+        }
+    },
+    {
+        "title": "Common Issues Matrix",
+        "table": {
+            "headers": ["Category", "First Checks", "Common Solutions"],
+            "rows": [
+                ["Network", "Ping, DNS, IP config", "Reset adapter, check DHCP, verify DNS"],
+                ["Hardware", "POST codes, LEDs, connections", "Reseat components, update drivers, check logs"],
+                ["Software", "Event logs, recent updates", "Restart service, reinstall, rollback updates"],
+                ["Security", "Access rights, authentication", "Check permissions, scan malware, verify policies"],
+                ["Performance", "Resource usage, bottlenecks", "Clear cache, end processes, check disk space"]
+            ]
+        }
+    },
+    {
+        "title": "Documentation Requirements",
+        "table": {
+            "headers": ["Element", "Details to Record"],
+            "rows": [
+                ["Problem", "Initial description and symptoms"],
+                ["Environment", "OS, hardware, software versions"],
+                ["Actions", "Steps taken, results observed"],
+                ["Resolution", "Final solution, implementation notes"],
+                ["Prevention", "Root cause, preventive measures"]
+            ]
+        }
+    },
+    {
+        "title": "Best Practices",
+        "list": [
+            "1. Always create a backup before making changes",
+            "2. Test in isolated environment when possible",
+            "3. Document all steps and changes made",
+            "4. Follow security protocols and permissions",
+            "5. Establish and verify success criteria"
+        ]
+    },
+    {
+        "title": "Escalation Guidelines",
+        "table": {
+            "headers": ["Level", "When to Escalate"],
+            "rows": [
+                ["Time", "Issue exceeds standard resolution time"],
+                ["Scope", "Problem affects multiple systems/users"],
+                ["Skills", "Required expertise beyond current level"],
+                ["Security", "Potential security breach detected"],
+                ["Impact", "Business-critical systems affected"]
+            ]
+        }
+    }
+]

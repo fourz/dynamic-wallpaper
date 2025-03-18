@@ -13,6 +13,7 @@
         "content/java_reference.json", 
         "content/json_reference.json",
         "content/raspbian_reference.json",
+        "content/troubleshooting_guide.json",
         "content/devops_practices.json",
         "content/learning_languages_guide.json",
         "content/writing_software_guide.json",        

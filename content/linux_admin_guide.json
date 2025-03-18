@@ -1,0 +1,128 @@
+[
+    {
+        "style": "heading",
+        "title": "Linux Administration Guide"
+    },
+    {
+        "title": "System Information",
+        "table": {
+            "headers": ["Command", "Purpose", "Example"],
+            "rows": [
+                ["uname -a", "System/kernel info", "Linux hostname 5.15.0-x86_64"],
+                ["lsb_release -a", "Distribution info", "Ubuntu 22.04 LTS"],
+                ["df -h", "Disk space usage", "Shows mounted filesystems"],
+                ["free -h", "Memory usage", "Shows RAM/swap usage"],
+                ["top/htop", "Process monitoring", "Real-time system stats"],
+                ["uptime", "System uptime", "Shows load averages"],
+                ["who", "Logged in users", "Displays active sessions"],
+                ["ps aux", "Process list", "Detailed process info"],
+                ["lscpu", "CPU info", "Shows CPU architecture"],
+                ["lshw", "Hardware info", "Detailed hardware summary"]
+            ]
+        }
+    },
+    {
+        "title": "Package Management",
+        "table": {
+            "headers": ["Task", "Debian/Ubuntu", "RHEL/CentOS"],
+            "rows": [
+                ["Update repos", "apt update", "dnf check-update"],
+                ["Upgrade packages", "apt upgrade", "dnf upgrade"],
+                ["Install package", "apt install pkg", "dnf install pkg"],
+                ["Remove package", "apt remove pkg", "dnf remove pkg"],
+                ["Search package", "apt search pkg", "dnf search pkg"],
+                ["List packages", "dpkg -l", "rpm -qa"]
+            ]
+        }
+    },
+    {
+        "title": "User Management",
+        "table": {
+            "headers": ["Command", "Purpose", "Example"],
+            "rows": [
+                ["useradd", "Create user", "useradd -m -s /bin/bash username"],
+                ["usermod", "Modify user", "usermod -aG sudo username"],
+                ["passwd", "Set password", "passwd username"],
+                ["chown", "Change ownership", "chown user:group file"],
+                ["chmod", "Change permissions", "chmod 755 file"],
+                ["userdel", "Delete user", "userdel -r username"],
+                ["groups", "List groups", "groups username"],
+                ["su", "Switch user", "su - username"],
+                ["sudo", "Run as superuser", "sudo command"],
+                ["visudo", "Edit sudoers file", "visudo"],
+                ["whoami", "Current user", "whoami"]
+            ]
+        }
+    },
+    {
+        "title": "Service Management",
+        "table": {
+            "headers": ["Command", "Purpose", "Example"],
+            "rows": [
+                ["systemctl start", "Start service", "systemctl start nginx"],
+                ["systemctl status", "Check service", "systemctl status ssh"],
+                ["systemctl enable", "Auto-start on boot", "systemctl enable postgresql"],
+                ["journalctl", "View logs", "journalctl -u service-name"],
+                ["systemctl restart", "Restart service", "systemctl restart apache2"],
+                ["systemctl stop", "Stop service", "systemctl stop mysql"],
+                ["systemctl reload", "Reload config", "systemctl reload nginx"],
+                ["systemctl disable", "Disable auto-start", "systemctl disable ssh"]
+            ]
+        }
+    },
+    {
+        "title": "Network Tools",
+        "table": {
+            "headers": ["Command", "Purpose", "Example"],
+            "rows": [
+                ["ip addr", "Network interfaces", "Shows IP addresses"],
+                ["netstat -tuln", "Open ports", "Lists listening ports"],
+                ["ss -tunlp", "Socket statistics", "Modern netstat alternative"],
+                ["nslookup", "DNS queries", "nslookup domain.com"],
+                ["curl", "HTTP requests", "curl -I https://site.com"],
+                ["traceroute", "Trace route", "traceroute domain.com"],
+                ["ifconfig", "Legacy interface tool", "ifconfig eth0"],
+                ["route", "Routing table", "Shows IP routing table"]
+            ]
+        }
+    },
+    {
+        "title": "Maintenance Tasks",
+        "table": {
+            "headers": ["Task", "Command", "Schedule"],
+            "rows": [
+                ["Update system", "apt update && apt upgrade", "Weekly"],
+                ["Clean package cache", "apt clean", "Monthly"],
+                ["Check disk space", "ncdu /", "Weekly"],
+                ["Monitor logs", "tail -f /var/log/syslog", "Daily"],
+                ["Backup config", "tar -czf config-backup.tar.gz /etc", "Monthly"],
+                ["Check cron jobs", "crontab -l", "Weekly"]
+            ]
+        }
+    },
+    {
+        "title": "Security Basics",
+        "table": {
+            "headers": ["Task", "Command/Tool", "Purpose"],
+            "rows": [
+                ["Check failed logins", "faillog -a", "Monitor login attempts"],
+                ["List open ports", "lsof -i", "Security audit"],
+                ["Check SSH config", "sshd -T", "SSH security settings"],
+                ["Update firewall", "ufw status", "Firewall management"],
+                ["Monitor auth logs", "tail /var/log/auth.log", "Security monitoring"]
+            ]
+        }
+    },
+    {
+        "title": "Best Practices",
+        "list": [
+            "Regular system updates",
+            "Monitor system resources",
+            "Backup critical data",
+            "Review system logs",
+            "Use SSH key authentication",
+            "Implement firewall rules",
+            "Keep software versions current"
+        ]
+    }
+]
