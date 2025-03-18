@@ -1,22 +1,31 @@
 /**
- * Controls content layout and visual presentation by providing:
- * - Content formatting for different data types through template generation
- * - Content fade animation functionality with multiple fade modes
- * - Stylesheet-aware formatting decisions for responsive layouts
+ * Controls content layout and visual presentation
+ * Implemented as a mathematical state machine for fade behaviors
  */
+import { DOMUtils, StateUtils } from './utils.js';
+
 export class LayoutManager {
     constructor() {
-        // Initialize fade system with 40s delay before triggering mode-specific fade
-        this.fadeToggleEnabled = false;
-        this.fadeTimeout = null;
-        this.lastMouseMoveTime = 0;
-        this.FADE_DELAY = 40000; 
-        this.uiFadeTimeout = null; // Add new property for UI fade timeout
-        // Fade states determine UI/content visibility behavior:
-        // - default: UI fades in/out on hover
-        // - usage: Everything always visible 
-        // - fade-out: Content fades to 30% after delay
-        // - wallpaper: Everything fades to 0% after delay
+        this.FADE_DELAY = 40000;
+        this.UI_FADE_DELAY = 2000;
+        
+        // Define fade state machine transitions (mathematical state diagram)
+        this.fadeStates = ['default', 'usage', 'fade-out', 'wallpaper'];
+        this.stateMachine = StateUtils.createStateMachine('default', {
+            'default': { next: 'usage' },
+            'usage': { next: 'fade-out' },
+            'fade-out': { next: 'wallpaper' },
+            'wallpaper': { next: 'default' }
+        });
+        
+        // Cache DOM selectors for performance
+        this.selectors = {
+            content: '#content',
+            buttons: '.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn, .permalink-btn'
+        };
+        
+        // Cleanup handlers
+        this.cleanupFunctions = [];
         this.fadeState = 'default';
     }
 
@@ -84,34 +93,30 @@ export class LayoutManager {
         return '';
     }
 
-    // Fading methods
+    // State machine-based fade toggle
     initFadeToggle(storage) {
-        this.fadeState = storage.getFadeState() || 'default'; // Start with default mode
-        const fadeToggleBtn = document.getElementById('fadeToggleBtn');
+        this.fadeState = storage.getFadeState() || 'default';
+        const fadeToggleBtn = DOMUtils.getElement('fadeToggleBtn');
         
         this.updateFadeButtonState(fadeToggleBtn);
         this.applyFadeState();
         
-        fadeToggleBtn.addEventListener('click', () => this.toggleFade(storage));
-    }
-
-    toggleFade(storage) {
-        const states = ['default', 'usage', 'fade-out', 'wallpaper'];
-        const currentIndex = states.indexOf(this.fadeState);
-        this.fadeState = states[(currentIndex + 1) % states.length];
-        
-        storage.setFadeState(this.fadeState);
-        
-        const fadeToggleBtn = document.getElementById('fadeToggleBtn');
-        this.updateFadeButtonState(fadeToggleBtn);
-        this.applyFadeState();
+        fadeToggleBtn.addEventListener('click', () => {
+            // Use mathematical state transition
+            this.fadeState = StateUtils.cycleState(this.fadeState, this.fadeStates);
+            storage.setFadeState(this.fadeState);
+            
+            this.updateFadeButtonState(fadeToggleBtn);
+            this.applyFadeState();
+        });
     }
 
     updateFadeButtonState(button) {
+        // Function composition for class manipulation
         button.className = 'fade-toggle-btn';
         button.classList.add(this.fadeState);
         
-        // Set an appropriate title based on the mode
+        // Map of states to descriptions (mathematical function)
         const titles = {
             'default': 'Default Mode: UI fades in/out on hover',
             'usage': 'Usage Mode: Always visible',
@@ -122,173 +127,123 @@ export class LayoutManager {
         button.title = titles[this.fadeState] || `Fade Mode: ${this.fadeState}`;
     }
 
+    // Apply state using algebraic state machine
     applyFadeState() {
-        const contentDiv = document.getElementById('content');
-        const buttons = document.querySelectorAll('.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn');
+        this.cleanupState();
         
-        // First remove all state classes
-        contentDiv.classList.remove('default', 'usage', 'fade-out', 'wallpaper');
-        buttons.forEach(btn => btn.classList.remove('default', 'usage', 'fade-out', 'wallpaper'));
-        
-        // Stop any existing fade monitoring
-        this.stopFadeMonitoring();
-        
-        // Set content to fully visible by default
-        contentDiv.style.opacity = '1';
-        
-        switch(this.fadeState) {
-            case 'default':
-                // Set up mouse move listener for UI visibility
-                this.setupDefaultFade();
-                break;
-                
-            case 'usage':
-                contentDiv.classList.add('usage');
-                buttons.forEach(btn => {
-                    btn.classList.add('usage');
-                    btn.style.opacity = getComputedStyle(document.documentElement)
-                        .getPropertyValue('--ui-usage-opacity').trim() || '1';
-                });
-                break;
-                
-            case 'fade-out':
-            case 'wallpaper':
-                contentDiv.classList.add(this.fadeState);
-                buttons.forEach(btn => btn.classList.add(this.fadeState));
-                this.startFadeMonitoring();
-                break;
-        }
-    }
-
-    // Add new method for default fade behavior
-    setupDefaultFade() {
-        const buttons = document.querySelectorAll('.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn, .permalink-btn');
-        
-        // Ensure UI starts hidden
-        buttons.forEach(btn => btn.style.opacity = '0');
-        
-        // Clear existing listener if any
-        if (this.defaultFadeListener) {
-            document.removeEventListener('mousemove', this.defaultFadeListener);
-        }
-        
-        // Create new listener
-        this.defaultFadeListener = () => {
-            buttons.forEach(btn => btn.style.opacity = '1');
-            
-            // Clear existing timeout
-            if (this.uiFadeTimeout) {
-                clearTimeout(this.uiFadeTimeout);
-            }
-            
-            // Set new timeout to fade out UI
-            this.uiFadeTimeout = setTimeout(() => {
-                if (this.fadeState === 'default') {
-                    buttons.forEach(btn => btn.style.opacity = '0');
-                }
-            }, 2000); // 2 second delay before fade out
+        // State implementation map (mathematical function mapping)
+        const stateImplementation = {
+            'default': this.applyDefaultState.bind(this),
+            'usage': this.applyUsageState.bind(this),
+            'fade-out': () => this.applyFadeOutState('0.3'),
+            'wallpaper': () => this.applyFadeOutState('0')
         };
         
-        document.addEventListener('mousemove', this.defaultFadeListener);
-    }
-
-    setupAutoFade() {
-        const contentDiv = document.getElementById('content');
-        const buttons = document.querySelectorAll('.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn');
+        // Apply classes to elements
+        const contentDiv = DOMUtils.getElement('content');
+        const buttons = DOMUtils.getElements(this.selectors.buttons);
         
-        contentDiv.style.opacity = '0';
-        buttons.forEach(btn => btn.style.opacity = '0');
-        
-        document.addEventListener('mousemove', () => {
-            if (this.fadeState === 'auto') {
-                contentDiv.style.opacity = '1';
-                buttons.forEach(btn => btn.style.opacity = '1');
-                clearTimeout(this.autoFadeTimeout);
-                this.autoFadeTimeout = setTimeout(() => {
-                    if (this.fadeState === 'auto') {
-                        contentDiv.style.opacity = '0';
-                        buttons.forEach(btn => btn.style.opacity = '0');
-                    }
-                }, 2000);
-            }
-        });
-    }
-
-    // Monitor mouse activity to trigger fades after delay
-    startFadeMonitoring() {
-        this.lastMouseMoveTime = Date.now();
-        this.boundHandleMouseMove = this.handleMouseMove.bind(this);
-        document.addEventListener('mousemove', this.boundHandleMouseMove);
-        this.scheduleFadeCheck();
-    }
-
-    // Cleanup fade monitoring when changing modes
-    stopFadeMonitoring() {
-        if (this.boundHandleMouseMove) {
-            document.removeEventListener('mousemove', this.boundHandleMouseMove);
-        }
-        if (this.fadeTimeout) {
-            clearTimeout(this.fadeTimeout);
-            this.fadeTimeout = null;
-        }
-        
-        // Also clean up default fade listener
-        if (this.defaultFadeListener) {
-            document.removeEventListener('mousemove', this.defaultFadeListener);
-            this.defaultFadeListener = null;
-        }
-        if (this.uiFadeTimeout) {
-            clearTimeout(this.uiFadeTimeout);
-            this.uiFadeTimeout = null;
-        }
-    }
-
-    // Reset fade timer on mouse movement
-    handleMouseMove() {
-        this.lastMouseMoveTime = Date.now();
-        this.restoreContentOpacity();
-    }
-
-    // Check if enough time has passed to trigger fade
-    checkFadeContent() {
-        if (this.fadeState === 'fade-out' || this.fadeState === 'wallpaper') {
-            const contentDiv = document.getElementById('content');
-            const buttons = document.querySelectorAll('.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn');
-            const now = Date.now();
-            
-            if (now - this.lastMouseMoveTime >= this.FADE_DELAY) {
-                // Apply mode-specific opacity
-                const opacity = this.fadeState === 'wallpaper' ? '0' : '0.3';
-                contentDiv.style.opacity = opacity;
-                buttons.forEach(btn => btn.style.opacity = opacity);
-            }
-        }
-        
-        this.scheduleFadeCheck();
-    }
-
-    // Schedule next fade check to run every second
-    scheduleFadeCheck() {
-        if (this.fadeTimeout) {
-            clearTimeout(this.fadeTimeout);
-        }
-        this.fadeTimeout = setTimeout(() => this.checkFadeContent(), 1000);
-    }
-
-    // Restore visibility on interaction based on fade mode
-    restoreContentOpacity() {
-        const contentDiv = document.getElementById('content');
-        const buttons = document.querySelectorAll('.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn');
-        
-        // Make content visible unless in wallpaper mode
-        if (this.fadeState !== 'wallpaper') {
-            contentDiv.style.opacity = '1';
-        }
-        
-        // Always show UI on interaction
-        buttons.forEach(btn => {
+        // Reset DOM state (idempotent operation)
+        contentDiv.classList.remove(...this.fadeStates);
+        DOMUtils.applyToAll(buttons, btn => {
+            btn.classList.remove(...this.fadeStates);
             btn.style.opacity = '1';
         });
+        contentDiv.style.opacity = '1';
+        
+        // Apply current state
+        contentDiv.classList.add(this.fadeState);
+        DOMUtils.applyToAll(buttons, btn => btn.classList.add(this.fadeState));
+        
+        // Execute state-specific logic
+        if (stateImplementation[this.fadeState]) {
+            stateImplementation[this.fadeState]();
+        }
+    }
+    
+    // State-specific implementations
+    applyDefaultState() {
+        const buttons = DOMUtils.getElements(this.selectors.buttons);
+        
+        // Set initial state
+        DOMUtils.applyToAll(buttons, btn => btn.style.opacity = '0');
+        
+        // Define mousemove handler
+        const handleMouseMove = () => {
+            if (this.fadeState !== 'default') return;
+            
+            DOMUtils.applyToAll(buttons, btn => btn.style.opacity = '1');
+            
+            clearTimeout(this.uiFadeTimeout);
+            this.uiFadeTimeout = setTimeout(() => {
+                if (this.fadeState === 'default') {
+                    DOMUtils.applyToAll(buttons, btn => btn.style.opacity = '0');
+                }
+            }, this.UI_FADE_DELAY);
+        };
+        
+        // Setup and register for cleanup
+        document.addEventListener('mousemove', handleMouseMove);
+        this.registerCleanup(() => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            clearTimeout(this.uiFadeTimeout);
+        });
+    }
+    
+    applyUsageState() {
+        const buttons = DOMUtils.getElements(this.selectors.buttons);
+        const opacity = getComputedStyle(document.documentElement)
+            .getPropertyValue('--ui-usage-opacity').trim() || '1';
+            
+        DOMUtils.applyToAll(buttons, btn => btn.style.opacity = opacity);
+    }
+    
+    applyFadeOutState(targetOpacity) {
+        const contentDiv = DOMUtils.getElement('content');
+        const buttons = DOMUtils.getElements(this.selectors.buttons);
+        
+        // Track last activity time
+        let lastActivityTime = Date.now();
+        
+        // Define handlers using pure functions
+        const handleActivity = () => {
+            lastActivityTime = Date.now();
+            contentDiv.style.opacity = '1';
+            DOMUtils.applyToAll(buttons, btn => btn.style.opacity = '1');
+        };
+        
+        const checkInactivity = () => {
+            if (this.fadeState !== 'fade-out' && this.fadeState !== 'wallpaper') return;
+            
+            const inactiveTime = Date.now() - lastActivityTime;
+            if (inactiveTime >= this.FADE_DELAY) {
+                contentDiv.style.opacity = targetOpacity;
+                DOMUtils.applyToAll(buttons, btn => btn.style.opacity = targetOpacity);
+            }
+            
+            this.fadeTimeout = setTimeout(checkInactivity, 1000);
+        };
+        
+        // Setup handlers
+        document.addEventListener('mousemove', handleActivity);
+        this.fadeTimeout = setTimeout(checkInactivity, 1000);
+        
+        // Register cleanup
+        this.registerCleanup(() => {
+            document.removeEventListener('mousemove', handleActivity);
+            clearTimeout(this.fadeTimeout);
+        });
+    }
+    
+    // Cleanup management using functional approach
+    registerCleanup(cleanupFn) {
+        this.cleanupFunctions.push(cleanupFn);
+    }
+    
+    cleanupState() {
+        // Execute all cleanup functions
+        this.cleanupFunctions.forEach(cleanup => cleanup());
+        this.cleanupFunctions = [];
     }
 
     // Add method to update only the permalink button UI

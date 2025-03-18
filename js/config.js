@@ -24,27 +24,39 @@ export class ConfigManager {
     }
 
     loadStylesheets(stylesheets) {
+        // Remove existing stylesheets
         document.querySelectorAll('link[rel="stylesheet"]').forEach(link => link.remove());
-        stylesheets.forEach(stylesheet => {
+        
+        // Handle single stylesheet or array
+        const sheets = Array.isArray(stylesheets) ? stylesheets : [stylesheets];
+        
+        // Load all stylesheets in order
+        sheets.forEach(stylesheet => {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = stylesheet;
+            link.href = this.getResourcePath(stylesheet);
             document.head.appendChild(link);
         });
+    }
+
+    getResourcePath(path) {
+        return this.isOnlineMode ? `${this.serverUrl}/${path.replace(/^\/+/, '')}` : path;
     }
 
     setWallpaper(wallpaperPath) {
         return new Promise((resolve, reject) => {
             const img = new Image();
+            const fullPath = this.getResourcePath(wallpaperPath);
+            
             img.onload = () => {
-                document.body.style.backgroundImage = `url('${this.isOnlineMode ? `${this.serverUrl}/${wallpaperPath}` : wallpaperPath}')`;
+                document.body.style.backgroundImage = `url('${fullPath}')`;
                 resolve();
             };
             img.onerror = () => {
                 console.error(`Failed to load wallpaper: ${wallpaperPath}`);
                 reject();
             };
-            img.src = this.isOnlineMode ? `${this.serverUrl}/${wallpaperPath}` : wallpaperPath;
+            img.src = fullPath;
         });
     }
 
@@ -52,45 +64,56 @@ export class ConfigManager {
         const foundWallpapers = new Set();
         const patternList = Array.isArray(patterns) ? patterns : [patterns];
 
-        const testImage = (path) => new Promise((resolve) => {
-            const img = new Image();
-            img.onload = () => resolve(true);
-            img.onerror = () => resolve(false);
-            img.src = this.isOnlineMode ? `${this.serverUrl}/${path}` : path;
-        });
+        const testImage = async (path) => {
+            try {
+                const fullPath = this.getResourcePath(path);
+                const img = new Image();
+                return await new Promise((resolve) => {
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = fullPath;
+                });
+            } catch (error) {
+                return false;
+            }
+        };
 
         for (const pattern of patternList) {
             if (pattern.includes('*')) {
                 const [basePath, filePattern] = pattern.split('*');
-                try {
-                    const indexes = Array.from({length: 10}, (_, i) => i + 1);
-                    for (const idx of indexes) {
-                        const path = `${basePath}${idx}${filePattern}`;
-                        if (await testImage(path)) {
-                            foundWallpapers.add(path);
-                        }
+                const indexes = Array.from({length: 20}, (_, i) => i + 1); // Expanded to check more files
+                await Promise.all(indexes.map(async idx => {
+                    const path = `${basePath}${idx}${filePattern}`;
+                    if (await testImage(path)) {
+                        foundWallpapers.add(path);
                     }
-                } catch (error) {
-                    console.warn(`Failed to scan ${basePath}`, error);
-                }
-            } else if (this.isOnlineMode || await testImage(pattern)) {
+                }));
+            } else if (await testImage(pattern)) {
                 foundWallpapers.add(pattern);
             }
         }
+        
         return Array.from(foundWallpapers).sort();
     }
 
     async loadContent(currentFile, loadJSONFn) {
-        if (currentFile) {
-            try {
-                const content = await loadJSONFn(currentFile);
-                if (this.formatContent) {
-                    const formattedContent = content.map(this.formatContent).join('');
-                    document.getElementById("content").innerHTML = formattedContent;
-                }
-            } catch (error) {
-                console.error('Failed to load content:', error);
+        if (!currentFile) return;
+        
+        try {
+            const content = await loadJSONFn(currentFile);
+            if (this.formatContent && content) {
+                const formattedContent = content
+                    .map(this.formatContent)
+                    .join('');
+                document.getElementById("content").innerHTML = formattedContent;
+                return true;
             }
+            return false;
+        } catch (error) {
+            console.error('Failed to load content:', error);
+            document.getElementById("content").innerHTML = 
+                `<p class="error">Failed to load content: ${error.message}</p>`;
+            return false;
         }
     }
 }

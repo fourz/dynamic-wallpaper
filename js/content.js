@@ -4,12 +4,18 @@
  * - Bookmarkable URLs: Use heading title from content
  * - Regular browsing: Use catalog title from config.json
  */
+import { DOMUtils, URLUtils, ErrorUtils } from './utils.js';
+
 export class ContentManager {
     constructor(storage, navigation, config, layout) {
         this.storage = storage;
         this.navigation = navigation;
         this.config = config;
         this.layout = layout;
+        
+        // Pre-calculate constants to avoid repeated computation
+        this.UI_ELEMENTS = ['.nav-btn', '.wall-btn', '.style-btn', '.fade-toggle-btn', '.permalink-btn'];
+        this.URL_PARAMS = ['random', 'content', 'styleset', 'wallpaper'];
     }
 
     async initialize() {
@@ -20,78 +26,83 @@ export class ContentManager {
             await this.initializeMode(configData);
             
             const params = new URLSearchParams(window.location.search);
-            // Check for URL parameters regardless of online/offline mode
-            const hasUrlParams = params.has('random') || params.has('content') || 
-                               params.has('styleset') || params.has('wallpaper');
+            // Mathematical predicate function to determine URL parameter mode
+            const hasUrlParams = URLUtils.hasAnyParams(params, this.URL_PARAMS);
             
-            // Set URL parameter mode without online mode check
             this.navigation.setUseUrlParameters(hasUrlParams);
             
-            // Hide navigation elements if using URL parameters regardless of mode
             if (hasUrlParams) {
                 this.hideNavigationElements();
             }
             
-            this.initializeManagers(configData);
-            this.setDocumentTitle(configData);
+            // Initialize subsystems in parallel where possible
+            await Promise.all([
+                this.initializeContent(configData),
+                this.initializeStyleAndWallpaper(configData, params)
+            ]);
             
-            await this.initializeStylesheets(configData);
-            await this.initializeWallpapers(configData);
-            
-            // Handle URL parameters if in URL mode
-            if (this.navigation.useUrlParameters) {
-                this.navigation.setIndexFromParams(params);
-            }
-            
-            await this.initializeContent(configData);
         } catch (error) {
             console.error('Failed to initialize:', error);
-            document.getElementById("content").innerHTML = `<p>Error loading content: ${error.message}</p>`;
+            DOMUtils.getElement("content").innerHTML = `<p>Error loading content: ${error.message}</p>`;
         }
+    }
+    
+    // Optimized initialization with parallelization
+    async initializeStyleAndWallpaper(configData, params) {
+        // Run these operations in parallel for efficiency
+        const [stylesInitialized, wallpapersInitialized] = await Promise.all([
+            this.initializeStylesheets(configData),
+            this.initializeWallpapers(configData)
+        ]);
+        
+        // Sequential operations that depend on the parallel results
+        this.initializeManagers(configData);
+        this.setDocumentTitle(configData);
+        
+        // Handle URL parameters if in URL mode
+        if (this.navigation.useUrlParameters) {
+            this.navigation.setIndexFromParams(params);
+        }
+        
+        return stylesInitialized && wallpapersInitialized;
     }
 
     hideNavigationElements() {
-        ['nav-btn', 'wall-btn', 'style-btn', 'fade-toggle-btn', 'permalink-btn'].forEach(className => {
-            const elements = document.getElementsByClassName(className);
-            if (elements) {
-                Array.from(elements).forEach(element => {
-                    if (element) {
-                        element.style.visibility = 'hidden';
-                    }
-                });
-            }
+        // Use DOM utility for more concise operation
+        this.UI_ELEMENTS.forEach(selector => {
+            DOMUtils.setStyleForAll(selector, 'visibility', 'hidden');
         });
     }
 
     async initializeMode(configData) {
-        let isOnlineMode = false;
-        
-        // Determine online/offline mode through explicit config or detection
-        if (configData.mode === 'detect') {
-            try {
-                // Test server connectivity by requesting config
-                const response = await fetch(`${configData.serverUrl}/config.json`);
-                isOnlineMode = response.ok;
-            } catch (error) {
-                isOnlineMode = false;
+        // Determine mode using pure function pattern
+        const determineMode = async () => {
+            if (configData.mode === 'detect') {
+                try {
+                    const response = await fetch(`${configData.serverUrl}/config.json`);
+                    return response.ok;
+                } catch {
+                    return false;
+                }
             }
-        } else {
-            isOnlineMode = configData.mode === 'online';
-        }
-
-        // Configure permalink initial state regardless of mode
-        const permalinkBtn = document.getElementById('permalinkBtn');
+            return configData.mode === 'online';
+        };
+        
+        const isOnlineMode = await determineMode();
+        
+        // Setup permalink using composition
+        const permalinkBtn = DOMUtils.getElement('permalinkBtn');
         if (permalinkBtn) {
-            const params = new URLSearchParams();
-            params.set('content', 'how_to_use_this_guide');
-            params.set('styleset', 'set1');
-            params.set('wallpaper', '0');
-            const baseUrl = window.location.protocol === 'file:' ? 
-                `file:///${window.location.pathname.replace(/^\//, '')}` : 
-                `${window.location.origin}${window.location.pathname}`;
-            permalinkBtn.href = `${baseUrl}?${params.toString()}`;
+            const baseUrl = URLUtils.getBaseUrl();
+            const defaultParams = {
+                content: 'how_to_use_this_guide',
+                styleset: 'set1',
+                wallpaper: '0'
+            };
+            permalinkBtn.href = URLUtils.createPermalink(baseUrl, defaultParams);
         }
 
+        // Set mode in all subsystems
         this.storage.setOnlineMode(isOnlineMode);
         this.storage.setServerUrl(configData.serverUrl || '');
         this.config.setOnlineMode(isOnlineMode);
@@ -112,10 +123,30 @@ export class ContentManager {
     }
 
     async initializeStylesheets(configData) {
-        const stylesheetSet = this.navigation.setStylesheetSets(Object.values(configData.stylesheets));
+        const params = new URLSearchParams(window.location.search);
+        const requestedSet = params.get('styleset');
+        
+        // Create array of stylesheet sets from config
+        const stylesheetSets = Object.entries(configData.stylesheets).map(([key, value]) => ({
+            key,
+            sheets: Array.isArray(value) ? value : [value]
+        }));
+        
+        // If styleset specified in URL, find and use it
+        if (requestedSet && stylesheetSets.some(set => set.key === requestedSet)) {
+            const selectedSet = stylesheetSets.find(set => set.key === requestedSet);
+            this.config.loadStylesheets(selectedSet.sheets);
+            return selectedSet.sheets;
+        }
+        
+        // Otherwise use navigation system
+        const stylesheetSet = this.navigation.setStylesheetSets(
+            stylesheetSets.map(set => set.sheets)
+        );
         if (stylesheetSet) {
             this.config.loadStylesheets(stylesheetSet);
         }
+        return stylesheetSet;
     }
 
     async initializeWallpapers(configData) {
@@ -127,6 +158,7 @@ export class ContentManager {
     }
 
     formatLinks(text) {
+        if (!text) return text;
         // URL regex pattern that matches http, https, and www URLs
         const urlPattern = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
         return text.replace(urlPattern, url => {
@@ -135,49 +167,69 @@ export class ContentManager {
         });
     }
 
-    // Simplified content processing method
+    // Use composition for content processing
     processContentItem(item) {
-        const processFields = ['block', 'list', 'numberedList'];
-        processFields.forEach(field => {
-            if (item[field]) {
-                item[field] = Array.isArray(item[field]) ? 
-                    item[field].map(text => this.formatLinks(text)) : 
-                    this.formatLinks(item[field]);
+        if (!item) return item;
+        
+        // Compose text processing functions
+        const processTextContent = (content) => {
+            if (!content) return content;
+            return Array.isArray(content)
+                ? content.map(this.formatLinks.bind(this))
+                : this.formatLinks(content);
+        };
+        
+        // Use pure function approach - create new object instead of mutating
+        const processedItem = {...item};
+        
+        // Process all text fields with a single function
+        const fieldsToProcess = ['block', 'list', 'numberedList', 'title', 'subtitle'];
+        fieldsToProcess.forEach(field => {
+            if (processedItem[field]) {
+                processedItem[field] = processTextContent(processedItem[field]);
             }
         });
         
-        if (item.table?.rows) {
-            item.table.rows = item.table.rows.map(row => 
-                row.map(cell => this.formatLinks(cell))
-            );
+        // Process table cells if present
+        if (processedItem.table?.rows) {
+            processedItem.table = {
+                ...processedItem.table,
+                rows: processedItem.table.rows.map(row => 
+                    row.map(cell => this.formatLinks(cell))
+                )
+            };
         }
-        return item;
+        
+        return processedItem;
     }
 
     async initializeContent(configData) {
-        const content = await this.storage.loadAllJSON(configData.content, this.navigation);
+        // Use monadic error handling pattern
+        const content = await ErrorUtils.tryOperation(
+            () => this.storage.loadAllJSON(configData.content, this.navigation),
+            () => null
+        );
+        
         if (!content) {
-            document.getElementById("content").innerHTML = '<p>No content files found</p>';
-            return;
+            DOMUtils.getElement("content").innerHTML = '<p>No content files found</p>';
+            return false;
         }
 
-        // Set page title based on mode
+        // Set page title using functional programming
         const headingItem = content.find(item => item.style === "heading");
-        if (headingItem?.title) {
-            if (this.navigation.useUrlParameters) {
-                // Bookmarkable URLs: use heading title
-                document.title = headingItem.title;
-            }
+        if (headingItem?.title && this.navigation.useUrlParameters) {
+            document.title = headingItem.title;
         }
 
-        // Process content with simplified logic
+        // Use function composition (map + join) for content processing
         const formattedContent = content
             .map(item => this.processContentItem(item))
             .map(item => this.layout.formatContent(item))
             .join('');
 
         this.appendContentStyles();
-        document.getElementById("content").innerHTML = formattedContent;
+        DOMUtils.getElement("content").innerHTML = formattedContent;
+        return true;
     }
 
     // Extracted content styles to separate method
@@ -195,8 +247,9 @@ export class ContentManager {
         document.head.appendChild(styleElement);
     }
 
-    // Single method to handle all navigation updates
+    // Navigation using command pattern and function composition
     async handleNavigation(type, direction) {
+        // Define commands as pure functions in a map (mathematical abstraction)
         const navigationActions = {
             content: {
                 navigate: () => this.navigation.navigateContent(direction),
@@ -212,18 +265,22 @@ export class ContentManager {
             }
         };
 
-        try {
+        // Use error monad pattern
+        return await ErrorUtils.tryOperation(async () => {
             const action = navigationActions[type];
-            if (!action) return;
+            if (!action) return false;
 
             const result = action.navigate();
             if (result) {
                 await action.handle(result);
                 this.updateNavigationState(result);
+                return true;
             }
-        } catch (error) {
+            return false;
+        }, (error) => {
             console.error(`Navigation failed for ${type}:`, error);
-        }
+            return false;
+        });
     }
 
     // Extracted navigation state update logic

@@ -91,27 +91,45 @@ export class StorageManager {
         return [];
     }
 
-    async loadJSON(path) {
-        try {
-            // If path is undefined, throw error early
-            if (!path) {
-                throw new Error('No content path specified');
-            }
+    /**
+     * Creates a full resource path based on online mode
+     * @param {string} path - The resource path
+     * @returns {string} The properly formatted path
+     */
+    getResourcePath(path) {
+        if (!path) return path;
+        
+        return this.onlineMode ? 
+            `${this.serverUrl}/${path.replace(/^\/+/, '')}` : 
+            path.replace(/^\/+/, '');
+    }
 
-            // Clean up path for offline mode to prevent double slashes
-            const fullPath = this.onlineMode ? 
-                `${this.serverUrl}/${path}` : 
-                // For offline mode, ensure path starts without leading slash
-                path.replace(/^\/+/, '');
-                
+    /**
+     * Load and parse JSON file with improved error handling
+     * @param {string} path - Path to JSON file
+     * @returns {Promise<object>} Parsed JSON data
+     */
+    async loadJSON(path) {
+        if (!path) throw new Error('No content path specified');
+        
+        try {
+            const fullPath = this.getResourcePath(path);
             const response = await fetch(fullPath);
+            
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
+            
             const data = await response.text();
             return JSON.parse(data);
         } catch (error) {
             console.error(`Failed to load ${path}:`, error);
+            
+            // Special handling for local file access errors
+            if (error.message.includes('Access') || error.message.includes('CORS')) {
+                throw new Error(this.getErrorMessage(path));
+            }
+            
             throw error;
         }
     }
@@ -121,37 +139,38 @@ export class StorageManager {
             throw new Error('No content pattern specified');
         }
 
+        // Convert all patterns to array format for consistent handling
+        let files;
+        
         if (Array.isArray(pattern)) {
-            const files = pattern;
-            console.log('Available content files:', files);
-            
-            // Set files in navigation system before loading default
-            navigation.setFiles(files);
-            
-            // Check URL parameters after setting files array
-            const params = new URLSearchParams(window.location.search);
-            if (params.has('content')) {
-                console.log('URL has content parameter:', params.get('content'));
-                navigation.setIndexFromParams(params);
-            }
-            
-            // Get current file after potential parameter handling
-            const selectedFile = navigation.getCurrentFile();
-            console.log('Selected content file:', selectedFile);
-            
-            if (!selectedFile) {
-                throw new Error('No content file selected');
-            }
-            
-            return await this.loadJSON(selectedFile);
+            files = pattern;
+        } else if (typeof pattern === 'string' && pattern.includes('*')) {
+            files = this.getAvailableFiles();
+        } else {
+            files = [pattern];
         }
-        if (typeof pattern === 'string' && pattern.includes('*')) {
-            const files = this.getAvailableFiles();
-            const firstFile = navigation.setFiles(files);
-            return files.length > 0 ? await this.loadJSON(firstFile) : null;
+        
+        console.log('Available content files:', files);
+        
+        // Set files in navigation and handle URL parameters
+        const selectedFile = navigation.setFiles(files);
+        
+        // Apply URL parameters if present
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('content')) {
+            console.log('URL has content parameter:', params.get('content'));
+            navigation.setIndexFromParams(params);
         }
-        const firstFile = navigation.setFiles([pattern]);
-        return await this.loadJSON(pattern);
+        
+        // Get final selected file after parameter processing
+        const finalFile = navigation.getCurrentFile() || selectedFile;
+        console.log('Selected content file:', finalFile);
+        
+        if (!finalFile) {
+            throw new Error('No content file selected');
+        }
+        
+        return await this.loadJSON(finalFile);
     }
 
     getErrorMessage(path) {
@@ -181,5 +200,18 @@ export class StorageManager {
     // Keep this method for external use
     isOnlineMode() {
         return this.onlineMode;
+    }
+
+    /**
+     * Get stylesheet set by key from config
+     * @param {object} configData - Configuration object
+     * @param {string} setKey - Key of stylesheet set to retrieve
+     * @returns {string[]} Array of stylesheet paths
+     */
+    getStylesheetSet(configData, setKey) {
+        if (!configData?.stylesheets || !setKey) return null;
+        
+        const set = configData.stylesheets[setKey];
+        return set ? (Array.isArray(set) ? set : [set]) : null;
     }
 }
