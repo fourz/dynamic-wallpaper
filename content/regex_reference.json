@@ -6,16 +6,19 @@
   {
     "title": "Character Patterns:",
     "table": {
-      "headers": ["Pattern", "Description"],
+      "headers": ["Pattern", "Name", "Description"],
       "rows": [
-        ["\\d", "Any digit (0-9)"],
-        ["\\D", "Any non-digit character"],
-        ["\\w", "Word character [a-zA-Z0-9_]"],
-        ["\\W", "Non-word character"],
-        ["\\s", "Whitespace (space, tab, newline)"],
-        ["\\S", "Non-whitespace character"],
-        [".", "Any character except newline"],
-        ["\\.", "A period (.)"]
+        ["\\d", "Digit", "Any digit (0-9)"],
+        ["\\D", "Non-digit", "Any non-digit character"],
+        ["\\w", "Word", "Word character [a-zA-Z0-9_]"],
+        ["\\W", "Non-word", "Non-word character"],
+        ["\\s", "Whitespace", "Whitespace (space, tab, newline)"],
+        ["\\S", "Non-whitespace", "Non-whitespace character"],
+        [".", "Dot", "Any character except newline"],
+        ["\\.", "Escaped dot", "A period (.)"],
+        ["\\n", "Newline", "Line break character"],
+        ["\\r", "Carriage return", "Carriage return character"],
+        ["\\t", "Tab", "Tab character"]
       ]
     }
   },
@@ -27,9 +30,14 @@
         ["*", "0 or more", "a* matches '', 'a', 'aa'..."],
         ["+", "1 or more", "a+ matches 'a', 'aa'..."],
         ["?", "0 or 1", "a? matches '' or 'a'"],
+        ["*?", "0 or more (lazy)", "a*? matches minimum possible"],
+        ["+?", "1 or more (lazy)", "a+? matches minimum possible"],
+        ["??", "0 or 1 (lazy)", "a?? matches minimum possible"],
         ["{n}", "Exactly n times", "a{3} matches 'aaa'"],
         ["{n,}", "n or more times", "a{2,} matches 'aa', 'aaa'..."],
-        ["{n,m}", "Between n and m", "a{2,4} matches 'aa', 'aaa', 'aaaa'"]
+        ["{n,m}", "Between n and m", "a{2,4} matches 'aa', 'aaa', 'aaaa'"],
+        ["{n,}?", "n or more (lazy)", "a{2,}? matches minimum possible"],
+        ["{n,m}?", "Between n and m (lazy)", "a{2,4}? matches minimum possible"]
       ]
     }
   },

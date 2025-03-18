@@ -64,10 +64,8 @@ export class LayoutManager {
         let content = '';
         
         if (item.style === "heading") {
-            if (this.isUsingStylesheet('small') || this.isUsingStylesheet('tiny')) {
-                return `<div style="width:100%; text-align:center; margin-bottom:1.5rem; flex-basis:100%;"><h1>${item.title}</h1></div>`;
-            }
-            return `<div class="flex-wrap"><h1>${item.title}</h1></div>`;
+            return `<div style="width:100%; text-align:center; margin-bottom:1.5rem; flex-basis:100%;"><h1>${item.title}</h1></div>`;
+
         }
         
         if (item.title && item.style !== "heading") {

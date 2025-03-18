@@ -50,8 +50,7 @@
         ["GitHub Copilot", "AI code completion", "Inline suggestions, contextual code generation"],
         ["GitLens", "Git repository insights", "Blame annotations, file history, comparisons"],
         ["Git Graph", "Repository visualization", "Branch history, commit tree view"],
-        ["Git History", "Commit exploration", "File and line history browsing"],
-        ["Peacock", "Workspace color coding", "Distinguish multiple VS Code windows"]
+        ["Git History", "Commit exploration", "File and line history browsing"]
       ]
     }
   },

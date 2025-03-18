@@ -35,7 +35,8 @@
                 ["Cloud", "Ansible Reference", "content/ansible_reference.json"],
                 ["Cloud", "FreeNAS Reference", "content/freenas_reference.json"],
                 ["Databases", "MSSQL Reference", "content/mssql_reference.json"],
-                ["Databases", "MySQL Reference", "content/mysql_reference.json"]
+                ["Databases", "MySQL Reference", "content/mysql_reference.json"],
+                ["Windows", "Group Policy Management", "content/group_policy_reference.json"]
             ]
         }
     },

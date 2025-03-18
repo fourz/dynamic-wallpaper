@@ -49,6 +49,23 @@
         ["continue", "continue; // Skip to next iteration"]
       ]
     }
+  },  
+  {
+    "title": "Common Methods:",
+    "table": {
+      "headers": ["Class", "Method", "Purpose"],
+      "rows": [
+        ["String", "length(), charAt(), substring()", "String manipulation"],
+        ["String", "equals(), equalsIgnoreCase()", "String comparison"],
+        ["String", "contains(), startsWith(), endsWith()", "String testing"],
+        ["ArrayList", "add(), get(), remove(), size()", "Collection operations"],
+        ["HashMap", "put(), get(), containsKey()", "Map operations"],
+        ["Arrays", "sort(), binarySearch()", "Array operations"],
+        ["Integer/Double", "parseInt(), parseDouble()", "String to number conversion"],
+        ["Math", "random(), round(), max(), min()", "Mathematical operations"],
+        ["System", "out.println(), currentTimeMillis()", "Output and system functions"]
+      ]
+    }
   },
   {
     "title": "Object-Oriented Programming:",
@@ -78,23 +95,6 @@
         ["try-with-resources", "Auto-closeable", "try (FileReader fr = new FileReader(file)) { code }"],
         ["Checked Exceptions", "Must be handled", "IOException, SQLException"],
         ["Unchecked Exceptions", "Runtime errors", "NullPointerException, ArrayIndexOutOfBoundsException"]
-      ]
-    }
-  },
-  {
-    "title": "Common Methods:",
-    "table": {
-      "headers": ["Class", "Method", "Purpose"],
-      "rows": [
-        ["String", "length(), charAt(), substring()", "String manipulation"],
-        ["String", "equals(), equalsIgnoreCase()", "String comparison"],
-        ["String", "contains(), startsWith(), endsWith()", "String testing"],
-        ["ArrayList", "add(), get(), remove(), size()", "Collection operations"],
-        ["HashMap", "put(), get(), containsKey()", "Map operations"],
-        ["Arrays", "sort(), binarySearch()", "Array operations"],
-        ["Integer/Double", "parseInt(), parseDouble()", "String to number conversion"],
-        ["Math", "random(), round(), max(), min()", "Mathematical operations"],
-        ["System", "out.println(), currentTimeMillis()", "Output and system functions"]
       ]
     }
   },

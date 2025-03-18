@@ -1,137 +1,64 @@
 [
     {
         "style": "heading",
-        "title": "Stay Organized: Focus and Productivity Guide"
+        "title": "Simple Focus Guide"
     },
     {
-        "title": "Daily Routine Essentials",
+        "title": "Daily Essentials",
         "table": {
-            "headers": ["Routine Item", "Description", "Helpful Tip"],
+            "headers": ["What", "How"],
             "rows": [
-                ["Morning Routine", "Maintain consistency in daily start", "Use a checklist to avoid decision fatigue in the morning"],
-                ["Time Blocking", "Schedule focused work periods", "Set a visual timer to stay aware of time passing"],
-                ["Break Schedule", "Take breaks every 25-30 minutes", "Move around during breaks to reset focus"],
-                ["Workspace Management", "Keep workspace clean and minimal", "Use a \"reset space\" rule—clear clutter before starting work"],
-                ["Planning", "Set next day's priorities every evening", "Write down top 3 tasks before bed to ease into work"]
+                ["Morning Start", "Follow checklist, avoid decisions"],
+                ["Time Blocks", "25min work + 5min break"],
+                ["Workspace", "Clear desk, minimal items"],
+                ["Evening Prep", "List top 3 tasks for tomorrow"]
             ]
         }
     },
     {
-        "title": "Task Management Strategies",
+        "title": "Task Management",
         "table": {
-            "headers": ["Strategy", "How to Implement", "Helpful Tip"],
+            "headers": ["Method", "How"],
             "rows": [
-                ["2-Minute Rule", "If it takes less than 2 minutes, do it now", "Keep a notepad nearby for quick tasks to prevent forgetting"],
-                ["Task Chunking", "Break large tasks into smaller, manageable parts", "Start with the easiest part to build momentum"],
-                ["Time Boxing", "Assign specific time blocks to tasks", "Use a timer and allow flexibility if needed"],
-                ["Priority Matrix", "Sort tasks by urgency and importance", "Mark urgent tasks in a different color for quick identification"],
-                ["Visual Reminders", "Use sticky notes or digital boards", "Keep them where you naturally look (desk, monitor, or phone)"]
+                ["2-Minute Rule", "If quick, do it now"],
+                ["Big Tasks", "Break into small chunks"],
+                ["Priority", "Mark urgent tasks in red"],
+                ["Reminders", "Sticky notes where you look"]
             ]
         }
     },
     {
-        "title": "Focus Enhancement Tools",
+        "title": "Focus Tools",
         "table": {
-            "headers": ["Tool", "Purpose", "Helpful Tip"],
+            "headers": ["Tool", "Purpose"],
             "rows": [
-                ["Noise-canceling headphones", "Block distracting sounds", "Choose comfortable ones for long use"],
-                ["Time tracking apps", "Monitor task duration", "Review tracked time weekly to adjust plans"],
-                ["Digital task managers", "Organize and track tasks", "Set reminders for deadlines and priorities"],
-                ["Pomodoro timer", "Structure work intervals", "Use breaks to stretch and hydrate"],
-                ["Distraction blockers", "Limit access to distracting sites/apps", "Whitelist essential sites only"]
+                ["Headphones", "Block noise"],
+                ["Timer", "Track work periods"],
+                ["Task App", "Remember deadlines"],
+                ["Site Blocker", "Limit distractions"]
             ]
         }
     },
     {
-        "title": "Work Environment Setup",
+        "title": "Device Focus Setup",
         "table": {
-            "headers": ["Setup Element", "Implementation", "Helpful Tip"],
+            "headers": ["Step", "Action"],
             "rows": [
-                ["Desk Position", "Away from high-traffic areas", "Face a wall to minimize visual distractions"],
-                ["Lighting", "Prioritize natural light sources", "Use a desk lamp with adjustable brightness"],
-                ["Desk Organization", "Keep only essential items present", "Use organizers to keep items in place"],
-                ["Work Space", "Maintain a dedicated area", "Personalize it to make it inviting"],
-                ["Organization System", "Implement color coding", "Label items for easy retrieval"]
+                ["Basic Modes", "Work and Personal only"],
+                ["Key Apps", "Pick 3-5 essential ones"],
+                ["Schedule", "Match your energy peaks"],
+                ["Notifications", "VIP contacts only"]
             ]
         }
     },
     {
-        "title": "Quick Reset Steps",
-        "table": {
-            "headers": ["Step", "Action", "Helpful Tip"],
-            "rows": [
-                ["Clear Space", "Remove non-essential desk items", "Keep a bin nearby for quick decluttering"],
-                ["Task Review", "Update to-do list", "Prioritize tasks based on current goals"],
-                ["Calendar Check", "Review upcoming commitments", "Set reminders for important events"],
-                ["Movement Break", "Take 5 minutes to move", "Do simple stretches or a short walk"],
-                ["Focus Reset", "Practice deep breathing", "Use a guided breathing app if needed"]
-            ]
-        }
-    },
-    {
-        "title": "Apple Focus Features Made Simple",
-        "table": {
-            "headers": ["What to Do", "How to Do It", "Pro Tip"],
-            "rows": [
-                ["Set Up Basic Modes", "Create Work and Personal modes first", "Start with just 2 modes - don't overwhelm yourself"],
-                ["Pick Important Apps", "Choose 3-5 must-have apps per mode", "Less is more - fewer apps = better focus"],
-                ["Set Up Auto-Schedule", "Pick your most productive hours", "Match to your natural energy peaks"],
-                ["Choose Screen Look", "Pick calm colors and dark mode", "Your eyes will thank you later"],
-                ["Tell Others You're Busy", "Turn on auto-reply messages", "Keep it simple: 'Working now, back at [time]'"]
-            ]
-        }
-    },
-    {
-        "title": "Android Focus Made Easy",
-        "table": {
-            "headers": ["What to Do", "How to Do It", "Pro Tip"],
-            "rows": [
-                ["Quick Focus Setup", "Use pre-made focus templates", "Start with 'Work' template and adjust later"],
-                ["Quiet Your Phone", "Block all but VIP contacts", "Make a short list of emergency contacts"],
-                ["Auto-Focus Times", "Match to your daily schedule", "Set it once, forget it forever"],
-                ["Track Your Time", "Use the built-in focus timer", "Start with 15-minute chunks"],
-                ["Let People Know", "Set up auto-text responses", "Keep messages short and clear"]
-            ]
-        }
-    },
-    {
-        "title": "Daily Implementation Steps",
+        "title": "Focus Reset",
         "list": [
-            "1. Start each day by reviewing your task list (5 minutes)",
-            "2. Set up your workspace using the clean desk protocol",
-            "3. Configure focus mode on your device before starting work",
-            "4. Use time-blocking for your top 3 priorities",
-            "5. Take scheduled breaks every 25-30 minutes"
-        ]
-    },
-    {
-        "title": "Your Daily Game Plan",
-        "list": [
-            "1. Morning Check (just 3 minutes): What's today's #1 task?",
-            "2. Clear your desk - keep only today's stuff",
-            "3. Phone on focus mode - notifications off",
-            "4. Pick your top 3 tasks (not 4, not 5)",
-            "5. Work 25 minutes, break 5 minutes - repeat"
-        ]
-    },
-    {
-        "title": "Focus Reset Protocol",
-        "list": [
-            "1. Close all unnecessary browser tabs and applications",
-            "2. Clear your desk of non-essential items",
-            "3. Put on noise-canceling headphones",
-            "4. Take 3 deep breaths",
-            "5. Set a timer for your next work block"
-        ]
-    },
-    {
-        "title": "Lost Focus? Quick Reset",
-        "list": [
-            "1. Close everything except what you need RIGHT NOW",
-            "2. Clear desk - keep only current task items",
-            "3. Headphones on - music optional",
-            "4. Big breath in (4 counts), out (4 counts)",
-            "5. Set timer - start with just 15 minutes"
+            "1. Close everything except current task",
+            "2. Clear desk",
+            "3. Headphones on",
+            "4. Deep breath",
+            "5. Set 25min timer"
         ]
     }
 ]

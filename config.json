@@ -26,6 +26,9 @@
         "content/mysql_reference.json",
         "content/freenas_reference.json",
         "content/git_reference.json",
+        "content/group_policy_reference.json",
+        "content/active_directory_reference.json",
+        "content/minecraft_bukkit_guide.json",
         "content/networking_basics.json",
         "content/networking_overview.json",
         "content/powershell_reference.json",
@@ -46,13 +49,15 @@
             "stylesheets/tiny.css"
         ],
         "set2": [
-            "stylesheets/small.css"
-        ],        
+            "stylesheets/smaller.css"
+        ],
         "set3": [
-            "stylesheets/default.css",
             "stylesheets/small.css"
         ],        
         "set4": [
+            "stylesheets/default.css"
+        ],        
+        "set5": [
             "stylesheets/large.css"
         ]                
 
