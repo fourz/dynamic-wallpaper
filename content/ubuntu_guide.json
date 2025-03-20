@@ -1,0 +1,254 @@
+[
+    {
+        "style": "heading",
+        "title": "Ubuntu Linux Reference Guide"
+    },
+    {
+        "title": "Installation Options",
+        "table": {
+            "headers": ["Type", "Use Case", "Notes"],
+            "rows": [
+                ["Desktop", "Personal/Developer workstation", "Full GUI, office apps, development tools"],
+                ["Server", "Web/Database hosting", "Command-line only by default, lower resource usage"],
+                ["Minimal", "Containers, VMs, embedded", "Bare minimum packages, manual configuration"],
+                ["LTS", "Production environments", "5 years of support, released every 2 years"],
+                ["Non-LTS", "Cutting-edge features", "9 months support, released every 6 months"],
+                ["WSL", "Windows integration", "Linux subsystem within Windows 10/11"]
+            ]
+        }
+    },
+    {
+        "title": "System Information",
+        "table": {
+            "headers": ["Command", "Purpose"],
+            "rows": [
+                ["lsb_release -a", "Display Ubuntu version information"],
+                ["uname -a", "Show kernel information"],
+                ["cat /proc/cpuinfo", "CPU details"],
+                ["free -h", "Memory usage in human-readable format"],
+                ["df -h", "Disk space usage"],
+                ["lspci", "List all PCI devices"],
+                ["lsusb", "List all USB devices"],
+                ["ifconfig -a", "Network interface configuration"],
+                ["ip a", "Modern replacement for ifconfig"],
+                ["neofetch", "Graphical system information summary"]
+            ]
+        }
+    },
+    {
+        "title": "Package Management",
+        "table": {
+            "headers": ["Command", "Description"],
+            "rows": [
+                ["apt update", "Update package lists"],
+                ["apt upgrade", "Upgrade installed packages"],
+                ["apt install package", "Install a package"],
+                ["apt remove package", "Remove a package but keep configuration"],
+                ["apt purge package", "Remove package and configuration"],
+                ["apt search term", "Search for packages"],
+                ["apt show package", "Display package information"],
+                ["apt list --installed", "List installed packages"],
+                ["apt autoremove", "Remove unused dependencies"],
+                ["add-apt-repository ppa:name", "Add a Personal Package Archive"]
+            ]
+        }
+    },
+    {
+        "title": "File Management",
+        "table": {
+            "headers": ["Command", "Function"],
+            "rows": [
+                ["ls -la", "List all files with details"],
+                ["pwd", "Print working directory"],
+                ["cd directory", "Change directory"],
+                ["mkdir directory", "Create directory"],
+                ["rm file", "Delete file"],
+                ["rm -r directory", "Delete directory recursively"],
+                ["cp source dest", "Copy file or directory"],
+                ["mv source dest", "Move/rename file or directory"],
+                ["find / -name pattern", "Find files by name"],
+                ["locate filename", "Quickly find files (needs updatedb)"]
+            ]
+        }
+    },
+    {
+        "title": "User Management",
+        "table": {
+            "headers": ["Command", "Purpose"],
+            "rows": [
+                ["sudo command", "Execute command as superuser"],
+                ["adduser username", "Create a new user interactively"],
+                ["usermod -aG group user", "Add user to a group"],
+                ["passwd username", "Change user password"],
+                ["su - username", "Switch to another user"],
+                ["who", "Show who is logged in"],
+                ["whoami", "Show current user"],
+                ["id", "Display user/group IDs"],
+                ["groups", "Show group memberships"],
+                ["last", "Show last logins"]
+            ]
+        }
+    },
+    {
+        "title": "Process Management",
+        "table": {
+            "headers": ["Command", "Function"],
+            "rows": [
+                ["ps aux", "List all running processes"],
+                ["top", "Dynamic process viewer"],
+                ["htop", "Interactive process viewer"],
+                ["kill PID", "Terminate process by ID"],
+                ["killall process_name", "Kill process by name"],
+                ["pkill pattern", "Kill processes by pattern match"],
+                ["nohup command &", "Run command immune to hangups"],
+                ["bg", "Send process to background"],
+                ["fg", "Bring process to foreground"],
+                ["nice -n value command", "Run with modified priority"]
+            ]
+        }
+    },
+    {
+        "title": "Network Tools",
+        "table": {
+            "headers": ["Command", "Usage"],
+            "rows": [
+                ["ping host", "Test connectivity to host"],
+                ["traceroute host", "Trace route to host"],
+                ["netstat -tuln", "List listening ports"],
+                ["ss -tuln", "Modern replacement for netstat"],
+                ["nmap host", "Port scanning"],
+                ["dig domain", "DNS lookup"],
+                ["host domain", "DNS lookup (simpler)"],
+                ["wget url", "Download files from web"],
+                ["curl url", "Transfer data from/to servers"],
+                ["ssh user@host", "Secure shell connection"]
+            ]
+        }
+    },
+    {
+        "title": "Service Management",
+        "table": {
+            "headers": ["Command", "Description"],
+            "rows": [
+                ["systemctl start service", "Start a service"],
+                ["systemctl stop service", "Stop a service"],
+                ["systemctl restart service", "Restart a service"],
+                ["systemctl status service", "Check service status"],
+                ["systemctl enable service", "Enable service at boot"],
+                ["systemctl disable service", "Disable service at boot"],
+                ["systemctl list-units --type=service", "List all services"],
+                ["journalctl -u service", "View service logs"],
+                ["service --status-all", "List status of all services"],
+                ["update-rc.d service defaults", "Legacy way to enable services"]
+            ]
+        }
+    },
+    {
+        "title": "Disk Management",
+        "table": {
+            "headers": ["Command", "Purpose"],
+            "rows": [
+                ["fdisk -l", "List disk partitions"],
+                ["mkfs.ext4 /dev/sdXY", "Create ext4 filesystem"],
+                ["mount /dev/sdXY /mnt", "Mount filesystem"],
+                ["umount /mnt", "Unmount filesystem"],
+                ["lsblk", "List block devices"],
+                ["blkid", "Display block device attributes"],
+                ["parted -l", "List partitions (alternative)"],
+                ["gparted", "GUI partition editor"],
+                ["findmnt", "Show mounted filesystems"],
+                ["smartctl -a /dev/sdX", "Check disk health"]
+            ]
+        }
+    },
+    {
+        "title": "Text Processing",
+        "table": {
+            "headers": ["Command", "Function"],
+            "rows": [
+                ["cat file", "Display file contents"],
+                ["less file", "View file with paging"],
+                ["head file", "Show first 10 lines"],
+                ["tail file", "Show last 10 lines"],
+                ["tail -f file", "Follow file updates in real-time"],
+                ["grep pattern file", "Search for pattern in file"],
+                ["sed 's/old/new/g' file", "Replace text in file"],
+                ["awk '{print $1}' file", "Process text data"],
+                ["sort file", "Sort lines in file"],
+                ["wc file", "Count lines, words, characters"]
+            ]
+        }
+    },
+    {
+        "title": "File Permissions",
+        "table": {
+            "headers": ["Command", "Description"],
+            "rows": [
+                ["chmod permissions file", "Change file permissions"],
+                ["chmod 755 file", "rwx for owner, rx for others"],
+                ["chmod 644 file", "rw for owner, r for others"],
+                ["chmod +x file", "Make file executable"],
+                ["chown user:group file", "Change file owner/group"],
+                ["chown -R user directory", "Recursively change ownership"],
+                ["umask 022", "Set default permissions mask"],
+                ["ls -l file", "View file permissions"],
+                ["getfacl file", "View advanced file permissions"],
+                ["setfacl -m u:user:rw file", "Set specific user permissions"]
+            ]
+        }
+    },
+    {
+        "title": "Backup & Restore",
+        "table": {
+            "headers": ["Command", "Usage"],
+            "rows": [
+                ["tar -czvf archive.tar.gz dir/", "Create compressed archive"],
+                ["tar -xzvf archive.tar.gz", "Extract compressed archive"],
+                ["rsync -av source/ dest/", "Synchronize directories"],
+                ["dd if=/dev/sdX of=image.img", "Create disk image"],
+                ["dd if=image.img of=/dev/sdX", "Restore disk image"],
+                ["timeshift --create", "Create system snapshot"],
+                ["duplicity /home s3://bucket", "Encrypted backup to cloud"],
+                ["dump -0uf /dev/nst0 /", "Traditional filesystem backup"],
+                ["restic backup /home", "Deduplicated backup"],
+                ["clonezilla", "Disk cloning solution"]
+            ]
+        }
+    },
+    {
+        "title": "Common Directories",
+        "table": {
+            "headers": ["Directory", "Purpose"],
+            "rows": [
+                ["/etc", "System configuration files"],
+                ["/var", "Variable data (logs, etc)"],
+                ["/home", "User home directories"],
+                ["/usr", "User programs and data"],
+                ["/bin", "Essential user binaries"],
+                ["/sbin", "System binaries"],
+                ["/lib", "Shared libraries"],
+                ["/tmp", "Temporary files"],
+                ["/opt", "Optional software"],
+                ["/proc", "Virtual filesystem for processes"]
+            ]
+        }
+    },
+    {
+        "title": "Ubuntu Desktop Tips",
+        "table": {
+            "headers": ["Task", "Method"],
+            "rows": [
+                ["Install Graphics Drivers", "Software & Updates > Additional Drivers"],
+                ["Switch Desktop Environment", "Log out > Select environment at login"],
+                ["Customize Appearance", "GNOME Tweaks or Settings > Appearance"],
+                ["Install Software", "Ubuntu Software Center or apt"],
+                ["Manage Startup Apps", "Settings > Applications > Startup"],
+                ["Change Display Settings", "Settings > Display"],
+                ["Configure Keyboard Shortcuts", "Settings > Keyboard > Shortcuts"],
+                ["Check System Resources", "System Monitor"],
+                ["Update Ubuntu", "Software Updater or apt"],
+                ["Take Screenshot", "Print Screen or Screenshot application"]
+            ]
+        }
+    }
+]

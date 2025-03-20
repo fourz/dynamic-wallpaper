@@ -75,20 +75,8 @@ export class ContentManager {
     }
 
     async initializeMode(configData) {
-        // Determine mode using pure function pattern
-        const determineMode = async () => {
-            if (configData.mode === 'detect') {
-                try {
-                    const response = await fetch(`${configData.serverUrl}/config.json`);
-                    return response.ok;
-                } catch {
-                    return false;
-                }
-            }
-            return configData.mode === 'online';
-        };
-        
-        const isOnlineMode = await determineMode();
+        // Simple protocol check for online/offline mode
+        const isOnlineMode = !window.location.protocol.startsWith('file:');
         
         // Setup permalink using composition
         const permalinkBtn = DOMUtils.getElement('permalinkBtn');
@@ -215,7 +203,7 @@ export class ContentManager {
             return false;
         }
 
-        // Set page title using functional programming
+        // Set page title
         const headingItem = content.find(item => item.style === "heading");
         if (headingItem?.title && this.navigation.useUrlParameters) {
             document.title = headingItem.title;

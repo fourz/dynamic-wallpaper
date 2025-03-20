@@ -1,0 +1,99 @@
+[
+    {
+        "style": "heading",
+        "title": "Return to Castle Wolfenstein Controls"
+    },
+    {
+        "title": "Basic Movement",
+        "table": {
+            "headers": ["Key", "Action"],
+            "rows": [
+                ["W", "Move Forward"],
+                ["S", "Move Backward"],
+                ["A", "Strafe Left"],
+                ["D", "Strafe Right"],
+                ["Space", "Jump"],
+                ["Ctrl", "Crouch"],
+                ["Shift", "Sprint"],
+                ["C", "Toggle Prone"]
+            ]
+        }
+    },
+    {
+        "title": "Combat Controls",
+        "table": {
+            "headers": ["Key", "Action"],
+            "rows": [
+                ["Left Mouse", "Fire"],
+                ["Right Mouse", "Aim/Iron Sights"],
+                ["R", "Reload"],
+                ["F", "Use/Activate"],
+                ["G", "Drop Weapon"],
+                ["Q", "Lean Left"],
+                ["E", "Lean Right"],
+                ["V", "Quick Kick"]
+            ]
+        }
+    },
+    {
+        "title": "Weapon Selection",
+        "table": {
+            "headers": ["Key", "Weapon"],
+            "rows": [
+                ["1", "Knife"],
+                ["2", "Luger/Colt"],
+                ["3", "MP40/Thompson"],
+                ["4", "Mauser/Springfield"],
+                ["5", "Venom Gun"],
+                ["6", "Flamethrower"],
+                ["7", "Panzerfaust"],
+                ["8", "Tesla Gun"]
+            ]
+        }
+    },
+    {
+        "title": "Multiplayer Controls",
+        "table": {
+            "headers": ["Key", "Action"],
+            "rows": [
+                ["T", "Team Chat"],
+                ["Y", "Global Chat"],
+                ["Tab", "Score Board"],
+                ["B", "Binoculars"],
+                ["Z", "Voice Commands"],
+                ["K", "Kill Self"],
+                ["M", "Team Menu"],
+                ["F1-F4", "Class Selection"]
+            ]
+        }
+    },
+    {
+        "title": "Game Functions",
+        "table": {
+            "headers": ["Key", "Action"],
+            "rows": [
+                ["Esc", "Main Menu"],
+                ["F5", "Quick Save"],
+                ["F9", "Quick Load"],
+                ["F12", "Screenshot"],
+                ["~", "Console"],
+                ["P", "Pause Game"],
+                ["F", "Flashlight"],
+                ["H", "Health Status"]
+            ]
+        }
+    },
+    {
+        "title": "Class-Specific Controls",
+        "table": {
+            "headers": ["Key", "Action", "Class"],
+            "rows": [
+                ["F", "Drop Ammo", "Lieutenant"],
+                ["F", "Drop Health", "Medic"],
+                ["F", "Plant Charges", "Engineer"],
+                ["F", "Call Artillery", "Field Ops"],
+                ["Mouse3", "Zoom Scope", "Sniper"]
+            ]
+        }
+    }
+]
