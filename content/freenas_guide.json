@@ -12,7 +12,10 @@
                 ["Storage", "Create ZFS pool, set compression"],
                 ["Users", "Create admin and user accounts"],
                 ["Shares", "Configure SMB/NFS shares"],
-                ["Updates", "Check system updates, plugins"]
+                ["Updates", "Check system updates, plugins"],
+                ["Security", "Set password policy, alerts"],
+                ["Services", "Enable SSH, FTP, Rsync"],
+                ["Backup", "Schedule snapshots, replication"]
             ]
         }
     },
@@ -38,7 +41,8 @@
                 ["Unix (644)", "rw-r--r-- standard files"],
                 ["ACL", "Windows-style permissions"],
                 ["Dataset ACL", "Inheritable permissions"],
-                ["Guest Access", "Public share settings"]
+                ["Guest Access", "Public share settings"],
+                ["User Mapping", "Local vs AD user access"]
             ]
         }
     },
@@ -64,7 +68,8 @@
                 ["Network", "Enable jumbo frames"],
                 ["Cache", "Use SSDs for L2ARC"],
                 ["ZIL", "SSD for sync writes"],
-                ["Scrub", "Schedule monthly scrubs"]
+                ["Scrub", "Schedule monthly scrubs"],
+                ["Tuning", "Adjust sysctl settings"]
             ]
         }
     }

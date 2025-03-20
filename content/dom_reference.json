@@ -1,0 +1,95 @@
+[
+    {
+        "style": "heading",
+        "title": "DOM Reference Guide"
+    },
+    {
+        "title": "Element Selection",
+        "table": {
+            "headers": ["Method", "Description", "Example"],
+            "rows": [
+                ["querySelector", "Select first matching element", "document.querySelector('.class')"],
+                ["querySelectorAll", "Select all matching elements", "document.querySelectorAll('div')"],
+                ["getElementById", "Select by ID", "document.getElementById('main')"],
+                ["getElementsByClassName", "Select by class name", "document.getElementsByClassName('item')"],
+                ["getElementsByTagName", "Select by tag name", "document.getElementsByTagName('p')"]
+            ]
+        }
+    },
+    {
+        "title": "Element Manipulation",
+        "table": {
+            "headers": ["Operation", "Description", "Example"],
+            "rows": [
+                ["createElement", "Create new element", "document.createElement('div')"],
+                ["appendChild", "Add child element", "parent.appendChild(child)"],
+                ["removeChild", "Remove child element", "parent.removeChild(child)"],
+                ["replaceChild", "Replace child element", "parent.replaceChild(new, old)"],
+                ["cloneNode", "Clone an element", "element.cloneNode(true)"]
+            ]
+        }
+    },
+    {
+        "title": "Content Modification",
+        "table": {
+            "headers": ["Property", "Usage", "Example"],
+            "rows": [
+                ["innerHTML", "HTML content", "element.innerHTML = '<span>text</span>'"],
+                ["textContent", "Text only", "element.textContent = 'Hello'"],
+                ["value", "Form input value", "input.value = 'new value'"],
+                ["setAttribute", "Set attribute", "element.setAttribute('data-id', '123')"],
+                ["removeAttribute", "Remove attribute", "element.removeAttribute('disabled')"]
+            ]
+        }
+    },
+    {
+        "title": "Style Manipulation",
+        "table": {
+            "headers": ["Method", "Purpose", "Example"],
+            "rows": [
+                ["classList.add", "Add CSS class", "element.classList.add('active')"],
+                ["classList.remove", "Remove CSS class", "element.classList.remove('disabled')"],
+                ["classList.toggle", "Toggle CSS class", "element.classList.toggle('visible')"],
+                ["style", "Direct CSS", "element.style.backgroundColor = 'red'"],
+                ["getComputedStyle", "Get applied styles", "getComputedStyle(element).width"]
+            ]
+        }
+    },
+    {
+        "title": "Event Handling",
+        "table": {
+            "headers": ["Method", "Description", "Example"],
+            "rows": [
+                ["addEventListener", "Add event listener", "element.addEventListener('click', handler)"],
+                ["removeEventListener", "Remove listener", "element.removeEventListener('click', handler)"],
+                ["preventDefault", "Prevent default action", "event.preventDefault()"],
+                ["stopPropagation", "Stop event bubble", "event.stopPropagation()"],
+                ["dispatchEvent", "Trigger event", "element.dispatchEvent(new Event('click'))"]
+            ]
+        }
+    },
+    {
+        "title": "Common Events",
+        "list": [
+            "click - Mouse click",
+            "submit - Form submission",
+            "input - Input value change",
+            "change - Element value change",
+            "focus/blur - Element focus/unfocus",
+            "keydown/keyup - Keyboard events",
+            "load - Resource loading complete"
+        ]
+    },
+    {
+        "title": "Best Practices",
+        "list": [
+            "Cache DOM selections for performance",
+            "Use event delegation for dynamic elements",
+            "Prefer textContent over innerHTML for text",
+            "Remove event listeners when no longer needed",
+            "Batch DOM updates for better performance",
+            "Use DocumentFragment for multiple insertions",
+            "Validate input before DOM manipulation"
+        ]
+    }
+]

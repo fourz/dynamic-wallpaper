@@ -208,19 +208,19 @@ button {
 
 /* Fade toggle states - updated for the four states */
 .fade-toggle-btn.default {
-    background: rgba(0, 0, 0, 0.8); /* Black for default mode */
+    background: rgba(0, 0, 0, 0.3); /* Black for default mode */
 }
 
 .fade-toggle-btn.usage {
-    background: rgba(0, 180, 180, 0.7); /* Turquoise for usage mode */
+    background: rgba(180, 0, 0, 0.3); /* Red for usage mode */
 }
 
 .fade-toggle-btn.fade-out {
-    background: rgba(200, 200, 200, 0.7); /* Light gray for fade-out mode */
+    background: rgba(200, 200, 200, 0.3); /* Light gray for fade-out mode */
 }
 
 .fade-toggle-btn.wallpaper {
-    background: rgba(100, 130, 150, 0.7); /* Blue-gray for fade-to-wallpaper mode */
+    background: rgba(100, 130, 150, 0.3); /* Blue-gray for fade-to-wallpaper mode */
 }
 
 /* Content fade transitions */

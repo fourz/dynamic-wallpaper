@@ -1,0 +1,95 @@
+[
+    {
+        "style": "heading",
+        "title": "Problem Solving Techniques Guide"
+    },
+    {
+        "title": "Algorithmic Approaches",
+        "table": {
+            "headers": ["Technique", "Best For", "Example Use Case"],
+            "rows": [
+                ["Divide & Conquer", "Complex problems", "Merge sort, Binary search"],
+                ["Dynamic Programming", "Optimization problems", "Fibonacci, Path finding"],
+                ["Greedy Algorithm", "Local optimization", "Dijkstra's algorithm"],
+                ["Backtracking", "Constraint problems", "N-Queens, Sudoku solver"],
+                ["Branch & Bound", "Optimization with constraints", "Traveling salesman"]
+            ]
+        }
+    },
+    {
+        "title": "Analysis Methods",
+        "table": {
+            "headers": ["Method", "Description", "When to Use"],
+            "rows": [
+                ["Root Cause Analysis", "Find underlying issue", "Bug investigation"],
+                ["Pattern Recognition", "Identify similarities", "Code optimization"],
+                ["Decomposition", "Break into sub-problems", "System design"],
+                ["State Analysis", "Track system states", "Concurrent systems"],
+                ["Edge Case Testing", "Boundary conditions", "Input validation"]
+            ]
+        }
+    },
+    {
+        "title": "Debugging Strategies",
+        "table": {
+            "headers": ["Strategy", "Technique", "Application"],
+            "rows": [
+                ["Binary Search Debug", "Halve problem space", "Large codebase issues"],
+                ["Stack Trace Analysis", "Follow call chain", "Runtime errors"],
+                ["Logging/Printing", "Add trace points", "Flow verification"],
+                ["Rubber Duck Debug", "Explain code verbally", "Logic errors"],
+                ["State Inspection", "Check variables", "Data flow issues"]
+            ]
+        }
+    },
+    {
+        "title": "Design Approaches",
+        "table": {
+            "headers": ["Approach", "Focus", "Benefits"],
+            "rows": [
+                ["Top-Down", "Start with overview", "Better architecture view"],
+                ["Bottom-Up", "Start with details", "Practical implementation"],
+                ["Inside-Out", "Core functionality first", "Essential features priority"],
+                ["Outside-In", "Interface first", "Better user experience"],
+                ["Iterative", "Incremental progress", "Quick feedback loop"]
+            ]
+        }
+    },
+    {
+        "title": "Problem-Solving Steps",
+        "numberedList": [
+            "Understand the problem completely",
+            "Break down into smaller parts",
+            "Identify patterns and similarities",
+            "Research existing solutions",
+            "Plan approach and strategy",
+            "Implement solution incrementally",
+            "Test and verify solution"
+        ]
+    },
+    {
+        "title": "Common Pitfalls",
+        "list": [
+            "Jumping to solutions too quickly",
+            "Not considering edge cases",
+            "Overcomplicating the solution",
+            "Ignoring performance implications",
+            "Not documenting assumptions",
+            "Skipping validation steps",
+            "Missing root cause analysis"
+        ]
+    },
+    {
+        "title": "Validation Methods",
+        "table": {
+            "headers": ["Method", "Purpose", "Example"],
+            "rows": [
+                ["Unit Testing", "Verify components", "Test individual functions"],
+                ["Integration Testing", "Verify interactions", "Test API endpoints"],
+                ["Stress Testing", "Check limitations", "Load testing"],
+                ["Peer Review", "Get feedback", "Code review"],
+                ["Benchmark", "Measure performance", "Time complexity analysis"]
+            ]
+        }
+    }
+]
