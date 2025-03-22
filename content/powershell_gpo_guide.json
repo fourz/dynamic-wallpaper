@@ -1,0 +1,124 @@
+[
+  {
+    "style": "heading",
+    "title": "PowerShell Group Policy Management Guide"
+  },
+  {
+    "title": "Basic GPO Commands",
+    "description": "Essential PowerShell commands for Group Policy management",
+    "table": {
+      "headers": ["Command", "Description", "Example"],
+      "rows": [
+        ["Get-GPO", "Retrieve GPO information", "Get-GPO -All"],
+        ["New-GPO", "Create a new GPO", "New-GPO -Name 'Security Policy'"],
+        ["Remove-GPO", "Delete a GPO", "Remove-GPO -Name 'Old Policy'"],
+        ["Backup-GPO", "Back up a GPO", "Backup-GPO -Name 'Security Policy' -Path 'C:\\GPOBackups'"],
+        ["Copy-GPO", "Copy an existing GPO", "Copy-GPO -SourceName 'Template' -TargetName 'New Policy'"],
+        ["Get-GPOReport", "Generate GPO report", "Get-GPOReport -Name 'Security Policy' -ReportType HTML -Path 'report.html'"]
+      ]
+    }
+  },
+  {
+    "title": "Working with GPO Links",
+    "code": [
+      "# Get all GPO links in a domain",
+      "$domain = Get-ADDomain",
+      "Get-GPInheritance -Target $domain.DistinguishedName",
+      "",
+      "# Link a GPO to an OU",
+      "New-GPLink -Name 'Security Policy' -Target 'OU=IT,DC=contoso,DC=com'",
+      "",
+      "# Remove a GPO link",
+      "Remove-GPLink -Name 'Old Policy' -Target 'OU=Sales,DC=contoso,DC=com'",
+      "",
+      "# Enable/Disable GPO link",
+      "Set-GPLink -Name 'Security Policy' -Target 'OU=IT,DC=contoso,DC=com' -LinkEnabled Yes"
+    ]
+  },
+  {
+    "title": "GPO Settings Management",
+    "code": [
+      "# Get all registry settings in a GPO",
+      "$gpo = Get-GPO -Name 'Security Policy'",
+      "$gpo.GetExtension('Registry').GetSettings()",
+      "",
+      "# Set registry policy",
+      "$regSettings = @{",
+      "    KeyPath = 'HKLM\\Software\\Policies\\Microsoft\\Windows\\System'",
+      "    ValueName = 'DisableCMD'",
+      "    Value = 1",
+      "    Type = 'DWord'",
+      "}",
+      "Set-GPRegistryValue -Name 'Security Policy' @regSettings",
+      "",
+      "# Remove registry setting",
+      "Remove-GPRegistryValue -Name 'Security Policy' -Key 'HKLM\\Software\\Policies\\Microsoft\\Windows\\System' -ValueName 'DisableCMD'"
+    ]
+  },
+  {
+    "title": "GPO Security Filtering",
+    "code": [
+      "# Get GPO permissions",
+      "$gpo = Get-GPO -Name 'Security Policy'",
+      "$gpo.GetSecurityInfo()",
+      "",
+      "# Add security filtering",
+      "Set-GPPermission -Name 'Security Policy' -TargetName 'IT_Staff' -TargetType Group -PermissionLevel GpoApply",
+      "",
+      "# Remove security filtering",
+      "Set-GPPermission -Name 'Security Policy' -TargetName 'Test_Group' -TargetType Group -PermissionLevel None",
+      "",
+      "# Grant edit permissions",
+      "Set-GPPermission -Name 'Security Policy' -TargetName 'GPO_Admins' -TargetType Group -PermissionLevel GpoEdit"
+    ]
+  },
+  {
+    "title": "GPO Backup and Restore",
+    "code": [
+      "# Backup all GPOs",
+      "$backupPath = 'C:\\GPOBackups'",
+      "New-Item -Path $backupPath -ItemType Directory -Force",
+      "Get-GPO -All | ForEach-Object {",
+      "    $backupInfo = Backup-GPO -Name $_.DisplayName -Path $backupPath",
+      "    Write-Host \"Backed up $($_.DisplayName) to $($backupInfo.BackupDirectory)\"",
+      "}",
+      "",
+      "# Restore specific GPO",
+      "$backupId = Get-ChildItem $backupPath | Select-Object -First 1",
+      "Restore-GPO -BackupId $backupId.Name -Path $backupPath"
+    ]
+  },
+  {
+    "title": "GPO Migration",
+    "table": {
+      "headers": ["Command", "Purpose", "Example"],
+      "rows": [
+        ["Export-GPO", "Export GPO for migration", "Export-GPO -Name 'Template' -Path 'C:\\Export' -BackupGpoForce"],
+        ["Import-GPO", "Import GPO from backup", "Import-GPO -BackupId $id -TargetName 'New GPO' -Path 'C:\\Import'"],
+        ["Copy-GPO", "Copy between domains", "Copy-GPO -SourceName 'Source GPO' -TargetName 'Target GPO' -TargetDomain 'target.com'"],
+        ["Get-GPOReport", "Migration analysis", "Get-GPOReport -Name 'GPO' -ReportType XML -Path 'analysis.xml'"]
+      ]
+    }
+  },
+  {
+    "title": "Common GPO Tasks",
+    "code": [
+      "# Force Group Policy Update",
+      "Invoke-GPUpdate -Computer 'PC01' -Force",
+      "",
+      "# Get GPO status on computer",
+      "$rsop = Get-GPResultantSetOfPolicy -Computer 'PC01' -ReportType Html -Path 'C:\\rsop.html'",
+      "",
+      "# Find GPOs with specific settings",
+      "$allGPOs = Get-GPO -All",
+      "$matchingGPOs = $allGPOs | Where-Object {",
+      "    $report = Get-GPOReport -Name $_.DisplayName -ReportType Xml",
+      "    $report -match 'DisableCMD'",
+      "}",
+      "",
+      "# Create and link GPO in one step",
+      "$newGPO = New-GPO -Name 'New Security Policy'",
+      "New-GPLink -Guid $newGPO.Id -Target 'OU=Servers,DC=contoso,DC=com'"
+    ]
+  }
+]

@@ -74,13 +74,9 @@ export class LayoutManager {
     
     formatCode(code) {
         const codeItems = Array.isArray(code) ? code : [code];
-        const codeLines = codeItems.map(item => {
-            // Split item on newlines and wrap each line in code tags
-            return item.split('\n')
-                      .map(line => `<code>${line}</code>`)
-                      .join('\n');
-        }).join('\n');
-        return `<div class="code-block">${codeLines}</div>`;
+        return `<div class="code-block">${codeItems
+            .map(item => item === "" ? "\n" : `<code>${item}</code>`)
+            .join('')}</div>`;
     }
     
     formatParagraphs(paragraphs) {
