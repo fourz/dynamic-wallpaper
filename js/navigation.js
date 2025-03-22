@@ -1,26 +1,28 @@
 /**
- * Manages navigation state and URL parameters for content, wallpapers, and stylesheets.
- * Provides two modes of operation:
- * 1. Local state: Saves navigation in localStorage for offline/normal use
- * 2. URL state: Uses URL parameters for sharable links in online mode
+ * Handles navigation state and URL management:
+ * - Local state: Offline mode with localStorage persistence
+ * - URL state: Online mode with shareable permalinks
  */
 export class NavigationManager {
     constructor() {
+        // Core state
         this.files = [];
         this.wallpapers = [];
         this.stylesheetSets = [];
+        
+        // Navigation indices
         this.currentFileIndex = 0;
         this.currentWallpaperIndex = 0;
         this.currentStylesheetSet = 0;
+        
+        // Mode flag
         this.useUrlParameters = false;
     }
 
+    // Mode configuration
     setUseUrlParameters(enabled) {
         this.useUrlParameters = enabled;
-        // If enabling URL mode, immediately update URL to match current state
-        if (enabled) {
-            this.updatePermalinkAndUrl();
-        }
+        if (enabled) this.updatePermalinkAndUrl();
     }
 
     // File navigation
@@ -34,7 +36,10 @@ export class NavigationManager {
     }
 
     navigateContent(direction) {
-        this.currentFileIndex = (this.currentFileIndex + direction + this.files.length) % this.files.length;
+        this.currentFileIndex = this.wrapIndex(
+            this.currentFileIndex + direction, 
+            this.files.length
+        );
         return this.getCurrentFile();
     }
 
@@ -49,11 +54,13 @@ export class NavigationManager {
     }
 
     navigateWallpaper(direction) {
-        if (this.wallpapers.length > 0) {
-            this.currentWallpaperIndex = (this.currentWallpaperIndex + direction + this.wallpapers.length) % this.wallpapers.length;
-            return this.getCurrentWallpaper();
-        }
-        return null;
+        if (!this.wallpapers.length) return null;
+        
+        this.currentWallpaperIndex = this.wrapIndex(
+            this.currentWallpaperIndex + direction, 
+            this.wallpapers.length
+        );
+        return this.getCurrentWallpaper();
     }
 
     // Stylesheet navigation
@@ -67,19 +74,24 @@ export class NavigationManager {
     }
 
     navigateStylesheet(direction) {
-        if (this.stylesheetSets.length > 0) {
-            this.currentStylesheetSet = (this.currentStylesheetSet + direction + this.stylesheetSets.length) % this.stylesheetSets.length;
-            return this.getCurrentStylesheetSet();
-        }
-        return null;
+        if (!this.stylesheetSets.length) return null;
+        
+        this.currentStylesheetSet = this.wrapIndex(
+            this.currentStylesheetSet + direction, 
+            this.stylesheetSets.length
+        );
+        return this.getCurrentStylesheetSet();
     }
 
-    // State management
-    // Only save state when not using URL parameters
+    // Helper for circular array navigation
+    wrapIndex(index, length) {
+        return (index + length) % length;
+    }
+
+    // State persistence
     getState() {
-        if (this.useUrlParameters) {
-            return {};
-        }
+        if (this.useUrlParameters) return {};
+        
         return {
             currentFileIndex: this.currentFileIndex,
             currentWallpaperIndex: this.currentWallpaperIndex,
@@ -87,13 +99,12 @@ export class NavigationManager {
         };
     }
 
-    // Only restore state when not using URL parameters
     setState(state) {
-        if (!this.useUrlParameters) {
-            if (state.currentFileIndex !== undefined) this.currentFileIndex = state.currentFileIndex;
-            if (state.currentWallpaperIndex !== undefined) this.currentWallpaperIndex = state.currentWallpaperIndex;
-            if (state.currentStylesheetSet !== undefined) this.currentStylesheetSet = state.currentStylesheetSet;
-        }
+        if (this.useUrlParameters) return;
+        
+        Object.entries(state).forEach(([key, value]) => {
+            if (value !== undefined) this[key] = value;
+        });
     }
 
     // URL parameter handling
@@ -105,102 +116,98 @@ export class NavigationManager {
         });
     }
 
-    // URL parameter parsing and application
     setIndexFromParams(params) {
+        // Handle random content selection
         if (params.has('random') && params.get('random') === 'true') {
             this.currentFileIndex = Math.floor(Math.random() * this.files.length);
             return;
         }
         
+        // Set content index
         if (params.has('content')) {
-            const index = parseInt(params.get('content'));
-            this.currentFileIndex = !isNaN(index) && index >= 0 && index < this.files.length ?
-                index : this.findContentByName(params.get('content'));
+            const contentParam = params.get('content');
+            const index = parseInt(contentParam);
+            this.currentFileIndex = !isNaN(index) && index >= 0 && index < this.files.length
+                ? index 
+                : this.findContentByName(contentParam);
         }
         
+        // Set style index
         if (params.has('style')) {
-            const styleParam = params.get('style');
-            const styleIndex = this.stylesheetSets.findIndex(set => {
-                // Handle array of stylesheets or single stylesheet
-                const stylesheets = Array.isArray(set) ? set : [set];
-                return stylesheets.some(sheet => 
-                    sheet.toLowerCase().includes(`/${styleParam.toLowerCase()}.css`)
-                );
-            });
-            if (styleIndex !== -1) {
-                this.currentStylesheetSet = styleIndex;
-            }
+            this.setStyleFromParam(params.get('style'));
         }
 
+        // Set wallpaper index
         if (params.has('wallpaper')) {
-            const wallpaperParam = params.get('wallpaper');
-            // Try to parse as index first
-            const wallIndex = parseInt(wallpaperParam);
-            if (!isNaN(wallIndex) && wallIndex >= 0 && wallIndex < this.wallpapers.length) {
-                this.currentWallpaperIndex = wallIndex;
-            } else {
-                // Try to find by filename if not a valid index
-                const wallpaperIndex = this.wallpapers.findIndex(wall => 
-                    wall.toLowerCase().includes(wallpaperParam.toLowerCase())
-                );
-                if (wallpaperIndex !== -1) {
-                    this.currentWallpaperIndex = wallpaperIndex;
-                }
-            }
+            this.setWallpaperFromParam(params.get('wallpaper'));
         }
     }
 
-    // Improved permalink URL generation
+    setStyleFromParam(styleParam) {
+        const styleIndex = this.stylesheetSets.findIndex(set => {
+            const stylesheets = Array.isArray(set) ? set : [set];
+            return stylesheets.some(sheet => 
+                sheet.toLowerCase().includes(`/${styleParam.toLowerCase()}.css`)
+            );
+        });
+        if (styleIndex !== -1) this.currentStylesheetSet = styleIndex;
+    }
+
+    setWallpaperFromParam(wallpaperParam) {
+        const wallIndex = parseInt(wallpaperParam);
+        if (!isNaN(wallIndex) && wallIndex >= 0 && wallIndex < this.wallpapers.length) {
+            this.currentWallpaperIndex = wallIndex;
+            return;
+        }
+        
+        const wallpaperIndex = this.wallpapers.findIndex(wall => 
+            wall.toLowerCase().includes(wallpaperParam.toLowerCase())
+        );
+        if (wallpaperIndex !== -1) this.currentWallpaperIndex = wallpaperIndex;
+    }
+
+    // Permalink generation
     updatePermalinkAndUrl() {
-        if (!this.files || this.files.length === 0) return null;
+        if (!this.files?.length) return null;
         
         try {
             const params = new URLSearchParams();
             const currentFile = this.getCurrentFile();
+            const fileName = currentFile?.split('/').pop().replace('.json', '') || '';
             
-            // Extract filename without path and extension for cleaner URLs
-            const fileName = currentFile ? currentFile.split('/').pop().replace('.json', '') : '';
+            const stylesetName = this.getStylesetName();
             
-            // Get the styleset name from config
-            let stylesetName = '';
-            if (window.configData && window.configData.stylesheets) {
-                stylesetName = Object.keys(window.configData.stylesheets)[this.currentStylesheetSet] || '';
-            }
+            this.setUrlParams(params, fileName, stylesetName);
+            const urlWithParams = this.createPermalinkUrl(params);
             
-            // Build parameters
-            params.set('content', fileName);
-            if (stylesetName) {
-                params.set('styleset', stylesetName);
-            }
-            params.set('wallpaper', this.currentWallpaperIndex.toString());
-            
-            // Fix URL generation for offline mode
-            let baseUrl;
-            if (window.location.protocol === 'file:') {
-                // Get the current file path and ensure proper formatting
-                const currentPath = window.location.pathname;
-                // Remove any leading slashes and convert to proper file:// URL
-                baseUrl = `file:///${currentPath.replace(/^\/+/, '')}`;
-            } else {
-                baseUrl = window.location.origin + window.location.pathname;
-            }
-            
-            const urlWithParams = `${baseUrl}?${params.toString()}`;
-            
-            // Update browser URL if in parameter mode
             if (this.useUrlParameters) {
                 window.history.replaceState({}, '', urlWithParams);
             }
             
-            // Always return permalink data regardless of mode
-            // This ensures the permalink button is always updated
-            return {
-                url: urlWithParams,
-                fileName: fileName
-            };
+            return { url: urlWithParams, fileName };
+            
         } catch (error) {
             console.error("Failed to update permalink URL:", error);
             return null;
         }
+    }
+
+    getStylesetName() {
+        if (!window.configData?.stylesheets) return '';
+        return Object.keys(window.configData.stylesheets)[this.currentStylesheetSet] || '';
+    }
+
+    setUrlParams(params, fileName, stylesetName) {
+        params.set('content', fileName);
+        if (stylesetName) params.set('styleset', stylesetName);
+        params.set('wallpaper', this.currentWallpaperIndex.toString());
+    }
+
+    createPermalinkUrl(params) {
+        const baseUrl = window.location.protocol === 'file:'
+            ? `file:///${window.location.pathname.replace(/^\//, '')}`
+            : `${window.location.origin}${window.location.pathname}`;
+            
+        return `${baseUrl}?${params.toString()}`;
     }
 }
