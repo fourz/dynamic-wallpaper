@@ -21,11 +21,13 @@
         "table": {
             "headers": ["File/Command", "Function"],
             "rows": [
-                ["/etc/wpa_supplicant/...", "WiFi configuration"],
+                ["/etc/wpa_supplicant/wpa_supplicant.conf", "WiFi configuration"],
+                ["/etc/dhcpcd.conf", "Static IP configuration"],
                 ["raspi-config", "Enable/disable interfaces"],
                 ["ifconfig", "Show network interfaces"],
                 ["iwlist wlan0 scan", "Scan WiFi networks"],
-                ["hostname -I", "Show IP address"]
+                ["hostname -I", "Show IP address"],
+                ["ip route | grep default", "Show default gateway"]
             ]
         }
     },
@@ -47,11 +49,13 @@
         "table": {
             "headers": ["Task", "Command"],
             "rows": [
-                ["Update System", "sudo apt update && upgrade"],
+                ["Update System", "sudo apt update && sudo apt upgrade"],
                 ["Clean Packages", "sudo apt autoremove"],
                 ["Check Storage", "df -h"],
                 ["Monitor Resources", "top"],
-                ["View Logs", "journalctl -xe"]
+                ["View Logs", "journalctl -xe"],
+                ["Check Running Services", "systemctl list-units --type=service"],
+                ["Monitor Temperature", "watch -n 1 vcgencmd measure_temp"]
             ]
         }
     },
@@ -65,6 +69,49 @@
                 ["Disable Splash", "disable_splash=1"],
                 ["Silent Boot", "quiet"],
                 ["Force HDMI", "hdmi_force_hotplug=1"]
+            ]
+        }
+    },
+    {
+        "title": "Software Management",
+        "table": {
+            "headers": ["Command", "Purpose"],
+            "rows": [
+                ["apt search package", "Search for a package"],
+                ["apt show package", "Show package details"],
+                ["apt install package", "Install a package"],
+                ["apt remove package", "Remove a package"],
+                ["apt list --installed", "List installed packages"],
+                ["pip3 install package", "Install Python package"],
+                ["pip3 list", "List installed Python packages"]
+            ]
+        }
+    },
+    {
+        "title": "Docker Commands",
+        "table": {
+            "headers": ["Command", "Function"],
+            "rows": [
+                ["docker pull image", "Download an image"],
+                ["docker run image", "Run a container"],
+                ["docker ps", "List running containers"],
+                ["docker stop container", "Stop a container"],
+                ["docker-compose up -d", "Start services defined in docker-compose.yml"],
+                ["docker system prune", "Clean up unused Docker resources"]
+            ]
+        }
+    },
+    {
+        "title": "Useful Directories",
+        "table": {
+            "headers": ["Directory", "Content"],
+            "rows": [
+                ["/boot/config.txt", "Boot configuration"],
+                ["/boot/cmdline.txt", "Kernel command line parameters"],
+                ["/etc/rc.local", "Startup script (runs at boot)"],
+                ["/var/log", "System logs"],
+                ["/home/pi", "User home directory"],
+                ["/opt", "Optional software location"]
             ]
         }
     }

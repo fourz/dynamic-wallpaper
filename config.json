@@ -36,6 +36,7 @@
         "content/networking_basics.json",
         "content/networking_overview.json",
         "content/powershell_reference.json",
+        "content/powershell_hashtables_guide.json",
 		"content/reactnodejs_reference.json",
         "content/regex_reference.json", 
         "content/visual_studio_code_reference.json",               

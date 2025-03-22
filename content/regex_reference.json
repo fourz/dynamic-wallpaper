@@ -61,17 +61,17 @@
   {
     "title": "Groups & Alternation:",
     "table": {
-      "headers": ["Symbol", "Description"],
+      "headers": ["Symbol", "Description", "Purpose"],
       "rows": [
-        ["(abc)", "Capture group"],
-        ["(?:abc)", "Non-capturing group"],
-        ["a|b", "Match a or b"],
-        ["\\1, \\2", "Backreference to group 1, 2, etc."],
-        ["(?=abc)", "Positive lookahead"],
-        ["(?!abc)", "Negative lookahead"],
-        ["(?<=abc)", "Positive lookbehind"],
-        ["(?<!abc)", "Negative lookbehind"],
-        ["(?i)", "Case-insensitive"]
+        ["(abc)", "Capture group", "Store matched text for later use"],
+        ["(?:abc)", "Non-capturing group", "Group patterns without storing the match"],
+        ["a|b", "Match a or b", "Provide alternative matching options"],
+        ["\\1, \\2", "Backreference to group 1, 2, etc.", "Reuse previously captured text"],
+        ["(?=abc)", "Positive lookahead", "Match only if followed by pattern"],
+        ["(?!abc)", "Negative lookahead", "Match only if not followed by pattern"],
+        ["(?<=abc)", "Positive lookbehind", "Match only if preceded by pattern"],
+        ["(?<!abc)", "Negative lookbehind", "Match only if not preceded by pattern"],
+        ["(?i)", "Case-insensitive", "Ignore letter case when matching"]
       ]
     }
   },

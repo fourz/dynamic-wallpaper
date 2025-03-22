@@ -8,10 +8,10 @@
         "table": {
             "headers": ["What", "How"],
             "rows": [
-                ["Morning Start", "Follow checklist, avoid decisions"],
-                ["Time Blocks", "25min work + 5min break"],
-                ["Workspace", "Clear desk, minimal items"],
-                ["Evening Prep", "List top 3 tasks for tomorrow"]
+                ["Morning Start", "Follow checklist, avoid decisions, prepare clothes night before"],
+                ["Time Blocks", "25min work + 5min break (Pomodoro), increase gradually if needed"],
+                ["Workspace", "Clear desk, minimal items, face away from distractions"],
+                ["Evening Prep", "List top 3 tasks for tomorrow, gather needed materials"]
             ]
         }
     },
@@ -20,10 +20,10 @@
         "table": {
             "headers": ["Method", "How"],
             "rows": [
-                ["2-Minute Rule", "If quick, do it now"],
-                ["Big Tasks", "Break into small chunks"],
-                ["Priority", "Mark urgent tasks in red"],
-                ["Reminders", "Sticky notes where you look"]
+                ["2-Minute Rule", "If quick, do it now - emails, texts, simple tasks"],
+                ["Big Tasks", "Break into 15-30min chunks, celebrate small wins"],
+                ["Priority", "Mark urgent tasks in red, use 1-2-3 numbering system"],
+                ["Reminders", "Sticky notes where you look, set phone alarms with specific labels"]
             ]
         }
     },
@@ -32,10 +32,10 @@
         "table": {
             "headers": ["Tool", "Purpose"],
             "rows": [
-                ["Headphones", "Block noise"],
-                ["Timer", "Track work periods"],
-                ["Task App", "Remember deadlines"],
-                ["Site Blocker", "Limit distractions"]
+                ["Headphones", "Block noise with brown/white noise or instrumental music"],
+                ["Timer", "Track work periods, visual timers for better awareness"],
+                ["Task App", "Remember deadlines, Trello/Todoist with categories"],
+                ["Site Blocker", "Limit distractions, block apps during focus time"]
             ]
         }
     },
@@ -44,10 +44,22 @@
         "table": {
             "headers": ["Step", "Action"],
             "rows": [
-                ["Basic Modes", "Work and Personal only"],
-                ["Key Apps", "Pick 3-5 essential ones"],
-                ["Schedule", "Match your energy peaks"],
-                ["Notifications", "VIP contacts only"]
+                ["Basic Modes", "Work and Personal only, use Focus modes on devices"],
+                ["Key Apps", "Pick 3-5 essential ones, remove others from home screen"],
+                ["Schedule", "Match your energy peaks, hardest tasks when most alert"],
+                ["Notifications", "VIP contacts only, schedule email checking times"]
+            ]
+        }
+    },
+    {
+        "title": "Focus Maintenance",
+        "table": {
+            "headers": ["Strategy", "Implementation"],
+            "rows": [
+                ["Body Check", "Water, protein snack, stretch every hour"],
+                ["Environment", "Natural light, comfortable temperature, minimal noise"],
+                ["Task Switching", "Complete small task before switching to maintain momentum"],
+                ["Dopamine Balance", "Small rewards after completing difficult tasks"]
             ]
         }
     },
@@ -55,10 +67,21 @@
         "title": "Focus Reset",
         "list": [
             "1. Close everything except current task",
-            "2. Clear desk",
-            "3. Headphones on",
-            "4. Deep breath",
-            "5. Set 25min timer"
+            "2. Clear desk and put phone away",
+            "3. Headphones on with focus playlist",
+            "4. Deep breath for 30 seconds (4-in, 4-hold, 4-out)",
+            "5. Set 25min timer and state intention aloud",
+            "6. Start with smallest sub-task first"
+        ]
+    },
+    {
+        "title": "Quick Recovery Techniques",
+        "list": [
+            "1. Body reset: 10 jumping jacks or quick walk",
+            "2. Brain reset: Write goal on paper",
+            "3. Visual reset: Look at distant object for 30 seconds",
+            "4. Say 'focusing now' as verbal trigger",
+            "5. Drink cold water"
         ]
     }
 ]

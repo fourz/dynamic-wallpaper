@@ -45,21 +45,21 @@
     {
         "title": "Required Elements",
         "list": [
-            "• body - Page container and wallpaper display",
-            "• .overlay - Content container with transparency",
-            "• .flex-wrap - Content section layout system",
-            "• Navigation buttons - Consistent size and position",
-            "• Fade transitions - Support for auto-fade feature"
+            "body - Page container and wallpaper display",
+            "overlay - Content container with transparency",
+            "flex-wrap - Content section layout system",
+            "Navigation buttons - Consistent size and position",
+            "Fade transitions - Support for auto-fade feature"
         ]
     },
     {
         "title": "Theme Customization Tips",
-        "list": [
-            "1. Test themes with various content types (tables, lists)",
-            "2. Maintain button positions for consistent navigation",
-            "3. Keep text readable against wallpaper backgrounds",
-            "4. Ensure smooth transitions for fade effects",
-            "5. Verify mobile and desktop compatibility"
+        "numberedList": [
+            "Test themes with various content types (tables, lists)",
+            "Maintain button positions for consistent navigation",
+            "Keep text readable against wallpaper backgrounds",
+            "Ensure smooth transitions for fade effects",
+            "Verify mobile and desktop compatibility"
         ]
     }
 ]

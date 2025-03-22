@@ -26,7 +26,8 @@ export class ContentManager {
             await this.initializeMode(configData);
             
             const params = new URLSearchParams(window.location.search);
-            // Mathematical predicate function to determine URL parameter mode
+            
+            // determine URL parameter mode
             const hasUrlParams = URLUtils.hasAnyParams(params, this.URL_PARAMS);
             
             this.navigation.setUseUrlParameters(hasUrlParams);

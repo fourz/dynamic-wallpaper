@@ -38,10 +38,6 @@ Originally designed as a simple wallpaper app, Dynamic Wallpaper has evolved int
 
 ## Installation
 
-### Prerequisites
-- Python 3.x (or Node.js)
-- Required dependencies
-
 ### Setup Steps
 ```bash
 git clone -b master https://github.com/fourz/dynamic-wallpaper.git
@@ -87,8 +83,8 @@ Share specific content by:
 
 ### Tested Environments
 - ✅ Local Windows File (Offline)
-- ✅ Rebex Tiny Web Server (Online)
-- ⚠️ Untested: IIS, Apache, Python HTTP Server
+- ✅ Apache, Rebex Tiny Web Server (Online)
+- ⚠️ Untested: IIS, Python HTTP Server
 
 ### Running the Application
 
