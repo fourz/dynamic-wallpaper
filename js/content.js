@@ -13,38 +13,25 @@ export class ContentManager {
         this.config = config;
         this.layout = layout;
         
-        // Pre-calculate constants to avoid repeated computation
+        // Define constants
         this.UI_ELEMENTS = ['.nav-btn', '.wall-btn', '.style-btn', '.fade-toggle-btn', '.permalink-btn'];
         this.URL_PARAMS = ['random', 'content', 'styleset', 'wallpaper'];
     }
 
     async initialize() {
         try {
+            // Load config and set global reference
             const configData = await this.storage.loadJSON('config.json');
             window.configData = configData;
             
-            await this.initializeMode(configData);
+            // Initialize app mode (online/offline)
+            await this.initializeAppMode(configData);
             
-            const params = new URLSearchParams(window.location.search);
-            const hasUrlParams = URLUtils.hasAnyParams(params, this.URL_PARAMS);
+            // Handle URL parameters and state management
+            await this.initializeStateManagement();
             
-            // First set URL parameter mode 
-            this.navigation.setUseUrlParameters(hasUrlParams);
-            
-            // Load the saved state - it will be used only if not in URL parameter mode
-            const savedState = this.storage.getNavigationState();
-            this.navigation.setState(savedState);
-            
-            if (hasUrlParams) {
-                // Hide navigation elements in permalink mode
-                this.hideNavigationElements();
-            }
-            
-            // Initialize subsystems in parallel where possible
-            await Promise.all([
-                this.initializeContent(configData),
-                this.initializeStyleAndWallpaper(configData, params)
-            ]);
+            // Initialize content and visual elements in parallel
+            await this.initializeContentAndVisuals(configData);
             
         } catch (error) {
             console.error('Failed to initialize:', error);
@@ -52,50 +39,21 @@ export class ContentManager {
         }
     }
     
-    // Optimized initialization with parallelization
-    async initializeStyleAndWallpaper(configData, params) {
-        // Run these operations in parallel for efficiency
-        const [stylesInitialized, wallpapersInitialized] = await Promise.all([
-            this.initializeStylesheets(configData),
-            this.initializeWallpapers(configData)
-        ]);
-        
-        // Sequential operations that depend on the parallel results
-        this.config.setFormatContentFunction((item) => this.layout.formatContent(item));
-        this.setDocumentTitle(configData);
-        
-        // Handle URL parameters if in URL mode
-        if (this.navigation.useUrlParameters && URLUtils.hasAnyParams(params, this.URL_PARAMS)) {
-            this.navigation.setIndexFromParams(params);
-        }
-        
-        // Save the initial state to ensure it's available on refresh
-        if (!this.navigation.useUrlParameters) {
-            this.storage.setNavigationState(this.navigation.getState());
-        }
-        
-        // Always update the permalink to ensure it reflects the current state
-        // This fixes permalinks not updating after initial load
-        const permalinkData = this.navigation.updatePermalinkAndUrl();
-        if (permalinkData) {
-            this.layout.updatePermalinkButton(permalinkData);
-        }
-        
-        return stylesInitialized && wallpapersInitialized;
-    }
-
-    hideNavigationElements() {
-        // Use DOM utility for more concise operation
-        this.UI_ELEMENTS.forEach(selector => {
-            DOMUtils.setStyleForAll(selector, 'visibility', 'hidden');
-        });
-    }
-
-    async initializeMode(configData) {
-        // Simple protocol check for online/offline mode
+    // Split initialization into clearer, focused methods
+    async initializeAppMode(configData) {
         const isOnlineMode = !window.location.protocol.startsWith('file:');
         
-        // Setup permalink using composition
+        // Set up permalink button with default values
+        this.setupPermalinkButton();
+        
+        // Configure online/offline mode in subsystems
+        this.storage.setOnlineMode(isOnlineMode);
+        this.storage.setServerUrl(configData.serverUrl || '');
+        this.config.setOnlineMode(isOnlineMode);
+        this.config.setServerUrl(configData.serverUrl || '');
+    }
+    
+    setupPermalinkButton() {
         const permalinkBtn = DOMUtils.getElement('permalinkBtn');
         if (permalinkBtn) {
             const baseUrl = URLUtils.getBaseUrl();
@@ -106,104 +64,39 @@ export class ContentManager {
             };
             permalinkBtn.href = URLUtils.createPermalink(baseUrl, defaultParams);
         }
-
-        // Set mode in all subsystems
-        this.storage.setOnlineMode(isOnlineMode);
-        this.storage.setServerUrl(configData.serverUrl || '');
-        this.config.setOnlineMode(isOnlineMode);
-        this.config.setServerUrl(configData.serverUrl || '');
     }
-
-    setDocumentTitle(configData) {
-        // Only set catalog title when not using bookmarkable URLs
-        if (!this.navigation.useUrlParameters && configData.title) {
-            document.title = configData.title;
-        }
-    }
-
-    async initializeStylesheets(configData) {
+    
+    async initializeStateManagement() {
         const params = new URLSearchParams(window.location.search);
-        const requestedSet = params.get('styleset');
+        const hasUrlParams = URLUtils.hasAnyParams(params, this.URL_PARAMS);
         
-        // Create array of stylesheet sets from config
-        const stylesheetSets = Object.entries(configData.stylesheets).map(([key, value]) => ({
-            key,
-            sheets: Array.isArray(value) ? value : [value]
-        }));
+        // Configure navigation mode based on URL parameters
+        this.navigation.setUseUrlParameters(hasUrlParams);
         
-        // If styleset specified in URL, find and use it
-        if (requestedSet && stylesheetSets.some(set => set.key === requestedSet)) {
-            const selectedSet = stylesheetSets.find(set => set.key === requestedSet);
-            this.config.loadStylesheets(selectedSet.sheets);
-            return selectedSet.sheets;
-        }
+        // Load saved state (only used if not in URL parameter mode)
+        const savedState = this.storage.getNavigationState();
+        this.navigation.setState(savedState);
         
-        // Otherwise use navigation system
-        const stylesheetSet = this.navigation.setStylesheetSets(
-            stylesheetSets.map(set => set.sheets)
-        );
-        if (stylesheetSet) {
-            this.config.loadStylesheets(stylesheetSet);
-        }
-        return stylesheetSet;
-    }
-
-    async initializeWallpapers(configData) {
-        const scannedWallpapers = await this.config.scanWallpapers(configData.wallpaper);
-        const currentWallpaper = this.navigation.setWallpapers(scannedWallpapers);
-        if (currentWallpaper) {
-            await this.config.setWallpaper(currentWallpaper);
+        // Hide navigation elements in permalink mode
+        if (hasUrlParams) {
+            this.UI_ELEMENTS.forEach(selector => {
+                DOMUtils.setStyleForAll(selector, 'visibility', 'hidden');
+            });
         }
     }
-
-    formatLinks(text) {
-        if (!text) return text;
-        // URL regex pattern that matches http, https, and www URLs
-        const urlPattern = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
-        return text.replace(urlPattern, url => {
-            const fullUrl = url.startsWith('www.') ? 'http://' + url : url;
-            return `<a href="${fullUrl}" target="_blank" class="content-link" rel="noopener noreferrer">${url}</a>`;
-        });
+    
+    async initializeContentAndVisuals(configData) {
+        const params = new URLSearchParams(window.location.search);
+        
+        // Run these operations in parallel
+        await Promise.all([
+            this.loadContent(configData),
+            this.setupVisuals(configData, params)
+        ]);
     }
-
-    // Use composition for content processing
-    processContentItem(item) {
-        if (!item) return item;
-        
-        // Compose text processing functions
-        const processTextContent = (content) => {
-            if (!content) return content;
-            return Array.isArray(content)
-                ? content.map(this.formatLinks.bind(this))
-                : this.formatLinks(content);
-        };
-        
-        // Use pure function approach - create new object instead of mutating
-        const processedItem = {...item};
-        
-        // Process all text fields with a single function
-        const fieldsToProcess = ['block', 'list', 'numberedList', 'title', 'subtitle'];
-        fieldsToProcess.forEach(field => {
-            if (processedItem[field]) {
-                processedItem[field] = processTextContent(processedItem[field]);
-            }
-        });
-        
-        // Process table cells if present
-        if (processedItem.table?.rows) {
-            processedItem.table = {
-                ...processedItem.table,
-                rows: processedItem.table.rows.map(row => 
-                    row.map(cell => this.formatLinks(cell))
-                )
-            };
-        }
-        
-        return processedItem;
-    }
-
-    async initializeContent(configData) {
-        // Use monadic error handling pattern
+    
+    async loadContent(configData) {
+        // Load and process content JSON
         const content = await ErrorUtils.tryOperation(
             () => this.storage.loadAllJSON(configData.content, this.navigation),
             () => null
@@ -214,25 +107,39 @@ export class ContentManager {
             return false;
         }
 
-        // Set page title
-        const headingItem = content.find(item => item.style === "heading");
-        if (headingItem?.title && this.navigation.useUrlParameters) {
-            document.title = headingItem.title;
-        }
+        // Set page title based on content if in permalink mode
+        this.updateDocumentTitle(content, configData);
 
-        // Use function composition (map + join) for content processing
-        const formattedContent = content
-            .map(item => this.processContentItem(item))
-            .map(item => this.layout.formatContent(item))
-            .join('');
-
-        this.appendContentStyles();
+        // Process and format content
+        const formattedContent = this.formatContentItems(content);
+        
+        // Apply styles and update DOM
+        this.applyContentStyles();
         DOMUtils.getElement("content").innerHTML = formattedContent;
         return true;
     }
-
-    // Extracted content styles to separate method
-    appendContentStyles() {
+    
+    updateDocumentTitle(content, configData) {
+        if (this.navigation.useUrlParameters) {
+            // Use title from content in permalink mode
+            const headingItem = content.find(item => item.style === "heading");
+            if (headingItem?.title) {
+                document.title = headingItem.title;
+            }
+        } else if (configData.title) {
+            // Use catalog title in normal mode
+            document.title = configData.title;
+        }
+    }
+    
+    formatContentItems(content) {
+        return content
+            .map(item => this.processContentItem(item))
+            .map(item => this.layout.formatContent(item))
+            .join('');
+    }
+    
+    applyContentStyles() {
         const styleElement = document.createElement('style');
         styleElement.textContent = `
             .content-link {
@@ -245,65 +152,167 @@ export class ContentManager {
         `;
         document.head.appendChild(styleElement);
     }
-
-    // Navigation using command pattern and function composition
-    async handleNavigation(type, direction) {
-        // Define commands as pure functions in a map (mathematical abstraction)
-        const navigationActions = {
-            content: {
-                navigate: () => this.navigation.navigateContent(direction),
-                handle: (result) => this.config.loadContent(result, path => this.storage.loadJSON(path))
-            },
-            wallpaper: {
-                navigate: () => this.navigation.navigateWallpaper(direction),
-                handle: (result) => this.config.setWallpaper(result)
-            },
-            stylesheet: {
-                navigate: () => this.navigation.navigateStylesheet(direction),
-                handle: (result) => this.config.loadStylesheets(result)
-            }
-        };
-
-        // Use error monad pattern
-        return await ErrorUtils.tryOperation(async () => {
-            const action = navigationActions[type];
-            if (!action) return false;
-
-            const result = action.navigate();
-            if (result) {
-                await action.handle(result);
-                this.updateNavigationState(result);
-                return true;
-            }
-            return false;
-        }, (error) => {
-            console.error(`Navigation failed for ${type}:`, error);
-            return false;
-        });
-    }
-
-    // Extracted navigation state update logic
-    updateNavigationState(result) {
+    
+    async setupVisuals(configData, params) {
+        // Set up stylesheets and wallpapers
+        await Promise.all([
+            this.setupStylesheets(configData),
+            this.setupWallpapers(configData)
+        ]);
+        
+        // Configure content formatting function
+        this.config.setFormatContentFunction((item) => this.layout.formatContent(item));
+        
+        // Apply URL parameters if present
+        if (this.navigation.useUrlParameters && URLUtils.hasAnyParams(params, this.URL_PARAMS)) {
+            this.navigation.setIndexFromParams(params);
+        }
+        
+        // Save state for normal navigation mode
         if (!this.navigation.useUrlParameters) {
             this.storage.setNavigationState(this.navigation.getState());
         }
         
+        // Update permalink
+        this.updatePermalink();
+    }
+    
+    updatePermalink() {
         const permalinkData = this.navigation.updatePermalinkAndUrl();
         if (permalinkData) {
             this.layout.updatePermalinkButton(permalinkData);
         }
     }
+    
+    async setupStylesheets(configData) {
+        const params = new URLSearchParams(window.location.search);
+        const requestedSet = params.get('styleset');
+        
+        // Create stylesheet sets from config
+        const stylesheetSets = Object.entries(configData.stylesheets).map(([key, value]) => ({
+            key,
+            sheets: Array.isArray(value) ? value : [value]
+        }));
+        
+        // Use requested set from URL or default
+        if (requestedSet && stylesheetSets.some(set => set.key === requestedSet)) {
+            const selectedSet = stylesheetSets.find(set => set.key === requestedSet);
+            this.config.loadStylesheets(selectedSet.sheets);
+            return selectedSet.sheets;
+        }
+        
+        // Use navigation system
+        const stylesheetSet = this.navigation.setStylesheetSets(
+            stylesheetSets.map(set => set.sheets)
+        );
+        
+        if (stylesheetSet) {
+            this.config.loadStylesheets(stylesheetSet);
+        }
+        
+        return stylesheetSet;
+    }
+    
+    async setupWallpapers(configData) {
+        const wallpapers = await this.config.scanWallpapers(configData.wallpaper);
+        const currentWallpaper = this.navigation.setWallpapers(wallpapers);
+        
+        if (currentWallpaper) {
+            await this.config.setWallpaper(currentWallpaper);
+        }
+    }
 
-    // Update navigation methods to use handleNavigation
+    // Content processing
+    formatLinks(text) {
+        if (!text) return text;
+        
+        const urlPattern = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
+        return text.replace(urlPattern, url => {
+            const fullUrl = url.startsWith('www.') ? 'http://' + url : url;
+            return `<a href="${fullUrl}" target="_blank" class="content-link" rel="noopener noreferrer">${url}</a>`;
+        });
+    }
+
+    processContentItem(item) {
+        if (!item) return item;
+        
+        // Create a function to process text content
+        const processText = (text) => Array.isArray(text)
+            ? text.map(this.formatLinks.bind(this))
+            : this.formatLinks(text);
+        
+        // Create a new processed item without modifying the original
+        const processedItem = {...item};
+        
+        // Process all text fields
+        ['block', 'list', 'numberedList', 'title', 'subtitle'].forEach(field => {
+            if (processedItem[field]) {
+                processedItem[field] = processText(processedItem[field]);
+            }
+        });
+        
+        // Process table cells
+        if (processedItem.table?.rows) {
+            processedItem.table = {
+                ...processedItem.table,
+                rows: processedItem.table.rows.map(row => row.map(this.formatLinks.bind(this)))
+            };
+        }
+        
+        return processedItem;
+    }
+
+    // Navigation methods
     async navigateContent(direction) {
-        await this.handleNavigation('content', direction);
+        return this.navigate('content', direction);
     }
 
     async navigateWallpaper(direction) {
-        await this.handleNavigation('wallpaper', direction);
+        return this.navigate('wallpaper', direction);
     }
 
     async navigateStylesheet(direction) {
-        await this.handleNavigation('stylesheet', direction);
+        return this.navigate('stylesheet', direction);
+    }
+
+    // Unified navigation handler
+    async navigate(type, direction) {
+        const actions = {
+            content: {
+                navigate: () => this.navigation.navigateContent(direction),
+                apply: (file) => this.config.loadContent(file, path => this.storage.loadJSON(path))
+            },
+            wallpaper: {
+                navigate: () => this.navigation.navigateWallpaper(direction),
+                apply: (wallpaper) => this.config.setWallpaper(wallpaper)
+            },
+            stylesheet: {
+                navigate: () => this.navigation.navigateStylesheet(direction),
+                apply: (stylesheets) => this.config.loadStylesheets(stylesheets)
+            }
+        };
+
+        try {
+            const action = actions[type];
+            if (!action) return false;
+
+            const item = action.navigate();
+            if (!item) return false;
+            
+            await action.apply(item);
+            
+            // Update navigation state
+            if (!this.navigation.useUrlParameters) {
+                this.storage.setNavigationState(this.navigation.getState());
+            }
+            
+            // Update permalink
+            this.updatePermalink();
+            
+            return true;
+        } catch (error) {
+            console.error(`Navigation failed for ${type}:`, error);
+            return false;
+        }
     }
 }

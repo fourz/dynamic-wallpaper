@@ -1,41 +1,83 @@
 /**
  * Controls content layout and visual presentation
- * Implemented as a mathematical state machine for fade behaviors
+ * Implements a state machine for fade behaviors
  */
 import { DOMUtils, StateUtils } from './utils.js';
 
 export class LayoutManager {
     constructor() {
-        this.FADE_DELAY = 40000;
-        this.UI_FADE_DELAY = 2000;
+        // Configuration
+        this.FADE_DELAY = 40000;        // 40 seconds for content fade
+        this.UI_FADE_DELAY = 2000;      // 2 seconds for UI controls fade
         
-        // Define fade state machine transitions (mathematical state diagram)
+        // Define states
         this.fadeStates = ['default', 'usage', 'fade-out', 'wallpaper'];
-        this.stateMachine = StateUtils.createStateMachine('default', {
-            'default': { next: 'usage' },
-            'usage': { next: 'fade-out' },
-            'fade-out': { next: 'wallpaper' },
-            'wallpaper': { next: 'default' }
-        });
         
-        // Cache DOM selectors for performance
-        this.selectors = {
-            content: '#content',
-            buttons: '.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn, .permalink-btn'
-        };
+        // DOM selectors (cached for performance)
+        this.contentSelector = '#content';
+        this.buttonSelector = '.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn, .permalink-btn';
         
-        // Cleanup handlers
-        this.cleanupFunctions = [];
+        // State tracking
         this.fadeState = 'default';
+        this.cleanupFunctions = [];
     }
 
-    // Formatting methods
-    formatList(items, isNumbered = false) {
-        const listType = isNumbered ? 'ol' : 'ul';
+    // Content formatting methods
+    formatContent(item) {
+        if (!item) return '';
+        
+        // Handle heading style specially
+        if (item.style === "heading") {
+            return this.formatHeading(item.title);
+        }
+        
+        // Start with the title if present
+        let content = item.title && item.style !== "heading" 
+            ? `<h2>${item.title}</h2>` 
+            : '';
+        
+        // Format based on content type
+        if (item.block) {
+            return this.wrapContent(content + this.formatBlock(item.block));
+        }
+        
+        if (item.list) {
+            return this.wrapContent(content + this.formatList(item.list, false));
+        }
+        
+        if (item.numberedList) {
+            return this.wrapContent(content + this.formatList(item.numberedList, true));
+        }
+        
+        if (item.table) {
+            return this.wrapContent(content + this.formatTable(item.table));
+        }
+        
+        // Default case - just wrap the title
+        return item.title ? this.wrapContent(content) : '';
+    }
+    
+    // Helper methods for content formatting
+    wrapContent(content) {
+        return `<div class="flex-wrap">${content}</div>`;
+    }
+    
+    formatHeading(title) {
+        return `<div style="width:100%; text-align:center; margin-bottom:1.5rem; flex-basis:100%;">
+            <h1>${title}</h1>
+        </div>`;
+    }
+    
+    formatBlock(blocks) {
+        return blocks.map(text => `<p class="block-text">${text}</p>`).join('');
+    }
+    
+    formatList(items, isNumbered) {
+        const tag = isNumbered ? 'ol' : 'ul';
         const listItems = items.map(item => `<li>${item}</li>`).join('');
-        return `<div class="flex-wrap">${'<' + listType}>${listItems}</${listType}></div>`;
+        return `<${tag}>${listItems}</${tag}>`;
     }
-
+    
     formatTable(tableData) {
         const headers = tableData.headers.map(h => `<th>${h}</th>`).join('');
         const rows = tableData.rows.map(row => 
@@ -43,64 +85,27 @@ export class LayoutManager {
         ).join('');
         
         return `
-            <div class="flex-wrap">
-                <table>
-                    <thead><tr>${headers}</tr></thead>
-                    <tbody>${rows}</tbody>
-                </table>
-            </div>
+            <table>
+                <thead><tr>${headers}</tr></thead>
+                <tbody>${rows}</tbody>
+            </table>
         `;
     }
 
-    formatBlock(blocks) {
-        return blocks.map(text => `<p class="block-text">${text}</p>`).join('');
-    }
-
-    isUsingStylesheet(name) {
-        return document.querySelector(`link[href*="${name}.css"]`) !== null;
-    }
-
-    formatContent(item) {
-        let content = '';
-        
-        if (item.style === "heading") {
-            return `<div style="width:100%; text-align:center; margin-bottom:1.5rem; flex-basis:100%;"><h1>${item.title}</h1></div>`;
-
-        }
-        
-        if (item.title && item.style !== "heading") {
-            content = `<h2>${item.title}</h2>`;
-        }
-        
-        if (item.block) {
-            return `<div class="flex-wrap">${content}${this.formatBlock(item.block)}</div>`;
-        }
-        
-        if (item.list) {
-            return `<div class="flex-wrap">${content}${this.formatList(item.list)}</div>`;
-        }
-        if (item.numberedList) {
-            return `<div class="flex-wrap">${content}${this.formatList(item.numberedList, true)}</div>`;
-        }
-        if (item.table) {
-            return `<div class="flex-wrap">${content}${this.formatTable(item.table)}</div>`;
-        }
-        if (item.title && !content) {
-            return `<div class="flex-wrap">${content}</div>`;
-        }
-        return '';
-    }
-
-    // State machine-based fade toggle
+    // Fade state management
     initFadeToggle(storage) {
-        this.fadeState = storage.getFadeState() || 'default';
+        // Get saved state or use default
+        this.fadeState = storage.getFadeState();
+        
+        // Set up toggle button
         const fadeToggleBtn = DOMUtils.getElement('fadeToggleBtn');
+        if (!fadeToggleBtn) return;
         
         this.updateFadeButtonState(fadeToggleBtn);
         this.applyFadeState();
         
+        // Set up click handler
         fadeToggleBtn.addEventListener('click', () => {
-            // Use mathematical state transition
             this.fadeState = StateUtils.cycleState(this.fadeState, this.fadeStates);
             storage.setFadeState(this.fadeState);
             
@@ -108,13 +113,13 @@ export class LayoutManager {
             this.applyFadeState();
         });
     }
-
+    
     updateFadeButtonState(button) {
-        // Function composition for class manipulation
+        // Reset and apply current state class
         button.className = 'fade-toggle-btn';
         button.classList.add(this.fadeState);
         
-        // Map of states to descriptions
+        // Set descriptive title
         const titles = {
             'default': 'Default Mode: UI fades in/out on hover',
             'usage': 'Usage Mode: Always visible',
@@ -124,54 +129,66 @@ export class LayoutManager {
         
         button.title = titles[this.fadeState] || `Fade Mode: ${this.fadeState}`;
     }
-
-    // Apply state using algebraic state machine
+    
     applyFadeState() {
+        // Clean up previous state
         this.cleanupState();
         
-        // State implementation map
-        const stateImplementation = {
-            'default': this.applyDefaultState.bind(this),
-            'usage': this.applyUsageState.bind(this),
-            'fade-out': () => this.applyFadeOutState('0.3'),
-            'wallpaper': () => this.applyFadeOutState('0')
-        };
-        
-        // Apply classes to elements
+        // Get DOM elements
         const contentDiv = DOMUtils.getElement('content');
-        const buttons = DOMUtils.getElements(this.selectors.buttons);
+        const buttons = DOMUtils.getElements(this.buttonSelector);
         
-        // Reset DOM state (idempotent operation)
-        contentDiv.classList.remove(...this.fadeStates);
-        DOMUtils.applyToAll(buttons, btn => {
-            btn.classList.remove(...this.fadeStates);
-            btn.style.opacity = '1';
-        });
-        contentDiv.style.opacity = '1';
+        // Reset state
+        this.resetElementStates(contentDiv, buttons);
         
         // Apply current state
         contentDiv.classList.add(this.fadeState);
         DOMUtils.applyToAll(buttons, btn => btn.classList.add(this.fadeState));
         
-        // Execute state-specific logic
-        if (stateImplementation[this.fadeState]) {
-            stateImplementation[this.fadeState]();
+        // Apply state-specific behavior
+        switch (this.fadeState) {
+            case 'default':
+                this.applyDefaultState(buttons);
+                break;
+            case 'usage':
+                this.applyUsageState(buttons);
+                break;
+            case 'fade-out':
+                this.applyFadeOutState('0.3');
+                break;
+            case 'wallpaper':
+                this.applyFadeOutState('0');
+                break;
         }
     }
     
-    // State-specific implementations
-    applyDefaultState() {
-        const buttons = DOMUtils.getElements(this.selectors.buttons);
+    resetElementStates(contentDiv, buttons) {
+        // Remove all state classes
+        contentDiv.classList.remove(...this.fadeStates);
         
-        // Set initial state
+        // Reset buttons
+        DOMUtils.applyToAll(buttons, btn => {
+            btn.classList.remove(...this.fadeStates);
+            btn.style.opacity = '1';
+        });
+        
+        // Reset content opacity
+        contentDiv.style.opacity = '1';
+    }
+    
+    // State implementations
+    applyDefaultState(buttons) {
+        // Initially hide buttons
         DOMUtils.applyToAll(buttons, btn => btn.style.opacity = '0');
         
-        // Define mousemove handler
+        // Show on mouse movement
         const handleMouseMove = () => {
             if (this.fadeState !== 'default') return;
             
+            // Show buttons
             DOMUtils.applyToAll(buttons, btn => btn.style.opacity = '1');
             
+            // Set timeout to hide buttons after delay
             clearTimeout(this.uiFadeTimeout);
             this.uiFadeTimeout = setTimeout(() => {
                 if (this.fadeState === 'default') {
@@ -180,16 +197,18 @@ export class LayoutManager {
             }, this.UI_FADE_DELAY);
         };
         
-        // Setup and register for cleanup
+        // Set up event listener
         document.addEventListener('mousemove', handleMouseMove);
+        
+        // Register for cleanup
         this.registerCleanup(() => {
             document.removeEventListener('mousemove', handleMouseMove);
             clearTimeout(this.uiFadeTimeout);
         });
     }
     
-    applyUsageState() {
-        const buttons = DOMUtils.getElements(this.selectors.buttons);
+    applyUsageState(buttons) {
+        // Always show buttons in usage mode
         const opacity = getComputedStyle(document.documentElement)
             .getPropertyValue('--ui-usage-opacity').trim() || '1';
             
@@ -198,18 +217,17 @@ export class LayoutManager {
     
     applyFadeOutState(targetOpacity) {
         const contentDiv = DOMUtils.getElement('content');
-        const buttons = DOMUtils.getElements(this.selectors.buttons);
-        
-        // Track last activity time
+        const buttons = DOMUtils.getElements(this.buttonSelector);
         let lastActivityTime = Date.now();
         
-        // Define handlers using pure functions
+        // Show everything on activity
         const handleActivity = () => {
             lastActivityTime = Date.now();
             contentDiv.style.opacity = '1';
             DOMUtils.applyToAll(buttons, btn => btn.style.opacity = '1');
         };
         
+        // Check for inactivity and fade if inactive
         const checkInactivity = () => {
             if (this.fadeState !== 'fade-out' && this.fadeState !== 'wallpaper') return;
             
@@ -222,29 +240,28 @@ export class LayoutManager {
             this.fadeTimeout = setTimeout(checkInactivity, 1000);
         };
         
-        // Setup handlers
+        // Set up handlers
         document.addEventListener('mousemove', handleActivity);
         this.fadeTimeout = setTimeout(checkInactivity, 1000);
         
-        // Register cleanup
+        // Register for cleanup
         this.registerCleanup(() => {
             document.removeEventListener('mousemove', handleActivity);
             clearTimeout(this.fadeTimeout);
         });
     }
     
-    // Cleanup management using functional approach
+    // Cleanup management
     registerCleanup(cleanupFn) {
         this.cleanupFunctions.push(cleanupFn);
     }
     
     cleanupState() {
-        // Execute all cleanup functions
         this.cleanupFunctions.forEach(cleanup => cleanup());
         this.cleanupFunctions = [];
     }
 
-    // Add method to update only the permalink button UI
+    // Permalink button update
     updatePermalinkButton(permalinkData) {
         if (!permalinkData) return;
         
@@ -252,14 +269,14 @@ export class LayoutManager {
         if (permalinkBtn) {
             permalinkBtn.href = permalinkData.url;
             
-            // Add a more descriptive title that shows where the link goes
+            // Set descriptive title
             const title = permalinkData.fileName 
                 ? `Permalink to: ${permalinkData.fileName}` 
                 : 'Permalink to this page';
                 
             permalinkBtn.title = title;
             
-            // Make sure the button is visible
+            // Ensure button is visible
             permalinkBtn.style.display = 'flex';
         }
     }
