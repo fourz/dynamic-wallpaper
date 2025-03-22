@@ -114,7 +114,7 @@ export class LayoutManager {
         button.className = 'fade-toggle-btn';
         button.classList.add(this.fadeState);
         
-        // Map of states to descriptions (mathematical function)
+        // Map of states to descriptions
         const titles = {
             'default': 'Default Mode: UI fades in/out on hover',
             'usage': 'Usage Mode: Always visible',
@@ -129,7 +129,7 @@ export class LayoutManager {
     applyFadeState() {
         this.cleanupState();
         
-        // State implementation map (mathematical function mapping)
+        // State implementation map
         const stateImplementation = {
             'default': this.applyDefaultState.bind(this),
             'usage': this.applyUsageState.bind(this),
