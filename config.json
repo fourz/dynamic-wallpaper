@@ -1,45 +1,71 @@
 {    
     "mode": "detect",
     "serverUrl": "https://localhost:8443",
-    "title": "Reference Sheets",
+    "title": "Reference Guide",
     "content": [
+        "content/dynamic-wallpaper_config_guide.json",        
+        "content/dynamic-wallpaper_css_guide.json",   
+        "content/table_of_contents.json",
+        "content/dom_reference.json",
+        "content/notepad++_keyboard_shortcuts.json",
+        "content/ansible_reference.json",       
+        "content/azure_reference.json",        
+        "content/github_guide.json",
+        "content/git_reference.json",        
         "content/java_reference.json", 
         "content/json_reference.json",
-        "content/regex_reference.json",
         "content/raspbian_reference.json",
+        "content/troubleshooting_guide.json",
+        "content/devops_practices.json",
+        "content/learning_languages_guide.json",
+        "content/writing_software_guide.json",        
         "content/ssh_reference.json",
         "content/ssl_reference.json",
-        "content/ubuntu_reference.json",
-        "content/visual_studio_code_reference.json",
         "content/bootstrap_reference.json",
-        "content/css_guide.json",
+        "content/stay_organized_adhd_guide.json",
+        "content/css_guide.json",        
         "content/javascript_reference.json",
-        "content/msazure_reference.json",
+        "content/linux_admin_guide.json",
+        "content/mssql_reference.json",
         "content/mysql_reference.json",
         "content/freenas_reference.json",
         "content/git_reference.json",
-        "content/how_to_use_this_guide.json",
-        "content/how_this_was_made.json"
+        "content/group_policy_reference.json",
+        "content/active_directory_reference.json",
+        "content/minecraft_bukkit_guide.json",
+        "content/networking_basics.json",
+        "content/networking_overview.json",
+        "content/powershell_reference.json",
+        "content/powershell_hashtables_guide.json",
+		"content/reactnodejs_reference.json",
+        "content/regex_reference.json", 
+        "content/visual_studio_code_reference.json",               
+        "content/yaml_reference.json",        
+        "content/how_to_use_this_guide.json",        
+        "content/how_to_make_guides.json",
+        "content/how_this_was_made_summary.json",
+        "content/newideas_guide.json"
     ],
     "wallpaper": [
         "images/wallpaper/VALLEY_BAY_DOUBLE.jpg",
         "images/wallpaper/wallpaper.png"
     ],
-    "stylesheets": {        
+    "stylesheets": {          
         "set1": [
             "stylesheets/tiny.css"
         ],
         "set2": [
-            "stylesheets/small.css"
-        ],        
+            "stylesheets/smaller.css"
+        ],
         "set3": [
-            "stylesheets/default.css",
             "stylesheets/small.css"
         ],        
         "set4": [
+            "stylesheets/default.css"
+        ],        
+        "set5": [
             "stylesheets/large.css"
-        ]                
-
+        ]
     }
 }
 

@@ -1,0 +1,76 @@
+[
+    {
+        "style": "heading",
+        "title": "Group Policy Management Guide"
+    },
+    {
+        "title": "Core Concepts:",
+        "table": {
+            "headers": ["Concept", "Description"],
+            "rows": [
+                ["GPO", "Group Policy Object - Container for policy settings"],
+                ["WMI Filters", "Conditions that determine if a GPO applies"],
+                ["Link Order", "Priority sequence for multiple GPOs"],
+                ["Inheritance", "How policies flow down through OUs"],
+                ["Loopback", "Special processing mode for user settings"],
+                ["Scope", "Determines which users/computers get the policy"]
+            ]
+        }
+    },
+    {
+        "title": "Policy Processing:",
+        "table": {
+            "headers": ["Setting", "Description"],
+            "rows": [
+                ["Computer Policy", "Processes at startup and every 90 mins"],
+                ["User Policy", "Processes at logon and every 90 mins"],
+                ["Enforced", "Policy that cannot be blocked by inheritance"],
+                ["Block Inheritance", "Prevents inherited policies from applying"],
+                ["Security Filtering", "Controls who receives the policy"],
+                ["Slow Link", "Different processing for slow connections"]
+            ]
+        }
+    },
+    {
+        "title": "Common Pitfalls:",
+        "table": {
+            "headers": ["Issue", "Solution"],
+            "rows": [
+                ["Wrong Link Order", "Check GPO precedence (higher number = higher priority)"],
+                ["Security Filtering", "Verify both User and Computer have read permissions"],
+                ["WMI Filter Failed", "Test WMI queries separately before applying"],
+                ["Inheritance Blocking", "Check for blocked inheritance in parent OUs"],
+                ["Missing Permissions", "Ensure Authenticated Users have read access"],
+                ["Policy Not Applying", "Run gpresult /r or RSOP.msc to troubleshoot"]
+            ]
+        }
+    },
+    {
+        "title": "Best Practices:",
+        "table": {
+            "headers": ["Practice", "Explanation"],
+            "rows": [
+                ["Use Small GPOs", "Create focused, single-purpose GPOs for easier management"],
+                ["Test First", "Always test GPOs in a pilot OU before full deployment"],
+                ["Document Changes", "Keep detailed notes in GPO comments field"],
+                ["Backup GPOs", "Regular backups using GPMC or PowerShell"],
+                ["Use Naming Convention", "Consistent naming for easy identification"],
+                ["Minimize Complexity", "Avoid deep linking and complex WMI filters"]
+            ]
+        }
+    },
+    {
+        "title": "Troubleshooting Tools:",
+        "table": {
+            "headers": ["Tool", "Purpose"],
+            "rows": [
+                ["gpresult /r", "View applied policies for current user"],
+                ["gpupdate /force", "Force immediate policy refresh"],
+                ["RSOP.msc", "Resultant Set of Policy analysis"],
+                ["Group Policy Modeling", "Preview policy application"],
+                ["Group Policy Results", "Review applied policies"],
+                ["Event Viewer", "Check for policy processing errors"]
+            ]
+        }
+    }
+]

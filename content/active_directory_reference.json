@@ -4,15 +4,43 @@
         "title": "Active Directory Quick Reference"
     },
     {
-        "title": "PowerShell AD Commands",
+        "title": "Core AD Concepts",
+        "table": {
+            "headers": ["Concept", "Description"],
+            "rows": [
+                ["Domain", "Logical group of network objects (users, computers, resources)"],
+                ["Forest", "Collection of one or more domains sharing schema"],
+                ["OU", "Organizational Unit - container for organizing AD objects"],
+                ["Schema", "Definition of all object types and attributes in AD"],
+                ["Global Catalog", "Forest-wide directory containing partial object attributes"]
+            ]
+        }
+    },
+    {
+        "title": "Trust Relationships",
+        "table": {
+            "headers": ["Trust Type", "Description"],
+            "rows": [
+                ["One-way Trust", "Users in trusted domain can access resources in trusting domain only"],
+                ["Two-way Trust", "Users in both domains can access resources in both domains"],
+                ["Forest Trust", "Trust relationship between entire Active Directory forests"],
+                ["External Trust", "Trust with domains outside the forest"],
+                ["Realm Trust", "Trust between AD domain and non-Windows Kerberos realm"]
+            ]
+        }
+    },
+    {
+        "title": "Essential PowerShell Commands",
         "table": {
             "headers": ["Command", "Purpose"],
             "rows": [
-                ["Get-ADUser", "Query user accounts in AD"],
+                ["Get-ADUser", "Query and filter AD user accounts"],
                 ["New-ADUser", "Create new AD user account"],
-                ["Set-ADUser", "Modify existing user properties"],
-                ["Remove-ADUser", "Delete AD user account"],
-                ["Get-ADGroup", "Query AD groups"]
+                ["Get-ADComputer", "Query computer accounts"],
+                ["Get-ADGroup", "Query security/distribution groups"],
+                ["Get-ADObject", "Search any type of AD object"],
+                ["Move-ADObject", "Relocate objects between OUs"],
+                ["Search-ADAccount", "Find inactive/expired accounts"]
             ]
         }
     },
@@ -21,11 +49,13 @@
         "table": {
             "headers": ["Attribute", "Description"],
             "rows": [
-                ["sAMAccountName", "Legacy logon name"],
+                ["sAMAccountName", "Legacy logon name (pre-Windows 2000)"],
                 ["userPrincipalName", "User's login name (email format)"],
-                ["distinguishedName", "Unique object identifier in AD"],
+                ["distinguishedName", "Unique object identifier path in AD"],
+                ["objectGUID", "Unique immutable identifier"],
                 ["memberOf", "Groups user belongs to"],
-                ["objectGUID", "Unique identifier"]
+                ["pwdLastSet", "Timestamp of last password change"],
+                ["lastLogon", "Last successful authentication time"]
             ]
         }
     },
@@ -34,16 +64,16 @@
         "table": {
             "headers": ["Command", "Description"],
             "rows": [
-                ["Add-ADGroupMember", "Add user to security group"],
-                ["Get-ADGroupMember", "List group members"],
-                ["New-ADGroup", "Create new security group"],
-                ["Remove-ADGroup", "Delete security group"],
-                ["Set-ADGroup", "Modify group properties"]
+                ["Add-ADGroupMember", "Add user/computer to group"],
+                ["Remove-ADGroupMember", "Remove member from group"],
+                ["New-ADGroup", "Create security/distribution group"],
+                ["Get-ADGroupMember", "List all group members"],
+                ["Get-ADPrincipalGroupMembership", "List user's group memberships"]
             ]
         }
     },
     {
-        "title": "User Account Status",
+        "title": "Account Management",
         "table": {
             "headers": ["Operation", "Command"],
             "rows": [
@@ -51,20 +81,33 @@
                 ["Disable Account", "Disable-ADAccount"],
                 ["Unlock Account", "Unlock-ADAccount"],
                 ["Reset Password", "Set-ADAccountPassword"],
-                ["Check Status", "Get-ADUser -Properties Enabled"]
+                ["Force Password Change", "Set-ADUser -ChangePasswordAtLogon $true"]
             ]
         }
     },
     {
-        "title": "Common AD Locations",
+        "title": "AD Maintenance Tools",
         "table": {
-            "headers": ["Container", "Purpose"],
+            "headers": ["Tool", "Purpose"],
             "rows": [
-                ["Users", "Default user accounts container"],
-                ["Computers", "Computer accounts storage"],
-                ["Domain Controllers", "DC accounts location"],
-                ["Builtin", "Built-in security groups"],
-                ["ForeignSecurityPrincipals", "External trust accounts"]
+                ["dcdiag", "DC health diagnostics"],
+                ["repadmin", "Replication management"],
+                ["ntdsutil", "AD database maintenance"],
+                ["dsa.msc", "Active Directory Users and Computers"],
+                ["gpmc.msc", "Group Policy Management Console"]
+            ]
+        }
+    },
+    {
+        "title": "Best Practices",
+        "table": {
+            "headers": ["Area", "Recommendation"],
+            "rows": [
+                ["OU Structure", "Design based on admin delegation needs"],
+                ["Groups", "Use global groups for users, domain local for resources"],
+                ["Naming", "Implement consistent naming conventions"],
+                ["Permissions", "Follow least-privilege principle"],
+                ["Monitoring", "Regular audit of changes and access"]
             ]
         }
     }

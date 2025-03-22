@@ -1,0 +1,55 @@
+[
+  {
+    "style": "heading",
+    "title": "Wide Area Networks (WAN)"
+  },
+  {
+    "title": "WAN Design Principles",
+    "table": {
+      "headers": ["Principle", "Description", "Business Impact"],
+      "rows": [
+        ["Redundancy", "Multiple connection paths", "High availability"],
+        ["QoS", "Traffic prioritization", "Reliable critical services"],
+        ["Scalability", "Growth accommodation", "Future-proof investment"],
+        ["Security", "Data protection", "Regulatory compliance"],
+        ["Cost-effectiveness", "Optimized spending", "ROI optimization"]
+      ]
+    }
+  },
+  {
+    "title": "WAN Technologies",
+    "table": {
+      "headers": ["Technology", "Description"],
+      "rows": [
+        ["MPLS", "Multiprotocol Label Switching"],
+        ["VPN", "Virtual Private Network"],
+        ["Leased Line", "Dedicated communication channel"],
+        ["Frame Relay", "Obsolete packet-switching technology"],
+        ["Ethernet WAN", "Ethernet over a wide area"]
+      ]
+    }
+  },
+  {
+    "title": "WAN Protocols",
+    "table": {
+      "headers": ["Protocol", "Description"],
+      "rows": [
+        ["PPP", "Point-to-Point Protocol"],
+        ["HDLC", "High-Level Data Link Control"],
+        ["L2TP", "Layer 2 Tunneling Protocol"],
+        ["IPsec", "Internet Protocol Security"]
+      ]
+    }
+  },
+  {
+    "title": "WAN Connectivity",
+    "table": {
+      "headers": ["Connectivity", "Description"],
+      "rows": [
+        ["Dedicated Circuit", "Direct connection to the service provider"],
+        ["Broadband", "Shared connection with other users"],
+        ["Wireless WAN", "Connectivity via cellular or satellite"]
+      ]
+    }
+  }
+]

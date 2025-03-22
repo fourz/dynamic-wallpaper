@@ -1,0 +1,91 @@
+[
+  {
+    "style": "heading",
+    "title": "PowerShell: Hash Tables Reference"
+  },
+  {
+    "title": "Hash Table Basics:",
+    "table": {
+      "headers": ["Operation", "Syntax", "Example"],
+      "rows": [
+        ["Creation", "$hash = @{}", "$users = @{John=35; Mary=28; Bob=42}"],
+        ["Add Entry", "$hash[key] = value", "$users['Alice'] = 31"],
+        ["Access Value", "$hash[key]", "$age = $users['John']  # Returns 35"],
+        ["Remove Entry", "$hash.Remove(key)", "$users.Remove('Bob')"],
+        ["Check Key Exists", "$hash.ContainsKey(key)", "if ($users.ContainsKey('Mary')) { ... }"],
+        ["Get All Keys", "$hash.Keys", "foreach ($name in $users.Keys) { ... }"],
+        ["Get All Values", "$hash.Values", "$ages = $users.Values  # Returns 35, 28, 31"]
+      ]
+    }
+  },
+  {
+    "title": "Hash Table Creation Methods:",
+    "description": "Different ways to create and initialize hash tables in PowerShell."
+  },
+  {
+    "code": "@{key1 = value1; key2 = value2}  # Standard creation\n\n$hash = @{}\n$hash.Add('key1', 'value1')  # Add method\n\n$hash = [ordered]@{a=1; b=2; c=3}  # Preserve insertion order\n\n$hash = @{}\n$hash['key1'] = 'value1'  # Bracket notation"
+  },
+  {
+    "title": "Converting Between Data Types:",
+    "table": {
+      "headers": ["Conversion", "Example", "Description"],
+      "rows": [
+        ["Hash Table to PSCustomObject", "$obj = [PSCustomObject]$hash", "Creates object with properties from hash keys"],
+        ["Array to Hash Table", "$hash = @{}\nforeach ($i in 0..4) { $hash[$i] = $i*2 }", "Creates hash with array indices as keys"],
+        ["CSV to Hash Table", "$users = Import-Csv users.csv | Group-Object -Property Name -AsHashTable", "Groups CSV data into hash table"],
+        ["Object to Hash Table", "$hash = @{}\n$obj.PSObject.Properties | ForEach-Object { $hash[$_.Name] = $_.Value }", "Extracts properties to hash keys"]
+      ]
+    }
+  },
+  {
+    "title": "Common Use Cases:",
+    "description": "Practical scenarios where hash tables excel in PowerShell scripts."
+  },
+  {
+    "code": "# Lookup tables for fast access\n$stateCodes = @{\n  'California' = 'CA'\n  'New York' = 'NY'\n  'Texas' = 'TX'\n}\n$code = $stateCodes['California']  # Quick lookup\n\n# Config storage\n$config = @{\n  Server = 'server01'\n  Port = 8080\n  Timeout = 30\n  Verbose = $true\n}\n\n# Parameter splatting\n$params = @{\n  Path = 'C:\\logs'\n  Filter = '*.log'\n  Recurse = $true\n  Force = $true\n}\nGet-ChildItem @params  # Splat parameters\n\n# Counting/grouping items\n$wordCount = @{}\n'the quick brown fox jumps over the lazy dog'.Split() | ForEach-Object {\n  if ($wordCount.ContainsKey($_)) {\n    $wordCount[$_]++\n  } else {\n    $wordCount[$_] = 1\n  }\n}\n# Result: @{the=2; quick=1; brown=1; ...}"
+  },
+  {
+    "title": "Advanced Techniques:",
+    "table": {
+      "headers": ["Technique", "Example", "Use Case"],
+      "rows": [
+        ["Nested Hash Tables", "$servers = @{\n  'Prod' = @{Host='prod01'; Port=443}\n  'Dev' = @{Host='dev01'; Port=8080}\n}", "Hierarchical data structures"],
+        ["Hash Table as Switch", "$actions = @{\n  'add' = {param($a,$b) $a+$b}\n  'mult' = {param($a,$b) $a*$b}\n}\n& $actions['add'] 5 3  # Returns 8", "Dispatch tables/command routing"],
+        ["Default Values", "$settings = @{}\n$timeout = $settings['Timeout'] ?? 30  # Default 30", "Handling missing keys gracefully"],
+        ["Hash Table Constructor", "$ht = [hashtable]::new()", "Creating strongly-typed hash tables"],
+        ["Thread-Safe Hash", "$concurrent = [System.Collections.Concurrent.ConcurrentDictionary[string,object]]::new()", "Thread-safe operations"]
+      ]
+    }
+  },
+  {
+    "title": "Hash Table Methods & Properties:",
+    "table": {
+      "headers": ["Method/Property", "Description", "Example"],
+      "rows": [
+        ["Add(key, value)", "Adds a key-value pair", "$hash.Add('key', 'value')"],
+        ["Clear()", "Removes all entries", "$hash.Clear()"],
+        ["ContainsKey(key)", "Checks if key exists", "$hash.ContainsKey('user')"],
+        ["ContainsValue(value)", "Checks if value exists", "$hash.ContainsValue(42)"],
+        ["Remove(key)", "Removes specified entry", "$hash.Remove('temp')"],
+        ["Count", "Number of key-value pairs", "$hash.Count"],
+        ["Keys", "Collection of all keys", "$hash.Keys"],
+        ["Values", "Collection of all values", "$hash.Values"],
+        ["GetEnumerator()", "Returns enumerator", "foreach ($pair in $hash.GetEnumerator()) { ... }"]
+      ]
+    }
+  },
+  {
+    "title": "Performance Considerations:",
+    "description": "Hash tables provide O(1) lookup time, making them efficient for large datasets where you need to find items by key quickly. Converting between arrays and hash tables can be useful for performance optimization."
+  },
+  {
+    "code": "# Performance comparison example\n$items = 1..10000\n\n# Array lookup (slow for large arrays)\n$array = $items\nMeasure-Command {\n  $found = $array -contains 9999\n}\n\n# Hash table lookup (fast regardless of size)\n$hash = @{}\nforeach ($i in $items) { $hash[$i] = $true }\nMeasure-Command {\n  $found = $hash.ContainsKey(9999)\n}"
+  },
+  {
+    "title": "Ordered Hash Tables:",
+    "description": "Since PowerShell v3, you can create ordered hash tables that preserve the order of insertion, making them useful for configurations where order matters."
+  },
+  {
+    "code": "# Standard hash table (order not guaranteed)\n$regular = @{Z=26; A=1; M=13}\n$regular.Keys  # Output order might vary\n\n# Ordered hash table (preserves insertion order)\n$ordered = [ordered]@{Z=26; A=1; M=13}\n$ordered.Keys  # Always outputs: Z, A, M"
+  }
+]

@@ -1,0 +1,101 @@
+[
+    {
+        "style": "heading",
+        "title": "Notepad++ Keyboard Shortcuts"
+    },
+    {
+        "title": "File Operations",
+        "table": {
+            "headers": ["Shortcut", "Action"],
+            "rows": [
+                ["Ctrl+N", "New File"],
+                ["Ctrl+O", "Open File"],
+                ["Ctrl+S", "Save"],
+                ["Ctrl+Shift+S", "Save As"],
+                ["Ctrl+W", "Close Current File"],
+                ["Ctrl+P", "Print"],
+                ["Alt+F4", "Exit Notepad++"]
+            ]
+        }
+    },
+    {
+        "title": "Basic Editing",
+        "table": {
+            "headers": ["Shortcut", "Action"],
+            "rows": [
+                ["Ctrl+Z", "Undo"],
+                ["Ctrl+Y", "Redo"],
+                ["Ctrl+X", "Cut"],
+                ["Ctrl+C", "Copy"],
+                ["Ctrl+V", "Paste"],
+                ["Ctrl+A", "Select All"],
+                ["Ctrl+D", "Duplicate Current Line"],
+                ["Ctrl+L", "Delete Current Line"]
+            ]
+        }
+    },
+    {
+        "title": "Search & Replace",
+        "table": {
+            "headers": ["Shortcut", "Action"],
+            "rows": [
+                ["Ctrl+F", "Find"],
+                ["Ctrl+H", "Replace"],
+                ["Ctrl+G", "Go to Line"],
+                ["F3", "Find Next"],
+                ["Shift+F3", "Find Previous"],
+                ["Ctrl+Shift+F", "Find in Files"],
+                ["Alt+F3", "Select All Occurrences"],
+                ["Ctrl+F2", "Toggle Bookmark"]
+            ]
+        }
+    },
+    {
+        "title": "View & Display",
+        "table": {
+            "headers": ["Shortcut", "Action"],
+            "rows": [
+                ["Ctrl++", "Zoom In"],
+                ["Ctrl+-", "Zoom Out"],
+                ["Ctrl+0", "Reset Zoom"],
+                ["F11", "Toggle Full Screen"],
+                ["Ctrl+Tab", "Next Document"],
+                ["Ctrl+Shift+Tab", "Previous Document"],
+                ["Alt+0", "Fold All"],
+                ["Alt+Shift+0", "Unfold All"]
+            ]
+        }
+    },
+    {
+        "title": "Multi-Editing",
+        "table": {
+            "headers": ["Shortcut", "Action"],
+            "rows": [
+                ["Alt+Click", "Column Selection"],
+                ["Ctrl+Alt+Up", "Multi-Cursor Up"],
+                ["Ctrl+Alt+Down", "Multi-Cursor Down"],
+                ["Ctrl+B", "Multi-Select Word"],
+                ["Ctrl+Shift+Alt+J", "Join Lines"],
+                ["Alt+Shift+Arrow", "Move Selected Lines"],
+                ["Tab", "Indent Selection"],
+                ["Shift+Tab", "Unindent Selection"]
+            ]
+        }
+    },
+    {
+        "title": "Advanced Features",
+        "table": {
+            "headers": ["Shortcut", "Action"],
+            "rows": [
+                ["Ctrl+Space", "Show Auto-completion"],
+                ["Ctrl+Shift+U", "Convert to Uppercase"],
+                ["Ctrl+U", "Convert to Lowercase"],
+                ["Ctrl+Alt+R", "Start Recording Macro"],
+                ["Ctrl+Shift+R", "Stop Recording Macro"],
+                ["Ctrl+Shift+P", "Play Recorded Macro"],
+                ["Ctrl+Alt+S", "Save Session"],
+                ["Ctrl+Alt+L", "Load Session"]
+            ]
+        }
+    }
+]

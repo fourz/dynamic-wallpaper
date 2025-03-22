@@ -1,67 +1,87 @@
 [
     {
-        "title": "Daily Routine Essentials",
+        "style": "heading",
+        "title": "Simple Focus Guide"
+    },
+    {
+        "title": "Daily Essentials",
         "table": {
-            "headers": ["Routine Item", "Description"],
+            "headers": ["What", "How"],
             "rows": [
-                ["Morning Routine", "Maintain consistency in daily start"],
-                ["Time Blocking", "Schedule focused work periods"],
-                ["Break Schedule", "Take breaks every 25-30 minutes"],
-                ["Workspace Management", "Keep workspace clean and minimal"],
-                ["Planning", "Set next day's priorities every evening"]
+                ["Morning Start", "Follow checklist, avoid decisions, prepare clothes night before"],
+                ["Time Blocks", "25min work + 5min break (Pomodoro), increase gradually if needed"],
+                ["Workspace", "Clear desk, minimal items, face away from distractions"],
+                ["Evening Prep", "List top 3 tasks for tomorrow, gather needed materials"]
             ]
         }
     },
     {
-        "title": "Task Management Strategies",
+        "title": "Task Management",
         "table": {
-            "headers": ["Strategy", "How to Implement"],
+            "headers": ["Method", "How"],
             "rows": [
-                ["2-Minute Rule", "If it takes less than 2 minutes, do it now"],
-                ["Task Chunking", "Break large tasks into smaller, manageable parts"],
-                ["Time Boxing", "Assign specific time blocks to tasks"],
-                ["Priority Matrix", "Sort tasks by urgency and importance"],
-                ["Visual Reminders", "Use sticky notes or digital boards"]
+                ["2-Minute Rule", "If quick, do it now - emails, texts, simple tasks"],
+                ["Big Tasks", "Break into 15-30min chunks, celebrate small wins"],
+                ["Priority", "Mark urgent tasks in red, use 1-2-3 numbering system"],
+                ["Reminders", "Sticky notes where you look, set phone alarms with specific labels"]
             ]
         }
     },
     {
-        "title": "Focus Enhancement Tools",
+        "title": "Focus Tools",
         "table": {
             "headers": ["Tool", "Purpose"],
             "rows": [
-                ["Noise-canceling headphones", "Block distracting sounds"],
-                ["Time tracking apps", "Monitor task duration"],
-                ["Digital task managers", "Organize and track tasks"],
-                ["Pomodoro timer", "Structure work intervals"],
-                ["Distraction blockers", "Limit access to distracting sites/apps"]
+                ["Headphones", "Block noise with brown/white noise or instrumental music"],
+                ["Timer", "Track work periods, visual timers for better awareness"],
+                ["Task App", "Remember deadlines, Trello/Todoist with categories"],
+                ["Site Blocker", "Limit distractions, block apps during focus time"]
             ]
         }
     },
     {
-        "title": "Work Environment Setup",
-        "table": {
-            "headers": ["Setup Element", "Implementation"],
-            "rows": [
-                ["Desk Position", "Away from high-traffic areas"],
-                ["Lighting", "Prioritize natural light sources"],
-                ["Desk Organization", "Keep only essential items present"],
-                ["Work Space", "Maintain a dedicated area"],
-                ["Organization System", "Implement color coding"]
-            ]
-        }
-    },
-    {
-        "title": "Quick Reset Steps",
+        "title": "Device Focus Setup",
         "table": {
             "headers": ["Step", "Action"],
             "rows": [
-                ["Clear Space", "Remove non-essential desk items"],
-                ["Task Review", "Update to-do list"],
-                ["Calendar Check", "Review upcoming commitments"],
-                ["Movement Break", "Take 5 minutes to move"],
-                ["Focus Reset", "Practice deep breathing"]
+                ["Basic Modes", "Work and Personal only, use Focus modes on devices"],
+                ["Key Apps", "Pick 3-5 essential ones, remove others from home screen"],
+                ["Schedule", "Match your energy peaks, hardest tasks when most alert"],
+                ["Notifications", "VIP contacts only, schedule email checking times"]
             ]
         }
+    },
+    {
+        "title": "Focus Maintenance",
+        "table": {
+            "headers": ["Strategy", "Implementation"],
+            "rows": [
+                ["Body Check", "Water, protein snack, stretch every hour"],
+                ["Environment", "Natural light, comfortable temperature, minimal noise"],
+                ["Task Switching", "Complete small task before switching to maintain momentum"],
+                ["Dopamine Balance", "Small rewards after completing difficult tasks"]
+            ]
+        }
+    },
+    {
+        "title": "Focus Reset",
+        "list": [
+            "1. Close everything except current task",
+            "2. Clear desk and put phone away",
+            "3. Headphones on with focus playlist",
+            "4. Deep breath for 30 seconds (4-in, 4-hold, 4-out)",
+            "5. Set 25min timer and state intention aloud",
+            "6. Start with smallest sub-task first"
+        ]
+    },
+    {
+        "title": "Quick Recovery Techniques",
+        "list": [
+            "1. Body reset: 10 jumping jacks or quick walk",
+            "2. Brain reset: Write goal on paper",
+            "3. Visual reset: Look at distant object for 30 seconds",
+            "4. Say 'focusing now' as verbal trigger",
+            "5. Drink cold water"
+        ]
     }
 ]

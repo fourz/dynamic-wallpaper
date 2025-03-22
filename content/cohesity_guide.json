@@ -12,7 +12,12 @@
                 ["Global Exclude", "Set cluster-wide exclusions"],
                 ["Job Chain", "Link dependent backup jobs"],
                 ["SLA Domain", "Define RPO and backup windows"],
-                ["Throttling", "Control backup performance impact"]
+                ["Throttling", "Control backup performance impact"],
+                ["Incremental Forever", "Storage-efficient backup strategy"],
+                ["Synthetic Full", "Create full backups without source impact"],
+                ["Auto-Protect", "Automatically include new VMs/volumes"],
+                ["Pre/Post Scripts", "Run custom scripts during job execution"],
+                ["Source-Side Dedup", "Reduce network traffic for remote sources"]
             ]
         }
     },
@@ -25,7 +30,12 @@
                 ["File Level", "Individual file restoration"],
                 ["Mass Restore", "Bulk recovery operations"],
                 ["Clone", "Test/Dev environment creation"],
-                ["Download", "Local file copy retrieval"]
+                ["Download", "Local file copy retrieval"],
+                ["Cross-Platform Recovery", "Restore between hypervisors"],
+                ["Granular Recovery", "Application-specific item restoration"],
+                ["Live Mount", "Zero-downtime database testing"],
+                ["Continuous Data Protection", "Near real-time recovery points"],
+                ["Recovery Validation", "Automated restore testing"]
             ]
         }
     },
@@ -38,7 +48,12 @@
                 ["External Target", "Archive/DR location"],
                 ["Deduplication", "Storage efficiency settings"],
                 ["Compression", "Data reduction options"],
-                ["Encryption", "Data security controls"]
+                ["Encryption", "Data security controls"],
+                ["Cloud Archive Tier", "Long-term retention in public cloud"],
+                ["QoS Policies", "Prioritize workload performance"],
+                ["Storage Pools", "Group nodes for specific workloads"],
+                ["Data Tiering", "Automated movement between performance tiers"],
+                ["Smart Replication", "WAN-optimized site-to-site transfer"]
             ]
         }
     },
@@ -51,7 +66,12 @@
                 ["Capacity Usage", "Weekly assessment"],
                 ["Cluster Health", "Daily check"],
                 ["Alert Review", "Morning/Evening"],
-                ["Audit Logs", "Weekly review"]
+                ["Audit Logs", "Weekly review"],
+                ["Data Reduction", "Monthly efficiency tracking"],
+                ["Recovery Point Validation", "Weekly testing"],
+                ["Helios Global Report", "Weekly multi-cluster review"],
+                ["Compliance Verification", "Monthly audit"],
+                ["Performance Metrics", "Weekly trend analysis"]
             ]
         }
     },
@@ -64,7 +84,82 @@
                 ["Retention", "Match compliance requirements"],
                 ["Performance", "Monitor backup windows"],
                 ["Testing", "Regular recovery validation"],
-                ["Updates", "Monthly maintenance window"]
+                ["Updates", "Monthly maintenance window"],
+                ["Multi-Factor Auth", "Enable for all admin accounts"],
+                ["RBAC Implementation", "Least privilege access model"],
+                ["Air Gap Protection", "Implement for ransomware defense"],
+                ["Cluster Expansion", "Keep 30% capacity headroom"],
+                ["Documentation", "Keep runbooks current and tested"]
+            ]
+        }
+    },
+    {
+        "title": "Data Source Management",
+        "table": {
+            "headers": ["Source Type", "Special Considerations"],
+            "rows": [
+                ["VMware", "CBT optimization, HotAdd transport mode"],
+                ["Hyper-V", "VSS integration, RCT tracking"],
+                ["Physical Servers", "Agent deployment, resource limits"],
+                ["NAS Devices", "Snapshot integration, change tracking"],
+                ["Databases", "Application consistency, log shipping"],
+                ["Microsoft 365", "Multi-geo support, incremental tracking"],
+                ["SaaS Applications", "API rate limiting, metadata indexing"],
+                ["Containers", "Namespace persistence, stateful workloads"],
+                ["Big Data", "Distributed node coordination"],
+                ["Endpoints", "Bandwidth throttling, offline protection"]
+            ]
+        }
+    },
+    {
+        "title": "Platform Administration",
+        "table": {
+            "headers": ["Task", "Key Components"],
+            "rows": [
+                ["User Management", "SSO integration, MFA, directory services"],
+                ["Network Configuration", "VLAN tagging, jumbo frames, LACP"],
+                ["Certificate Management", "SSL/TLS implementation, rotation"],
+                ["API Integration", "Authentication tokens, rate limits"],
+                ["Alerting Setup", "Email, SNMP, webhooks, syslog"],
+                ["Cluster Expansion", "Node addition, rebalancing"],
+                ["Software Updates", "Patching, version upgrades"],
+                ["Disaster Recovery", "Site failover, cluster recovery"],
+                ["Compliance", "Audit trails, immutability controls"],
+                ["Remote Office", "Edge deployment, WAN optimization"]
+            ]
+        }
+    },
+    {
+        "title": "Security Features",
+        "table": {
+            "headers": ["Feature", "Description"],
+            "rows": [
+                ["Data Encryption", "At-rest and in-flight protection"],
+                ["Ransomware Detection", "Machine learning-based anomaly detection"],
+                ["WORM Compliance", "Write-once, read-many immutability"],
+                ["Multifactor Auth", "Additional login security layer"],
+                ["Role-Based Access", "Granular permission controls"],
+                ["Audit Logging", "Comprehensive activity tracking"],
+                ["Key Management", "External HSM integration"],
+                ["Zero Trust", "Always verify, never trust architecture"],
+                ["DataLock", "Administrative deletion prevention"],
+                ["Secure Recovery", "Authenticated restore operations"]
+            ]
+        }
+    },
+    {
+        "title": "Troubleshooting",
+        "table": {
+            "headers": ["Issue", "Resolution Steps"],
+            "rows": [
+                ["Failed Jobs", "1. Check source connectivity 2. Verify credentials 3. Review logs 4. Check quorum"],
+                ["Slow Backups", "1. Monitor network 2. Check source load 3. Verify proxy health 4. Review throttling"],
+                ["Restore Failures", "1. Validate snapshot 2. Check target access 3. Verify space 4. Test network path"],
+                ["Cluster Alerts", "1. Check node health 2. Verify network 3. Review disk status 4. Monitor services"],
+                ["Replication Issues", "1. Test WAN link 2. Verify target cluster 3. Check bandwidth 4. Review firewall"],
+                ["Storage Growth", "1. Analyze deduplication 2. Check retention 3. Audit job scope 4. Review compression"],
+                ["Authentication Issues", "1. Verify directory services 2. Check certificates 3. Test user accounts 4. Review RBAC"],
+                ["Performance Problems", "1. Monitor CPU/RAM 2. Check disk I/O 3. Verify network throughput 4. Review active jobs"]
             ]
         }
     }

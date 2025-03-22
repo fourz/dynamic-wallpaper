@@ -1,0 +1,78 @@
+[
+    {
+        "style": "heading",
+        "title": "Dynamic Wallpaper: Setup & Configuration Guide"
+    },
+    {
+        "title": "Quick Start Guide",
+        "table": {
+            "headers": ["Step", "Action", "Purpose"],
+            "rows": [
+                ["Initial Setup", "Clone repository", "Get application files"],
+                ["Configuration", "Edit config.json", "Set up content & display"],
+                ["Content", "Add JSON guides", "Create reference content"],
+                ["Wallpapers", "Add image files", "Set up backgrounds"],
+                ["Launch", "Open index.html", "Start the application"]
+            ]
+        }
+    },
+    {
+        "title": "Content Management",
+        "table": {
+            "headers": ["Task", "How To", "Example"],
+            "rows": [
+                ["Add Guide", "Add path to content array", "content/my_guide.json"],
+                ["Order Guides", "Arrange array entries", "Determines navigation order"],
+                ["Remove Guide", "Remove path from array", "Delete unwanted entry"],
+                ["Group Guides", "Order by topic", "Keep related guides together"],
+                ["Validate Path", "Check file existence", "Ensure path is correct"]
+            ]
+        }
+    },
+    {
+        "title": "Visual Customization",
+        "table": {
+            "headers": ["Setting", "Location", "Options"],
+            "rows": [
+                ["Themes", "stylesheets object", "default, large, small, tiny"],
+                ["Wallpapers", "wallpaper array", "jpg, png images"],
+                ["Layout", "stylesheet sets", "Combine CSS files"],
+                ["Title", "title property", "Application header"],
+                ["Mode", "mode property", "'detect' or custom"]
+            ]
+        }
+    },
+    {
+        "title": "Directory Structure",
+        "list": [
+            "• /content/ - JSON guide files",
+            "• /images/wallpaper/ - Background images",
+            "• /stylesheets/ - CSS theme files",
+            "• /js/ - Application logic",
+            "• config.json - Main configuration"
+        ]
+    },
+    {
+        "title": "User Features",
+        "table": {
+            "headers": ["Feature", "Control", "Function"],
+            "rows": [
+                ["Content Navigation", "Left/Right Arrows", "Browse guides"],
+                ["Wallpaper Cycling", "Bottom Corners", "Change background"],
+                ["Theme Switching", "Above wallpaper", "Change appearance"],
+                ["Auto-fade", "Top Left Button", "Toggle content fade"],
+                ["Content Display", "Scroll Content", "View full guides"]
+            ]
+        }
+    },
+    {
+        "title": "Troubleshooting",
+        "list": [
+            "1. Content not loading? Check file paths in config.json",
+            "2. Images not showing? Verify wallpaper directory structure",
+            "3. Styles not applying? Check stylesheet sets configuration",
+            "4. Navigation issues? Validate JSON content format",
+            "5. Display problems? Try different stylesheet sets"
+        ]
+    }
+]

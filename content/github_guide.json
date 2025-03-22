@@ -1,0 +1,66 @@
+[
+    {
+        "style": "heading",
+        "title": "GitHub Guide"
+    },
+    {
+        "title": "Key GitHub Features",
+        "table": {
+            "headers": ["Feature", "Description", "Usage"],
+            "rows": [
+                ["Pull Requests", "Code review & merge workflow", "Submit changes for review"],
+                ["Actions", "CI/CD automation", "Automate builds and deployments"],
+                ["Issues", "Task tracking", "Bug reports and feature requests"],
+                ["Projects", "Project management", "Kanban boards and roadmaps"],
+                ["Discussions", "Team communication", "Community engagement"]
+            ]
+        }
+    },
+    {
+        "title": "GitHub Flow",
+        "numberedList": [
+            "Create feature branch from main/master",
+            "Make changes and commit",
+            "Open pull request",
+            "Review and discussion",
+            "Deploy and test",
+            "Merge to main/master"
+        ]
+    },
+    {
+        "title": "Common Actions",
+        "table": {
+            "headers": ["Action", "Purpose", "Navigation"],
+            "rows": [
+                ["Fork Repository", "Create personal copy", "Click Fork button"],
+                ["Clone Repository", "Local copy", "Code > Clone"],
+                ["Create PR", "Submit changes", "Pull requests > New"],
+                ["Review PR", "Code review", "Pull requests > Select PR"],
+                ["Merge PR", "Integrate changes", "Pull requests > Merge"]
+            ]
+        }
+    },
+    {
+        "title": "Repository Settings",
+        "list": [
+            "Access Control: Manage collaborators and teams",
+            "Branch Protection: Set merge requirements",
+            "GitHub Pages: Web hosting configuration",
+            "Webhooks: Integration endpoints",
+            "Security: Dependency scanning and alerts"
+        ]
+    },
+    {
+        "title": "Markdown Features",
+        "table": {
+            "headers": ["Feature", "Syntax", "Usage"],
+            "rows": [
+                ["Task Lists", "- [ ] Task", "Track todo items"],
+                ["Tables", "| Header | Row |", "Organize data"],
+                ["Code Blocks", "```language", "Share code snippets"],
+                ["Mentions", "@username", "Notify users"],
+                ["References", "#issue-number", "Link issues/PRs"]
+            ]
+        }
+    }
+]

@@ -1,0 +1,323 @@
+/* Master stylesheet: Provides base styles and fade system infrastructure
+ * - Defines common layout and styling
+ * - Implements fade behavior through CSS variables and transitions
+ * - Allows theme customization through CSS variable overrides
+ */
+
+/* Base layout: Full viewport coverage with overflow control */
+body {
+    margin: 0;
+    background: url('wallpaper.png') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    height: auto;
+    overflow: hidden;  /* Prevent page scrolling */
+}
+
+/* Content container: Semi-transparent overlay with responsive scroll */
+.overlay {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    overflow-y: auto;
+    width: 92%;
+    margin: 0 auto;
+    /* Scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.3);
+    transition: opacity var(--content-fade-time, 0.5s) ease-in-out;
+}
+
+.overlay.fade-out {
+    opacity: var(--content-fade-opacity, 0.3);
+}
+
+.overlay.wallpaper {
+    opacity: 0;
+}
+
+/* Scrollbar styling for WebKit browsers */
+.overlay::-webkit-scrollbar {
+    width: 8px;
+}
+
+.overlay::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.overlay::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+/* Flexible container for content sections */
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+}
+
+/* Prevent content from overflowing flex container */
+.flex-wrap > * {
+    width: 100%;
+    min-width: 0;
+}
+
+/* Common heading styles */
+h1 { 
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+h2 { 
+    width: 100%;
+    color: #fff;
+}
+
+/* Table styling */
+table {
+    width: auto;
+    border-collapse: collapse;
+    margin: 0;
+    flex: 1;
+}
+
+th, td {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: left;
+    white-space: normal;
+}
+
+th {
+    background: rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+}
+
+/* List styling */
+ul, ol {
+    margin: 0;
+    padding-left: 1.5em;
+}
+
+li {
+    margin: 0;
+}
+
+/* Button styling */
+button {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Navigation controls - consistent across all themes */
+.nav-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.wall-btn, .style-btn {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.wall-btn { bottom: 20px; }
+.style-btn { bottom: 70px; }
+.nav-left, .wall-left, .style-left { left: 20px; }
+.nav-right, .wall-right, .style-right { right: 20px; }
+
+/* Fade toggle button */
+.fade-toggle-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Hover effects for controls */
+.nav-btn:hover, .wall-btn:hover, .style-btn:hover, .fade-toggle-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Fade toggle states */
+.fade-toggle-btn.active {
+    background: rgba(0, 180, 0, 0.267);
+}
+
+.fade-toggle-btn.active:hover {
+    background: rgba(0, 150, 0, 0.8);
+}
+
+.fade-toggle-btn.auto {
+    background: rgba(0, 0, 180, 0.6);
+}
+
+.fade-toggle-btn.usage {
+    background: rgba(0, 180, 0, 0.6);
+}
+
+.fade-toggle-btn.fade-out {
+    background: rgba(180, 180, 0, 0.6);
+}
+
+.fade-toggle-btn.wallpaper {
+    background: rgba(180, 0, 0, 0.6);
+}
+
+/* Fade toggle states - updated for the four states */
+.fade-toggle-btn.default {
+    background: rgba(0, 0, 0, 0.3); /* Black for default mode */
+}
+
+.fade-toggle-btn.usage {
+    background: rgba(180, 0, 0, 0.3); /* Red for usage mode */
+}
+
+.fade-toggle-btn.fade-out {
+    background: rgba(200, 200, 200, 0.3); /* Light gray for fade-out mode */
+}
+
+.fade-toggle-btn.wallpaper {
+    background: rgba(100, 130, 150, 0.3); /* Blue-gray for fade-to-wallpaper mode */
+}
+
+/* Content fade transitions */
+.overlay, .nav-btn, .wall-btn, .style-btn, .fade-toggle-btn {
+    transition: opacity 0.5s ease-in-out;
+}
+
+.overlay.auto, .nav-btn.auto, .wall-btn.auto, .style-btn.auto, .fade-toggle-btn.auto {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.overlay.fade-out, .nav-btn.fade-out, .wall-btn.fade-out, .style-btn.fade-out, .fade-toggle-btn.fade-out,
+.overlay.wallpaper, .nav-btn.wallpaper, .wall-btn.wallpaper, .style-btn.wallpaper, .fade-toggle-btn.wallpaper {
+    transition: opacity 2s ease-in-out;
+}
+
+/* UI-only fade for default mode */
+.nav-btn.default, .wall-btn.default, .style-btn.default, .fade-toggle-btn.default {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Hover effects for controls - specific to default mode */
+body:hover .nav-btn.default,
+body:hover .wall-btn.default,
+body:hover .style-btn.default,
+body:hover .fade-toggle-btn.default {
+    opacity: 1;
+}
+
+/* Content fading class */
+.overlay.fading {
+    transition: opacity 2s ease-in-out;
+}
+
+/* Utility classes */
+.nav-buttons, .file-buttons, .tab-info {
+    display: none;
+}
+
+/* Link styling in content */
+.content-link {
+    color: #ffffff;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+.content-link:visited {
+    color: #ffffff;
+}
+
+.content-link:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* Base UI element states - hidden by default */
+.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn, .permalink-btn {
+    opacity: 0;
+    transition: opacity var(--ui-fade-in-time, 0.3s) ease-in-out;
+}
+
+/* Mode-specific behaviors */
+.nav-btn.usage, .wall-btn.usage, .style-btn.usage, .fade-toggle-btn.usage {
+    opacity: var(--ui-usage-opacity, 1);
+}
+
+.nav-btn.fade-out, .wall-btn.fade-out, .style-btn.fade-out, .fade-toggle-btn.fade-out,
+.nav-btn.wallpaper, .wall-btn.wallpaper, .style-btn.wallpaper, .fade-toggle-btn.wallpaper {
+    transition: opacity var(--ui-fade-out-time, 2s) ease-in-out;
+}
+
+/* Permalink button styling */
+.permalink-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.permalink-btn:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Update fade system to include permalink button */
+.nav-btn, .wall-btn, .style-btn, .fade-toggle-btn, .permalink-btn {
+    opacity: 0;
+    transition: opacity var(--ui-fade-in-time, 0.3s) ease-in-out;
+}

@@ -1,0 +1,65 @@
+[
+    {
+        "style": "heading",
+        "title": "Dynamic Wallpaper: Theme Stylesheet Guide"
+    },
+    {
+        "title": "Available Themes",
+        "table": {
+            "headers": ["Theme", "Use Case", "Characteristics"],
+            "rows": [
+                ["default.css", "Standard Display", "Balanced layout, medium text"],
+                ["large.css", "Presentation Mode", "Large text, spacious layout"],
+                ["small.css", "Dense Content", "Compact layout, smaller text"],
+                ["tiny.css", "Maximum Content", "Minimal spacing, tiny text"],
+                ["Combined Sets", "Custom Needs", "Mix multiple stylesheets"]
+            ]
+        }
+    },
+    {
+        "title": "Theme Controls",
+        "table": {
+            "headers": ["Feature", "Location", "Usage"],
+            "rows": [
+                ["Theme Cycling", "Style Buttons", "Click arrows above wallpaper"],
+                ["Theme Sets", "config.json", "Define stylesheet combinations"],
+                ["Auto-fade", "Top Left", "Toggle content transparency"],
+                ["Content Width", "Automatic", "Responsive to screen size"],
+                ["Scrolling", "Content Area", "Vertical scroll when needed"]
+            ]
+        }
+    },
+    {
+        "title": "Creating Custom Themes",
+        "table": {
+            "headers": ["Step", "Action", "Important Notes"],
+            "rows": [
+                ["1. Create File", "Add new .css file", "Place in stylesheets/"],
+                ["2. Core Styles", "Copy base layout", "Keep navigation consistent"],
+                ["3. Customize", "Modify properties", "Maintain readability"],
+                ["4. Configure", "Add to config.json", "Include in stylesheet set"],
+                ["5. Test", "Check all features", "Verify responsiveness"]
+            ]
+        }
+    },
+    {
+        "title": "Required Elements",
+        "list": [
+            "body - Page container and wallpaper display",
+            "overlay - Content container with transparency",
+            "flex-wrap - Content section layout system",
+            "Navigation buttons - Consistent size and position",
+            "Fade transitions - Support for auto-fade feature"
+        ]
+    },
+    {
+        "title": "Theme Customization Tips",
+        "numberedList": [
+            "Test themes with various content types (tables, lists)",
+            "Maintain button positions for consistent navigation",
+            "Keep text readable against wallpaper backgrounds",
+            "Ensure smooth transitions for fade effects",
+            "Verify mobile and desktop compatibility"
+        ]
+    }
+]

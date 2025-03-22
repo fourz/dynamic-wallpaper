@@ -1,0 +1,92 @@
+[
+    {
+        "style": "heading",
+        "title": "Minecraft Bukkit Development Guide"
+    },
+    {
+        "title": "Plugin Basics",
+        "table": {
+            "headers": ["Component", "Description", "Example"],
+            "rows": [
+                ["Main Class", "Entry point of plugin", "public class MyPlugin extends JavaPlugin"],
+                ["plugin.yml", "Plugin configuration", "name: MyPlugin\nversion: 1.0\nmain: com.example.MyPlugin"],
+                ["onEnable()", "Plugin startup method", "public void onEnable() { getLogger().info(\"Started!\"); }"],
+                ["onDisable()", "Plugin shutdown method", "public void onDisable() { saveConfig(); }"],
+                ["Commands", "Register in plugin.yml", "commands:\n  heal:\n    description: Heal player"],
+                ["Permissions", "Define in plugin.yml", "permissions:\n  myplugin.heal:\n    description: Allows healing"]
+            ]
+        }
+    },
+    {
+        "title": "Event Handling",
+        "table": {
+            "headers": ["Task", "Code Example"],
+            "rows": [
+                ["Register Listener", "@EventHandler\npublic void onPlayerJoin(PlayerJoinEvent e)"],
+                ["Enable Events", "getServer().getPluginManager().registerEvents(this, this);"],
+                ["Cancel Event", "event.setCancelled(true);"],
+                ["Priority", "@EventHandler(priority = EventPriority.HIGH)"],
+                ["Get Player", "Player player = event.getPlayer();"],
+                ["Get Block", "Block block = event.getBlock();"],
+                ["Get Entity", "Entity entity = event.getEntity();"],
+                ["Get Damage", "double damage = event.getDamage();"]
+            ]
+        }
+    },
+    {
+        "title": "Common Objects",
+        "table": {
+            "headers": ["Object", "Usage", "Example"],
+            "rows": [
+                ["Location", "World position", "new Location(world, x, y, z)"],
+                ["ItemStack", "Item creation", "new ItemStack(Material.DIAMOND_SWORD)"],
+                ["Inventory", "Storage access", "player.getInventory()"],
+                ["World", "World manipulation", "player.getWorld()"],
+                ["Entity", "Mob/player handling", "world.spawnEntity(loc, EntityType.ZOMBIE)"],
+                ["Block", "World element", "loc.getBlock()"],
+                ["CommandSender", "Command executor", "public boolean onCommand(CommandSender sender, ...)"],
+                ["Configuration", "Plugin settings", "getConfig().getString(\"message\")"],
+                ["Scheduler", "Task scheduling", "getServer().getScheduler().runTaskLater(this, () -> {}, 20L)"]
+            ]
+        }
+    },
+    {
+        "title": "Configuration",
+        "table": {
+            "headers": ["Task", "Code Example"],
+            "rows": [
+                ["Save Config", "saveConfig();"],
+                ["Load Config", "reloadConfig();"],
+                ["Get Value", "getConfig().getString(\"message\");"],
+                ["Set Value", "getConfig().set(\"message\", \"Hello!\");"],
+                ["Default Config", "saveDefaultConfig();"],
+                ["Config Section", "getConfig().getConfigurationSection(\"section\");"],
+                ["Config Keys", "getConfig().getKeys(false);"],
+                ["Config Path", "getDataFolder().toPath().resolve(\"config.yml\");"]
+            ]
+        }
+    },
+    {
+        "title": "Tasks & Scheduling",
+        "table": {
+            "headers": ["Type", "Usage"],
+            "rows": [
+                ["Sync Task", "getServer().getScheduler().runTask(this, () -> {});"],
+                ["Async Task", "getServer().getScheduler().runTaskAsynchronously(this, () -> {});"],
+                ["Delayed Task", "runTaskLater(this, () -> {}, 20L); // 1 second"],
+                ["Repeating Task", "runTaskTimer(this, () -> {}, 0L, 20L);"],
+                ["Cancel Tasks", "getServer().getScheduler().cancelTasks(this);"]
+            ]
+        }
+    },
+    {
+        "title": "Best Practices",
+        "list": [
+            "Always check if Player/Entity is null",
+            "Use async tasks for database operations",
+            "Handle exceptions in event listeners",
+            "Clean up resources in onDisable()",
+            "Use plugin.yml for command registration"
+        ]
+    }
+]

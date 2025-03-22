@@ -1,0 +1,84 @@
+[
+    {
+        "style": "heading",
+        "title": "Computer Networking Overview"
+    },
+    {
+        "title": "Guide Series Navigation",
+        "table": {
+            "headers": ["Guide", "Contents", "Use When"],
+            "rows": [
+                ["Networking Basics", "Fundamental concepts, protocols, addressing", "Learning networking foundations"],
+                ["Routing", "Routing protocols, configurations, algorithms", "Understanding traffic flow"],
+                ["WAN Technologies", "Enterprise connectivity, protocols, service types", "Planning wide-area networks"],
+                ["Security", "Network protection, protocols, best practices", "Implementing security measures"]
+            ]
+        }
+    },
+    {
+        "title": "Network Classifications",
+        "table": {
+            "headers": ["Type", "Scale", "Typical Use Cases", "Key Technologies"],
+            "rows": [
+                ["PAN (Personal)", "1-10m", "Personal devices, IoT", "Bluetooth, NFC, USB"],
+                ["LAN (Local)", "10m-1km", "Home/office networks", "Ethernet, Wi-Fi"],
+                ["CAN (Campus)", "1-5km", "University/corporate campus", "Fiber, Extended LAN"],
+                ["MAN (Metropolitan)", "5-50km", "City infrastructure", "DQDB, Metro Ethernet"],
+                ["WAN (Wide)", "50km+", "Global connectivity", "MPLS, Leased Lines"]
+            ]
+        }
+    },
+    {
+        "title": "Network Topologies",
+        "table": {
+            "headers": ["Topology", "Description", "Diagram"],
+            "rows": [
+                ["Star", "All devices connect to a central hub or switch", "images/network_star.png"],
+                ["Bus", "All devices connect to a single cable", "images/network_bus.png"],
+                ["Ring", "Devices connect in a circular fashion", "images/network_ring.png"],
+                ["Mesh", "Devices connect to multiple other devices", "images/network_mesh.png"]
+            ]
+        }
+    },
+    {
+        "title": "OSI Model Layers",
+        "table": {
+            "headers": ["Layer", "Description", "Example Protocols"],
+            "rows": [
+                ["Physical", "Physical connection and transmission of data", "Ethernet, Wi-Fi"],
+                ["Data Link", "Provides error-free transmission between two nodes", "MAC, LLC"],
+                ["Network", "Handles routing of data packets", "IP"],
+                ["Transport", "Provides reliable data transfer", "TCP, UDP"],
+                ["Session", "Manages connections between applications", "NetBIOS"],
+                ["Presentation", "Handles data formatting and encryption", "SSL, TLS"],
+                ["Application", "Provides network services to applications", "HTTP, DNS, SMTP"]
+            ]
+        }
+    },
+    {
+        "title": "Network Architecture Models",
+        "table": {
+            "headers": ["Model", "Key Features", "Primary Use"],
+            "rows": [
+                ["Client-Server", "Centralized resources, scalable", "Enterprise applications"],
+                ["Peer-to-Peer", "Decentralized, resilient", "File sharing, blockchain"],
+                ["Hybrid", "Combined approach, flexible", "Modern applications"],
+                ["Cloud-Based", "Service-oriented, elastic", "SaaS, PaaS, IaaS"],
+                ["Edge Computing", "Distributed processing", "IoT, real-time processing"]
+            ]
+        }
+    },
+    {
+        "title": "Modern Networking Trends",
+        "table": {
+            "headers": ["Trend", "Description", "Impact"],
+            "rows": [
+                ["SDN", "Software-Defined Networking", "Programmable network infrastructure"],
+                ["NFV", "Network Function Virtualization", "Virtualized network services"],
+                ["5G Networks", "High-speed mobile networking", "Enhanced mobile connectivity"],
+                ["Zero Trust", "Assume breach security model", "Enhanced security architecture"],
+                ["Intent-Based", "Automated network management", "Simplified network operations"]
+            ]
+        }
+    }
+]

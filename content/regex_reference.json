@@ -6,16 +6,19 @@
   {
     "title": "Character Patterns:",
     "table": {
-      "headers": ["Pattern", "Description"],
+      "headers": ["Pattern", "Name", "Description"],
       "rows": [
-        ["\\d", "Any digit (0-9)"],
-        ["\\D", "Any non-digit character"],
-        ["\\w", "Word character [a-zA-Z0-9_]"],
-        ["\\W", "Non-word character"],
-        ["\\s", "Whitespace (space, tab, newline)"],
-        ["\\S", "Non-whitespace character"],
-        [".", "Any character except newline"],
-        ["\\.", "A period (.)"]
+        ["\\d", "Digit", "Any digit (0-9)"],
+        ["\\D", "Non-digit", "Any non-digit character"],
+        ["\\w", "Word", "Word character [a-zA-Z0-9_]"],
+        ["\\W", "Non-word", "Non-word character"],
+        ["\\s", "Whitespace", "Whitespace (space, tab, newline)"],
+        ["\\S", "Non-whitespace", "Non-whitespace character"],
+        [".", "Dot", "Any character except newline"],
+        ["\\.", "Escaped dot", "A period (.)"],
+        ["\\n", "Newline", "Line break character"],
+        ["\\r", "Carriage return", "Carriage return character"],
+        ["\\t", "Tab", "Tab character"]
       ]
     }
   },
@@ -27,9 +30,14 @@
         ["*", "0 or more", "a* matches '', 'a', 'aa'..."],
         ["+", "1 or more", "a+ matches 'a', 'aa'..."],
         ["?", "0 or 1", "a? matches '' or 'a'"],
+        ["*?", "0 or more (lazy)", "a*? matches minimum possible"],
+        ["+?", "1 or more (lazy)", "a+? matches minimum possible"],
+        ["??", "0 or 1 (lazy)", "a?? matches minimum possible"],
         ["{n}", "Exactly n times", "a{3} matches 'aaa'"],
         ["{n,}", "n or more times", "a{2,} matches 'aa', 'aaa'..."],
-        ["{n,m}", "Between n and m", "a{2,4} matches 'aa', 'aaa', 'aaaa'"]
+        ["{n,m}", "Between n and m", "a{2,4} matches 'aa', 'aaa', 'aaaa'"],
+        ["{n,}?", "n or more (lazy)", "a{2,}? matches minimum possible"],
+        ["{n,m}?", "Between n and m (lazy)", "a{2,4}? matches minimum possible"]
       ]
     }
   },
@@ -53,17 +61,17 @@
   {
     "title": "Groups & Alternation:",
     "table": {
-      "headers": ["Symbol", "Description"],
+      "headers": ["Symbol", "Description", "Purpose"],
       "rows": [
-        ["(abc)", "Capture group"],
-        ["(?:abc)", "Non-capturing group"],
-        ["a|b", "Match a or b"],
-        ["\\1, \\2", "Backreference to group 1, 2, etc."],
-        ["(?=abc)", "Positive lookahead"],
-        ["(?!abc)", "Negative lookahead"],
-        ["(?<=abc)", "Positive lookbehind"],
-        ["(?<!abc)", "Negative lookbehind"],
-        ["(?i)", "Case-insensitive"]
+        ["(abc)", "Capture group", "Store matched text for later use"],
+        ["(?:abc)", "Non-capturing group", "Group patterns without storing the match"],
+        ["a|b", "Match a or b", "Provide alternative matching options"],
+        ["\\1, \\2", "Backreference to group 1, 2, etc.", "Reuse previously captured text"],
+        ["(?=abc)", "Positive lookahead", "Match only if followed by pattern"],
+        ["(?!abc)", "Negative lookahead", "Match only if not followed by pattern"],
+        ["(?<=abc)", "Positive lookbehind", "Match only if preceded by pattern"],
+        ["(?<!abc)", "Negative lookbehind", "Match only if not preceded by pattern"],
+        ["(?i)", "Case-insensitive", "Ignore letter case when matching"]
       ]
     }
   },

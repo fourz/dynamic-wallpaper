@@ -1,64 +1,68 @@
-{
-  "title": "Git Quick Reference",
-  "sections": [
+[
     {
-      "name": "Basic Commands",
-      "commands": [
-        {
-          "command": "git init",
-          "description": "Initialize a new Git repository"
-        },
-        {
-          "command": "git clone <url>",
-          "description": "Clone a repository from remote"
-        },
-        {
-          "command": "git status",
-          "description": "Show working tree status"
-        },
-        {
-          "command": "git add <file>",
-          "description": "Add file to staging area"
-        },
-        {
-          "command": "git commit -m \"message\"",
-          "description": "Commit staged changes"
-        }
-      ]
+        "style": "heading",
+        "title": "Git Command Reference Guide"
     },
     {
-      "name": "Branch Operations",
-      "commands": [
-        {
-          "command": "git branch",
-          "description": "List branches"
-        },
-        {
-          "command": "git checkout <branch>",
-          "description": "Switch to branch"
-        },
-        {
-          "command": "git merge <branch>",
-          "description": "Merge branch into current branch"
+        "title": "Basic Git Operations",
+        "table": {
+            "headers": ["Command", "Description", "Example"],
+            "rows": [
+                ["git init", "Initialize a new Git repository", "git init my-project"],
+                ["git clone", "Clone a repository from remote", "git clone https://github.com/user/repo.git"],
+                ["git status", "Show working tree status", "git status"],
+                ["git add", "Stage changes for commit", "git add file.txt"],
+                ["git commit", "Record changes to repository", "git commit -m \"Add feature\""]
+            ]
         }
-      ]
     },
     {
-      "name": "Remote Operations",
-      "commands": [
-        {
-          "command": "git fetch",
-          "description": "Download objects from remote"
-        },
-        {
-          "command": "git pull",
-          "description": "Fetch and merge remote changes"
-        },
-        {
-          "command": "git push",
-          "description": "Upload local changes to remote"
+        "title": "Branch Management",
+        "table": {
+            "headers": ["Command", "Purpose", "Example"],
+            "rows": [
+                ["git branch", "List/create branches", "git branch feature"],
+                ["git checkout", "Switch branches", "git checkout main"],
+                ["git merge", "Combine branches", "git merge feature"],
+                ["git rebase", "Reapply commits", "git rebase main"],
+                ["git stash", "Save working changes", "git stash save \"WIP\""]
+            ]
         }
-      ]
+    },
+    {
+        "title": "Remote Operations",
+        "table": {
+            "headers": ["Command", "Purpose", "Example"],
+            "rows": [
+                ["git remote add", "Add remote repository", "git remote add origin URL"],
+                ["git fetch", "Download remote changes", "git fetch origin"],
+                ["git pull", "Fetch and merge changes", "git pull origin main"],
+                ["git push", "Upload local changes", "git push origin main"],
+                ["git remote -v", "List remote connections", "git remote -v"]
+            ]
+        }
+    },
+    {
+        "title": "Common Workflows",
+        "numberedList": [
+            "Create feature branch: git checkout -b feature",
+            "Make changes and stage: git add .",
+            "Commit changes: git commit -m \"message\"",
+            "Update from main: git pull origin main",
+            "Push changes: git push origin feature"
+        ]
+    },
+    {
+        "title": "Configuration and Setup",
+        "table": {
+            "headers": ["Command", "Purpose", "Example"],
+            "rows": [
+                ["git config", "Set configuration", "git config --global user.name \"Name\""],
+                ["git ignore", "Exclude files", "Add *.log to .gitignore"],
+                ["git alias", "Create shortcuts", "git config --global alias.co checkout"],
+                ["git hooks", "Automate actions", "Create pre-commit hook"],
+                ["git attributes", "Define file attributes", "Set line endings"]
+            ]
+        }
     }
-  ]
-}
+]

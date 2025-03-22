@@ -1,0 +1,104 @@
+[
+    {
+        "style": "heading",
+        "title": "System Administration Problem Solving Guide"
+    },
+    {
+        "title": "Diagnostic Approaches",
+        "table": {
+            "headers": ["Technique", "Use Case", "Example"],
+            "rows": [
+                ["Bottom-Up", "Network connectivity", "Check physical → TCP/IP → Application"],
+                ["Top-Down", "Application issues", "Check App logs → Dependencies → Infrastructure"],
+                ["Divide-Conquer", "System-wide problems", "Isolate affected vs working components"],
+                ["Elimination", "Resource conflicts", "Disable services one by one"],
+                ["Correlation", "Time-based issues", "Compare logs across services"],
+                ["Pattern Recognition", "Common error types", "Identify recurring issues"],
+                ["State Analysis", "System states", "Monitor changes in system metrics"],
+                ["Root Cause Analysis", "Underlying issues", "Trace back to initial problem"]
+            ]
+        }
+    },
+    {
+        "title": "Monitoring Strategies",
+        "table": {
+            "headers": ["Strategy", "Focus", "Tools"],
+            "rows": [
+                ["Resource Usage", "CPU/Memory/Disk", "top, htop, iotop"],
+                ["Network Analysis", "Traffic/Connections", "tcpdump, wireshark"],
+                ["Log Analysis", "Error patterns", "grep, ELK stack"],
+                ["Performance", "Bottlenecks", "perf, sar, nethogs"],
+                ["Service Health", "Availability", "nagios, prometheus"],
+                ["Security", "Threat detection", "fail2ban, tripwire"],
+                ["Backup Monitoring", "Data integrity", "rsnapshot, bacula"],
+                ["User Activity", "Session tracking", "last, auditd"]
+            ]
+        }
+    },
+    {
+        "title": "Common Investigation Tools",
+        "table": {
+            "headers": ["Tool Type", "Purpose", "Examples"],
+            "rows": [
+                ["System Info", "Hardware/OS details", "uname, dmidecode"],
+                ["Process Tools", "Process management", "ps, pstree, lsof"],
+                ["Network Tools", "Connectivity", "ping, traceroute, netstat"],
+                ["File Tools", "File operations", "ls, find, du"],
+                ["Performance", "System metrics", "vmstat, iostat, dstat"],
+                ["Log Analysis", "Error tracking", "grep, tail, awk"],
+                ["Security Tools", "Threat detection", "nmap, chkrootkit"],
+                ["Backup Tools", "Data protection", "rsync, tar, dd"]
+            ]
+        }
+    },
+    {
+        "title": "Troubleshooting Steps",
+        "numberedList": [
+            "Verify problem reproduction",
+            "Collect system state information",
+            "Check recent changes/updates",
+            "Review relevant logs",
+            "Test in isolated environment",
+            "Implement solution",
+            "Document findings and fix"
+        ]
+    },
+    {
+        "title": "Infrastructure Analysis",
+        "table": {
+            "headers": ["Layer", "Check Points", "Tools"],
+            "rows": [
+                ["Hardware", "CPU, Memory, Storage", "lshw, smartctl"],
+                ["Network", "Connectivity, Routing", "mtr, iperf"],
+                ["OS", "System resources", "sysstat, procfs"],
+                ["Services", "Daemons, Ports", "systemctl, netstat"],
+                ["Applications", "Processes, Logs", "journalctl, custom logs"]
+            ]
+        }
+    },
+    {
+        "title": "Best Practices",
+        "list": [
+            "Document all changes made",
+            "Maintain change control logs",
+            "Create baseline measurements",
+            "Use version control for configs",
+            "Keep backup before changes",
+            "Test in staging first",
+            "Monitor post-change impact"
+        ]
+    },
+    {
+        "title": "Recovery Strategies",
+        "table": {
+            "headers": ["Strategy", "Scenario", "Approach"],
+            "rows": [
+                ["Rollback", "Failed updates", "Restore previous state"],
+                ["Failover", "Hardware issues", "Switch to backup systems"],
+                ["Redundancy", "Service outages", "Use redundant components"],
+                ["Backup Restore", "Data loss", "Restore from backups"],
+                ["Load Balancing", "Performance issues", "Distribute load"]
+            ]
+        }
+    }
+]

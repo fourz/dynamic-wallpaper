@@ -17,6 +17,45 @@
     }
   },
   {
+    "title": "Windows Certificate Commands",
+    "table": {
+      "headers": ["Command", "Purpose", "Example"],
+      "rows": [
+        ["certutil", "View certificate", "certutil -v -dump certificate.cer"],
+        ["certreq", "Request certificate", "certreq -submit -attrib \"CertificateTemplate:WebServer\" request.req"],
+        ["netsh", "Bind certificate", "netsh http add sslcert ipport=0.0.0.0:443 certhash=hash appid={guid}"],
+        ["powershell", "List certificates", "Get-ChildItem -Path Cert:\\LocalMachine\\My"],
+        ["mmc", "Certificate console", "certlm.msc (Local Machine) or certmgr.msc (Current User)"]
+      ]
+    }
+  },
+  {
+    "title": "Windows SSL Diagnostics",
+    "table": {
+      "headers": ["Tool", "Purpose", "Command"],
+      "rows": [
+        ["Test-NetConnection", "Check port", "Test-NetConnection -ComputerName site.com -Port 443"],
+        ["IIS Crypto", "Check config", "IISCrypto.exe /backup"],
+        ["SSL Labs", "Security check", "Invoke-WebRequest -Uri https://www.ssllabs.com/ssltest/"],
+        ["WinRM", "Test HTTPS", "winrm quickconfig -transport:https"],
+        ["Port Query", "Test SSL ports", "portqryui.exe"]
+      ]
+    }
+  },
+  {
+    "title": "PowerShell Certificate Tasks",
+    "table": {
+      "headers": ["Task", "Command", "Description"],
+      "rows": [
+        ["Import Cert", "Import-PfxCertificate", "Import certificate to store"],
+        ["Export Cert", "Export-PfxCertificate", "Export with private key"],
+        ["Remove Cert", "Remove-Item Cert:", "Delete certificate"],
+        ["New Store", "New-Item -Path Cert:", "Create certificate store"],
+        ["Check Trust", "Get-AuthenticodeSignature", "Verify signature"]
+      ]
+    }
+  },
+  {
     "title": "Certificate Types",
     "table": {
       "headers": ["Type", "Use Case", "Description"],

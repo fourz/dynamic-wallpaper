@@ -1,0 +1,95 @@
+[
+    {
+        "style": "heading",
+        "title": "CompTIA Cloud+ Study Guide"
+    },
+    {
+        "title": "Cloud Architecture",
+        "table": {
+            "headers": ["Concept", "Description", "Example"],
+            "rows": [
+                ["IaaS", "Infrastructure as a Service", "AWS EC2, Azure VMs"],
+                ["PaaS", "Platform as a Service", "Heroku, Google App Engine"],
+                ["SaaS", "Software as a Service", "Salesforce, Microsoft 365"],
+                ["Public Cloud", "Services offered to general public", "AWS, Azure, GCP"],
+                ["Private Cloud", "Internal cloud infrastructure", "VMware vSphere, OpenStack"]
+            ]
+        }
+    },
+    {
+        "title": "Security Concepts",
+        "table": {
+            "headers": ["Concept", "Description", "Implementation"],
+            "rows": [
+                ["IAM", "Identity and Access Management", "Role-based access control"],
+                ["Encryption", "Data protection", "AES-256, SSL/TLS"],
+                ["Security Groups", "Network security", "Firewall rules, port control"],
+                ["Compliance", "Regulatory standards", "HIPAA, PCI DSS, GDPR"],
+                ["MFA", "Multi-factor Authentication", "2FA, biometrics"]
+            ]
+        }
+    },
+    {
+        "title": "Virtualization",
+        "table": {
+            "headers": ["Technology", "Purpose", "Examples"],
+            "rows": [
+                ["Hypervisors", "VM management", "VMware ESXi, Hyper-V"],
+                ["Containers", "Application isolation", "Docker, Kubernetes"],
+                ["VMs", "Server virtualization", "Virtual machines"],
+                ["Storage virtualization", "Storage pooling", "vSAN, Storage Spaces"],
+                ["Network virtualization", "Virtual networking", "VLANs, VPNs"]
+            ]
+        }
+    },
+    {
+        "title": "Business Continuity",
+        "table": {
+            "headers": ["Concept", "Purpose", "Implementation"],
+            "rows": [
+                ["Backup", "Data protection", "Snapshot, replication"],
+                ["DR", "Disaster Recovery", "Site recovery, failover"],
+                ["HA", "High Availability", "Load balancing, clustering"],
+                ["RPO", "Recovery Point Objective", "Data loss tolerance"],
+                ["RTO", "Recovery Time Objective", "Downtime tolerance"]
+            ]
+        }
+    },
+    {
+        "title": "Cloud Operations",
+        "table": {
+            "headers": ["Task", "Description", "Tools"],
+            "rows": [
+                ["Monitoring", "System observation", "CloudWatch, Azure Monitor"],
+                ["Automation", "Task automation", "Terraform, Ansible"],
+                ["Scaling", "Resource adjustment", "Auto-scaling groups"],
+                ["Migration", "Cloud transition", "AWS Migration Hub"],
+                ["Cost Management", "Budget control", "Cost calculators, tagging"]
+            ]
+        }
+    },
+    {
+        "title": "Key Technologies",
+        "list": [
+            "Load Balancers - Traffic distribution",
+            "Auto-scaling - Dynamic resource adjustment",
+            "APIs - Service integration",
+            "CDN - Content delivery networks",
+            "DNS - Domain name services",
+            "VPC - Virtual private cloud",
+            "Storage services - Object, block, file storage"
+        ]
+    },
+    {
+        "title": "Best Practices",
+        "list": [
+            "Implement least privilege access",
+            "Regular security audits",
+            "Maintain documentation",
+            "Monitor resource usage",
+            "Implement tagging strategy",
+            "Regular backup testing",
+            "Incident response planning"
+        ]
+    }
+]

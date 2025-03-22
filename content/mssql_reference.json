@@ -1,4 +1,14 @@
 [
+  {"style": "heading", "title": "SQL Server Reference"},
+  {
+    "title": "Overview:",
+    "block": [
+      "Microsoft SQL Server is a relational database management system (RDBMS) developed by Microsoft. It provides a robust platform for storing and managing data, supporting a wide range of transaction processing, business intelligence, and analytics applications.",
+      "Key components include the Database Engine for storing and processing data, Analysis Services for online analytical processing and data mining, Integration Services for data integration and workflow solutions, and Reporting Services for creating and managing reports.",
+      "SQL Server offers enterprise-level features like high availability through Always On Availability Groups, disaster recovery with log shipping and failover clustering, and advanced security features including row-level security, data encryption, and dynamic data masking.",
+      "The platform supports both on-premises deployment and cloud integration through Azure SQL Database, allowing hybrid scenarios and seamless cloud migration paths. Development tools include SQL Server Management Studio (SSMS) for administration and query development, and Azure Data Studio for cross-platform database development."
+    ]
+  },
   {
     "title": "SQL Basics:",
     "table": {

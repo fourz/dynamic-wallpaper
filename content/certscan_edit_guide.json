@@ -1,0 +1,108 @@
+[
+    {
+        "style": "heading",
+        "title": "CertainScanEditUx64 Installation & Usage Guide"
+    },
+    {
+        "title": "System Requirements",
+        "table": {
+            "headers": ["Component", "Minimum", "Recommended"],
+            "rows": [
+                ["OS", "Windows 10 64-bit", "Windows 11 64-bit"],
+                ["CPU", "Intel i5/AMD Ryzen 5", "Intel i7/AMD Ryzen 7"],
+                ["RAM", "8GB", "16GB"],
+                ["Display", "1920x1080", "2560x1440"],
+                ["Storage", "256GB SSD", "512GB SSD"]
+            ]
+        }
+    },
+    {
+        "title": "Installation Process",
+        "table": {
+            "headers": ["Step", "Action", "Notes"],
+            "rows": [
+                ["1", "Verify Prerequisites", "Check .NET version 4.7.2+"],
+                ["2", "Run Setup", "CertainScanEditUx64_Setup.exe"],
+                ["3", "Choose Components", "Select required modules"],
+                ["4", "Configure Path", "Set installation directory"],
+                ["5", "License Setup", "Enter activation key"]
+            ]
+        }
+    },
+    {
+        "title": "Configuration Steps",
+        "table": {
+            "headers": ["Setting", "Purpose", "Default Value"],
+            "rows": [
+                ["Workspace Path", "Default save location", "C:\\CertainScan\\Workspace"],
+                ["Temp Directory", "Processing directory", "C:\\CertainScan\\Temp"],
+                ["Auto-save Interval", "Backup frequency", "10 minutes"],
+                ["Cache Size", "Memory allocation", "2GB"],
+                ["Thread Count", "Processing threads", "Auto (CPU cores - 1)"]
+            ]
+        }
+    },
+    {
+        "title": "Basic Operations",
+        "table": {
+            "headers": ["Function", "Shortcut", "Description"],
+            "rows": [
+                ["Open File", "Ctrl+O", "Open document for editing"],
+                ["Save Changes", "Ctrl+S", "Save current document"],
+                ["Export", "Ctrl+E", "Export processed file"],
+                ["Undo", "Ctrl+Z", "Reverse last action"],
+                ["Batch Process", "Ctrl+B", "Process multiple files"]
+            ]
+        }
+    },
+    {
+        "title": "Advanced Features",
+        "table": {
+            "headers": ["Feature", "Usage", "Notes"],
+            "rows": [
+                ["OCR Enhancement", "Text recognition improvement", "Requires GPU"],
+                ["Custom Templates", "Document templates", "XML format"],
+                ["Automation Scripts", "Batch processing", "Python support"],
+                ["Quality Profiles", "Output settings", "Customizable"],
+                ["Field Extraction", "Data capture", "AI-assisted"]
+            ]
+        }
+    },
+    {
+        "title": "Troubleshooting",
+        "table": {
+            "headers": ["Issue", "Common Cause", "Solution"],
+            "rows": [
+                ["Slow Performance", "Large cache size", "Clear cache"],
+                ["Crashes on Start", "Corrupt settings", "Reset configuration"],
+                ["Export Fails", "Insufficient permissions", "Check folder access"],
+                ["OCR Errors", "Poor image quality", "Adjust preprocessing"],
+                ["Memory Error", "File too large", "Increase memory allocation"]
+            ]
+        }
+    },
+    {
+        "title": "Maintenance Tasks",
+        "list": [
+            "Weekly temp folder cleanup",
+            "Monthly cache clearing",
+            "Regular software updates",
+            "Backup configuration files",
+            "Log file management",
+            "Template verification",
+            "Performance monitoring"
+        ]
+    },
+    {
+        "title": "Best Practices",
+        "list": [
+            "Use SSD for workspace",
+            "Regular profile backups",
+            "Optimize large batches",
+            "Monitor system resources",
+            "Document custom settings",
+            "Test new templates",
+            "Maintain organized workspace"
+        ]
+    }
+]

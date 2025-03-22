@@ -1,0 +1,55 @@
+/* Import master styles */
+@import url('master.css');
+
+/* Theme-specific overrides for smaller theme */
+body {
+    padding: 15px 30px;
+    font-size: 10.5pt;
+    line-height: 1.25;
+}
+
+.overlay {
+    padding: 14px;
+    border-radius: 7px;
+    max-width: 1200px;
+    gap: 1.35rem;
+    max-height: calc(100vh - 30px);
+    min-height: 165px;
+}
+
+.flex-wrap {
+    flex: 1 1 440px;
+    min-width: 440px;
+}
+
+h1 {
+    font-size: 15pt;
+}
+
+h2 {
+    margin: 0 0 0.35rem 0;
+    font-size: 10.5pt;
+}
+
+table {
+    font-size: 10.5pt;
+}
+
+th, td {
+    padding: 5px 6px;
+    min-width: 70px;
+}
+
+td:not(:first-child), 
+th:not(:first-child) {
+    min-width: 14.5en;
+}
+
+li {
+    padding: 0.175em 0;
+}
+
+button {
+    padding: 7px 14px;
+    border-radius: 4px;
+}

@@ -1,5 +1,9 @@
 [
   {
+    "style": "heading",
+    "title": "PowerShell: Command Reference"
+},
+  {
     "title": "Basic Commands:",
     "table": {
       "headers": ["Command", "Description", "Example"],

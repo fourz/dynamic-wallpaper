@@ -8,11 +8,15 @@
         "table": {
             "headers": ["Property", "Description", "Example"],
             "rows": [
-                ["margin", "Outside spacing", "margin: 10px 20px;"],
-                ["padding", "Inside spacing", "padding: 1em 2em;"],
-                ["border", "Edge styling", "border: 1px solid #000;"],
-                ["width/height", "Element size", "width: 100%; height: 50px;"],
-                ["box-sizing", "Size calculation", "box-sizing: border-box;"]
+                ["margin", "Outside spacing", "margin: 10px 20px 15px 25px;"],
+                ["padding", "Inside spacing", "padding: 1em 2em 1.5em;"],
+                ["border", "Edge styling", "border: 1px solid #000;\nborder-radius: 4px;"],
+                ["width/height", "Element size", "width: calc(100% - 20px);\nmax-width: 1200px;"],
+                ["box-sizing", "Size calculation", "box-sizing: border-box;"],
+                ["outline", "Visual border", "outline: 2px dashed #f00;"],
+                ["border-radius", "Corner rounding", "border-radius: 8px 4px;\nborder-top-left-radius: 10px;"],
+                ["overflow", "Content overflow", "overflow: hidden;\noverflow-y: auto;"],
+                ["resize", "Resize behavior", "resize: both;\nresize: vertical;"]
             ]
         }
     },
@@ -22,10 +26,14 @@
             "headers": ["Value", "Description", "Example"],
             "rows": [
                 ["static", "Default flow", "position: static;"],
-                ["relative", "Relative to normal", "position: relative; top: 10px;"],
-                ["absolute", "Relative to parent", "position: absolute; left: 0;"],
-                ["fixed", "Relative to viewport", "position: fixed; bottom: 0;"],
-                ["sticky", "Scrolling behavior", "position: sticky; top: 0;"]
+                ["relative", "Relative to normal", "position: relative;\ntop: 10px;\nz-index: 1;"],
+                ["absolute", "Relative to parent", "position: absolute;\ntop: 0;\nleft: 50%;\ntransform: translateX(-50%);"],
+                ["fixed", "Relative to viewport", "position: fixed;\ntop: 0;\nwidth: 100%;"],
+                ["sticky", "Scrolling behavior", "position: sticky;\ntop: 0;\nz-index: 100;"],
+                ["inset", "All sides positioning", "inset: 0;\ninset: 10px 20px;"],
+                ["transform-origin", "Transform anchor", "transform-origin: center;\ntransform-origin: top left;"],
+                ["perspective", "3D depth", "perspective: 1000px;"],
+                ["backface-visibility", "3D back face", "backface-visibility: hidden;"]
             ]
         }
     },
@@ -34,11 +42,17 @@
         "table": {
             "headers": ["Property", "Common Values", "Example"],
             "rows": [
-                ["display", "flex, inline-flex", "display: flex;"],
-                ["flex-direction", "row, column", "flex-direction: column;"],
-                ["justify-content", "center, space-between", "justify-content: center;"],
-                ["align-items", "center, stretch", "align-items: center;"],
-                ["flex", "grow shrink basis", "flex: 1 0 auto;"]
+                ["display", "flex, inline-flex", "display: flex;\ngap: 10px;"],
+                ["flex-direction", "row, column, row-reverse", "flex-direction: column;"],
+                ["justify-content", "center, space-between, space-around", "justify-content: space-between;"],
+                ["align-items", "center, stretch, flex-start", "align-items: center;"],
+                ["flex", "grow shrink basis", "flex: 1 0 auto;"],
+                ["flex-wrap", "wrap, nowrap", "flex-wrap: wrap;"],
+                ["order", "numeric order", "order: 1;"],
+                ["align-content", "Space distribution", "align-content: space-between;"],
+                ["flex-flow", "Direction and wrap", "flex-flow: row wrap;"],
+                ["place-content", "Align and justify", "place-content: center space-between;"],
+                ["gap", "Item spacing", "gap: 1rem;\ncolumn-gap: 20px;"]
             ]
         }
     },
@@ -48,10 +62,15 @@
             "headers": ["Property", "Description", "Example"],
             "rows": [
                 ["display", "Grid container", "display: grid;"],
-                ["grid-template", "Define layout", "grid-template-columns: 1fr 2fr;"],
-                ["gap", "Grid spacing", "gap: 10px;"],
-                ["grid-area", "Item placement", "grid-area: header;"],
-                ["grid-auto-flow", "Auto placement", "grid-auto-flow: dense;"]
+                ["grid-template", "Define layout", "grid-template-columns: repeat(3, 1fr);\ngrid-template-rows: auto;"],
+                ["gap", "Grid spacing", "gap: 10px;\nrow-gap: 20px;"],
+                ["grid-area", "Item placement", "grid-area: 1 / 1 / 3 / 3;"],
+                ["grid-auto-flow", "Auto placement", "grid-auto-flow: dense;"],
+                ["place-items", "Alignment shorthand", "place-items: center stretch;"],
+                ["grid-template-areas", "Named grid areas", "grid-template-areas: 'header header' 'nav main';"],
+                ["grid-auto-columns", "Auto column size", "grid-auto-columns: minmax(100px, auto);"],
+                ["grid-column", "Column span", "grid-column: span 2;\ngrid-column: 1 / -1;"],
+                ["masonry-auto-flow", "Masonry layout", "masonry-auto-flow: next;\nmasonry-auto-flow: pack;"]
             ]
         }
     },
@@ -60,12 +79,93 @@
         "table": {
             "headers": ["Property", "Description", "Example"],
             "rows": [
-                ["font-family", "Font type", "font-family: Arial, sans-serif;"],
-                ["font-size", "Text size", "font-size: 16px;"],
+                ["font-family", "Font type", "font-family: 'Roboto', system-ui, sans-serif;"],
+                ["font-size", "Text size", "font-size: clamp(1rem, 2vw, 2rem);"],
                 ["line-height", "Line spacing", "line-height: 1.5;"],
                 ["text-align", "Alignment", "text-align: center;"],
-                ["font-weight", "Text thickness", "font-weight: bold;"]
+                ["font-weight", "Text thickness", "font-weight: 600;"],
+                ["letter-spacing", "Character spacing", "letter-spacing: 0.05em;"],
+                ["text-transform", "Case transformation", "text-transform: capitalize;"],
+                ["text-decoration", "Line decoration", "text-decoration: underline wavy red;"],
+                ["white-space", "Space handling", "white-space: nowrap;\nwhite-space: pre-wrap;"],
+                ["word-break", "Line breaking", "word-break: break-all;\nword-break: keep-all;"]
             ]
         }
+    },
+    {
+        "title": "Colors & Backgrounds",
+        "table": {
+            "headers": ["Property", "Description", "Example"],
+            "rows": [
+                ["color", "Text color", "color: hsl(200, 100%, 50%);"],
+                ["background", "Background shorthand", "background: linear-gradient(45deg, #f00, #00f);"],
+                ["opacity", "Element transparency", "opacity: 0.8;"],
+                ["box-shadow", "Drop shadow", "box-shadow: 0 2px 4px rgba(0,0,0,0.1);"],
+                ["filter", "Visual effects", "filter: brightness(1.2) contrast(1.1);"],
+                ["backdrop-filter", "Background effects", "backdrop-filter: blur(10px) brightness(0.8);"],
+                ["background-blend-mode", "Layer blending", "background-blend-mode: multiply;"],
+                ["mix-blend-mode", "Element blending", "mix-blend-mode: overlay;"],
+                ["gradient", "Complex gradients", "background: conic-gradient(from 45deg, #f00, #00f);"]
+            ]
+        }
+    },
+
+    {
+        "title": "Miscellaneous",
+        "table": {
+            "headers": ["Property", "Description", "Example"],
+            "rows": [
+                ["cursor", "Mouse pointer", "cursor: pointer;"],
+                ["user-select", "Text selection", "user-select: none;"],
+                ["pointer-events", "Mouse interaction", "pointer-events: none;"],
+                ["filter", "Visual effects", "filter: grayscale(50%);"],
+                ["scroll-behavior", "Scroll smoothness", "scroll-behavior: smooth;"],
+                ["backface-visibility", "3D back face", "backface-visibility: hidden;"],
+                ["will-change", "Performance hint", "will-change: transform, opacity;"],
+                ["clip-path", "Element clipping", "clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);"],
+                ["mask", "Image masking", "mask: linear-gradient(180deg, transparent, black);"]
+            ]
+        }
+    },
+    {
+        "title": "Responsive Design",
+        "table": {
+            "headers": ["Media Query", "Description", "Example"],
+            "rows": [
+                ["@media", "Screen size check", "@media (min-width: 768px) { ... }"],
+                ["min-width", "Minimum width", "@media (min-width: 600px) { ... }"],
+                ["max-width", "Maximum width", "@media (max-width: 1200px) { ... }"],
+                ["orientation", "Device orientation", "@media (orientation: landscape) { ... }"],
+                ["aspect-ratio", "Screen ratio", "@media (aspect-ratio: 16/9) { ... }"],
+                ["hover", "Pointer interaction", "@media (hover: hover) { ... }"],
+                ["prefers-color-scheme", "Dark mode check", "@media (prefers-color-scheme: dark) { ... }"],
+                ["prefers-reduced-motion", "Motion preference", "@media (prefers-reduced-motion: reduce) { ... }"]
+            ]
+        }
+    },
+    {
+        "title": "Transitions & Animations",
+        "table": {
+            "headers": ["Property", "Description", "Example"],
+            "rows": [
+                ["transition", "Property animation", "transition: all 0.3s ease-in-out;"],
+                ["animation", "Keyframe animation", "animation: bounce 1s infinite;"],
+                ["transform", "Visual transforms", "transform: scale(1.1) rotate(45deg);"],
+                ["will-change", "Performance hint", "will-change: transform, opacity;"]
+            ]
+        }
+    },
+    {
+        "title": "Resources",
+        "list": [
+            "• MDN Web Docs: https://developer.mozilla.org/en-US/docs/Web/CSS",
+            "• CSS Tricks: https://css-tricks.com/",
+            "• W3Schools: https://www.w3schools.com/css/",
+            "• Can I Use: https://caniuse.com/",
+            "• CodePen: https://codepen.io/",
+            "• CSS Gradient: https://cssgradient.io/",
+            "• CSS Grid Generator: https://cssgrid-generator.netlify.app/"
+
+        ]
     }
 ]

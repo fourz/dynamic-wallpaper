@@ -1,5 +1,9 @@
 [
   {
+    "style": "heading",
+    "title": "React and Node.js Reference Guide"
+},
+  {
     "title": "React Components:",
     "table": {
       "headers": ["Concept", "Description", "Example"],
@@ -8,8 +12,8 @@
         ["Class Component", "Component using ES6 class", "class MyComponent extends React.Component { render() { return <h1>Hello</h1>; } }"],
         ["JSX", "JavaScript XML syntax", "<h1>{props.name}</h1>"],
         ["Props", "Passing data to components", "<MyComponent name=\"World\" />"],
-        ["State", "Managing component data", "this.state = { count: 0 }; this.setState({ count: 1 });"],
-        ["Lifecycle Methods", "Methods called at different stages", "componentDidMount(), componentDidUpdate(), componentWillUnmount()"],
+        ["State", "Managing component data", "const [count, setCount] = useState(0); setCount(1);"],
+        ["Lifecycle Methods", "Methods called at different stages", "useEffect(() => { // componentDidMount }, []); useEffect(() => { // componentDidUpdate }); return () => { // componentWillUnmount };"],
         ["Hooks", "Using state and lifecycle in functional components", "useState(), useEffect()"],
         ["Conditional Rendering", "Rendering based on conditions", "{condition ? <A /> : <B />}"]
       ]
@@ -76,6 +80,38 @@
         ["Authentication", "Implementing user authentication", "Using libraries like Passport.js"],
         ["Real-time Communication", "Using WebSockets for real-time updates", "Using libraries like Socket.IO"],
         ["State Management", "Using Redux or Context API to manage state", "Centralized state management"]
+      ]
+    }
+  },
+  {
+    "title": "React Performance:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Memoization", "Optimizing re-renders", "useMemo(() => computeExpensive(a, b), [a, b])"],
+        ["React.memo", "Preventing unnecessary renders", "export default React.memo(MyComponent)"],
+        ["Code Splitting", "Lazy loading components", "const MyComponent = React.lazy(() => import('./MyComponent'))"],
+        ["Suspense", "Handling lazy-loaded components", "<Suspense fallback={<Loader />}><MyComponent /></Suspense>"],
+        ["useCallback", "Memoizing functions", "const handler = useCallback(() => doSomething(), [])"],
+        ["Bundle Size", "Optimizing package size", "Import specific modules: import { map } from 'lodash-es'"],
+        ["Performance Profiler", "Measuring component performance", "Use React DevTools Profiler"],
+        ["Web Vitals", "Monitoring performance metrics", "reportWebVitals(console.log)"]
+      ]
+    }
+  },
+  {
+    "title": "Node.js Advanced Concepts:",
+    "table": {
+      "headers": ["Concept", "Description", "Example"],
+      "rows": [
+        ["Clustering", "Utilizing multiple CPU cores", "const cluster = require('cluster'); cluster.fork()"],
+        ["Worker Threads", "Parallel JavaScript execution", "const { Worker } = require('worker_threads')"],
+        ["Memory Management", "Handling memory leaks", "process.memoryUsage(), weak references"],
+        ["Debug & Profiling", "Troubleshooting tools", "node --inspect app.js, node --prof"],
+        ["Security", "Common security practices", "helmet middleware, input validation, rate limiting"],
+        ["Microservices", "Distributed architecture", "Service discovery, API gateway patterns"],
+        ["GraphQL", "Query language for APIs", "const { ApolloServer } = require('apollo-server')"],
+        ["Docker Integration", "Containerization", "Multi-stage builds, Docker Compose"]
       ]
     }
   }

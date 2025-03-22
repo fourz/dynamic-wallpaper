@@ -41,5 +41,21 @@
         ["Authentication", "Methods", "PublicKey, Password, KeyboardInteractive"]
       ]
     }
+  },
+  {
+    "title": "PowerShell Usage",
+    "table": {
+      "headers": ["Command", "Description", "Example"],
+      "rows": [
+        ["New-SSHSession", "Create a new SSH session", "New-SSHSession -ComputerName hostname -Credential (Get-Credential)"],
+        ["Invoke-SSHCommand", "Execute command on remote host", "Invoke-SSHCommand -SessionId 0 -Command 'ls -la'"],
+        ["Enter-SSHSession", "Start interactive SSH session", "Enter-SSHSession -ComputerName hostname -Username user"],
+        ["Get-SSHSession", "List active SSH sessions", "Get-SSHSession"],
+        ["Remove-SSHSession", "Close SSH session", "Remove-SSHSession -SessionId 0"],
+        ["New-SFTPSession", "Create SFTP session", "New-SFTPSession -ComputerName hostname -Credential (Get-Credential)"],
+        ["Get-SFTPItem", "Download file via SFTP", "Get-SFTPItem -SessionId 0 -Path /remote/file.txt -Destination C:\\local\\"],
+        ["Set-SFTPItem", "Upload file via SFTP", "Set-SFTPItem -SessionId 0 -Path C:\\local\\file.txt -Destination /remote/"]
+      ]
+    }
   }
 ]

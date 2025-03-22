@@ -45,26 +45,33 @@
     {
         "title": "Network Design",
         "table": {
-            "headers": ["Pattern", "Application"],
+            "headers": ["Pattern", "Application", "Explanation"],
             "rows": [
-                ["Mainline", "High-speed backbone routes"],
-                ["Feeder Lines", "Local service connections"],
-                ["Loop System", "Circular urban transport"],
-                ["Grid Pattern", "City bus/tram networks"],
-                ["Hub and Spoke", "Airport/station networks"]
+                ["Mainline", "High-speed backbone routes", "Double-track system with minimal intersections, connecting major hubs with express services"],
+                ["Feeder Lines", "Local service connections", "Single-track branches that collect/distribute from mainlines to local stations"],
+                ["Loop System", "Circular urban transport", "One-way circuit design that prevents traffic crossing and maximizes flow"],
+                ["Grid Pattern", "City bus/tram networks", "Perpendicular routes forming squares, ideal for comprehensive urban coverage"],
+                ["Hub and Spoke", "Airport/station networks", "Central terminal with radiating routes, perfect for transfer-based systems"],
+                ["PAX Flow", "Passenger networks", "Dedicated passenger lines separated from cargo to maintain service reliability"],
+                ["Branch-Merge", "Industrial corridors", "Dedicated industry connections merging into main routes with priority signals"]
             ]
         }
     },
     {
         "title": "Industry Chains",
         "table": {
-            "headers": ["Industry", "Products"],
+            "headers": ["Industry Chain", "Production Flow"],
             "rows": [
-                ["Coal Mine", "Coal → Power Plant"],
-                ["Forest", "Wood → Sawmill → Factory"],
-                ["Farm", "Grain → Factory"],
-                ["Oil Wells", "Oil → Refinery → Factory"],
-                ["Iron Ore", "Iron Ore → Steel Mill"]
+                ["Coal", "Coal Mine → Power Plant"],
+                ["Wood Products", "Forest → Sawmill → Factory (Goods)"],
+                ["Food", "Farm (Grain) → Food Processing Plant (Food)"],
+                ["Oil Products", "Oil Wells → Oil Refinery → (Oil, Goods)"],
+                ["Steel", "Iron Ore Mine → Steel Mill (Steel)"],
+                ["Bank", "Bank (Valuables) → Bank"],
+                ["Paper", "Forest → Paper Mill (Paper)"],
+                ["Livestock", "Farm (Livestock) → Food Processing Plant"],
+                ["Mining", "Diamond Mine → Factory (Goods)"],
+                ["Marine", "Oil Rig → Oil Refinery (Oil, Goods)"]
             ]
         }
     }
