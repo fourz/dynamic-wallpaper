@@ -5,7 +5,7 @@
     },
     {
         "title": "Overview:",
-        "block": [
+        "paragraphs": [
             "A comprehensive collection of technical documentation organized by domain and expertise level.",
             "This documentation covers development, infrastructure, security, and general technical guides.",
             "Each section is categorized for easy navigation and quick reference."

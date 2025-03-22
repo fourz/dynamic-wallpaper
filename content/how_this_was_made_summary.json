@@ -17,14 +17,6 @@
         }
     },
     {
-        "title": "Unexpected Discoveries",
-        "paragraphs": [
-            "What began as a modest attempt to create an aesthetically pleasing wallpaper unexpectedly transformed into a comprehensive reference library. Through conversational collaboration with GitHub Copilot, the project continuously expanded beyond its initial scope.",
-            "The stream-of-consciousness development approach allowed for rapid iteration and unexpected innovation. Rather than following a rigid plan, each feature inspired the next, creating a self-documenting system that could extend itself through conversation.",
-            "The most surprising outcome was how easily the system could generate new content through simple prompts - just describing the desired information was enough to create properly formatted content cards that integrated seamlessly with the existing structure."
-        ]
-    },
-    {
         "title": "Architecture Overview",
         "table": {
             "headers": ["Component", "Description", "Implementation"],

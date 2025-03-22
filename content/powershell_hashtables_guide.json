@@ -1,7 +1,7 @@
 [
   {
     "style": "heading",
-    "title": "PowerShell: Hash Tables Reference"
+    "title": "PowerShell Hashtables Reference"
   },
   {
     "title": "Hash Table Basics:",
@@ -19,11 +19,23 @@
     }
   },
   {
-    "title": "Hash Table Creation Methods:",
-    "description": "Different ways to create and initialize hash tables in PowerShell."
-  },
-  {
-    "code": "@{key1 = value1; key2 = value2}  # Standard creation\n\n$hash = @{}\n$hash.Add('key1', 'value1')  # Add method\n\n$hash = [ordered]@{a=1; b=2; c=3}  # Preserve insertion order\n\n$hash = @{}\n$hash['key1'] = 'value1'  # Bracket notation"
+    "title": "Hash Table Creation Methods",    
+    "code": [
+      "@{ key = value }",
+      "[hashtable]::new()",
+      "$hash = @{}"
+    ],
+    "description": "Different ways to create and initialize hashtables in PowerShell",
+    "table": {
+      "headers": ["Method", "Description", "Example"],
+      "rows": [
+        ["Splatting Operator", "Create using @{}", "$hash = @{ Name = 'John'; Age = 30 }"],
+        ["Type Accelerator", "Create using [hashtable]", "$hash = [hashtable]::new()"],
+        ["Cast Expression", "Cast to hashtable", "$hash = [hashtable]@{ Key = 'Value' }"],
+        ["Empty Initialization", "Create empty hashtable", "$hash = @{}"],
+        ["Ordered Dictionary", "Create ordered hashtable", "$hash = [ordered]@{ A = 1; B = 2 }"]
+      ]
+    }
   },
   {
     "title": "Converting Between Data Types:",
@@ -38,13 +50,6 @@
     }
   },
   {
-    "title": "Common Use Cases:",
-    "description": "Practical scenarios where hash tables excel in PowerShell scripts."
-  },
-  {
-    "code": "# Lookup tables for fast access\n$stateCodes = @{\n  'California' = 'CA'\n  'New York' = 'NY'\n  'Texas' = 'TX'\n}\n$code = $stateCodes['California']  # Quick lookup\n\n# Config storage\n$config = @{\n  Server = 'server01'\n  Port = 8080\n  Timeout = 30\n  Verbose = $true\n}\n\n# Parameter splatting\n$params = @{\n  Path = 'C:\\logs'\n  Filter = '*.log'\n  Recurse = $true\n  Force = $true\n}\nGet-ChildItem @params  # Splat parameters\n\n# Counting/grouping items\n$wordCount = @{}\n'the quick brown fox jumps over the lazy dog'.Split() | ForEach-Object {\n  if ($wordCount.ContainsKey($_)) {\n    $wordCount[$_]++\n  } else {\n    $wordCount[$_] = 1\n  }\n}\n# Result: @{the=2; quick=1; brown=1; ...}"
-  },
-  {
     "title": "Advanced Techniques:",
     "table": {
       "headers": ["Technique", "Example", "Use Case"],
@@ -53,7 +58,7 @@
         ["Hash Table as Switch", "$actions = @{\n  'add' = {param($a,$b) $a+$b}\n  'mult' = {param($a,$b) $a*$b}\n}\n& $actions['add'] 5 3  # Returns 8", "Dispatch tables/command routing"],
         ["Default Values", "$settings = @{}\n$timeout = $settings['Timeout'] ?? 30  # Default 30", "Handling missing keys gracefully"],
         ["Hash Table Constructor", "$ht = [hashtable]::new()", "Creating strongly-typed hash tables"],
-        ["Thread-Safe Hash", "$concurrent = [System.Collections.Concurrent.ConcurrentDictionary[string,object]]::new()", "Thread-safe operations"]
+        ["Thread-Safe Hash", "$concurrent = [System.Collections.Concurrent. ConcurrentDictionary[string,object]]::new()", "Thread-safe operations"]
       ]
     }
   },
@@ -76,16 +81,18 @@
   },
   {
     "title": "Performance Considerations:",
+    "code": "# Performance comparison example\n$items = 1..10000\n\n# Array lookup (slow for large arrays)\n$array = $items\nMeasure-Command {\n  $found = $array -contains 9999\n}\n\n# Hash table lookup (fast regardless of size)\n$hash = @{}\nforeach ($i in $items) { $hash[$i] = $true }\nMeasure-Command {\n  $found = $hash.ContainsKey(9999)\n}",
     "description": "Hash tables provide O(1) lookup time, making them efficient for large datasets where you need to find items by key quickly. Converting between arrays and hash tables can be useful for performance optimization."
+    
   },
   {
-    "code": "# Performance comparison example\n$items = 1..10000\n\n# Array lookup (slow for large arrays)\n$array = $items\nMeasure-Command {\n  $found = $array -contains 9999\n}\n\n# Hash table lookup (fast regardless of size)\n$hash = @{}\nforeach ($i in $items) { $hash[$i] = $true }\nMeasure-Command {\n  $found = $hash.ContainsKey(9999)\n}"
-  },
-  {
-    "title": "Ordered Hash Tables:",
+    "title": "Ordered Hash Tables:",    
+    "code": "# Standard hash table (order not guaranteed)\n$regular = @{Z=26; A=1; M=13}\n$regular.Keys  # Output order might vary\n\n# Ordered hash table (preserves insertion order)\n$ordered = [ordered]@{Z=26; A=1; M=13}\n$ordered.Keys  # Always outputs: Z, A, M",
     "description": "Since PowerShell v3, you can create ordered hash tables that preserve the order of insertion, making them useful for configurations where order matters."
   },
   {
-    "code": "# Standard hash table (order not guaranteed)\n$regular = @{Z=26; A=1; M=13}\n$regular.Keys  # Output order might vary\n\n# Ordered hash table (preserves insertion order)\n$ordered = [ordered]@{Z=26; A=1; M=13}\n$ordered.Keys  # Always outputs: Z, A, M"
+    "title": "Common Use Cases:",
+    "code": "# Lookup tables for fast access\n$stateCodes = @{\n  'California' = 'CA'\n  'New York' = 'NY'\n  'Texas' = 'TX'\n}\n$code = $stateCodes['California']  # Quick lookup\n\n# Config storage\n$config = @{\n  Server = 'server01'\n  Port = 8080\n  Timeout = 30\n  Verbose = $true\n}\n\n# Parameter splatting\n$params = @{\n  Path = 'C:\\logs'\n  Filter = '*.log'\n  Recurse = $true\n  Force = $true\n}\nGet-ChildItem @params  # Splat parameters\n\n# Counting/grouping items\n$wordCount = @{}\n'the quick brown fox jumps over the lazy dog'.Split() | ForEach-Object {\n  if ($wordCount.ContainsKey($_)) {\n    $wordCount[$_]++\n  } else {\n    $wordCount[$_] = 1\n  }\n}\n# Result: @{the=2; quick=1; brown=1; ...}",
+    "description": "Practical scenarios where hash tables excel in PowerShell scripts."
   }
 ]

@@ -56,6 +56,19 @@
     }
   },
   {
+    "title": "WinSCP PowerShell Module",
+    "table": {
+      "headers": ["Task", "Command", "Description"],
+      "rows": [
+        ["Install Module", "Install-Module -Name WinSCP", "Install WinSCP PowerShell module"],
+        ["SFTP Connect", "New-WinSCPSession -Hostname host -SshHostKeyFingerprint fingerprint -Credential cred", "Connect with key verification"],
+        ["Upload Files", "Send-WinSCPItem -Path localPath -Destination remotePath -SessionObject session", "Upload with SFTP"],
+        ["Download Files", "Receive-WinSCPItem -Path remotePath -Destination localPath -SessionObject session", "Download with SFTP"],
+        ["Secure Transfer", "New-WinSCPSessionOption -Protocol Sftp -HostName host -SshHostKeyFingerprint fingerprint -SshPrivateKeyPath keyfile", "Use key-based auth"]
+      ]
+    }
+  },
+  {
     "title": "Certificate Types",
     "table": {
       "headers": ["Type", "Use Case", "Description"],

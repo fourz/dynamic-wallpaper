@@ -30,19 +30,6 @@
     }
   },
   {
-    "title": "SSH Security",
-    "table": {
-      "headers": ["Feature", "Description", "Configuration"],
-      "rows": [
-        ["Key Types", "RSA, ED25519, ECDSA", "-t rsa|ed25519|ecdsa"],
-        ["Port Forwarding", "Tunnel connections", "-L local:remote"],
-        ["Agent Forwarding", "Key forwarding", "-A or ForwardAgent yes"],
-        ["Permissions", "File permissions", "chmod 600 private_key"],
-        ["Authentication", "Methods", "PublicKey, Password, KeyboardInteractive"]
-      ]
-    }
-  },
-  {
     "title": "PowerShell Usage",
     "table": {
       "headers": ["Command", "Description", "Example"],
@@ -55,6 +42,35 @@
         ["New-SFTPSession", "Create SFTP session", "New-SFTPSession -ComputerName hostname -Credential (Get-Credential)"],
         ["Get-SFTPItem", "Download file via SFTP", "Get-SFTPItem -SessionId 0 -Path /remote/file.txt -Destination C:\\local\\"],
         ["Set-SFTPItem", "Upload file via SFTP", "Set-SFTPItem -SessionId 0 -Path C:\\local\\file.txt -Destination /remote/"]
+      ]
+    }
+  },
+  {
+    "title": "WinSCP PowerShell Module",
+    "table": {
+      "headers": ["Command", "Description", "Example"],
+      "rows": [
+        ["New-WinSCPSession", "Create WinSCP session", "New-WinSCPSession -HostName host -Credential (Get-Credential)"],
+        ["Get-WinSCPItem", "Download file/directory", "Get-WinSCPItem -Path /remote/file.txt -Destination C:\\local\\"],
+        ["Send-WinSCPItem", "Upload file/directory", "Send-WinSCPItem -Path C:\\local\\file.txt -Destination /remote/"],
+        ["Remove-WinSCPItem", "Delete file/directory", "Remove-WinSCPItem -Path /remote/file.txt"],
+        ["Rename-WinSCPItem", "Rename file/directory", "Rename-WinSCPItem -Path /remote/old.txt -Destination /remote/new.txt"],
+        ["Invoke-WinSCPCommand", "Execute command", "Invoke-WinSCPCommand -Command 'ls -la'"],
+        ["ConvertTo-WinSCPEscapedString", "Escape path strings", "ConvertTo-WinSCPEscapedString -FileMask 'file[1-9].txt'"],
+        ["Test-WinSCPPath", "Check if path exists", "Test-WinSCPPath -Path /remote/folder/"]
+      ]
+    }
+  },
+  {
+    "title": "SSH Security",
+    "table": {
+      "headers": ["Feature", "Description", "Configuration"],
+      "rows": [
+        ["Key Types", "RSA, ED25519, ECDSA", "-t rsa|ed25519|ecdsa"],
+        ["Port Forwarding", "Tunnel connections", "-L local:remote"],
+        ["Agent Forwarding", "Key forwarding", "-A or ForwardAgent yes"],
+        ["Permissions", "File permissions", "chmod 600 private_key"],
+        ["Authentication", "Methods", "PublicKey, Password, KeyboardInteractive"]
       ]
     }
   }

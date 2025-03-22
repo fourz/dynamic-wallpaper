@@ -321,3 +321,58 @@ body:hover .fade-toggle-btn.default {
     opacity: 0;
     transition: opacity var(--ui-fade-in-time, 0.3s) ease-in-out;
 }
+
+.description {
+    margin: 0 1em 0 0.5em;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.9);    
+}
+
+.code-block {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1em;
+    margin: 0.8em 0;
+    border-radius: 6px;
+    border-left: 4px solid rgba(86, 182, 255, 0.4);
+    font-family: 'Consolas', monospace;
+    white-space: pre-wrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.code-block code {
+    display: block;
+    margin: 0.3em 0;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.5;
+    font-size: 0.95em;
+}
+
+/* Remove margin for consecutive code lines */
+.code-block code + code {
+    margin-top: 0;
+}
+
+.content-paragraph {
+    margin: 1em 0;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 0.5em 0;
+    text-align: justify;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.content-paragraph:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.content-paragraph:first-of-type {
+    font-size: 1.05em;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    border-bottom: none;
+}
+
+.content-paragraph + .content-paragraph {
+    margin-top: 1.2em;
+}

@@ -35,6 +35,21 @@ export class LayoutManager {
         let content = item.title && item.style !== "heading" 
             ? `<h2>${item.title}</h2>` 
             : '';
+            
+        // Add description if present
+        if (item.description) {
+            content += `<p class="description">${item.description}</p>`;
+        }
+        
+        // Add code block if present
+        if (item.code) {
+            content += this.formatCode(item.code);
+        }
+        
+        // Add paragraphs if present
+        if (item.paragraphs) {
+            content += this.formatParagraphs(item.paragraphs);
+        }
         
         // Format based on content type
         if (item.block) {
@@ -53,8 +68,25 @@ export class LayoutManager {
             return this.wrapContent(content + this.formatTable(item.table));
         }
         
-        // Default case - just wrap the title
-        return item.title ? this.wrapContent(content) : '';
+        // Default case - just wrap the title and any new elements
+        return this.wrapContent(content);
+    }
+    
+    formatCode(code) {
+        const codeItems = Array.isArray(code) ? code : [code];
+        const codeLines = codeItems.map(item => {
+            // Split item on newlines and wrap each line in code tags
+            return item.split('\n')
+                      .map(line => `<code>${line}</code>`)
+                      .join('\n');
+        }).join('\n');
+        return `<div class="code-block">${codeLines}</div>`;
+    }
+    
+    formatParagraphs(paragraphs) {
+        return Array.isArray(paragraphs) 
+            ? paragraphs.map(p => `<p class="content-paragraph">${p}</p>`).join('\n')
+            : `<p class="content-paragraph">${paragraphs}</p>`;
     }
     
     // Helper methods for content formatting
