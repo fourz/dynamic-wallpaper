@@ -67,5 +67,130 @@
                 ["Position", "position-{static|relative|absolute|fixed}"]
             ]
         }
+    },
+    {
+        "title": "Text & Typography",
+        "table": {
+            "headers": ["Style", "Classes"],
+            "rows": [
+                ["Text Align", "text-{start|end|center|justify}"],
+                ["Text Transform", "text-{uppercase|lowercase|capitalize}"],
+                ["Text Wrap", "text-{nowrap|wrap|break}"],
+                ["Font Weight", "fw-{light|normal|bold}"],
+                ["Font Size", "fs-{1-6}"],
+                ["Line Height", "lh-{1-6}"]
+            ]
+        }
+    },
+    {
+        "title": "Button Styles",
+        "table": {
+            "headers": ["Type", "Classes"],
+            "rows": [
+                ["Primary", "btn btn-primary"],
+                ["Secondary", "btn btn-secondary"],
+                ["Success", "btn btn-success"],
+                ["Danger", "btn btn-danger"],
+                ["Link", "btn btn-link"],
+                ["Outline", "btn btn-outline-{color}"]
+            ]
+        }
+    },
+    {
+        "title": "Form Controls",
+        "table": {
+            "headers": ["Type", "Classes"],
+            "rows": [
+                ["Input", "form-control"],
+                ["Select", "form-select"],
+                ["Checkbox", "form-check"],
+                ["Radio", "form-check form-check-inline"],
+                ["Switch", "form-check form-switch"],
+                ["File Upload", "form-control form-control-sm"]
+            ]
+        }
+    },
+    {
+        "title": "Alert Messages",
+        "table": {
+            "headers": ["Type", "Classes"],
+            "rows": [
+                ["Success", "alert alert-success"],
+                ["Info", "alert alert-info"],
+                ["Warning", "alert alert-warning"],
+                ["Danger", "alert alert-danger"],
+                ["Dismissable", "alert alert-dismissible"]
+            ]
+        }
+    },
+    {
+        "title": "Navigation Components",
+        "table": {
+            "headers": ["Type", "Classes"],
+            "rows": [
+                ["Navbar", "navbar navbar-expand-lg"],
+                ["Nav Item", "nav-item"],
+                ["Nav Link", "nav-link"],
+                ["Dropdown", "dropdown"],
+                ["Tab", "nav nav-tabs"],
+                ["Pill", "nav nav-pills"]
+            ]
+        }
+    },
+    {
+        "title": "Card Components",
+        "table": {
+            "headers": ["Type", "Classes"],
+            "rows": [
+                ["Card", "card"],
+                ["Header", "card-header"],
+                ["Body", "card-body"],
+                ["Footer", "card-footer"],
+                ["Image", "card-img-top"],
+                ["Title", "card-title"],
+                ["Text", "card-text"]
+            ]
+        }   
+    },
+    {
+        "title": "Modal Components",
+        "table": {
+            "headers": ["Type", "Classes"],
+            "rows": [
+                ["Modal", "modal"],
+                ["Dialog", "modal-dialog"],
+                ["Content", "modal-content"],
+                ["Header", "modal-header"],
+                ["Body", "modal-body"],
+                ["Footer", "modal-footer"],
+                ["Backdrop", "modal-backdrop"]
+            ]
+        }
+    },
+    {
+        "title": "Carousel Components",
+        "table": {
+            "headers": ["Type", "Classes"],
+            "rows": [
+                ["Carousel", "carousel"],
+                ["Slide", "carousel-item"],
+                ["Control", "carousel-control-prev|next"],
+                ["Indicator", "carousel-indicators"]
+            ]
+        }
+    },
+    {
+        "title": "Utility Classes",
+        "table": {
+            "headers": ["Type", "Classes"],
+            "rows": [
+                ["Visibility", "invisible visible"],
+                ["Position", "fixed sticky"],
+                ["Shadow", "shadow-{sm|md|lg|xl}"],
+                ["Rounded", "rounded-{sm|md|lg|circle}"],
+                ["Border", "border-{0-5} border-{color}"],
+                ["Spacing", "m{t|r|b|l|x|y}-{0-5}"]
+            ]
+        }
     }
 ]

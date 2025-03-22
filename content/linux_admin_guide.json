@@ -31,7 +31,9 @@
                 ["Install package", "apt install pkg", "dnf install pkg"],
                 ["Remove package", "apt remove pkg", "dnf remove pkg"],
                 ["Search package", "apt search pkg", "dnf search pkg"],
-                ["List packages", "dpkg -l", "rpm -qa"]
+                ["List packages", "dpkg -l", "rpm -qa"],
+                ["Show package info", "apt show pkg", "dnf info pkg"],
+                ["Check dependencies", "apt depends pkg", "dnf repoquery --requires pkg"]
             ]
         }
     },
