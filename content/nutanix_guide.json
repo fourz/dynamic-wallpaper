@@ -67,5 +67,57 @@
                 ["Performance Review", "Quarterly analysis"]
             ]
         }
+    },
+    {
+        "title": "REST API Usage",
+        "table": {
+            "headers": ["Endpoint", "Description"],
+            "rows": [
+                ["GET /vms", "List all virtual machines"],
+                ["POST /vms", "Create a new virtual machine"],
+                ["DELETE /vms/{uuid}", "Delete a specific VM"],
+                ["GET /clusters/status", "Get cluster status information"],
+                ["PUT /storage_containers/{id}", "Update storage container properties"]
+            ]
+        }
+    },
+    {
+        "title": "API Authentication Examples",
+        "table": {
+            "headers": ["Method", "Example"],
+            "rows": [
+                ["Basic Auth", "curl -X GET -u 'admin:password' https://cluster-ip:9440/api/nutanix/v3/vms"],
+                ["API Key", "curl -H 'Authorization: Bearer $TOKEN' https://cluster-ip:9440/api/nutanix/v3/clusters"],
+                ["JWT Token", "curl -H 'Content-Type: application/json' -H 'Authorization: Bearer $JWT' -X POST https://cluster-ip:9440/api/nutanix/v3/vms"],
+                ["Session Cookie", "curl -b 'NTNX_IGW_SESSION=$SESSION' https://cluster-ip:9440/api/nutanix/v3/subnets"],
+                ["API Error Handling", "Check response status code and error.message field in JSON response"]
+            ]
+        }
+    },
+    {
+        "title": "PowerShell Module Usage",
+        "table": {
+            "headers": ["Command", "Function"],
+            "rows": [
+                ["Install-Module NutanixCmdlets", "Install Nutanix PowerShell module"],
+                ["Connect-NutanixCluster -Server $ip -UserName admin -Password $pw", "Connect to Nutanix cluster"],
+                ["Get-NTNXVirtualMachine", "List all virtual machines"],
+                ["New-NTNXVirtualMachine", "Create a new VM"],
+                ["Set-NTNXVirtualMachine", "Modify VM configuration"]
+            ]
+        }
+    },
+    {
+        "title": "PowerShell Examples",
+        "table": {
+            "headers": ["Task", "Command Example"],
+            "rows": [
+                ["VM Creation", "New-NTNXVirtualMachine -Name 'TestVM' -NumVcpus 2 -MemoryMB 4096 -NetworkAdapterList $nicList"],
+                ["Clone VM", "$clone = Copy-NTNXVirtualMachine -Vmid $sourceVM.Vmid -Name 'ClonedVM'"],
+                ["VM Power Operations", "Start-NTNXVirtualMachine -Vmid $vm.Vmid; Stop-NTNXVirtualMachine -Vmid $vm.Vmid"],
+                ["VM Snapshots", "New-NTNXVMSnapshot -Vmid $vm.Vmid -SnapshotName 'BeforeUpdate'"],
+                ["Bulk Operations", "$vms | Where-Object {$_.Name -like 'Test*'} | Start-NTNXVirtualMachine"]
+            ]
+        }
     }
 ]

@@ -251,7 +251,16 @@ export class LayoutManager {
         const permalinkBtn = document.getElementById('permalinkBtn');
         if (permalinkBtn) {
             permalinkBtn.href = permalinkData.url;
-            permalinkBtn.title = `Permalink to: ${permalinkData.fileName}`;
+            
+            // Add a more descriptive title that shows where the link goes
+            const title = permalinkData.fileName 
+                ? `Permalink to: ${permalinkData.fileName}` 
+                : 'Permalink to this page';
+                
+            permalinkBtn.title = title;
+            
+            // Make sure the button is visible
+            permalinkBtn.style.display = 'flex';
         }
     }
 }

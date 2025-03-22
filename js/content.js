@@ -26,13 +26,17 @@ export class ContentManager {
             await this.initializeMode(configData);
             
             const params = new URLSearchParams(window.location.search);
-            
-            // determine URL parameter mode
             const hasUrlParams = URLUtils.hasAnyParams(params, this.URL_PARAMS);
             
+            // First set URL parameter mode 
             this.navigation.setUseUrlParameters(hasUrlParams);
             
+            // Load the saved state - it will be used only if not in URL parameter mode
+            const savedState = this.storage.getNavigationState();
+            this.navigation.setState(savedState);
+            
             if (hasUrlParams) {
+                // Hide navigation elements in permalink mode
                 this.hideNavigationElements();
             }
             
@@ -57,12 +61,24 @@ export class ContentManager {
         ]);
         
         // Sequential operations that depend on the parallel results
-        this.initializeManagers(configData);
+        this.config.setFormatContentFunction((item) => this.layout.formatContent(item));
         this.setDocumentTitle(configData);
         
         // Handle URL parameters if in URL mode
-        if (this.navigation.useUrlParameters) {
+        if (this.navigation.useUrlParameters && URLUtils.hasAnyParams(params, this.URL_PARAMS)) {
             this.navigation.setIndexFromParams(params);
+        }
+        
+        // Save the initial state to ensure it's available on refresh
+        if (!this.navigation.useUrlParameters) {
+            this.storage.setNavigationState(this.navigation.getState());
+        }
+        
+        // Always update the permalink to ensure it reflects the current state
+        // This fixes permalinks not updating after initial load
+        const permalinkData = this.navigation.updatePermalinkAndUrl();
+        if (permalinkData) {
+            this.layout.updatePermalinkButton(permalinkData);
         }
         
         return stylesInitialized && wallpapersInitialized;
@@ -96,12 +112,6 @@ export class ContentManager {
         this.storage.setServerUrl(configData.serverUrl || '');
         this.config.setOnlineMode(isOnlineMode);
         this.config.setServerUrl(configData.serverUrl || '');
-    }
-
-    initializeManagers(configData) {
-        const savedState = this.storage.getNavigationState();
-        this.navigation.setState(savedState);
-        this.config.setFormatContentFunction((item) => this.layout.formatContent(item));
     }
 
     setDocumentTitle(configData) {

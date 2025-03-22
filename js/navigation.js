@@ -157,11 +157,21 @@ export class NavigationManager {
         try {
             const params = new URLSearchParams();
             const currentFile = this.getCurrentFile();
-            const fileName = currentFile ? currentFile.split('/').pop().replace('.json', '') : '';
-            const stylesetName = Object.keys(window.configData.stylesheets)[this.currentStylesheetSet];
             
+            // Extract filename without path and extension for cleaner URLs
+            const fileName = currentFile ? currentFile.split('/').pop().replace('.json', '') : '';
+            
+            // Get the styleset name from config
+            let stylesetName = '';
+            if (window.configData && window.configData.stylesheets) {
+                stylesetName = Object.keys(window.configData.stylesheets)[this.currentStylesheetSet] || '';
+            }
+            
+            // Build parameters
             params.set('content', fileName);
-            params.set('styleset', stylesetName);
+            if (stylesetName) {
+                params.set('styleset', stylesetName);
+            }
             params.set('wallpaper', this.currentWallpaperIndex.toString());
             
             // Fix URL generation for offline mode
@@ -182,6 +192,8 @@ export class NavigationManager {
                 window.history.replaceState({}, '', urlWithParams);
             }
             
+            // Always return permalink data regardless of mode
+            // This ensures the permalink button is always updated
             return {
                 url: urlWithParams,
                 fileName: fileName

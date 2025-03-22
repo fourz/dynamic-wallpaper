@@ -152,18 +152,18 @@ export class StorageManager {
         
         console.log('Available content files:', files);
         
-        // Set files in navigation and handle URL parameters
-        const selectedFile = navigation.setFiles(files);
+        // Set files in navigation
+        navigation.setFiles(files);
         
-        // Apply URL parameters if present
+        // Apply URL parameters if present and in URL parameter mode
         const params = new URLSearchParams(window.location.search);
-        if (params.has('content')) {
-            console.log('URL has content parameter:', params.get('content'));
+        if (navigation.useUrlParameters && params.has('content')) {
+            console.log('Applying URL parameters to navigation');
             navigation.setIndexFromParams(params);
         }
         
         // Get final selected file after parameter processing
-        const finalFile = navigation.getCurrentFile() || selectedFile;
+        const finalFile = navigation.getCurrentFile();
         console.log('Selected content file:', finalFile);
         
         if (!finalFile) {
