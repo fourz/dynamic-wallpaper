@@ -94,13 +94,59 @@
     "table": {
       "headers": ["Title", "URL"],
       "rows": [
-        ["Regex101", "https://regex101.com/"],
-        ["Regexr", "https://regexr.com/"],
-        ["Regex Tester", "https://www.regextester.com/"],        
-        ["Regular-Expressions.info", "https://www.regular-expressions.info/"],
-        ["Regex Cheat Sheet", "https://www.rexegg.com/regex-quickstart.html"],
-        ["Regex Crossword", "https://regexcrossword.com/"]
+        ["Regex101", "<regex101>"],
+        ["Regexr", "<regexr>"],
+        ["Regex Tester", "<regextester>"],
+        ["Regular-Expressions.info", "<regular-expressions>"],
+        ["Regex Cheat Sheet", "<regex-cheatsheet>"],
+        ["Regex Crossword", "<regex-crossword>"],
+        ["Regex Golf", "<regex-golf>"]
       ]
-    }
+    },
+    "links": [
+      {        
+        "token": "<regex101>",
+        "url": "https://regex101.com/",
+        "display": "regex101.com",
+        "hover": "Test and debug regular expressions online"
+      },
+      {
+        "token": "<regexr>",
+        "url": "https://regexr.com/",
+        "display": "regexr.com",
+        "hover": "Interactive regex tester and debugger"
+      },
+      {
+        "token": "<regextester>",
+        "url": "https://www.regextester.com/",
+        "display": "www.regextester.com",
+        "hover": "Online tool to test regular expressions"
+      },
+      {
+        "token": "<regular-expressions>",
+        "url": "https://www.regular-expressions.info/",
+        "display": "Regular-Expressions.info",
+        "hover": "Comprehensive guide to regular expressions"
+      },
+      {
+        "token": "<regex-cheatsheet>",
+        "url": "www.rexegg.com/regex-quickstart.html",
+        "display": "www.rexegg.com/regex-quickstart.html",
+        "hover": "Quick reference guide for regular expressions"
+      },
+      {
+        "token": "<regex-crossword>",
+        "url": "https://regexcrossword.com/",
+        "display": "regexcrossword.com",
+        "hover": "Solve crossword puzzles with regular expressions"
+      },
+      {
+        "token": "<regex-golf>",
+        "url": "https://alf.nu/RegexGolf",
+        "display": "alf.nu/RegexGolf",
+        "hover": "Competitive game to write the shortest regex"
+      }
+
+    ]
   }
 ]

@@ -38,7 +38,12 @@ export class LayoutManager {
             
         // Add description if present
         if (item.description) {
-            content += `<p class="description">${item.description}</p>`;
+            // Apply link substitution if available
+            const description = item.processedLinks 
+                ? this.substituteLinks(item.description, item.processedLinks) 
+                : item.description;
+                
+            content += `<p class="description">${description}</p>`;
         }
         
         // Add code block if present
@@ -53,19 +58,19 @@ export class LayoutManager {
         
         // Format based on content type
         if (item.block) {
-            return this.wrapContent(content + this.formatBlock(item.block));
+            return this.wrapContent(content + this.formatBlock(item.block, item.processedLinks));
         }
         
         if (item.list) {
-            return this.wrapContent(content + this.formatList(item.list, false));
+            return this.wrapContent(content + this.formatList(item.list, false, item.processedLinks));
         }
         
         if (item.numberedList) {
-            return this.wrapContent(content + this.formatList(item.numberedList, true));
+            return this.wrapContent(content + this.formatList(item.numberedList, true, item.processedLinks));
         }
         
         if (item.table) {
-            return this.wrapContent(content + this.formatTable(item.table));
+            return this.wrapContent(content + this.formatTable(this.processTableLinks(item.table, item.processedLinks)));
         }
         
         // Default case - just wrap the title and any new elements
@@ -96,13 +101,29 @@ export class LayoutManager {
         </div>`;
     }
     
-    formatBlock(blocks) {
+    formatBlock(blocks, linkMap) {
+        if (linkMap && Object.keys(linkMap).length > 0) {
+            return blocks.map(text => 
+                `<p class="block-text">${this.substituteLinks(text, linkMap)}</p>`
+            ).join('');
+        }
+        
         return blocks.map(text => `<p class="block-text">${text}</p>`).join('');
     }
     
-    formatList(items, isNumbered) {
+    formatList(items, isNumbered, linkMap) {
         const tag = isNumbered ? 'ol' : 'ul';
-        const listItems = items.map(item => `<li>${item}</li>`).join('');
+        
+        // Apply link substitution if available
+        let listItems;
+        if (linkMap && Object.keys(linkMap).length > 0) {
+            listItems = items.map(item => 
+                `<li>${this.substituteLinks(item, linkMap)}</li>`
+            ).join('');
+        } else {
+            listItems = items.map(item => `<li>${item}</li>`).join('');
+        }
+        
         return `<${tag}>${listItems}</${tag}>`;
     }
     
@@ -118,6 +139,44 @@ export class LayoutManager {
                 <tbody>${rows}</tbody>
             </table>
         `;
+    }
+    
+    // Process table cells for link substitution
+    processTableLinks(table, linkMap) {
+        if (!linkMap || Object.keys(linkMap).length === 0) {
+            return table;
+        }
+        
+        // Create a deep copy to avoid modifying the original
+        const processedTable = {
+            headers: [...table.headers],
+            rows: table.rows.map(row => [...row])
+        };
+        
+        // Process each cell in each row
+        processedTable.rows = processedTable.rows.map(row => 
+            row.map(cell => this.substituteLinks(cell, linkMap))
+        );
+        
+        return processedTable;
+    }
+    
+    // Substitute link tokens in text content
+    substituteLinks(text, linkMap) {
+        if (!text || !linkMap || Object.keys(linkMap).length === 0) {
+            return text;
+        }
+        
+        // Replace all tokens with their corresponding links
+        let result = text;
+        Object.entries(linkMap).forEach(([token, linkData]) => {
+            const regex = new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+            const title = linkData.hover ? ` title="${linkData.hover}"` : '';
+            const linkHtml = `<a href="${linkData.url}" target="_blank" class="content-link" rel="noopener noreferrer"${title}>${linkData.display}</a>`;
+            result = result.replace(regex, linkHtml);
+        });
+        
+        return result;
     }
 
     // Fade state management

@@ -226,11 +226,14 @@ export class ContentManager {
     formatLinks(text) {
         if (!text) return text;
         
+        // Standard URL pattern matching
         const urlPattern = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
-        return text.replace(urlPattern, url => {
+        let processedText = text.replace(urlPattern, url => {
             const fullUrl = url.startsWith('www.') ? 'http://' + url : url;
             return `<a href="${fullUrl}" target="_blank" class="content-link" rel="noopener noreferrer">${url}</a>`;
         });
+        
+        return processedText;
     }
 
     processContentItem(item) {
@@ -259,7 +262,32 @@ export class ContentManager {
             };
         }
         
+        // Process link tokens if links array is present
+        if (processedItem.links && Array.isArray(processedItem.links)) {
+            processedItem.processedLinks = this.processLinkTokens(processedItem);
+        }
+        
         return processedItem;
+    }
+    
+    // Process link tokens for substitution
+    processLinkTokens(item) {
+        if (!item.links || !Array.isArray(item.links)) return {};
+        
+        // Create a map of token to link data for efficient lookup
+        const linkMap = {};
+        
+        item.links.forEach(link => {
+            if (link.token && (link.url || link.display)) {
+                linkMap[link.token] = {
+                    url: link.url || '#',
+                    display: link.display || link.url || link.token,
+                    hover: link.hover || ''
+                };
+            }
+        });
+        
+        return linkMap;
     }
 
     // Navigation methods

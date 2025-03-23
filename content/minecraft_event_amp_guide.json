@@ -1,0 +1,121 @@
+[
+  {
+    "style": "heading",
+    "title": "Minecraft Amplified World Event Guide"
+  },
+  {
+    "title": "Adlib Adventures",
+    "table": {
+      "headers": ["Adventure Type", "Description", "Requirements"],
+      "rows": [
+        ["Sky Islands Hopping", "Create obstacle courses between natural floating islands", "Ender pearls, elytra, or building blocks"],
+        ["Canyon Explorer", "Navigate and map the massive ravines and gorges", "Maps, torches, climbing gear"],
+        ["Mountain Race", "Race to the top of the highest peak from sea level", "Speed potions, climbing equipment"],
+        ["Cave Diving Expedition", "Explore the extensive cave systems under amplified terrain", "Torches, pickaxes, food supplies"],
+        ["Volcano Trek", "Ascend and descend the volcanic mountains in search of rare resources", "Fire resistance potions, obsidian"],
+        ["Travelling Circus Mining", "Create a mobile mining operation on the move", "Minecarts, rails, storage chests"],
+        ["Aerial Combat Challenge", "Engage in elytra dogfights or archery battles in the sky", "Bows, arrows, fireworks"]
+      ]
+    },
+    "description": "Spontaneous adventures that take advantage of the extreme terrain in amplified worlds. These can be organized at any point during the event with minimal preparation."
+  },
+  {
+    "title": "Final Day Build Ideas",
+    "table": {
+      "headers": ["Project", "Concept", "Materials Needed"],
+      "rows": [
+        ["Sky Fortress", "Massive floating castle connecting multiple natural islands", "Stone variants, wood, glass, chains"],
+        ["Mountain Observatory", "Astronomy center at the world height limit with glass dome", "Glass, quartz, redstone for telescopes"],
+        ["Vertical Village", "Multi-level town built into a cliff face with connecting bridges", "Wood, stone, lanterns, fences"],
+        ["Amplified Monument", "Colossal statue or structure visible from anywhere on the map", "Concrete, terracotta, beacons"],
+        ["Transportation Network", "Complete rail, ice boat, or elytra launch system connecting all player bases", "Rails, ice, redstone components"],
+        ["Waterfall City", "Settlement built inside and behind giant waterfalls", "Glass, prismarine, sea lanterns"]
+      ]
+    },
+    "description": "Collaborative build projects designed for the final day, showcasing what can be created in amplified terrain. These builds serve as monuments to the event and can be featured in a final tour."
+  },
+  {
+    "title": "Event Schedule Template",
+    "table": {
+      "headers": ["Day", "Focus", "Activities"],
+      "rows": [
+        ["Day 1", "Establish Base Camps", "Resource gathering, basic shelter building, area claiming"],
+        ["Day 2", "Exploration Phase", "Mapping expeditions, location scouting, resource identification"],
+        ["Day 3", "Infrastructure", "Transportation networks, automated farms, community facilities"],
+        ["Day 4", "Adlib Adventures", "Organize spontaneous challenges and adventures from the list"],
+        ["Day 5", "Build Preparation", "Resource collection for final build, area preparation"],
+        ["Day 6-7", "Final Day Builds", "Collaborative construction of monumental final projects"]
+      ]
+    },
+    "description": "A sample schedule to structure the event over a week, allowing for a mix of planned activities and player-driven exploration and creativity."
+  },
+  {
+    "title": "Resource Management",
+    "table": {
+      "headers": ["Resource Type", "Strategy", "Location Tips"],
+      "rows": [
+        ["Wood", "Establish tree farms early on elevated plateaus", "Jungle biomes offer efficient wood farming"],
+        ["Stone", "Mine horizontally rather than vertically in amplified worlds", "Mountain bases provide easy access"],
+        ["Ores", "Use the exposed cliff faces to spot ore veins", "Ravines offer excellent ore visibility"],
+        ["Food", "Create terrace farms on mountain slopes", "River valleys remain flat for traditional farming"],
+        ["Mob Drops", "Build spawner platforms at varied heights", "Dark caves are abundant for mob farming"],
+        ["Decorative Blocks", "Utilize the unique terrain features for natural decorations", "Extreme hills have exposed stone variants"],
+        ["Redstone", "Mine at lower levels in ravines for redstone veins", "Lava pools indicate potential diamond levels"]
+      ]
+    },
+    "description": "Strategies for efficient resource gathering in amplified terrain, focusing on the unique challenges and opportunities presented by the extreme landscape."
+  },
+  {
+    "title": "Technical Considerations",
+    "table": {
+      "headers": ["Aspect", "Challenge", "Solution"],
+      "rows": [
+        ["Server Performance", "Amplified worlds demand more resources", "Pre-generate chunks, limit render distance"],
+        ["Transportation", "Vertical movement is time-consuming", "Create water elevators, ice paths, elytra launch pads"],
+        ["Mob Spawning", "More dark spaces in complex terrain", "Light up areas thoroughly, utilize natural barriers"],
+        ["Navigation", "Easy to get lost in extreme terrain", "Build landmark towers, use colored beacons, create maps"],
+        ["Building", "Difficult terrain for large structures", "Utilize natural formations, build modular designs"],
+        ["Community Interaction", "Players spread out in vast landscapes", "Establish communication channels, create community hubs"],
+        ["Event Coordination", "Balancing spontaneous and planned activities", "Designate event coordinators, schedule regular updates"]
+      ]
+    },
+    "description": "Technical challenges specific to amplified terrain events and suggested solutions to ensure a smooth and enjoyable experience for all participants."
+  },
+  {
+    "title": "Team Challenges",
+    "code": [
+      "# Example Challenge: Mountain Monument Race",
+      "",
+      "## Rules:",
+      "1. Teams of 3-5 players",
+      "2. Each team selects a mountain peak",
+      "3. 2-hour time limit to build the most impressive monument",
+      "4. Only materials gathered during the event can be used",
+      "5. Community voting determines the winner",
+      "",
+      "# Example Challenge: Canyon Bridge Contest",
+      "",
+      "## Rules:",
+      "1. Teams must build bridges across the largest canyon",
+      "2. Bridges must be walkable and aesthetically pleasing",
+      "3. Structure must withstand TNT testing (optional)",
+      "4. Time limit of 3 hours from start to finish",
+      "5. Judges evaluate based on design, stability, and creativity"
+    ],
+    "description": "Organized team competitions that can be held throughout the event to encourage collaboration and creative use of the amplified terrain."
+  },
+  {
+    "title": "Photo Opportunity Locations",
+    "table": {
+      "headers": ["Location Type", "Features", "Best Time"],
+      "rows": [
+        ["Sunset Peak", "Highest mountain with western exposure", "In-game sunset"],
+        ["Waterfall Ravines", "Areas where multiple waterfalls create rainbows", "Midday for light effects"],
+        ["Floating Islands", "Naturally occurring islands with unique shapes", "Dawn for silhouette effect"],
+        ["Ice Spires", "Snow-capped mountains in cold biomes", "Night with full moon"],
+        ["Extreme Overhangs", "Cliff formations that defy gravity", "Daytime for shadow play"]
+      ]
+    },
+    "description": "Prime locations for screenshots and group photos to document the event. These locations showcase the unique aspects of amplified terrain generation."
+  }
+]
