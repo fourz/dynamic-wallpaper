@@ -25,7 +25,9 @@
                 ["Content Engine", "Dynamic content loader", "Async/await with fetch API"],
                 ["Navigation System", "Content/theme cycling", "Event-driven with state persistence"],
                 ["Rendering Engine", "Content display system", "DOM manipulation with HTML templates"],
-                ["Theme Manager", "Dynamic styling system", "CSS variables with multiple stylesheets"]
+                ["Theme Manager", "Dynamic styling system", "CSS variables with multiple stylesheets"],
+                ["Error Handling", "Graceful error recovery", "Try/catch with user feedback"],
+                ["Documentation", "Self-explanatory system", "Structured JSON content with AI prompts"]
             ]
         }
     },
@@ -38,7 +40,9 @@
                 ["HTML5", "Structure & content", "Semantic markup, custom data attributes"],
                 ["CSS3", "Styling & themes", "CSS variables, flex layout, media queries"],
                 ["JSON", "Data storage", "Modular content files, configuration"],
-                ["LocalStorage", "State persistence", "Cookie fallback for compatibility"]
+                ["LocalStorage", "State persistence", "Cookie fallback for compatibility"],
+                ["GitHub Copilot", "AI collaboration", "Code suggestions and content generation"],
+                ["Visual Studio Code", "Development environment", "Extensions for linting, formatting, and AI integration"]
             ]
         }
     },
@@ -51,7 +55,10 @@
                 ["Observer Pattern", "Event handling", "Loose coupling between components"],
                 ["Factory Pattern", "Content creation", "Consistent object creation and validation"],
                 ["State Pattern", "App state management", "Centralized state control"],
-                ["Strategy Pattern", "Content rendering", "Flexible content display algorithms"]
+                ["Strategy Pattern", "Content rendering", "Flexible content display algorithms"],
+                ["Template Pattern", "Content structure", "Reusable content format templates"],
+                ["Singleton Pattern", "Global objects", "Single instance for shared resources"],            
+                ["Decorator Pattern", "Theme system", "Dynamic styling with multiple layers"]
             ]
         }
     },

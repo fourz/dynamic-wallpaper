@@ -6,66 +6,107 @@
     {
         "title": "Navigation Controls",
         "table": {
-            "headers": ["Action", "How To"],
+            "headers": ["Control", "Function", "Location"],
             "rows": [
-                ["Change Guide", "Edit config.json content path"],
-                ["Refresh View", "Reload browser window"],
-                ["Adjust Size", "Modify CSS in stylesheet"],
-                ["Custom Theme", "Edit default.css file"],
-                ["New Content", "Create JSON in content folder"]
+                ["Content Navigation", "Change between reference guides", "Left/Right arrows on screen center"],
+                ["Wallpaper Controls", "Cycle through background images", "Left/Right arrows at bottom"],
+                ["Style Controls", "Change visual theme/size", "Left/Right arrows above wallpaper controls"],
+                ["Fade Toggle", "Cycle through display modes", "Top-left button with mode indicator"]
             ]
-        }
+        },
+        "description": "The system provides different navigation options for adjusting content, appearance, and behavior. Use these controls to customize your experience."
     },
     {
-        "title": "File Structure",
+        "title": "Fade Modes",
         "table": {
-            "headers": ["Component", "Purpose"],
+            "headers": ["Mode", "Behavior", "Use Case"],
             "rows": [
-                ["config.json", "Main configuration file"],
-                ["content/*.json", "Reference guide content"],
-                ["*.css", "Visual styling files"],
-                ["index.html", "Display page"],
-                ["overlay.js", "Content rendering engine"]
+                ["Default", "UI controls fade out when not in use", "Reading with minimal distractions"],
+                ["Usage", "All elements remain visible", "Interactive tutorials or frequent navigation"],
+                ["Fade-Out", "Content fades to 30% opacity after 40s of inactivity", "Reference on secondary display"],
+                ["Wallpaper", "All elements fade completely after 40s", "Display as desktop wallpaper"]
             ]
-        }
+        },
+        "description": "The fade system manages visibility of UI elements and content based on activity. Click the button in the top-left corner to cycle through different modes."
     },
     {
-        "title": "Content Format",
+        "title": "Content Structure",
         "table": {
-            "headers": ["Element", "Usage"],
+            "headers": ["Component", "Purpose", "Example"],
             "rows": [
-                ["Heading", "Main title with style:heading"],
-                ["Tables", "Structured data presentation"],
-                ["Lists", "Bulleted information"],
-                ["Numbered Lists", "Sequential steps"],
-                ["Sections", "Group related information"]
+                ["Heading", "Main page title", "How To Use This Reference System"],
+                ["Sections", "Organized content blocks", "Navigation Controls, File Structure"],
+                ["Tables", "Structured data presentation", "Key-value or multi-column information"],
+                ["Code Blocks", "Display formatted commands or scripts", "Configuration examples"],
+                ["Links", "External references using token substitution", "<regex101> expands to full link"],
+                ["Lists", "Bullet or numbered lists", "Step-by-step instructions"]
             ]
-        }
+        },
+        "description": "Content is organized in a standardized format for consistency. Each guide follows this structure to ensure information is easily accessible."
     },
     {
-        "title": "Customization",
-        "table": {
-            "headers": ["Setting", "Location"],
-            "rows": [
-                ["Background", "wallpaper.png file"],
-                ["Styles", "CSS files in root"],
-                ["Content", "JSON files in content/"],
-                ["Layout", "Edit CSS grid settings"],
-                ["Colors", "Modify CSS variables"]
-            ]
-        }
+        "title": "Creating Custom Content",
+        "code": [
+            "// Example section with table and link tokens",
+            "{",
+            "  \"title\": \"Resources:\",",
+            "  \"table\": {",
+            "    \"headers\": [\"Resource\", \"Link\"],",
+            "    \"rows\": [\"Documentation\", \"{docs-link]\"]",
+            "    ]",
+            "  },",
+            "  \"links\": [",
+            "    {",
+            "      \"token\": \"{docs-link}\",",
+            "      \"url\": \"https://example.com/docs\",",
+            "      \"display\": \"Official Documentation\",",
+            "      \"hover\": \"View the complete documentation\"",
+            "    },",
+            "  ]",
+            "}"
+        ],
+        "description": "To create new content, follow the structure of existing guides. Use tables for data, code blocks for examples, and link tokens for external references."
     },
     {
-        "title": "Troubleshooting",
+        "title": "System Architecture",
         "table": {
-            "headers": ["Issue", "Solution"],
+            "headers": ["Component", "Responsibility", "File"],
             "rows": [
-                ["Blank Screen", "Check file paths in config"],
-                ["No Styles", "Verify CSS file existence"],
-                ["Load Error", "Use local web server"],
-                ["JSON Error", "Validate JSON syntax"],
-                ["Display Issues", "Clear browser cache"]
+                ["ContentManager", "Content loading and formatting", "js/content.js"],
+                ["LayoutManager", "Visual presentation and fade behavior", "js/layout.js"],
+                ["NavigationManager", "Content navigation and permalinks", "js/navigation.js"],
+                ["StorageManager", "Data persistence and file handling", "js/storage.js"],
+                ["ConfigManager", "System configuration and resources", "js/config.js"]
             ]
-        }
+        },
+        "description": "The system uses a modular architecture with separate components handling specific responsibilities. This design allows for easy maintenance and extension."
+    },
+    {
+        "title": "Permalinks and Sharing",
+        "table": {
+            "headers": ["Feature", "Usage", "Example"],
+            "rows": [
+                ["Permalink Button", "Generate shareable URL (top-right)", "Click to copy or open in new tab"],
+                ["Direct URL", "URL with query parameters", "?content=regex_reference&styleset=large"],
+                ["Content Parameter", "Specify guide to display", "?content=powershell_hashtables_guide"],
+                ["Styleset Parameter", "Set visual theme", "?styleset=small"],
+                ["Wallpaper Parameter", "Set background image", "?wallpaper=2"]
+            ]
+        },
+        "description": "Generate permalinks to specific content and visual settings. These URLs can be bookmarked or shared to provide direct access to reference material."
+    },
+    {
+        "title": "Advanced Features",
+        "table": {
+            "headers": ["Feature", "Description", "Implementation"],
+            "rows": [
+                ["Link Tokens", "Replace tokens with formatted links", "Content items with links array"],
+                ["Responsive Design", "Adapts to display size", "CSS media queries and flexible layouts"],
+                ["State Persistence", "Remembers settings between sessions", "LocalStorage for preferences"],
+                ["Content Refresh", "Dynamically load new content", "Asynchronous content loading"],
+                ["Error Handling", "Graceful failure modes", "Try/catch with helpful messages"]
+            ]
+        },
+        "description": "The system includes several advanced features to enhance usability and functionality. These can be leveraged to create more sophisticated reference guides."
     }
 ]
