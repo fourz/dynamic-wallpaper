@@ -1,0 +1,208 @@
+[
+  {
+    "style": "heading",
+    "title": "RVNKWorlds Class Structure Overview"
+  },
+  {
+    "title": "Plugin Architecture",
+    "table": {
+      "headers": ["Component", "Responsibility", "Key Classes"],
+      "rows": [
+        ["Core System", "Plugin initialization and coordination", "RVNKWorlds, ConfigManager"],
+        ["World Management", "World operations and state tracking", "WorldManager, RVNKWorld"],
+        ["Group System", "World group organization", "WorldGroupManager, WorldGroup"],
+        ["Player System", "Player data and position tracking", "PlayerManager, TeleportManager"],
+        ["Inventory System", "Per-world inventory handling", "InventoryManager, InventoryData"],
+        ["Portal System", "Custom portal emulation", "PortalManager, PortalType"],
+        ["Template System", "World template processing", "TemplateManager, WorldTemplate"],
+        ["Activity Tracking", "World usage monitoring", "ActivityTracker, CleanupManager"]
+      ]
+    },
+    "description": "The RVNKWorlds plugin uses a modular architecture organized around specialized managers that handle different aspects of world management. This separation of concerns improves maintainability and extensibility."
+  },
+  {
+    "title": "Core Components",
+    "table": {
+      "headers": ["Class", "Purpose", "Key Methods"],
+      "rows": [
+        ["RVNKWorlds", "Main plugin class, entry point to API", "getInstance(), getWorldManager(), reload()"],
+        ["WorldManager", "Central world operations facade", "loadWorld(), unloadWorld(), teleportPlayer()"],
+        ["ConfigManager", "Configuration handling", "loadConfig(), saveConfig(), get(), set()"],
+        ["CommandHandler", "Command processing", "registerCommands(), handleCommand()"],
+        ["EventListener", "Event subscription", "registerListeners()"]
+      ]
+    },
+    "description": "These core components form the foundation of the plugin, handling initialization, configuration, and top-level operations."
+  },
+  {
+    "title": "World Management System",
+    "table": {
+      "headers": ["Class", "Purpose", "Key Methods"],
+      "rows": [
+        ["WorldManager", "World operation facade", "loadWorld(), importWorld(), teleportPlayer()"],
+        ["RVNKWorld", "World container and data access", "getName(), isLoaded(), getWorldGroup()"],
+        ["WorldInfo", "World information container", "getEnvironment(), getPlayerCount(), getCreationTime()"],
+        ["WorldCreationSettings", "World generation parameters", "getEnvironment(), getWorldType(), getSeed()"],
+        ["WorldStateManager", "Persistence of world state", "saveWorldState(), loadWorldState()"]
+      ]
+    },
+    "description": "The world management system is responsible for all operations related to worlds, including creation, loading, and accessing world information."
+  },
+  {
+    "title": "World Group System",
+    "table": {
+      "headers": ["Class", "Purpose", "Key Methods"],
+      "rows": [
+        ["WorldGroupManager", "Group registration and lookup", "createGroup(), getGroup(), getAllGroups()"],
+        ["WorldGroup", "Group data container", "addWorld(), removeWorld(), isInGroup()"],
+        ["GroupRegistry", "Group state persistence", "saveGroups(), loadGroups()"],
+        ["DimensionLinker", "Dimension association", "linkWorlds(), getLinkedWorld()"]
+      ]
+    },
+    "description": "World groups allow related worlds to share settings and inventories. This system manages the relationships between worlds and groups."
+  },
+  {
+    "title": "Player Management System",
+    "table": {
+      "headers": ["Class", "Purpose", "Key Methods"],
+      "rows": [
+        ["PlayerManager", "Player data handling", "getPlayerData(), savePlayerData()"],
+        ["TeleportManager", "Player movement coordination", "teleport(), recordPosition(), recallPosition()"],
+        ["PositionTracker", "Location memory", "storePosition(), retrievePosition()"],
+        ["PlayerStateManager", "Player state persistence", "savePlayerState(), loadPlayerState()"]
+      ]
+    },
+    "description": "The player management system handles player-related functionality, including teleportation, position tracking, and other player state data."
+  },
+  {
+    "title": "Inventory Management System",
+    "table": {
+      "headers": ["Class", "Purpose", "Key Methods"],
+      "rows": [
+        ["InventoryManager", "Inventory operations", "saveInventory(), loadInventory(), clearInventory()"],
+        ["InventoryData", "Inventory state container", "getItems(), getArmor(), getOffHand()"],
+        ["GameModeInventory", "Per-gamemode inventories", "loadInventoryForGameMode(), saveInventoryForGameMode()"],
+        ["InventoryStorage", "Data persistence", "getPlayerDataFile(), serializeInventory()"]
+      ]
+    },
+    "description": "The inventory management system handles storing and loading player inventories based on world groups and game modes."
+  },
+  {
+    "title": "Portal System",
+    "table": {
+      "headers": ["Class", "Purpose", "Key Methods"],
+      "rows": [
+        ["PortalManager", "Portal handling coordination", "handlePortalEvent(), getDestination()"],
+        ["PortalType", "Portal type enumeration", "NETHER, END"],
+        ["NetherPortalHandler", "Nether portal emulation", "findOrCreateDestinationPortal(), calculateDestinationCoordinates()"],
+        ["EndPortalHandler", "End portal emulation", "handleEndPortalUse(), findEndExit()"]
+      ]
+    },
+    "description": "The portal system emulates vanilla Minecraft portal behavior for custom world groups, ensuring players can use nether and end portals naturally."
+  },
+  {
+    "title": "Template System",
+    "table": {
+      "headers": ["Class", "Purpose", "Key Methods"],
+      "rows": [
+        ["TemplateManager", "Template registration", "registerTemplate(), getTemplate()"],
+        ["WorldTemplate", "Template data container", "applyTo(), getSettings()"],
+        ["TemplateRegistry", "Template persistence", "saveTemplates(), loadTemplates()"],
+        ["TemplateFactory", "Template creation", "createFromWorld(), createFromSettings()"]
+      ]
+    },
+    "description": "The template system allows for easy world creation using predefined settings. Templates define world generation parameters and other settings."
+  },
+  {
+    "title": "Activity Tracking System",
+    "table": {
+      "headers": ["Class", "Purpose", "Key Methods"],
+      "rows": [
+        ["ActivityTracker", "World usage monitoring", "recordActivity(), getLastActivity()"],
+        ["CleanupManager", "Inactive world unloading", "checkInactiveWorlds(), scheduleCleanup()"],
+        ["ActivityLogger", "Usage statistics", "logActivity(), generateReport()"],
+        ["AutomatedTaskScheduler", "Scheduled operations", "scheduleTask(), cancelTask()"]
+      ]
+    },
+    "description": "The activity tracking system monitors world usage and can automatically unload inactive worlds to improve server performance."
+  },
+  {
+    "title": "Class Relationships",
+    "code": [
+      "// Core hierarchical structure",
+      "RVNKWorlds (Main Plugin)",
+      "  ├── ConfigManager",
+      "  ├── CommandHandler",
+      "  ├── EventListener",
+      "  └── Manager Components",
+      "      ├── WorldManager",
+      "      │   ├── RVNKWorld(s)",
+      "      │   ├── WorldInfo",
+      "      │   └── WorldCreationSettings",
+      "      ├── WorldGroupManager",
+      "      │   ├── WorldGroup(s)",
+      "      │   └── GroupRegistry",
+      "      ├── PlayerManager",
+      "      │   ├── TeleportManager",
+      "      │   └── PlayerData",
+      "      ├── InventoryManager",
+      "      │   ├── InventoryData",
+      "      │   └── GameModeInventory",
+      "      ├── PortalManager",
+      "      │   ├── NetherPortalHandler",
+      "      │   └── EndPortalHandler",
+      "      ├── TemplateManager",
+      "      │   ├── WorldTemplate(s)",
+      "      │   └── WorldCreationSettings",
+      "      └── ActivityTracker",
+      "          ├── CleanupManager",
+      "          └── ActivityLogger"
+    ],
+    "description": "This hierarchical structure shows the relationships between the main components of the RVNKWorlds plugin. Most systems follow a manager-worker pattern with specialized classes handling specific tasks."
+  },
+  {
+    "title": "Resources:",
+    "table": {
+      "headers": ["Title", "URL"],
+      "rows": [
+        ["Source Code Repository", "{github-repo}"],
+        ["Development Roadmap", "{roadmap}"],
+        ["Plugin Documentation", "{docs}"],
+        ["Bug Tracker", "{issues}"],
+        ["Plugin API", "{api-docs}"]
+      ]
+    },
+    "links": [
+      {
+        "token": "{github-repo}",
+        "url": "https://github.com/ravenkls/RVNKWorlds",
+        "display": "GitHub Repository",
+        "hover": "View the source code and contribute to development"
+      },
+      {
+        "token": "{roadmap}",
+        "url": "https://github.com/ravenkls/RVNKWorlds/blob/main/ROADMAP.md",
+        "display": "Development Roadmap",
+        "hover": "See planned features and upcoming changes"
+      },
+      {
+        "token": "{docs}",
+        "url": "https://ravenkls.github.io/RVNKWorlds/",
+        "display": "Plugin Documentation",
+        "hover": "Complete plugin documentation and guides"
+      },
+      {
+        "token": "{issues}",
+        "url": "https://github.com/ravenkls/RVNKWorlds/issues",
+        "display": "Issue Tracker",
+        "hover": "Report bugs or request features"
+      },
+      {
+        "token": "{api-docs}",
+        "url": "https://ravenkls.github.io/RVNKWorlds/api/",
+        "display": "API Documentation",
+        "hover": "Developer API reference for integrating with RVNKWorlds"
+      }
+    ]
+  }
+]

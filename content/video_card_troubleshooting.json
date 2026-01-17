@@ -1,0 +1,172 @@
+[
+  {
+    "style": "heading",
+    "title": "Video Card Troubleshooting Guide"
+  },
+  {
+    "title": "Common Video Card Issues:",
+    "table": {
+      "headers": ["Issue", "Symptoms", "Likely Causes"],
+      "rows": [
+        ["Display Artifacts", "Graphical glitches, colored dots, lines", "Overheating, bad VRAM, overclocking"],
+        ["Display Freezing", "Screen freezes while audio continues", "Driver crash, unstable GPU clock"],
+        ["BSOD Crashes", "Blue screen with error codes related to GPU", "Driver conflict, hardware failure"],
+        ["Black Screen", "Monitor shows no signal", "Driver failure, GPU connection issue, power issue"],
+        ["Performance Drops", "Stuttering, FPS drops, lag", "Thermal throttling, driver issues, background processes"],
+        ["Fan Issues", "Excessive noise, no fan movement", "Fan failure, dust buildup, driver settings"]
+      ]
+    }
+  },
+  {
+    "title": "Basic Troubleshooting Steps:",
+    "table": {
+      "headers": ["Step", "Description", "Reasoning"],
+      "rows": [
+        ["Check Connections", "Ensure GPU is properly seated and all cables are connected", "Loose connections cause intermittent issues"],
+        ["Update Drivers", "Install latest graphics drivers from manufacturer website", "Outdated drivers cause compatibility problems"],
+        ["Clean Install Drivers", "Use DDU to remove old drivers before installing new ones", "Driver conflicts can cause instability"],
+        ["Check Temperatures", "Monitor GPU temperatures under load", "Overheating causes throttling and artifacts"],
+        ["Test in Safe Mode", "Boot in safe mode to test basic display functionality", "Isolates driver and software issues"],
+        ["Verify Power Supply", "Ensure PSU has sufficient wattage for your GPU", "Insufficient power causes instability"]
+      ]
+    }
+  },
+  {
+    "title": "NVIDIA-Specific Troubleshooting:",
+    "table": {
+      "headers": ["Issue", "Solution"],
+      "rows": [
+        ["GeForce Experience Issues", "Reinstall GeForce Experience or use standalone driver installation"],
+        ["NVIDIA Control Panel Missing", "Run 'C:\\Program Files\\NVIDIA Corporation\\Control Panel Client\\nvcplui.exe' or reinstall drivers"],
+        ["G-Sync Problems", "Update drivers, verify monitor compatibility, enable G-Sync in NVIDIA Control Panel"],
+        ["Shadow Play Not Working", "Check GeForce Experience settings, update drivers, verify hardware requirements"],
+        ["CUDA Applications Crashing", "Install CUDA toolkit matching your driver version, check application compatibility"],
+        ["Multiple Display Issues", "Set correct display configuration in NVIDIA Control Panel under 'Set up multiple displays'"]
+      ]
+    }
+  },
+  {
+    "title": "NVIDIA Driver Tools:",
+    "table": {
+      "headers": ["Tool", "Purpose", "Usage"],
+      "rows": [
+        ["GeForce Experience", "Driver updates, game optimization, recording", "Official NVIDIA software suite"],
+        ["NVIDIA Control Panel", "Display settings, 3D settings, GPU configuration", "Right-click desktop > NVIDIA Control Panel"],
+        ["NVIDIA Profile Inspector", "Advanced driver settings and profile management", "Third-party tool for power users"],
+        ["NVIDIA Nsight", "Graphics debugging and profiling", "Developer tool for application analysis"],
+        ["NVIDIA-SMI", "Command line tool for GPU monitoring", "Run 'nvidia-smi' in Command Prompt"],
+        ["DDU (Display Driver Uninstaller)", "Clean removal of GPU drivers", "Third-party tool, run in Safe Mode"]
+      ]
+    }
+  },
+  {
+    "title": "NVIDIA-Specific Commands:",
+    "code": [
+      "# Check NVIDIA GPU status via command line",
+      "nvidia-smi",
+      "",
+      "# Query NVIDIA driver version",
+      "nvidia-smi --query-gpu=driver_version --format=csv",
+      "",
+      "# Monitor GPU temperature and usage",
+      "nvidia-smi --query-gpu=temperature.gpu,utilization.gpu --format=csv -l 5",
+      "",
+      "# Reset NVIDIA driver without rebooting (Windows)",
+      "nvidia-smi --gpu-reset",
+      "",
+      "# Change power mode (requires admin)",
+      "nvidia-smi -pl 200  # Set power limit to 200W"
+    ],
+    "description": "Useful command-line tools for diagnosing NVIDIA GPU issues and checking status"
+  },
+  {
+    "title": "Advanced Troubleshooting:",
+    "table": {
+      "headers": ["Technique", "Method", "When to Use"],
+      "rows": [
+        ["Stress Testing", "Use FurMark, Heaven Benchmark, or 3DMark to stress test GPU", "To verify stability and thermal performance"],
+        ["Underclocking", "Reduce GPU core/memory clocks by 5-10% using MSI Afterburner", "For overheating or power-related issues"],
+        ["VBIOS Update", "Update video card BIOS from manufacturer website", "For persistent issues with newer games/applications"],
+        ["NVIDIA Debug Mode", "Enable debug mode in NVIDIA Control Panel", "When experiencing crashes in specific applications"],
+        ["Event Log Analysis", "Check Windows Event Viewer for display driver errors", "To identify timing and cause of GPU crashes"],
+        ["DirectX/OpenGL Tests", "Run dxdiag and OpenGL diagnostics", "To isolate API-specific rendering problems"]
+      ]
+    }
+  },
+  {
+    "title": "Windows Settings for NVIDIA GPUs:",
+    "code": [
+      "# Enable Hardware-Accelerated GPU Scheduling (Windows 10/11)",
+      "Settings > System > Display > Graphics Settings > Hardware-accelerated GPU scheduling",
+      "",
+      "# Set Graphics Performance Preference for specific apps",
+      "Settings > System > Display > Graphics Settings > Browse > [select app] > Options > High Performance",
+      "",
+      "# Disable Game Mode if experiencing issues",
+      "Settings > Gaming > Game Mode > Off",
+      "",
+      "# Check graphics drivers in Device Manager",
+      "Device Manager > Display adapters > [right-click NVIDIA GPU] > Properties > Driver"
+    ],
+    "description": "Windows-specific settings that can help resolve NVIDIA graphics card issues"
+  },
+  {
+    "title": "Resources:",
+    "table": {
+      "headers": ["Title", "URL"],
+      "rows": [
+        ["NVIDIA Driver Downloads", "{nvidia-drivers}"],
+        ["GeForce Forums", "{geforce-forums}"],
+        ["TechPowerUp GPU Database", "{techpowerup}"],
+        ["r/NVIDIA Subreddit", "{reddit-nvidia}"],
+        ["NVIDIA Support", "{nvidia-support}"],
+        ["DDU Download", "{ddu-download}"],
+        ["GPU-Z Tool", "{gpuz}"]
+      ]
+    },
+    "links": [
+      {
+        "token": "{nvidia-drivers}",
+        "url": "https://www.nvidia.com/download/index.aspx",
+        "display": "NVIDIA Driver Downloads",
+        "hover": "Official NVIDIA driver download page"
+      },
+      {
+        "token": "{geforce-forums}",
+        "url": "https://forums.geforce.com/",
+        "display": "GeForce Forums",
+        "hover": "Community forums for NVIDIA GPU troubleshooting"
+      },
+      {
+        "token": "{techpowerup}",
+        "url": "https://www.techpowerup.com/gpu-specs/",
+        "display": "TechPowerUp GPU Database",
+        "hover": "Comprehensive database of GPU specifications"
+      },
+      {
+        "token": "{reddit-nvidia}",
+        "url": "https://www.reddit.com/r/nvidia/",
+        "display": "r/NVIDIA Subreddit",
+        "hover": "Community discussions and troubleshooting for NVIDIA GPUs"
+      },
+      {
+        "token": "{nvidia-support}",
+        "url": "https://www.nvidia.com/en-us/support/",
+        "display": "NVIDIA Support",
+        "hover": "Official NVIDIA support resources"
+      },
+      {
+        "token": "{ddu-download}",
+        "url": "https://www.wagnardsoft.com/display-driver-uninstaller-ddu-",
+        "display": "Display Driver Uninstaller",
+        "hover": "Tool for clean removal of graphics drivers"
+      },
+      {
+        "token": "{gpuz}",
+        "url": "https://www.techpowerup.com/gpuz/",
+        "display": "GPU-Z",
+        "hover": "GPU information and monitoring utility"
+      }
+    ]
+  }
+]

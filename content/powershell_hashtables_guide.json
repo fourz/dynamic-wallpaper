@@ -153,5 +153,50 @@
       "# Result: @{the=2; quick=1; brown=1; ...}"
     ],
     "description": "Practical scenarios where hash tables excel in PowerShell scripts."
+  },
+  {
+    "title": "Resources:",
+    "table": {
+      "headers": ["Title", "URL"],
+      "rows": [
+        ["Microsoft Docs - About Hash Tables", "{ms-docs}"],
+        ["PowerShell Team Blog", "{ps-blog}"],
+        ["Learn PowerShell", "{learn-ps}"],
+        ["PowerShell Community", "{ps-community}"],
+        ["PowerShell Documentation", "{ps-docs}"]
+      ]
+    },
+    "links": [
+      {
+        "token": "{ms-docs}",
+        "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_hash_tables",
+        "display": "Microsoft Documentation",
+        "hover": "Official Microsoft documentation about PowerShell hash tables"
+      },
+      {
+        "token": "{ps-blog}",
+        "url": "https://devblogs.microsoft.com/powershell/",
+        "display": "PowerShell Team Blog",
+        "hover": "Official PowerShell team blog with latest updates and tips"
+      },
+      {
+        "token": "{learn-ps}",
+        "url": "https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-hashtable",
+        "display": "Deep Dive into Hash Tables",
+        "hover": "Comprehensive guide about PowerShell hash tables"
+      },
+      {
+        "token": "{ps-community}",
+        "url": "https://powershell.org/",
+        "display": "PowerShell.org",
+        "hover": "PowerShell community resources and forums"
+      },
+      {
+        "token": "{ps-docs}",
+        "url": "https://learn.microsoft.com/en-us/powershell/",
+        "display": "PowerShell Documentation",
+        "hover": "Complete PowerShell documentation"
+      }
+    ]
   }
 ]

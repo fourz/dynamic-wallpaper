@@ -1,0 +1,377 @@
+[
+  {
+    "style": "heading",
+    "title": "RVNKWorlds Class Reference"
+  },
+  {
+    "title": "Core API Classes",
+    "table": {
+      "headers": ["Class", "Package", "Description"],
+      "rows": [
+        ["RVNKWorlds", "com.ravenkls.rvnkworlds", "Main plugin class and API entry point"],
+        ["WorldManager", "com.ravenkls.rvnkworlds.world", "World operation facade and coordination"],
+        ["WorldGroupManager", "com.ravenkls.rvnkworlds.group", "World group management and operations"],
+        ["PlayerManager", "com.ravenkls.rvnkworlds.player", "Player-related functionality and state"],
+        ["InventoryManager", "com.ravenkls.rvnkworlds.inventory", "Inventory operations and persistence"],
+        ["PortalManager", "com.ravenkls.rvnkworlds.portal", "Portal handling and emulation"],
+        ["TemplateManager", "com.ravenkls.rvnkworlds.template", "World template management"],
+        ["ConfigManager", "com.ravenkls.rvnkworlds.config", "Configuration handling and persistence"]
+      ]
+    }
+  },
+  {
+    "title": "Events",
+    "table": {
+      "headers": ["Event Class", "Triggered When", "Key Data"],
+      "rows": [
+        ["WorldLoadEvent", "World is loaded by the plugin", "World, Group, Reason"],
+        ["WorldUnloadEvent", "World is unloaded by the plugin", "World, Group, Reason"],
+        ["WorldImportEvent", "World is imported into the plugin", "World, Template, Success"],
+        ["WorldCreateEvent", "New world is created", "World, Template, Settings"],
+        ["WorldTeleportEvent", "Player teleports between worlds", "Player, From, To, Cancel"],
+        ["WorldGroupChangeEvent", "Player changes world groups", "Player, FromGroup, ToGroup"],
+        ["InventorySwitchEvent", "Player's inventory is switched", "Player, FromWorld, ToWorld"],
+        ["PortalCreateEvent", "Custom portal is created", "Location, Type, Creator"],
+        ["PortalUseEvent", "Player uses a custom portal", "Player, Portal, Destination"]
+      ]
+    },
+    "description": "The plugin provides these events for developers to hook into RVNKWorlds operations. All events follow the standard Bukkit event pattern and can be registered through a normal EventHandler."
+  },
+  {
+    "title": "RVNKWorlds (Main Class)",
+    "code": [
+      "// Main API methods in the RVNKWorlds class",
+      "public class RVNKWorlds extends JavaPlugin {",
+      "    // Instance access",
+      "    public static RVNKWorlds getInstance()",
+      "",
+      "    // Manager access methods",
+      "    public WorldManager getWorldManager()",
+      "    public WorldGroupManager getWorldGroupManager()",
+      "    public PlayerManager getPlayerManager()",
+      "    public InventoryManager getInventoryManager()",
+      "    public PortalManager getPortalManager()",
+      "    public TemplateManager getTemplateManager()",
+      "    public ConfigManager getConfigManager()",
+      "",
+      "    // Plugin operations",
+      "    public void reload()",
+      "    public boolean isDebug()",
+      "    public Logger getPluginLogger()",
+      "}"
+    ],
+    "description": "The main RVNKWorlds class serves as the entry point to the API, providing access to all plugin subsystems through the manager getters."
+  },
+  {
+    "title": "WorldManager",
+    "code": [
+      "// Key methods in WorldManager",
+      "public class WorldManager {",
+      "    // World operations",
+      "    public boolean loadWorld(String worldName)",
+      "    public boolean unloadWorld(String worldName, boolean save)",
+      "    public boolean importWorld(String worldName, String template)",
+      "    public boolean importWorldGroup(String baseName)",
+      "    public World createWorld(String name, WorldCreationSettings settings)",
+      "    public boolean deleteWorld(String worldName, boolean deleteFiles)",
+      "",
+      "    // World access",
+      "    public RVNKWorld getWorld(String worldName)",
+      "    public RVNKWorld getWorld(World bukkitWorld)",
+      "    public List<RVNKWorld> getAllWorlds()",
+      "    public RVNKWorld getDefaultWorld()",
+      "",
+      "    // Teleportation",
+      "    public boolean teleportPlayer(Player player, String worldName)",
+      "    public boolean teleportPlayer(Player player, String worldName, boolean savePosition)",
+      "    public boolean teleportPlayerToLastPosition(Player player, String worldName)",
+      "",
+      "    // World info",
+      "    public WorldInfo getWorldInfo(String worldName)",
+      "    public boolean isWorldLoaded(String worldName)",
+      "    public boolean isWorldImported(String worldName)",
+      "}"
+    ],
+    "description": "The WorldManager provides comprehensive world operations, acting as the facade for all world-related functionality in the plugin."
+  },
+  {
+    "title": "WorldGroupManager",
+    "code": [
+      "// Key methods in WorldGroupManager",
+      "public class WorldGroupManager {",
+      "    // Group operations",
+      "    public WorldGroup createGroup(String name, String description)",
+      "    public boolean deleteGroup(String name)",
+      "    public boolean addWorldToGroup(String worldName, String groupName)",
+      "    public boolean removeWorldFromGroup(String worldName)",
+      "",
+      "    // Group access",
+      "    public WorldGroup getGroup(String groupName)",
+      "    public WorldGroup getGroupByWorld(String worldName)",
+      "    public WorldGroup getGroupByWorld(World world)",
+      "    public List<WorldGroup> getAllGroups()",
+      "    public WorldGroup getDefaultGroup()",
+      "",
+      "    // Group settings",
+      "    public boolean setGroupProperty(String groupName, String property, Object value)",
+      "    public Object getGroupProperty(String groupName, String property)",
+      "    public boolean isGroupLinkedInventories(String groupName)",
+      "    public boolean isGroupPortalEmulator(String groupName)",
+      "}"
+    ],
+    "description": "The WorldGroupManager handles the organization of worlds into groups, allowing for shared settings and linked inventories."
+  },
+  {
+    "title": "PlayerManager",
+    "code": [
+      "// Key methods in PlayerManager",
+      "public class PlayerManager {",
+      "    // Player data",
+      "    public PlayerData getPlayerData(Player player)",
+      "    public PlayerData getPlayerData(UUID playerId)",
+      "    public void savePlayerData(Player player)",
+      "    public void saveAllPlayerData()",
+      "",
+      "    // Player positions",
+      "    public Location getLastPosition(Player player, String worldName)",
+      "    public void savePosition(Player player, Location location)",
+      "    public void clearPositions(Player player)",
+      "",
+      "    // Home world",
+      "    public String getHomeWorld(Player player)",
+      "    public void setHomeWorld(Player player, String worldName)",
+      "",
+      "    // Player permissions",
+      "    public boolean canAccessWorld(Player player, String worldName)",
+      "    public List<String> getAccessibleWorlds(Player player)",
+      "    public boolean persistsGameMode(Player player)",
+      "}"
+    ],
+    "description": "The PlayerManager handles player-related functionality, including data storage, position tracking, and permission checking."
+  },
+  {
+    "title": "InventoryManager",
+    "code": [
+      "// Key methods in InventoryManager",
+      "public class InventoryManager {",
+      "    // Inventory operations",
+      "    public void saveInventory(Player player, String worldGroup)",
+      "    public void loadInventory(Player player, String worldGroup)",
+      "    public void clearInventory(Player player)",
+      "    public void resetGroupInventory(String groupName)",
+      "",
+      "    // GameMode-specific operations",
+      "    public void saveInventoryForGameMode(Player player, String worldGroup, GameMode gameMode)",
+      "    public void loadInventoryForGameMode(Player player, String worldGroup, GameMode gameMode)",
+      "    public boolean hasInventoryForGameMode(UUID playerId, String worldGroup, GameMode gameMode)",
+      "",
+      "    // Inventory data",
+      "    public InventoryData getInventoryData(UUID playerId, String worldGroup)",
+      "    public File getPlayerDataFile(UUID playerId, String groupName, GameMode gameMode)",
+      "    public boolean isUsingWorldGroupInventories()",
+      "}"
+    ],
+    "description": "The InventoryManager handles per-world and per-gamemode inventory storage and operations, ensuring players have appropriate inventories in each world."
+  },
+  {
+    "title": "PortalManager",
+    "code": [
+      "// Key methods in PortalManager",
+      "public class PortalManager {",
+      "    // Portal operations",
+      "    public boolean handlePortalEvent(PlayerPortalEvent event)",
+      "    public Location getDestination(Location source, PortalType type, String worldGroup)",
+      "    public boolean createNetherPortal(Location location, BlockFace orientation)",
+      "    public Location findOrCreateDestinationPortal(Location source, PortalType type)",
+      "",
+      "    // Portal settings",
+      "    public boolean isPortalEmulationEnabled()",
+      "    public boolean isPortalEmulationEnabledForGroup(String groupName)",
+      "    public void setPortalEmulationForGroup(String groupName, boolean enabled)",
+      "",
+      "    // Portal coordination",
+      "    public String getLinkedWorld(String worldName, PortalType type)",
+      "    public Location calculateDestinationCoordinates(Location source, PortalType type)",
+      "    public double getNetherCoordinateScale()",
+      "}"
+    ],
+    "description": "The PortalManager handles custom portal behavior, allowing players to use nether and end portals within custom world groups, similar to vanilla Minecraft."
+  },
+  {
+    "title": "TemplateManager",
+    "code": [
+      "// Key methods in TemplateManager",
+      "public class TemplateManager {",
+      "    // Template operations",
+      "    public WorldTemplate createTemplate(String name, WorldSettings settings)",
+      "    public WorldTemplate getTemplate(String name)",
+      "    public List<WorldTemplate> getAllTemplates()",
+      "    public boolean deleteTemplate(String name)",
+      "",
+      "    // Template creation",
+      "    public WorldTemplate createTemplateFromWorld(String name, World world)",
+      "    public void saveTemplate(WorldTemplate template)",
+      "",
+      "    // Template application",
+      "    public boolean applyTemplate(String templateName, World world)",
+      "    public WorldCreationSettings getCreationSettings(String templateName)",
+      "}"
+    ],
+    "description": "The TemplateManager handles world templates, which define predetermined settings for world creation and importing."
+  },
+  {
+    "title": "ConfigManager",
+    "code": [
+      "// Key methods in ConfigManager",
+      "public class ConfigManager {",
+      "    // Configuration operations",
+      "    public void loadConfig()",
+      "    public void saveConfig()",
+      "    public void reloadConfig()",
+      "",
+      "    // Configuration access",
+      "    public FileConfiguration getConfig()",
+      "    public Object get(String path)",
+      "    public Object get(String path, Object defaultValue)",
+      "    public void set(String path, Object value)",
+      "",
+      "    // Plugin settings",
+      "    public LogLevel getLogLevel()",
+      "    public String getDefaultWorld()",
+      "    public int getInactivityThreshold()",
+      "    public boolean isUsingWorldGroupInventories()",
+      "    public boolean isPortalEmulationEnabled()",
+      "    public List<String> getProtectedWorlds()",
+      "}"
+    ],
+    "description": "The ConfigManager handles loading, saving, and accessing plugin configuration, allowing for both runtime changes and persistence."
+  },
+  {
+    "title": "RVNKWorld",
+    "table": {
+      "headers": ["Method", "Return Type", "Description"],
+      "rows": [
+        ["getName()", "String", "Gets the world name"],
+        ["getWorldGroup()", "WorldGroup", "Gets the group this world belongs to"],
+        ["getEnvironment()", "World.Environment", "Gets the world environment (NORMAL, NETHER, THE_END)"],
+        ["getBukkitWorld()", "World", "Gets the Bukkit world object"],
+        ["isLoaded()", "boolean", "Checks if the world is currently loaded"],
+        ["getCreationTime()", "long", "Gets the timestamp when the world was created"],
+        ["getLastActivity()", "long", "Gets the timestamp of the last player activity"],
+        ["getTemplate()", "String", "Gets the template used to create this world, if any"],
+        ["getPlayerCount()", "int", "Gets the current number of players in the world"],
+        ["getSettings()", "Map<String, Object>", "Gets all world settings as a map"]
+      ]
+    },
+    "description": "The RVNKWorld class represents a world managed by the plugin, providing access to both Bukkit world functionality and RVNKWorlds-specific features."
+  },
+  {
+    "title": "WorldGroup",
+    "table": {
+      "headers": ["Method", "Return Type", "Description"],
+      "rows": [
+        ["getName()", "String", "Gets the group name"],
+        ["getDescription()", "String", "Gets the group description"],
+        ["getWorlds()", "List<String>", "Gets all worlds in this group"],
+        ["addWorld(String)", "boolean", "Adds a world to this group"],
+        ["removeWorld(String)", "boolean", "Removes a world from this group"],
+        ["containsWorld(String)", "boolean", "Checks if a world is in this group"],
+        ["isLinkedInventories()", "boolean", "Checks if inventories are linked in this group"],
+        ["setLinkedInventories(boolean)", "void", "Sets whether inventories are linked"],
+        ["isPortalEmulator()", "boolean", "Checks if portal emulation is enabled"],
+        ["setPortalEmulator(boolean)", "void", "Sets whether portal emulation is enabled"]
+      ]
+    },
+    "description": "The WorldGroup class represents a collection of worlds with shared settings, such as linked inventories or portal emulation."
+  },
+  {
+    "title": "Integration Examples",
+    "code": [
+      "// Get the plugin instance",
+      "RVNKWorlds plugin = RVNKWorlds.getInstance();",
+      "",
+      "// Create a new world using a template",
+      "WorldManager worldManager = plugin.getWorldManager();",
+      "World newWorld = worldManager.createWorld(\"adventure\", ",
+      "    new WorldCreationSettings(World.Environment.NORMAL, WorldType.NORMAL, 12345));",
+      "",
+      "// Create a world group and add worlds to it",
+      "WorldGroupManager groupManager = plugin.getWorldGroupManager();",
+      "WorldGroup group = groupManager.createGroup(\"adventure\", \"Adventure World Group\");",
+      "groupManager.addWorldToGroup(\"adventure\", \"adventure\");",
+      "groupManager.addWorldToGroup(\"adventure_nether\", \"adventure\");",
+      "groupManager.setGroupProperty(\"adventure\", \"linkedInventories\", true);",
+      "",
+      "// Teleport a player to a world",
+      "worldManager.teleportPlayer(player, \"adventure\", true);",
+      "",
+      "// Listen for world-related events",
+      "@EventHandler",
+      "public void onWorldTeleport(WorldTeleportEvent event) {",
+      "    Player player = event.getPlayer();",
+      "    String fromWorld = event.getFromWorld().getName();",
+      "    String toWorld = event.getToWorld().getName();",
+      "    player.sendMessage(\"Teleporting from \" + fromWorld + \" to \" + toWorld);",
+      "}"
+    ],
+    "description": "These code examples show how to integrate with the RVNKWorlds API from your own plugin, allowing you to create and manage worlds, teleport players, and respond to world-related events."
+  },
+  {
+    "title": "Version Compatibility",
+    "table": {
+      "headers": ["RVNKWorlds Version", "Minecraft Versions", "Key Features"],
+      "rows": [
+        ["1.0.0", "1.18-1.20", "Core world management, world groups, templates"],
+        ["1.1.0 (Planned)", "1.18-1.20", "Enhanced inventory system, advanced portal management"],
+        ["1.2.0 (Planned)", "1.18-1.20", "World border management, world regeneration"],
+        ["2.0.0 (Future)", "TBD", "Multiverse integration, dynamic world system"]
+      ]
+    },
+    "description": "RVNKWorlds is designed to maintain compatibility with recent Minecraft versions while adding new features in each release."
+  },
+  {
+    "title": "Resources:",
+    "table": {
+      "headers": ["Resource", "URL"],
+      "rows": [
+        ["API Javadoc", "{javadoc}"],
+        ["Developer Guide", "{dev-guide}"],
+        ["GitHub Repository", "{github-repo}"],
+        ["Maven Repository", "{maven-repo}"],
+        ["Discord Support", "{discord}"]
+      ]
+    },
+    "links": [
+      {
+        "token": "{javadoc}",
+        "url": "https://ravenkls.github.io/RVNKWorlds/javadoc/",
+        "display": "API Javadoc Documentation",
+        "hover": "Detailed API documentation for developers"
+      },
+      {
+        "token": "{dev-guide}",
+        "url": "https://ravenkls.github.io/RVNKWorlds/developer-guide/",
+        "display": "Developer Integration Guide",
+        "hover": "Guide for integrating RVNKWorlds with your plugin"
+      },
+      {
+        "token": "{github-repo}",
+        "url": "https://github.com/ravenkls/RVNKWorlds",
+        "display": "GitHub Repository",
+        "hover": "Source code and issue tracker"
+      },
+      {
+        "token": "{maven-repo}",
+        "url": "https://repo.ravenkls.com/repository/maven-public/",
+        "display": "Maven Repository",
+        "hover": "Add RVNKWorlds as a dependency in your projects"
+      },
+      {
+        "token": "{discord}",
+        "url": "https://discord.gg/ravenkls",
+        "display": "Discord Support Server",
+        "hover": "Get help with plugin development and integration"
+      }
+    ]
+  }
+]
