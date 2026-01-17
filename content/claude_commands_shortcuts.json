@@ -1,0 +1,106 @@
+[
+  {
+    "style": "heading",
+    "title": "Claude Code Commands & Shortcuts"
+  },
+  {
+    "title": "Keyboard Shortcuts",
+    "table": {
+      "headers": ["Shortcut", "Action"],
+      "rows": [
+        ["@", "Reference files and folders"],
+        ["Esc", "Interrupt Claude's processing"],
+        ["Esc + Esc", "Access undo/rewind menu"],
+        ["Shift+Tab", "Auto-accept changes (YOLO mode)"],
+        ["Cmd+Esc / Ctrl+Esc", "Quick launch in IDEs"],
+        ["Tab", "Accept autocomplete suggestion"],
+        ["Up/Down", "Navigate command history"]
+      ]
+    }
+  },
+  {
+    "title": "Essential Slash Commands",
+    "table": {
+      "headers": ["Command", "Description"],
+      "rows": [
+        ["/help", "Access usage documentation"],
+        ["/rewind", "Open checkpoint restoration interface"],
+        ["/memory", "Edit CLAUDE.md memory files"],
+        ["/config", "View and modify settings"],
+        ["/model", "Select or change the AI model"],
+        ["/clear", "Clear conversation history"],
+        ["/compact", "Summarize and reduce context"]
+      ]
+    }
+  },
+  {
+    "title": "Extension Commands",
+    "table": {
+      "headers": ["Command", "Description"],
+      "rows": [
+        ["/agents", "Manage AI subagents"],
+        ["/mcp", "Configure Model Context Protocol connections"],
+        ["/permissions", "View and manage tool permissions"],
+        ["/cost", "Show session token usage and cost"]
+      ]
+    }
+  },
+  {
+    "title": "CLI Commands",
+    "code": [
+      "# Start interactive session",
+      "claude",
+      "",
+      "# Run with specific prompt",
+      "claude \"explain this code\"",
+      "",
+      "# Headless mode (non-interactive)",
+      "claude -p \"fix the bug\" --allowedTools Edit,Read",
+      "",
+      "# Continue previous session",
+      "claude --continue",
+      "",
+      "# Resume specific session",
+      "claude --resume <session-id>"
+    ]
+  },
+  {
+    "title": "CLI Flags",
+    "table": {
+      "headers": ["Flag", "Description"],
+      "rows": [
+        ["-p, --prompt", "Run with prompt in headless mode"],
+        ["--continue", "Continue most recent session"],
+        ["--resume <id>", "Resume specific session"],
+        ["--allowedTools", "Specify allowed tools for headless"],
+        ["--model", "Override default model"],
+        ["--output-format", "json, text, or stream-json"],
+        ["--verbose", "Enable verbose logging"]
+      ]
+    }
+  },
+  {
+    "title": "File References",
+    "description": "Use @ to reference files and folders in your prompts:",
+    "code": [
+      "# Reference specific file",
+      "@src/main.js explain this file",
+      "",
+      "# Reference folder",
+      "@src/components/ review these components",
+      "",
+      "# Multiple references",
+      "@package.json @tsconfig.json check compatibility"
+    ]
+  },
+  {
+    "title": "Quick Tips",
+    "list": [
+      "Use /rewind to undo file changes without restarting",
+      "Double-tap Esc to see checkpoint history",
+      "@ autocompletes file paths as you type",
+      "/compact helps when hitting context limits",
+      "/memory persists important context across sessions"
+    ]
+  }
+]

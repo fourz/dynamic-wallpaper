@@ -1,0 +1,138 @@
+[
+  {
+    "style": "heading",
+    "title": "Claude Agents, Skills & Hooks"
+  },
+  {
+    "title": "Agent Skills",
+    "description": "Skills are modular capabilities that extend Claude's functionality. Claude automatically discovers and uses skills based on context.",
+    "table": {
+      "headers": ["Property", "Details"],
+      "rows": [
+        ["Location (project)", ".claude/skills/"],
+        ["Location (personal)", "~/.claude/skills/"],
+        ["Definition file", "SKILL.md in skill directory"],
+        ["Invocation", "Automatic based on context"]
+      ]
+    }
+  },
+  {
+    "title": "Creating a Skill",
+    "code": [
+      "# Directory structure",
+      ".claude/skills/",
+      "  my-skill/",
+      "    SKILL.md",
+      "",
+      "# SKILL.md format",
+      "---",
+      "name: my-skill",
+      "description: What this skill does",
+      "---",
+      "",
+      "## Instructions",
+      "Detailed instructions for Claude when using this skill."
+    ]
+  },
+  {
+    "title": "Built-in Subagents",
+    "description": "Specialized AI assistants with separate context preservation:",
+    "table": {
+      "headers": ["Subagent", "Purpose"],
+      "rows": [
+        ["Code-reviewer", "Automated quality and security analysis"],
+        ["Debugger", "Root cause analysis for errors and test failures"],
+        ["Data-scientist", "SQL and BigQuery analysis expertise"],
+        ["Explore", "Codebase exploration and search"],
+        ["Plan", "Implementation planning and architecture"]
+      ]
+    }
+  },
+  {
+    "title": "Using Subagents",
+    "code": [
+      "# List available agents",
+      "/agents",
+      "",
+      "# Invoke specific agent",
+      "Use the debugger to analyze this error",
+      "",
+      "# Agent runs in separate context",
+      "# Returns results when complete"
+    ]
+  },
+  {
+    "title": "Hooks Overview",
+    "description": "Automation scripts triggered by specific events in Claude Code:",
+    "table": {
+      "headers": ["Event", "Timing", "Can Block"],
+      "rows": [
+        ["PreToolUse", "Before tool invocation", "Yes"],
+        ["PostToolUse", "After tool completion", "No"],
+        ["Stop", "When session ends", "No"],
+        ["SessionStart", "At session initialization", "No"]
+      ]
+    }
+  },
+  {
+    "title": "Hook Configuration",
+    "code": [
+      "// In settings.json",
+      "{",
+      "  \"hooks\": {",
+      "    \"PreToolUse\": [",
+      "      {",
+      "        \"matcher\": \"Edit\",",
+      "        \"command\": \"./scripts/pre-edit-check.sh\"",
+      "      }",
+      "    ],",
+      "    \"PostToolUse\": [",
+      "      {",
+      "        \"matcher\": \"*\",",
+      "        \"command\": \"./scripts/log-activity.sh\"",
+      "      }",
+      "    ]",
+      "  }",
+      "}"
+    ]
+  },
+  {
+    "title": "Hook Use Cases",
+    "table": {
+      "headers": ["Use Case", "Hook Type"],
+      "rows": [
+        ["Auto-format code after edits", "PostToolUse (Edit)"],
+        ["Log all tool activity", "PostToolUse (*)"],
+        ["Block dangerous commands", "PreToolUse (Bash)"],
+        ["Run linter after file changes", "PostToolUse (Edit, Write)"],
+        ["Initialize environment", "SessionStart"]
+      ]
+    }
+  },
+  {
+    "title": "Security Warning",
+    "description": "Always review hook code before adding - hooks execute shell commands with your user credentials.",
+    "list": [
+      "Hooks run with full user permissions",
+      "Review third-party hook scripts carefully",
+      "Use absolute paths in hook commands",
+      "Test hooks in safe environment first"
+    ]
+  },
+  {
+    "title": "Example: Auto-format Hook",
+    "code": [
+      "#!/bin/bash",
+      "# scripts/auto-format.sh",
+      "# PostToolUse hook for Edit tool",
+      "",
+      "FILE=\"$CLAUDE_TOOL_ARG_file_path\"",
+      "",
+      "if [[ \"$FILE\" == *.js ]]; then",
+      "  npx prettier --write \"$FILE\"",
+      "elif [[ \"$FILE\" == *.py ]]; then",
+      "  black \"$FILE\"",
+      "fi"
+    ]
+  }
+]

@@ -1,0 +1,104 @@
+[
+  {
+    "style": "heading",
+    "title": "Git Worktrees Guide"
+  },
+  {
+    "title": "What are Git Worktrees?",
+    "description": "Git worktrees enable parallel development workflows by creating isolated working directories linked to the same repository.",
+    "list": [
+      "Maintain separate Claude Code sessions per branch without context loss",
+      "Execute hotfixes while continuing feature development",
+      "Test experimental changes in complete isolation",
+      "Compare different AI model outputs on identical tasks"
+    ]
+  },
+  {
+    "title": "Essential Commands",
+    "table": {
+      "headers": ["Command", "Description"],
+      "rows": [
+        ["git worktree add <path> <branch>", "Create worktree with existing branch"],
+        ["git worktree add -b <new-branch> <path>", "Create worktree with new branch"],
+        ["git worktree list", "View all active worktrees"],
+        ["git worktree remove <path>", "Delete worktree directory"],
+        ["git worktree prune", "Clean up stale worktree references"]
+      ]
+    }
+  },
+  {
+    "title": "Practical Examples",
+    "code": [
+      "# Create a hotfix worktree from main",
+      "git worktree add ../myproject-hotfix main",
+      "cd ../myproject-hotfix",
+      "git checkout -b hotfix/critical-bug",
+      "",
+      "# Create feature worktree with new branch",
+      "git worktree add -b feature/new-api ../myproject-api",
+      "",
+      "# List all worktrees",
+      "git worktree list",
+      "",
+      "# Remove when done",
+      "git worktree remove ../myproject-hotfix"
+    ]
+  },
+  {
+    "title": "Claude Code + Worktrees Workflow",
+    "numberedList": [
+      "Create worktree for new feature: git worktree add -b feature/auth ../auth-feature",
+      "Open separate Claude Code session in worktree directory",
+      "Each session maintains its own context and CLAUDE.md",
+      "Merge when complete, then remove worktree"
+    ]
+  },
+  {
+    "title": "Best Practices",
+    "table": {
+      "headers": ["Practice", "Reason"],
+      "rows": [
+        ["Use descriptive paths", "../project-feature or ../project-hotfix"],
+        ["One worktree per task", "Keeps context isolated and focused"],
+        ["Clean up after merge", "Prevents stale worktrees accumulating"],
+        ["Separate Claude sessions", "Each worktree gets its own AI context"]
+      ]
+    }
+  },
+  {
+    "title": "Common Scenarios",
+    "table": {
+      "headers": ["Scenario", "Solution"],
+      "rows": [
+        ["Urgent hotfix during feature work", "Create hotfix worktree, fix, merge, delete"],
+        ["Compare implementations", "Two worktrees with different approaches"],
+        ["Long-running refactor", "Dedicated worktree while main continues"],
+        ["Review PR locally", "Worktree for PR branch without switching"]
+      ]
+    }
+  },
+  {
+    "title": "Resources",
+    "table": {
+      "headers": ["Resource", "Link"],
+      "rows": [
+        ["Git Worktree Docs", "{git-docs}"],
+        ["Atlassian Guide", "{atlassian}"]
+      ]
+    },
+    "links": [
+      {
+        "token": "{git-docs}",
+        "url": "https://git-scm.com/docs/git-worktree",
+        "display": "git-scm.com",
+        "hover": "Official Git worktree documentation"
+      },
+      {
+        "token": "{atlassian}",
+        "url": "https://www.atlassian.com/git/tutorials/git-worktree",
+        "display": "atlassian.com",
+        "hover": "Atlassian Git worktree tutorial"
+      }
+    ]
+  }
+]

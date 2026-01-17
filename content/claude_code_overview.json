@@ -1,0 +1,95 @@
+[
+  {
+    "style": "heading",
+    "title": "Claude Code Overview"
+  },
+  {
+    "title": "What is Claude Code?",
+    "description": "Claude Code is an AI-powered development tool that integrates with your workflow, available as a CLI and IDE extension.",
+    "list": [
+      "Interactive sessions with real-time code generation and modification",
+      "Non-interactive (headless) mode for automation and CI/CD pipelines",
+      "Checkpointing system that automatically tracks file edits for quick recovery",
+      "Multi-model support with configurable AI backends",
+      "Cross-platform: macOS, Linux, Windows, and npm"
+    ]
+  },
+  {
+    "title": "Installation",
+    "table": {
+      "headers": ["Method", "Command"],
+      "rows": [
+        ["Recommended", "curl -fsSL https://claude.ai/install.sh | bash"],
+        ["npm", "npm install -g @anthropic-ai/claude-code"],
+        ["Homebrew", "brew install claude-code"]
+      ]
+    }
+  },
+  {
+    "title": "Core Capabilities",
+    "table": {
+      "headers": ["Feature", "Description"],
+      "rows": [
+        ["Code Generation", "Generate, modify, and refactor code across any language"],
+        ["File Operations", "Read, write, edit files with automatic tracking"],
+        ["Shell Commands", "Execute terminal commands with permission controls"],
+        ["Web Search", "Search and fetch web content for research"],
+        ["Multi-file Edits", "Coordinate changes across multiple files"],
+        ["Git Integration", "Commit, branch, PR creation with context awareness"]
+      ]
+    }
+  },
+  {
+    "title": "Operating Modes",
+    "table": {
+      "headers": ["Mode", "Use Case"],
+      "rows": [
+        ["Interactive", "Real-time development with user confirmation"],
+        ["Headless", "CI/CD automation, batch processing"],
+        ["Plan Mode", "Design implementation before coding"],
+        ["YOLO Mode", "Auto-accept changes without confirmation"]
+      ]
+    }
+  },
+  {
+    "title": "Configuration Priority",
+    "description": "Settings are loaded in order of precedence:",
+    "numberedList": [
+      "Enterprise settings (highest priority)",
+      "Project local (.claude/settings.local.json)",
+      "Project shared (.claude/settings.json)",
+      "User global (~/.claude/settings.json)"
+    ]
+  },
+  {
+    "title": "Resources",
+    "table": {
+      "headers": ["Resource", "Link"],
+      "rows": [
+        ["Official Docs", "{docs}"],
+        ["Claude Code Cheatsheet", "{cheatsheet}"],
+        ["Anthropic Console", "{console}"]
+      ]
+    },
+    "links": [
+      {
+        "token": "{docs}",
+        "url": "https://docs.anthropic.com/en/docs/claude-code",
+        "display": "docs.anthropic.com",
+        "hover": "Official Claude Code documentation"
+      },
+      {
+        "token": "{cheatsheet}",
+        "url": "https://awesomeclaude.ai/code-cheatsheet",
+        "display": "awesomeclaude.ai",
+        "hover": "Community cheatsheet and quick reference"
+      },
+      {
+        "token": "{console}",
+        "url": "https://console.anthropic.com",
+        "display": "console.anthropic.com",
+        "hover": "Anthropic API console"
+      }
+    ]
+  }
+]

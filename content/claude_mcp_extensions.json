@@ -1,0 +1,125 @@
+[
+  {
+    "style": "heading",
+    "title": "Claude MCP & Extensions"
+  },
+  {
+    "title": "Model Context Protocol (MCP)",
+    "description": "MCP extends Claude Code with external service integrations, enabling access to databases, APIs, and third-party tools.",
+    "list": [
+      "Standardized protocol for AI-tool communication",
+      "Runs as local servers that Claude Code connects to",
+      "Provides tools and resources from external services",
+      "Configurable per-project or globally"
+    ]
+  },
+  {
+    "title": "MCP Management Commands",
+    "table": {
+      "headers": ["Command", "Description"],
+      "rows": [
+        ["claude mcp add <name> <command>", "Register new MCP server"],
+        ["claude mcp list", "View installed integrations"],
+        ["claude mcp remove <name>", "Uninstall MCP server"],
+        ["/mcp", "Interactive MCP configuration"]
+      ]
+    }
+  },
+  {
+    "title": "Popular MCP Integrations",
+    "table": {
+      "headers": ["Integration", "Capabilities"],
+      "rows": [
+        ["GitHub", "Repository and PR management, issues, actions"],
+        ["Linear", "Issue tracking, projects, team workflows"],
+        ["Notion", "Document and database access"],
+        ["Airtable", "Database operations and automation"],
+        ["Stripe", "Payment processing, subscriptions"],
+        ["Figma", "Design system access, component inspection"],
+        ["Vercel", "Deployment management, logs, domains"],
+        ["Postgres", "Direct database queries and schema access"],
+        ["Puppeteer", "Browser automation and testing"]
+      ]
+    }
+  },
+  {
+    "title": "Installation Examples",
+    "code": [
+      "# Add GitHub MCP server",
+      "claude mcp add github npx @anthropic/mcp-github",
+      "",
+      "# Add Postgres database access",
+      "claude mcp add postgres npx @anthropic/mcp-postgres",
+      "",
+      "# Add with environment variables",
+      "claude mcp add notion npx @anthropic/mcp-notion \\",
+      "  --env NOTION_API_KEY=secret_xxx"
+    ]
+  },
+  {
+    "title": "Security Considerations",
+    "table": {
+      "headers": ["Rule", "Details"],
+      "rows": [
+        ["No wildcards", "Use full tool names like mcp__github__get_issue"],
+        ["Review permissions", "Each MCP server declares its tool capabilities"],
+        ["Environment variables", "Store secrets in env, not in config files"],
+        ["Scope access", "Grant minimum necessary permissions"]
+      ]
+    }
+  },
+  {
+    "title": "Tool Permission Format",
+    "description": "MCP tools follow a naming convention:",
+    "code": [
+      "# Format: mcp__<server>__<tool>",
+      "",
+      "# Examples:",
+      "mcp__github__get_issue",
+      "mcp__github__create_pull_request",
+      "mcp__postgres__query",
+      "mcp__notion__search"
+    ]
+  },
+  {
+    "title": "Configuration File",
+    "description": "MCP servers are configured in settings.json:",
+    "code": [
+      "{",
+      "  \"mcpServers\": {",
+      "    \"github\": {",
+      "      \"command\": \"npx\",",
+      "      \"args\": [\"@anthropic/mcp-github\"],",
+      "      \"env\": {",
+      "        \"GITHUB_TOKEN\": \"${GITHUB_TOKEN}\"",
+      "      }",
+      "    }",
+      "  }",
+      "}"
+    ]
+  },
+  {
+    "title": "Resources",
+    "table": {
+      "headers": ["Resource", "Link"],
+      "rows": [
+        ["MCP Specification", "{mcp-spec}"],
+        ["MCP Servers List", "{mcp-servers}"]
+      ]
+    },
+    "links": [
+      {
+        "token": "{mcp-spec}",
+        "url": "https://modelcontextprotocol.io",
+        "display": "modelcontextprotocol.io",
+        "hover": "Official MCP specification and documentation"
+      },
+      {
+        "token": "{mcp-servers}",
+        "url": "https://github.com/modelcontextprotocol/servers",
+        "display": "github.com/mcp/servers",
+        "hover": "Official and community MCP server implementations"
+      }
+    ]
+  }
+]
