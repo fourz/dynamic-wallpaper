@@ -216,9 +216,13 @@ export class ContentManager {
     async setupWallpapers(configData) {
         const wallpapers = await this.config.scanWallpapers(configData.wallpaper);
         const currentWallpaper = this.navigation.setWallpapers(wallpapers);
-        
+
         if (currentWallpaper) {
-            await this.config.setWallpaper(currentWallpaper);
+            try {
+                await this.config.setWallpaper(currentWallpaper);
+            } catch (error) {
+                console.error('Failed to set wallpaper:', error);
+            }
         }
     }
 

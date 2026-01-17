@@ -37,14 +37,6 @@ export class StorageManager {
         this.storage.setItem('navigationState', JSON.stringify(state));
     }
 
-    getStylePreference() {
-        return this.storage.getItem('stylePreference');
-    }
-
-    setStylePreference(style) {
-        this.storage.setItem('stylePreference', style);
-    }
-
     clearAll() {
         this.storage.clear();
     }
@@ -114,12 +106,6 @@ export class StorageManager {
             'content/css_guide.json',
             'content/bootstrap_reference.json'
         ];
-    }
-
-    getStylesheetSet(configData, setKey) {
-        if (!configData?.stylesheets || !setKey) return null;
-        const set = configData.stylesheets[setKey];
-        return set ? (Array.isArray(set) ? set : [set]) : null;
     }
 
     // Error handling

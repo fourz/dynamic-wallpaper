@@ -32,6 +32,9 @@ export class NavigationManager {
     }
 
     getCurrentFile() {
+        if (!this.files.length || this.currentFileIndex < 0 || this.currentFileIndex >= this.files.length) {
+            return null;
+        }
         return this.files[this.currentFileIndex];
     }
 
@@ -50,6 +53,9 @@ export class NavigationManager {
     }
 
     getCurrentWallpaper() {
+        if (!this.wallpapers.length || this.currentWallpaperIndex < 0 || this.currentWallpaperIndex >= this.wallpapers.length) {
+            return null;
+        }
         return this.wallpapers[this.currentWallpaperIndex];
     }
 
@@ -70,6 +76,9 @@ export class NavigationManager {
     }
 
     getCurrentStylesheetSet() {
+        if (!this.stylesheetSets.length || this.currentStylesheetSet < 0 || this.currentStylesheetSet >= this.stylesheetSets.length) {
+            return null;
+        }
         return this.stylesheetSets[this.currentStylesheetSet];
     }
 
@@ -126,15 +135,24 @@ export class NavigationManager {
         // Set content index
         if (params.has('content')) {
             const contentParam = params.get('content');
-            const index = parseInt(contentParam);
-            this.currentFileIndex = !isNaN(index) && index >= 0 && index < this.files.length
-                ? index 
-                : this.findContentByName(contentParam);
+            // Use strict number check: only treat as index if entire string is a valid integer
+            const isNumeric = /^\d+$/.test(contentParam);
+            const index = isNumeric ? parseInt(contentParam, 10) : -1;
+
+            if (index >= 0 && index < this.files.length) {
+                this.currentFileIndex = index;
+            } else {
+                const foundIndex = this.findContentByName(contentParam);
+                // Only update if content was found, otherwise keep current index
+                if (foundIndex !== -1) {
+                    this.currentFileIndex = foundIndex;
+                }
+            }
         }
         
         // Set style index
-        if (params.has('style')) {
-            this.setStyleFromParam(params.get('style'));
+        if (params.has('styleset')) {
+            this.setStyleFromParam(params.get('styleset'));
         }
 
         // Set wallpaper index

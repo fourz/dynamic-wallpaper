@@ -32,24 +32,6 @@ export const DOMUtils = {
     }
 };
 
-// Path utilities using functional programming principles
-export const PathUtils = {
-    // Normalize paths between online/offline modes using pure function
-    getResourcePath: (path, isOnline, serverUrl) => {
-        if (!path) return path;
-        const cleanPath = path.replace(/^\/+/, '');
-        return isOnline ? `${serverUrl}/${cleanPath}` : cleanPath;
-    },
-    
-    // Pattern matching using function composition and predicates
-    matchesPattern: (path, pattern) => {
-        if (!pattern.includes('*')) return path === pattern;
-        
-        const [prefix, suffix] = pattern.split('*');
-        return path.startsWith(prefix) && path.endsWith(suffix);
-    }
-};
-
 export const URLUtils = {
     // Immutable URL parameter handling to prevent side effects
     createPermalink: (baseUrl, params) => {
@@ -78,23 +60,6 @@ export const StateUtils = {
     cycleState: (currentState, stateArray) => {
         const currentIndex = stateArray.indexOf(currentState);
         return stateArray[(currentIndex + 1) % stateArray.length];
-    },
-    
-    // State machine factory using closure for encapsulation
-    createStateMachine: (initialState, transitions) => {
-        let currentState = initialState;
-        
-        return {
-            getState: () => currentState,
-            transition: (event) => {
-                const nextState = transitions[currentState]?.[event];
-                if (nextState) {
-                    currentState = nextState;
-                    return true;
-                }
-                return false;
-            }
-        };
     }
 };
 
@@ -107,10 +72,5 @@ export const ErrorUtils = {
         } catch (error) {
             return errorHandler(error);
         }
-    },
-    
-    // Convert technical errors to user-friendly messages
-    formatErrorMessage: (error, context = '') => {
-        return `Error ${context ? `in ${context}` : ''}: ${error.message || 'Unknown error'}`;
     }
 };

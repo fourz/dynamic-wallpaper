@@ -53,8 +53,9 @@ export class ConfigManager {
                 resolve();
             };
             img.onerror = () => {
-                console.error(`Failed to load wallpaper: ${wallpaperPath}`);
-                reject();
+                const error = new Error(`Failed to load wallpaper: ${wallpaperPath}`);
+                console.error(error.message);
+                reject(error);
             };
             img.src = fullPath;
         });
